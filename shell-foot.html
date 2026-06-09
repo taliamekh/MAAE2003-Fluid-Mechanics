@@ -19,7 +19,7 @@ function showSection(sectionId, anchorId) {
   items.forEach(el => el.classList.add('active'));
   /* Close mobile sidebar + backdrop */
   if (window.innerWidth <= 768) {
-    closeSidebar();
+    closeMobileSidebar();
   }
 }
 
@@ -35,19 +35,18 @@ function toggleChapter(chId) {
 
 /* ── Sidebar Toggle ── */
 function toggleSidebar() {
-  var sb = document.getElementById('sidebar');
-  var bd = document.getElementById('sidebarBackdrop');
   if (window.innerWidth <= 768) {
+    var sb = document.getElementById('sidebar');
+    var bd = document.getElementById('sidebarBackdrop');
     var isOpen = sb.classList.toggle('mobile-open');
     if (bd) bd.classList.toggle('visible', isOpen);
   } else {
-    sb.classList.toggle('closed');
+    document.body.classList.toggle('sb-closed');
   }
 }
-function closeSidebar() {
-  var sb = document.getElementById('sidebar');
+function closeMobileSidebar() {
+  document.getElementById('sidebar').classList.remove('mobile-open');
   var bd = document.getElementById('sidebarBackdrop');
-  sb.classList.remove('mobile-open');
   if (bd) bd.classList.remove('visible');
 }
 
