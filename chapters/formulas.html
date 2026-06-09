@@ -1,0 +1,17 @@
+<section id="formulas" class="page-section">
+  <h1 class="page-title" style="color:var(--eq)">Equation Sheet</h1>
+  <p class="page-subtitle">All key equations from MAAE 2300 — grows as chapters are added</p>
+
+  <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;">
+    <button class="collapse-toggle" onclick="toggleFormulaView('compact')" id="fv-compact" style="font-size:12px;">Compact</button>
+    <button class="collapse-toggle" onclick="toggleFormulaView('detailed')" id="fv-detailed" style="font-size:12px;">Detailed</button>
+    <button class="collapse-toggle" onclick="toggleFormulaView('all')" id="fv-all" style="font-size:12px;">Show All</button>
+  </div>
+
+  <div id="formula-content">
+    <div class="pending-placeholder">
+      <i class="ti ti-variable" aria-hidden="true"></i>
+      Equations will appear here as chapters are added
+    </div>
+  </div>
+</section>

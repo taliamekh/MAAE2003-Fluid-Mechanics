@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAAE 2300 — Fluid Mechanics I</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+:root {
+  --bg: #F2F6FA;
+  --surface: #FFFFFF;
+  --surface-hover: #E8EDF4;
+  --text: #1A2A3A;
+  --muted: #6A7A8A;
+  --border: #D0D8E0;
+  --code-bg: #E8EDF4;
+  --sidebar-bg: #0B2E48;
+  --sidebar-text: #8A9DB0;
+  --sidebar-pending: #B0C0D0;
+  --menu-active: #FF6B35;
+  --eq: #FF6B35;
+  --def: #2A6B7C;
+  --tip: #1AAA96;
+  --tip-bright: #5DF8D8;
+  --deriv: #093C5D;
+  --example: #F4A261;
+  --unit: #7A8FA6;
+  --ch1-title: #FF6B35;
+  --ch2-title: #2A6B7C;
+  --ch3-title: #093C5D;
+  --ch4-title: #F4A261;
+  --ch5-title: #1AAA96;
+  --ch6-title: #7A8FA6;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 15px;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: 210px;
+  min-width: 210px;
+  height: 100vh;
+  position: fixed;
+  left: 0; top: 0;
+  background: var(--sidebar-bg);
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 100;
+  padding: 20px 0 30px;
+  transition: transform .3s ease;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.1) transparent;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 2px; }
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  margin-bottom: 10px;
+}
+.sidebar-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--sidebar-text);
+}
+.sidebar-toggle {
+  background: none; border: none;
+  color: var(--sidebar-text);
+  cursor: pointer; font-size: 14px;
+  padding: 2px 4px;
+}
+.sidebar-toggle:hover { color: #fff; }
+.sidebar-course {
+  padding: 0 16px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--menu-active);
+  letter-spacing: .3px;
+}
+
+/* Chapter group */
+.sb-group { margin-bottom: 2px; }
+.sb-sep {
+  height: 1px;
+  background: rgba(255,255,255,.06);
+  margin: 8px 16px;
+}
+.sb-item {
+  display: block;
+  padding: 7px 16px 7px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--sidebar-text);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  border-left: 3px solid transparent;
+  user-select: none;
+}
+.sb-item:hover { background: rgba(255,255,255,.05); }
+.sb-item.active {
+  color: var(--menu-active);
+  background: rgba(255,107,53,.08);
+  border-left-color: var(--menu-active);
+  box-shadow: 0 0 8px rgba(255,107,53,.12), inset 0 0 0 1px rgba(255,107,53,.10);
+}
+.sb-item.pending { color: var(--sidebar-pending); }
+.sb-item .ch-arrow {
+  display: inline-block;
+  font-size: 10px;
+  margin-right: 4px;
+  transition: transform .2s;
+}
+.sb-item .ch-arrow.open { transform: rotate(90deg); }
+
+/* Lecture sub-items */
+.sb-subs { overflow: hidden; max-height: 0; transition: max-height .3s ease; }
+.sb-subs.open { max-height: 600px; }
+.sb-sub {
+  display: block;
+  padding: 5px 16px 5px 28px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--sidebar-text);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  opacity: .85;
+}
+.sb-sub:hover { background: rgba(255,255,255,.04); color: #ccc; }
+.sb-sub.active { color: var(--menu-active); }
+.sb-sub.pending { color: var(--sidebar-pending); }
+.sb-sub.prob-link { font-size: 11.5px; }
+.sb-sub.prob-link::before { content: '└ '; color: rgba(255,255,255,.15); }
+
+/* Toggle button when sidebar is closed */
+.sidebar-open-btn {
+  display: none;
+  position: fixed;
+  top: 12px; left: 12px;
+  z-index: 99;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.12);
+}
+.sidebar-open-btn:hover { color: #fff; }
+.sidebar.closed { transform: translateX(-100%); }
+.sidebar.closed ~ .sidebar-open-btn { display: block; }
+
+/* ── CONTENT AREA ── */
+.content-area {
+  margin-left: 210px;
+  padding: 30px 40px 60px;
+  max-width: 860px;
+  width: 100%;
+}
+
+/* ── SECTIONS — one at a time ── */
+.page-section { display: none; }
+.page-section.visible { display: block; }
+
+/* ── TYPOGRAPHY ── */
+.page-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.page-subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 32px 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 24px 0 10px;
+}
+p { margin: 10px 0; }
+strong { font-weight: 600; }
+
+/* ── CARDS ── */
+.card-bracket {
+  background: var(--surface);
+  border-radius: 6px;
+  padding: 14px 18px 12px 16px;
+  border: 1px solid var(--border);
+  border-left: 3.5px solid var(--bracket-c, var(--eq));
+  margin: 14px 0;
+}
+.card-bracket .card-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--bracket-c, var(--eq));
+  border-bottom: 1px solid var(--bracket-c, var(--eq));
+  padding-bottom: 4px;
+  display: inline-block;
+}
+.eq-card  { --bracket-c: var(--eq); }
+.def-card { --bracket-c: var(--def); }
+.tip-card { --bracket-c: var(--tip); }
+.drv-card { --bracket-c: var(--deriv); }
+.ex-card  { --bracket-c: var(--example); }
+.unit-card { --bracket-c: var(--unit); }
+.eq-card strong  { color: var(--eq); }
+.def-card strong { color: var(--def); }
+.tip-card strong { color: var(--tip); }
+.drv-card strong { color: var(--deriv); }
+.ex-card strong  { color: var(--example); }
+.unit-card strong { color: var(--unit); }
+
+/* ── VARIABLE PILLS ── */
+.var-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.pill {
+  font-size: 12px;
+  color: rgba(0,0,0,.50);
+  background: rgba(0,0,0,.02);
+  border: 1px solid rgba(0,0,0,.10);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ── TIP / CALLOUT ── */
+.callout {
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 14px 0;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.callout-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.callout-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.callout-text { font-size: 14px; line-height: 1.6; }
+.callout-tip {
+  background: rgba(26,170,150,.06);
+  border: 1px solid rgba(26,170,150,.15);
+}
+.callout-tip .callout-icon, .callout-tip .callout-title { color: var(--tip); }
+.callout-warning {
+  background: rgba(255,107,53,.06);
+  border: 1px solid rgba(255,107,53,.15);
+}
+.callout-warning .callout-icon, .callout-warning .callout-title { color: var(--eq); }
+.callout-exam {
+  background: rgba(9,60,93,.06);
+  border: 1px solid rgba(9,60,93,.15);
+}
+.callout-exam .callout-icon, .callout-exam .callout-title { color: var(--deriv); }
+
+/* ── THOUGHT BLOCK ── */
+.thought-block {
+  background: rgba(255,107,53,.04);
+  border: 1px solid rgba(255,107,53,.12);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin: 16px 0;
+}
+.thought-header {
+  color: var(--eq);
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.thought-body p { font-size: 13px; margin: 6px 0; line-height: 1.6; }
+
+/* ── COLLAPSIBLE SOLUTIONS ── */
+.collapse-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--eq);
+  cursor: pointer;
+  padding: 6px 12px;
+  background: rgba(255,107,53,.06);
+  border: 1px solid rgba(255,107,53,.12);
+  border-radius: 6px;
+  margin: 8px 0;
+  user-select: none;
+}
+.collapse-toggle:hover { background: rgba(255,107,53,.10); }
+.collapse-toggle .arrow { transition: transform .2s; font-size: 11px; }
+.collapse-toggle.open .arrow { transform: rotate(90deg); }
+.collapse-body { display: none; margin-top: 8px; }
+.collapse-body.open { display: block; }
+
+/* ── SOLUTION STEPS ── */
+.step {
+  display: flex;
+  gap: 12px;
+  margin: 12px 0;
+  align-items: flex-start;
+}
+.step-num {
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.step-body { flex: 1; }
+.step-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.step-work { font-size: 14px; line-height: 1.6; }
+.step-tip { font-size: 12px; color: var(--muted); margin-top: 4px; font-style: italic; }
+
+/* ── FIGURE BOX ── */
+.figure-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  margin: 16px 0;
+  text-align: center;
+}
+.figure-box img { max-width: 100%; border-radius: 6px; }
+.figure-caption { font-size: 12px; color: var(--muted); margin-top: 8px; font-style: italic; }
+.figure-row { display: flex; gap: 12px; margin: 16px 0; }
+.figure-row .figure-box { flex: 1; }
+
+/* ── FORMULA SHEET (inline formula containers) ── */
+.katex-display { overflow-x: auto; overflow-y: hidden; padding: 4px 0; }
+
+/* ── PROGRESS TRACKER ── */
+.progress-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.progress-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+.progress-item input[type="checkbox"] { accent-color: var(--eq); width: 16px; height: 16px; }
+.progress-item label { cursor: pointer; flex: 1; }
+.progress-bar-bg {
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: var(--eq);
+  border-radius: 3px;
+  transition: width .4s ease;
+}
+
+/* ── PENDING PLACEHOLDER ── */
+.pending-placeholder {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.pending-placeholder i { font-size: 32px; display: block; margin-bottom: 12px; opacity: .5; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.mobile-open { transform: translateX(0); }
+  .sidebar-open-btn { display: block !important; }
+  .content-area { margin-left: 0; padding: 20px 18px 40px; }
+  .figure-row { flex-direction: column; }
+}
+@media (max-width: 500px) {
+  .card-bracket { padding: 10px 12px 8px 10px; }
+  .page-title { font-size: 22px; }
+  h2 { font-size: 18px; }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR TOGGLE (visible when sidebar closed / mobile) -->
+<button class="sidebar-open-btn" onclick="toggleSidebar()" aria-label="Open navigation">▶</button>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <span class="sidebar-title">Contents</span>
+    <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Close navigation">◀</button>
+  </div>
+  <div class="sidebar-course">MAAE 2300 — Fluid Mechanics I</div>
+
+  <!-- Ch 1 -->
+  <div class="sb-group">
+    <a class="sb-item pending" onclick="toggleChapter('ch1'); showSection('ch1-notes')">
+      <span class="ch-arrow" id="ch1-arrow">▸</span>Ch 1: Fluid Properties
+    </a>
+    <div class="sb-subs" id="ch1-subs">
+      <a class="sb-sub pending" onclick="showSection('ch1-notes','ch1-lec1')">1.1 Introduction</a>
+      <a class="sb-sub pending" onclick="showSection('ch1-notes','ch1-lec2')">1.2 Units & Fluid Properties</a>
+      <a class="sb-sub pending" onclick="showSection('ch1-notes','ch1-lec3')">1.3 Hydrostatics & Manometers</a>
+      <a class="sb-sub pending" onclick="showSection('ch1-notes','ch1-lec4')">1.4 Pressure</a>
+      <a class="sb-sub prob-link pending" onclick="showSection('ch1-prob')">Recommended Problems</a>
+    </div>
+  </div>
+
+  <!-- Ch 2 -->
+  <div class="sb-group">
+    <a class="sb-item pending" onclick="toggleChapter('ch2'); showSection('ch2-notes')">
+      <span class="ch-arrow" id="ch2-arrow">▸</span>Ch 2: Hydrostatic Forces
+    </a>
+    <div class="sb-subs" id="ch2-subs">
+      <a class="sb-sub pending" onclick="showSection('ch2-notes','ch2-lec1')">2.1 Forces on Plane Surfaces</a>
+      <a class="sb-sub pending" onclick="showSection('ch2-notes','ch2-lec2')">2.2 Forces on Curved Surfaces</a>
+      <a class="sb-sub pending" onclick="showSection('ch2-notes','ch2-lec3')">2.3 Buoyancy</a>
+      <a class="sb-sub prob-link pending" onclick="showSection('ch2-prob')">Recommended Problems</a>
+    </div>
+  </div>
+
+  <!-- Ch 3 -->
+  <div class="sb-group">
+    <a class="sb-item pending" onclick="toggleChapter('ch3'); showSection('ch3-notes')">
+      <span class="ch-arrow" id="ch3-arrow">▸</span>Ch 3: Bernoulli's Equation
+    </a>
+    <div class="sb-subs" id="ch3-subs">
+      <a class="sb-sub pending" onclick="showSection('ch3-notes','ch3-lec1')">3.1 Bernoulli's Equation I</a>
+      <a class="sb-sub pending" onclick="showSection('ch3-notes','ch3-lec2')">3.2 Bernoulli's Equation II</a>
+      <a class="sb-sub prob-link pending" onclick="showSection('ch3-prob')">Recommended Problems</a>
+    </div>
+  </div>
+
+  <!-- Ch 4 -->
+  <div class="sb-group">
+    <a class="sb-item pending" onclick="toggleChapter('ch4'); showSection('ch4-notes')">
+      <span class="ch-arrow" id="ch4-arrow">▸</span>Ch 4: Fluid Dynamics Intro
+    </a>
+    <div class="sb-subs" id="ch4-subs">
+      <a class="sb-sub pending" onclick="showSection('ch4-notes','ch4-lec1')">4.1 Introduction to Fluid Dynamics</a>
+      <a class="sb-sub prob-link pending" onclick="showSection('ch4-prob')">Recommended Problems</a>
+    </div>
+  </div>
+
+  <!-- Ch 5 -->
+  <div class="sb-group">
+    <a class="sb-item pending" onclick="toggleChapter('ch5'); showSection('ch5-notes')">
+      <span class="ch-arrow" id="ch5-arrow">▸</span>Ch 5: Reynolds Transport
+    </a>
+    <div class="sb-subs" id="ch5-subs">
+      <a class="sb-sub pending" onclick="showSection('ch5-notes','ch5-lec1')">5.1 RTT — Mass</a>
+      <a class="sb-sub pending" onclick="showSection('ch5-notes','ch5-lec2')">5.2 RTT — Linear Momentum</a>
+      <a class="sb-sub pending" onclick="showSection('ch5-notes','ch5-lec3')">5.3 RTT — Angular Momentum</a>
+      <a class="sb-sub pending" onclick="showSection('ch5-notes','ch5-lec4')">5.4 RTT — Energy</a>
+      <a class="sb-sub prob-link pending" onclick="showSection('ch5-prob')">Recommended Problems</a>
+    </div>
+  </div>
+
+  <!-- Ch 6 -->
+  <div class="sb-group">
+    <a class="sb-item pending" onclick="toggleChapter('ch6'); showSection('ch6-notes')">
+      <span class="ch-arrow" id="ch6-arrow">▸</span>Ch 6: Pipe Flow & Losses
+    </a>
+    <div class="sb-subs" id="ch6-subs">
+      <a class="sb-sub pending" onclick="showSection('ch6-notes','ch6-lec1')">6.1 Pipe Flow Losses I</a>
+      <a class="sb-sub pending" onclick="showSection('ch6-notes','ch6-lec2')">6.2 Pipe Flow Losses II</a>
+      <a class="sb-sub pending" onclick="showSection('ch6-notes','ch6-lec3')">6.3 Pipe Flow Losses III</a>
+      <a class="sb-sub prob-link pending" onclick="showSection('ch6-prob')">Recommended Problems</a>
+    </div>
+  </div>
+
+  <div class="sb-sep"></div>
+
+  <!-- Reference Sheet -->
+  <a class="sb-item pending" onclick="showSection('formulas')">
+    <i class="ti ti-variable" style="font-size:14px;margin-right:4px" aria-hidden="true"></i>Equation Sheet
+  </a>
+
+  <div class="sb-sep"></div>
+
+  <!-- Assessment Prep -->
+  <a class="sb-item pending" onclick="showSection('m1prep')">
+    <i class="ti ti-clipboard-check" style="font-size:14px;margin-right:4px" aria-hidden="true"></i>Midterm 1 Prep
+  </a>
+  <a class="sb-item pending" onclick="showSection('m2prep')">
+    <i class="ti ti-clipboard-check" style="font-size:14px;margin-right:4px" aria-hidden="true"></i>Midterm 2 Prep
+  </a>
+  <a class="sb-item pending" onclick="showSection('final')">
+    <i class="ti ti-award" style="font-size:14px;margin-right:4px" aria-hidden="true"></i>Final Prep
+  </a>
+
+  <div class="sb-sep"></div>
+
+  <!-- Labs -->
+  <a class="sb-item pending" onclick="showSection('lab1')">
+    <i class="ti ti-flask" style="font-size:14px;margin-right:4px" aria-hidden="true"></i>Lab 1: Venturi Meter
+  </a>
+  <a class="sb-item pending" onclick="showSection('lab2')">
+    <i class="ti ti-flask" style="font-size:14px;margin-right:4px" aria-hidden="true"></i>Lab 2: Jet Pump
+  </a>
+  <a class="sb-item pending" onclick="showSection('lab3')">
+    <i class="ti ti-flask" style="font-size:14px;margin-right:4px" aria-hidden="true"></i>Lab 3: Flow Measurement
+  </a>
+
+  <div class="sb-sep"></div>
+
+  <!-- Summary & Progress -->
+  <a class="sb-item" onclick="showSection('summary')">
+    <i class="ti ti-list-details" style="font-size:14px;margin-right:4px" aria-hidden="true"></i>Summary
+  </a>
+  <a class="sb-item" onclick="showSection('progress')">
+    <i class="ti ti-chart-bar" style="font-size:14px;margin-right:4px" aria-hidden="true"></i>Progress
+  </a>
+</nav>
+
+<main class="content-area">
+<!-- pending --><section id="ch1-notes" class="page-section"><div class="pending-placeholder"><i class="ti ti-book" aria-hidden="true"></i>Chapter 1 notes — coming soon</div></section>
+
+<!-- pending --><section id="ch1-prob" class="page-section"><div class="pending-placeholder"><i class="ti ti-math-function" aria-hidden="true"></i>Chapter 1 recommended problems — coming soon</div></section>
+
+<!-- pending --><section id="ch2-notes" class="page-section"><div class="pending-placeholder"><i class="ti ti-book" aria-hidden="true"></i>Chapter 2 notes — coming soon</div></section>
+
+<!-- pending --><section id="ch2-prob" class="page-section"><div class="pending-placeholder"><i class="ti ti-math-function" aria-hidden="true"></i>Chapter 2 recommended problems — coming soon</div></section>
+
+<!-- pending --><section id="ch3-notes" class="page-section"><div class="pending-placeholder"><i class="ti ti-book" aria-hidden="true"></i>Chapter 3 notes — coming soon</div></section>
+
+<!-- pending --><section id="ch3-prob" class="page-section"><div class="pending-placeholder"><i class="ti ti-math-function" aria-hidden="true"></i>Chapter 3 recommended problems — coming soon</div></section>
+
+<!-- pending --><section id="ch4-notes" class="page-section"><div class="pending-placeholder"><i class="ti ti-book" aria-hidden="true"></i>Chapter 4 notes — coming soon</div></section>
+
+<!-- pending --><section id="ch4-prob" class="page-section"><div class="pending-placeholder"><i class="ti ti-math-function" aria-hidden="true"></i>Chapter 4 recommended problems — coming soon</div></section>
+
+<!-- pending --><section id="ch5-notes" class="page-section"><div class="pending-placeholder"><i class="ti ti-book" aria-hidden="true"></i>Chapter 5 notes — coming soon</div></section>
+
+<!-- pending --><section id="ch5-prob" class="page-section"><div class="pending-placeholder"><i class="ti ti-math-function" aria-hidden="true"></i>Chapter 5 recommended problems — coming soon</div></section>
+
+<!-- pending --><section id="ch6-notes" class="page-section"><div class="pending-placeholder"><i class="ti ti-book" aria-hidden="true"></i>Chapter 6 notes — coming soon</div></section>
+
+<!-- pending --><section id="ch6-prob" class="page-section"><div class="pending-placeholder"><i class="ti ti-math-function" aria-hidden="true"></i>Chapter 6 recommended problems — coming soon</div></section>
+
+<section id="formulas" class="page-section">
+  <h1 class="page-title" style="color:var(--eq)">Equation Sheet</h1>
+  <p class="page-subtitle">All key equations from MAAE 2300 — grows as chapters are added</p>
+
+  <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;">
+    <button class="collapse-toggle" onclick="toggleFormulaView('compact')" id="fv-compact" style="font-size:12px;">Compact</button>
+    <button class="collapse-toggle" onclick="toggleFormulaView('detailed')" id="fv-detailed" style="font-size:12px;">Detailed</button>
+    <button class="collapse-toggle" onclick="toggleFormulaView('all')" id="fv-all" style="font-size:12px;">Show All</button>
+  </div>
+
+  <div id="formula-content">
+    <div class="pending-placeholder">
+      <i class="ti ti-variable" aria-hidden="true"></i>
+      Equations will appear here as chapters are added
+    </div>
+  </div>
+</section>
+
+<!-- pending --><section id="m1prep" class="page-section"><div class="pending-placeholder"><i class="ti ti-clipboard-check" aria-hidden="true"></i>Midterm 1 Prep (May 21) — coming soon</div></section>
+
+<!-- pending --><section id="m2prep" class="page-section"><div class="pending-placeholder"><i class="ti ti-clipboard-check" aria-hidden="true"></i>Midterm 2 Prep (June 11) — coming soon</div></section>
+
+<!-- pending --><section id="final" class="page-section"><div class="pending-placeholder"><i class="ti ti-award" aria-hidden="true"></i>Final Exam Prep — coming soon</div></section>
+
+<!-- pending --><section id="lab1" class="page-section"><div class="pending-placeholder"><i class="ti ti-flask" aria-hidden="true"></i>Lab 1: Flow Through a Venturi Meter — coming soon</div></section>
+
+<!-- pending --><section id="lab2" class="page-section"><div class="pending-placeholder"><i class="ti ti-flask" aria-hidden="true"></i>Lab 2: Jet Pump — coming soon</div></section>
+
+<!-- pending --><section id="lab3" class="page-section"><div class="pending-placeholder"><i class="ti ti-flask" aria-hidden="true"></i>Lab 3: Flow Measurement — coming soon</div></section>
+
+<section id="summary" class="page-section visible">
+  <h1 class="page-title" style="color:var(--eq)">MAAE 2300 — Fluid Mechanics I</h1>
+  <p class="page-subtitle">Summer 2026 &middot; Dr. Nafisa Bano &middot; Carleton University</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:28px;">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Chapters</div>
+      <div style="font-size:22px;font-weight:600;color:var(--eq);">0 <span style="font-size:13px;color:var(--muted);font-weight:400;">/ 6</span></div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Equations</div>
+      <div style="font-size:22px;font-weight:600;color:var(--def);">0</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Lectures</div>
+      <div style="font-size:22px;font-weight:600;color:var(--deriv);">0 <span style="font-size:13px;color:var(--muted);font-weight:400;">/ 17</span></div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Labs</div>
+      <div style="font-size:22px;font-weight:600;color:var(--tip);">0 <span style="font-size:13px;color:var(--muted);font-weight:400;">/ 3</span></div>
+    </div>
+  </div>
+
+  <h2 style="color:var(--ch1-title);">Course Structure</h2>
+  <div class="card-bracket def-card">
+    <div class="card-title">Assessment Breakdown</div>
+    <p><strong>Midterm 1</strong> (May 21) — 15%</p>
+    <p><strong>Midterm 2</strong> (June 11) — 15%</p>
+    <p><strong>Final Exam</strong> (TBA) — 55%</p>
+    <p><strong>Lab Reports</strong> (×3) — 15%</p>
+    <p style="font-size:13px;color:var(--muted);margin-top:8px;">Must pass the final exam to pass the course. Must pass all lab reports individually (≥50% each).</p>
+  </div>
+
+  <h2>Chapter Map</h2>
+
+  <h3 style="color:var(--ch1-title);">Ch 1: Fluid Properties & Pressure</h3>
+  <p style="color:var(--muted);font-size:13px;">Pending — Text Ch 1.1–1.7, 2.1–2.4, 2.10</p>
+
+  <h3 style="color:var(--ch2-title);">Ch 2: Hydrostatic Forces & Buoyancy</h3>
+  <p style="color:var(--muted);font-size:13px;">Pending — Text Ch 2.5–2.8</p>
+
+  <h3 style="color:var(--ch3-title);">Ch 3: Bernoulli's Equation</h3>
+  <p style="color:var(--muted);font-size:13px;">Pending — Text Ch 2.9, 3.5</p>
+
+  <h3 style="color:var(--ch4-title);">Ch 4: Introduction to Fluid Dynamics</h3>
+  <p style="color:var(--muted);font-size:13px;">Pending — Text Ch 1.5, 3.1, 6.1–6.2, 1.9, 3.2</p>
+
+  <h3 style="color:var(--ch5-title);">Ch 5: Reynolds Transport Theorem</h3>
+  <p style="color:var(--muted);font-size:13px;">Pending — Text Ch 3.2–3.6</p>
+
+  <h3 style="color:var(--ch6-title);">Ch 6: Pipe Flow & Losses</h3>
+  <p style="color:var(--muted);font-size:13px;">Pending — Text Ch 3.7, 6.3–6.4, 6.6–6.7</p>
+
+  <h2>Textbook</h2>
+  <p><em>Fluid Mechanics</em>, 9th Ed. — Frank M. White, Henry Xue (McGraw Hill, 2021). ISBN 9781260575545.</p>
+</section>
+
+<section id="progress" class="page-section">
+  <h1 class="page-title" style="color:var(--eq)">Progress Tracker</h1>
+  <p class="page-subtitle">Track your study progress across all course content</p>
+
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+    <div style="flex:1;">
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+    <span id="progress-pct" style="font-size:14px;font-weight:600;color:var(--eq);min-width:36px;">0%</span>
+  </div>
+
+  <h2 style="color:var(--ch1-title);">Ch 1: Fluid Properties & Pressure</h2>
+  <div class="progress-grid">
+    <div class="progress-item"><input type="checkbox" id="p-ch1-lec1"><label for="p-ch1-lec1">1.1 Introduction</label></div>
+    <div class="progress-item"><input type="checkbox" id="p-ch1-lec2"><label for="p-ch1-lec2">1.2 Units & Fluid Properties</label></div>
+    <div class="progress-item"><input type="checkbox" id="p-ch1-lec3"><label for="p-ch1-lec3">1.3 Hydrostatics & Manometers</label></div>
+    <div class="progress-item"><input type="checkbox" id="p-ch1-lec4"><label for="p-ch1-lec4">1.4 Pressure</label></div>
+    <div class="progress-item"><input type="checkbox" id="p-ch1-prob"><label for="p-ch1-prob">Ch 1 Problems</label></div>
+  </div>
+
+  <h2 style="color:var(--ch2-title);">Ch 2: Hydrostatic Forces & Buoyancy</h2>
+  <div class="progress-grid">
+    <div class="progress-item"><input type="checkbox" id="p-ch2-lec1"><label for="p-ch2-lec1">2.1 Forces on Plane Surfaces</label></div>
+    <div class="progress-item"><input type="checkbox" id="p-ch2-lec2"><label for="p-ch2-lec2">2.2 Forces on Curved Surfaces</label></div>
+    <div class="progress-item"><input type="checkbox" id="p-ch2-lec3"><label for="p-ch2-lec3">2.3 Buoyancy</label></div>
+    <div class="progress-item"><input type="checkbox" id="p-ch2-prob"><label for="p-ch2-prob">Ch 2 Problems</label></div>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Ch 3: Bernoulli's Equation</h2>
+  <div class="progress-grid">
+    <div class="progress-item"><input type="checkbox" id="p-ch3-lec1"><label for="p-ch3-lec1">3.1 Bernoulli's Equation I</label></div>
+    <div class="progress-item"><input type="checkbox" id="p-ch3-lec2"><label for="p-ch3-lec2">3.2 Bernoulli's Equation II</label></div>
+    <div class="progress-item"><input type="checkbox" id="p-ch3-prob"><label for="p-ch3-prob">Ch 3 Problems</label></div>
+  </div>
+
+  <h2 style="color:var(--ch4-title);">Ch 4: Introduction to Fluid Dynamics</h2>
+  <div class="progress-grid">
+    <div class="progress-item"><input type="checkbox" id="p-ch4-lec1"><label for="p-ch4-lec1">4.1 Intro to Fluid Dynamics</label></div>
+    <div class="progress-item"><input type="checkbox" id="p-ch4-prob"><label for="p-ch4-prob">Ch 4 Problems</label></div>
+  </div>
+
+  <h2 style="color:var(--ch5-title);">Ch 5: Reynolds Transport Theorem</h2>
+  <div class="progress-grid">
+    <div class="progress-item"><input type="checkbox" id="p-ch5-lec1"><label for="p-ch5-lec1">5.1 RTT — Mass</label></div>
+    <div class="progress-item"><input type="checkbox" id="p-ch5-lec2"><label for="p-ch5-lec2">5.2 RTT — Linear Momentum</label></div>
+    <div class="progress-item"><input type="checkbox" id="p-ch5-lec3"><label for="p-ch5-lec3">5.3 RTT — Angular Momentum</label></div>
+    <div class="progress-item"><input type="checkbox" id="p-ch5-lec4"><label for="p-ch5-lec4">5.4 RTT — Energy</label></div>
+    <div class="progress-item"><input type="checkbox" id="p-ch5-prob"><label for="p-ch5-prob">Ch 5 Problems</label></div>
+  </div>
+
+  <h2 style="color:var(--ch6-title);">Ch 6: Pipe Flow & Losses</h2>
+  <div class="progress-grid">
+    <div class="progress-item"><input type="checkbox" id="p-ch6-lec1"><label for="p-ch6-lec1">6.1 Pipe Flow Losses I</label></div>
+    <div class="progress-item"><input type="checkbox" id="p-ch6-lec2"><label for="p-ch6-lec2">6.2 Pipe Flow Losses II</label></div>
+    <div class="progress-item"><input type="checkbox" id="p-ch6-lec3"><label for="p-ch6-lec3">6.3 Pipe Flow Losses III</label></div>
+    <div class="progress-item"><input type="checkbox" id="p-ch6-prob"><label for="p-ch6-prob">Ch 6 Problems</label></div>
+  </div>
+
+  <div class="sb-sep" style="margin:20px 0;background:var(--border);"></div>
+
+  <h2 style="color:var(--eq);">Assessments</h2>
+  <div class="progress-grid">
+    <div class="progress-item"><input type="checkbox" id="p-m1"><label for="p-m1">Midterm 1 Prep</label></div>
+    <div class="progress-item"><input type="checkbox" id="p-m2"><label for="p-m2">Midterm 2 Prep</label></div>
+    <div class="progress-item"><input type="checkbox" id="p-final"><label for="p-final">Final Exam Prep</label></div>
+  </div>
+
+  <h2 style="color:var(--tip);">Labs</h2>
+  <div class="progress-grid">
+    <div class="progress-item"><input type="checkbox" id="p-lab1"><label for="p-lab1">Lab 1: Venturi Meter</label></div>
+    <div class="progress-item"><input type="checkbox" id="p-lab2"><label for="p-lab2">Lab 2: Jet Pump</label></div>
+    <div class="progress-item"><input type="checkbox" id="p-lab3"><label for="p-lab3">Lab 3: Flow Measurement</label></div>
+  </div>
+</section>
+
+</main>
+<!-- shell-foot.html — JS + closing tags -->
+<script>
+/* ── Section Switching ── */
+function showSection(sectionId, anchorId) {
+  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('visible'));
+  const target = document.getElementById(sectionId);
+  if (target) {
+    target.classList.add('visible');
+    if (anchorId) {
+      const anchor = document.getElementById(anchorId);
+      if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+  /* Update active states */
+  document.querySelectorAll('.sb-item, .sb-sub').forEach(el => el.classList.remove('active'));
+  const items = document.querySelectorAll(`[onclick*="'${sectionId}'"]`);
+  items.forEach(el => el.classList.add('active'));
+  /* Close mobile sidebar */
+  if (window.innerWidth <= 768) {
+    document.getElementById('sidebar').classList.remove('mobile-open');
+  }
+}
+
+/* ── Chapter Expand/Collapse ── */
+function toggleChapter(chId) {
+  const subs = document.getElementById(chId + '-subs');
+  const arrow = document.getElementById(chId + '-arrow');
+  if (subs) {
+    subs.classList.toggle('open');
+    if (arrow) arrow.classList.toggle('open');
+  }
+}
+
+/* ── Sidebar Toggle ── */
+function toggleSidebar() {
+  const sb = document.getElementById('sidebar');
+  if (window.innerWidth <= 768) {
+    sb.classList.toggle('mobile-open');
+  } else {
+    sb.classList.toggle('closed');
+  }
+}
+
+/* ── Collapsible Sections ── */
+document.addEventListener('click', function(e) {
+  const toggle = e.target.closest('.collapse-toggle');
+  if (toggle) {
+    toggle.classList.toggle('open');
+    const body = toggle.nextElementSibling;
+    if (body && body.classList.contains('collapse-body')) {
+      body.classList.toggle('open');
+    }
+  }
+});
+
+/* ── Progress Persistence ── */
+function initProgress() {
+  const KEY = 'maae2300-progress';
+  const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+  document.querySelectorAll('.progress-item input[type="checkbox"]').forEach(cb => {
+    if (saved[cb.id]) cb.checked = true;
+    cb.addEventListener('change', () => {
+      const state = {};
+      document.querySelectorAll('.progress-item input[type="checkbox"]').forEach(c => {
+        state[c.id] = c.checked;
+      });
+      localStorage.setItem(KEY, JSON.stringify(state));
+      updateProgressBar();
+    });
+  });
+  updateProgressBar();
+}
+function updateProgressBar() {
+  const all = document.querySelectorAll('.progress-item input[type="checkbox"]');
+  const checked = document.querySelectorAll('.progress-item input[type="checkbox"]:checked');
+  const pct = all.length ? Math.round((checked.length / all.length) * 100) : 0;
+  const fill = document.getElementById('progress-fill');
+  const label = document.getElementById('progress-pct');
+  if (fill) fill.style.width = pct + '%';
+  if (label) label.textContent = pct + '%';
+}
+
+/* ── Init ── */
+document.addEventListener('DOMContentLoaded', function() {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: '\\[', right: '\\]', display: true },
+      { left: '\\(', right: '\\)', display: false }
+    ],
+    trust: true,
+    strict: false
+  });
+  initProgress();
+  /* Show summary as landing page */
+  showSection('summary');
+});
+</script>
+</body>
+</html>

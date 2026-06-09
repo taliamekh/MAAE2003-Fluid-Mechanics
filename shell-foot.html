@@ -1,0 +1,101 @@
+<!-- shell-foot.html — JS + closing tags -->
+<script>
+/* ── Section Switching ── */
+function showSection(sectionId, anchorId) {
+  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('visible'));
+  const target = document.getElementById(sectionId);
+  if (target) {
+    target.classList.add('visible');
+    if (anchorId) {
+      const anchor = document.getElementById(anchorId);
+      if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+  /* Update active states */
+  document.querySelectorAll('.sb-item, .sb-sub').forEach(el => el.classList.remove('active'));
+  const items = document.querySelectorAll(`[onclick*="'${sectionId}'"]`);
+  items.forEach(el => el.classList.add('active'));
+  /* Close mobile sidebar */
+  if (window.innerWidth <= 768) {
+    document.getElementById('sidebar').classList.remove('mobile-open');
+  }
+}
+
+/* ── Chapter Expand/Collapse ── */
+function toggleChapter(chId) {
+  const subs = document.getElementById(chId + '-subs');
+  const arrow = document.getElementById(chId + '-arrow');
+  if (subs) {
+    subs.classList.toggle('open');
+    if (arrow) arrow.classList.toggle('open');
+  }
+}
+
+/* ── Sidebar Toggle ── */
+function toggleSidebar() {
+  const sb = document.getElementById('sidebar');
+  if (window.innerWidth <= 768) {
+    sb.classList.toggle('mobile-open');
+  } else {
+    sb.classList.toggle('closed');
+  }
+}
+
+/* ── Collapsible Sections ── */
+document.addEventListener('click', function(e) {
+  const toggle = e.target.closest('.collapse-toggle');
+  if (toggle) {
+    toggle.classList.toggle('open');
+    const body = toggle.nextElementSibling;
+    if (body && body.classList.contains('collapse-body')) {
+      body.classList.toggle('open');
+    }
+  }
+});
+
+/* ── Progress Persistence ── */
+function initProgress() {
+  const KEY = 'maae2300-progress';
+  const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+  document.querySelectorAll('.progress-item input[type="checkbox"]').forEach(cb => {
+    if (saved[cb.id]) cb.checked = true;
+    cb.addEventListener('change', () => {
+      const state = {};
+      document.querySelectorAll('.progress-item input[type="checkbox"]').forEach(c => {
+        state[c.id] = c.checked;
+      });
+      localStorage.setItem(KEY, JSON.stringify(state));
+      updateProgressBar();
+    });
+  });
+  updateProgressBar();
+}
+function updateProgressBar() {
+  const all = document.querySelectorAll('.progress-item input[type="checkbox"]');
+  const checked = document.querySelectorAll('.progress-item input[type="checkbox"]:checked');
+  const pct = all.length ? Math.round((checked.length / all.length) * 100) : 0;
+  const fill = document.getElementById('progress-fill');
+  const label = document.getElementById('progress-pct');
+  if (fill) fill.style.width = pct + '%';
+  if (label) label.textContent = pct + '%';
+}
+
+/* ── Init ── */
+document.addEventListener('DOMContentLoaded', function() {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: '\\[', right: '\\]', display: true },
+      { left: '\\(', right: '\\)', display: false }
+    ],
+    trust: true,
+    strict: false
+  });
+  initProgress();
+  /* Show summary as landing page */
+  showSection('summary');
+});
+</script>
+</body>
+</html>
