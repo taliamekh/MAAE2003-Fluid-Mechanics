@@ -168,10 +168,10 @@ body {
 }
 .sidebar-open-btn:hover { color: #fff; }
 
-/* Desktop: sidebar closed → slide out, content expands */
+/* Desktop: sidebar closed → slide out, button appears, content shifts to gutter */
 .sidebar.closed { transform: translateX(-100%); }
 .sidebar.closed ~ .sidebar-open-btn { display: block; }
-.sidebar.closed ~ .content-area { margin-left: 0; }
+.sidebar.closed ~ .content-area { margin-left: 48px; }
 
 /* Backdrop for mobile overlay */
 .sidebar-backdrop {
@@ -425,10 +425,11 @@ strong { font-weight: 600; }
   }
   .sidebar.mobile-open { transform: translateX(0); }
   .sidebar-open-btn { display: block !important; }
-  .content-area { margin-left: 0 !important; padding: 20px 18px 40px; }
+  .content-area { margin-left: 0 !important; padding: 20px 18px 40px 48px; }
   .figure-row { flex-direction: column; }
 }
 @media (max-width: 500px) {
+  .content-area { padding: 16px 14px 40px 48px; }
   .card-bracket { padding: 10px 12px 8px 10px; }
   .page-title { font-size: 22px; }
   h2 { font-size: 18px; }
@@ -436,12 +437,6 @@ strong { font-weight: 600; }
 </style>
 </head>
 <body>
-
-<!-- SIDEBAR TOGGLE (visible when sidebar closed / mobile) -->
-<button class="sidebar-open-btn" id="sidebarOpenBtn" onclick="toggleSidebar()" aria-label="Open navigation">▶</button>
-
-<!-- BACKDROP for mobile sidebar overlay -->
-<div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
 
 <!-- SIDEBAR -->
 <nav class="sidebar" id="sidebar">
@@ -571,3 +566,9 @@ strong { font-weight: 600; }
     <i class="ti ti-chart-bar" style="font-size:14px;margin-right:4px" aria-hidden="true"></i>Progress
   </a>
 </nav>
+
+<!-- SIDEBAR TOGGLE — after nav so .sidebar.closed ~ .sidebar-open-btn works -->
+<button class="sidebar-open-btn" id="sidebarOpenBtn" onclick="toggleSidebar()" aria-label="Open navigation">▶</button>
+
+<!-- BACKDROP for mobile sidebar overlay -->
+<div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebar()"></div>
