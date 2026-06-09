@@ -1,0 +1,151 @@
+<section id="summary" class="page-section visible">
+  <h1 class="page-title" style="color:var(--eq)">MAAE 2300 — Fluid Mechanics I</h1>
+  <p class="page-subtitle">Summer 2026 &middot; Dr. Nafisa Bano &middot; Carleton University</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:28px;">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Chapters</div>
+      <div style="font-size:22px;font-weight:600;color:var(--eq);">0 <span style="font-size:13px;color:var(--muted);font-weight:400;">/ 6</span></div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Equations</div>
+      <div style="font-size:22px;font-weight:600;color:var(--def);">9</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Lectures</div>
+      <div style="font-size:22px;font-weight:600;color:var(--deriv);">2 <span style="font-size:13px;color:var(--muted);font-weight:400;">/ 17</span></div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Labs</div>
+      <div style="font-size:22px;font-weight:600;color:var(--tip);">0 <span style="font-size:13px;color:var(--muted);font-weight:400;">/ 3</span></div>
+    </div>
+  </div>
+
+  <h2 style="color:var(--ch1-title);">Assessment Breakdown</h2>
+  <div class="card-bracket def-card">
+    <div class="card-title">Grading</div>
+    <p><strong>Midterm 1</strong> (May 21) — 15%</p>
+    <p><strong>Midterm 2</strong> (June 11) — 15%</p>
+    <p><strong>Final Exam</strong> (TBA) — 55%</p>
+    <p><strong>Lab Reports</strong> (×3) — 15%</p>
+    <p style="font-size:13px;color:var(--muted);margin-top:8px;">Must pass the final exam to pass the course. Must pass all lab reports individually (≥50% each).</p>
+  </div>
+
+  <!-- ═══ CH 1 SUMMARY ═══ -->
+  <h2 style="color:var(--ch1-title);">Ch 1 — Fluid Properties & Pressure</h2>
+  <p style="font-size:14px;margin-bottom:12px;">Establishes the foundational definitions and assumptions that underpin every equation in the course — what a fluid is, how we treat it mathematically, and the three branches we will study.</p>
+
+  <div class="cluster">
+    <div class="cluster-title" style="color:var(--ch1-title);">Classification of Matter</div>
+    <dl>
+      <dt class="wh-what">What:</dt><dd>Matter classified as solid, liquid, gas, or plasma based on molecular bonding and response to shear stress.</dd>
+      <dt class="wh-why">Why:</dt><dd>The defining property of a fluid is that it <em>cannot resist shear stress</em> — it deforms continuously. Solids resist shear by deforming to equilibrium.</dd>
+      <dt class="wh-how">How:</dt><dd>Liquids have constant volume/density and form a free surface. Gases expand to fill their container and have no definite volume. Both are fluids.</dd>
+      <dt class="wh-trap">Trap:</dt><dd>Don't confuse "cannot resist shear" with "has no viscosity." Fluids still resist shear through viscous effects — they just never reach static equilibrium under shear.</dd>
+    </dl>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-title" style="color:var(--ch1-title);">The Continuum Assumption</div>
+    <dl>
+      <dt class="wh-what">What:</dt><dd>Treat fluid properties as smooth, continuous functions of position rather than tracking individual molecules.</dd>
+      <dt class="wh-why">Why:</dt><dd>Enables the use of differential calculus — partial derivatives, integrals, and governing PDEs — for engineering-scale analysis.</dd>
+      <dt class="wh-how">How:</dt><dd>\(\rho = \lim_{\delta V \to \delta V^*} \frac{\delta m}{\delta V}\) where \(\delta V^* \sim 10^{-9}\) mm³ gives a stable local density.</dd>
+      <dt class="wh-trap">Trap:</dt><dd>Fails in rarefied gas flows (high altitude, vacuum systems) where the mean free path approaches the problem's characteristic length.</dd>
+    </dl>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-title" style="color:var(--ch1-title);">Branches of Fluid Mechanics</div>
+    <dl>
+      <dt class="wh-what">What:</dt><dd>Three branches — hydrostatics (fluids at rest), kinematics (geometry of motion), and fluid dynamics (forces causing acceleration).</dd>
+      <dt class="wh-why">Why:</dt><dd>Structures the entire course: Ch 1–2 cover statics, Ch 4 covers kinematics, Ch 5–6 cover dynamics via the Reynolds Transport Theorem.</dd>
+    </dl>
+  </div>
+
+  <p class="cross-ch">Classification of matter → shear stress concept reappears in viscosity (Ch 1.2) and Newton's law of viscosity</p>
+  <p class="cross-ch">Continuum assumption → justifies every differential equation in Ch 3–6</p>
+  <p class="cross-ch">Density definition → used directly in hydrostatics (Ch 2), Bernoulli (Ch 3), and RTT (Ch 5)</p>
+
+  <div class="cluster">
+    <div class="cluster-title" style="color:var(--ch1-title);">Units & Dimensional Analysis</div>
+    <dl>
+      <dt class="wh-what">What:</dt><dd>Four primary dimensions {M, L, T, Θ} from which all fluid mechanics quantities derive. Two consistent unit systems: SI and BG.</dd>
+      <dt class="wh-why">Why:</dt><dd>Dimensional homogeneity is required for every valid equation — if terms don't match dimensions, the equation is wrong.</dd>
+      <dt class="wh-how">How:</dt><dd>Check: every term in an equation must reduce to the same primary dimension combination. Convert: 1 slug = 14.5939 kg, 1 ft = 0.3048 m.</dd>
+      <dt class="wh-trap">Trap:</dt><dd>Never mix SI and BG in the same calculation. Some "constants" carry hidden dimensions (e.g., valve flow coefficient \(C_V\)).</dd>
+    </dl>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-title" style="color:var(--ch1-title);">Density, Specific Weight & Specific Gravity</div>
+    <dl>
+      <dt class="wh-what">What:</dt><dd>Three related ways to characterize a fluid's "heaviness": \(\rho = m/V\), \(\gamma = \rho g\), \(SG = \rho/\rho_W\).</dd>
+      <dt class="wh-how">How:</dt><dd>Need density? → \(\rho = m/V\). Need weight per volume? → \(\gamma = \rho g\). Need dimensionless comparison? → \(SG = \rho / 1000\).</dd>
+      <dt class="wh-trap">Trap:</dt><dd>Don't confuse \(\rho\) with \(\gamma\) — they differ by a factor of \(g\). SG is dimensionless but NOT a substitute for \(\rho\) in equations.</dd>
+    </dl>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-title" style="color:var(--ch1-title);">Viscosity</div>
+    <dl>
+      <dt class="wh-what">What:</dt><dd>Resistance to fluid deformation under shear. Dynamic viscosity \(\mu\) relates shear stress to velocity gradient; kinematic viscosity \(\nu = \mu/\rho\).</dd>
+      <dt class="wh-how">How:</dt><dd>Newton's law: \(\tau = \mu \, du/dy\). Finding \(\mu\) experimentally: measure \(\tau\) and \(du/dy\), then divide.</dd>
+      <dt class="wh-trap">Trap:</dt><dd>Liquid viscosity ↓ with T; gas viscosity ↑ with T — opposite trends. Don't confuse dynamic (\(\mu\)) with kinematic (\(\nu\)).</dd>
+    </dl>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-title" style="color:var(--ch1-title);">Surface Tension & Capillarity</div>
+    <dl>
+      <dt class="wh-what">What:</dt><dd>Surface tension \(\Upsilon\) creates pressure differences across curved surfaces and drives capillary rise/fall in narrow tubes.</dd>
+      <dt class="wh-how">How:</dt><dd>Droplet: \(\Delta p = 2\Upsilon/R\). Bubble: \(\Delta p = 4\Upsilon/R\). Capillary: \(h = 2\Upsilon\cos\theta / \gamma R\).</dd>
+      <dt class="wh-trap">Trap:</dt><dd>Bubble has 2× droplet pressure (two surfaces). Capillary height is negative for non-wetting fluids (\(\theta > 90°\)).</dd>
+    </dl>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-title" style="color:var(--ch1-title);">Ideal Gas Law</div>
+    <dl>
+      <dt class="wh-what">What:</dt><dd>\(p = \rho R T\) — equation of state for ideal gases relating pressure, density, and absolute temperature.</dd>
+      <dt class="wh-how">How:</dt><dd>Need gas density? → \(\rho = p/(RT)\). Constant T compression? → \(p_1/\rho_1 = p_2/\rho_2\).</dd>
+      <dt class="wh-trap">Trap:</dt><dd>Must use <em>absolute</em> pressure and temperature (Pa and K, not gauge and °C). \(R\) is gas-specific, not universal.</dd>
+    </dl>
+  </div>
+
+  <!-- Pending chapters -->
+  <h2 style="color:var(--ch2-title);">Ch 2 — Hydrostatic Forces & Buoyancy</h2>
+  <p style="color:var(--muted);font-size:13px;">Pending — Text Ch 2.5–2.8</p>
+
+  <h2 style="color:var(--ch3-title);">Ch 3 — Bernoulli's Equation</h2>
+  <p style="color:var(--muted);font-size:13px;">Pending — Text Ch 2.9, 3.5</p>
+
+  <h2 style="color:var(--ch4-title);">Ch 4 — Introduction to Fluid Dynamics</h2>
+  <p style="color:var(--muted);font-size:13px;">Pending — Text Ch 1.5, 3.1, 6.1–6.2, 1.9, 3.2</p>
+
+  <h2 style="color:var(--ch5-title);">Ch 5 — Reynolds Transport Theorem</h2>
+  <p style="color:var(--muted);font-size:13px;">Pending — Text Ch 3.2–3.6</p>
+
+  <h2 style="color:var(--ch6-title);">Ch 6 — Pipe Flow & Losses</h2>
+  <p style="color:var(--muted);font-size:13px;">Pending — Text Ch 3.7, 6.3–6.4, 6.6–6.7</p>
+
+  <!-- Quick Reference Table -->
+  <h2>Quick Reference</h2>
+  <table class="qr-table">
+    <thead><tr><th>Test</th><th>Formula</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>Is continuum valid?</td><td>Problem length scale ≫ mean free path</td><td>If yes → use differential approach; if no → molecular dynamics</td></tr>
+      <tr><td>Fluid or solid?</td><td>Apply shear stress</td><td>Continuous deformation → fluid; deforms to equilibrium → solid</td></tr>
+      <tr><td>Density from mass/volume?</td><td>\(\rho = m/V\)</td><td>SI: kg/m³, BG: slugs/ft³</td></tr>
+      <tr><td>Specific weight?</td><td>\(\gamma = \rho g\)</td><td>Weight per unit volume</td></tr>
+      <tr><td>Sinks or floats?</td><td>\(SG = \rho/\rho_W\)</td><td>SG > 1 → sinks; SG < 1 → floats</td></tr>
+      <tr><td>Shear stress in fluid?</td><td>\(\tau = \mu \, du/dy\)</td><td>Newtonian fluids only</td></tr>
+      <tr><td>Droplet internal pressure?</td><td>\(\Delta p = 2\Upsilon/R\)</td><td>Bubble: \(4\Upsilon/R\)</td></tr>
+      <tr><td>Capillary rise?</td><td>\(h = 2\Upsilon\cos\theta / \gamma R\)</td><td>Positive = wetting, negative = non-wetting</td></tr>
+      <tr><td>Gas density at conditions?</td><td>\(\rho = p/(RT)\)</td><td>Use absolute p and T</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Textbook</h2>
+  <p><em>Fluid Mechanics</em>, 9th Ed. — Frank M. White, Henry Xue (McGraw Hill, 2021). ISBN 9781260575545.</p>
+</section>
