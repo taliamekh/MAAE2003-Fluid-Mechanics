@@ -10,7 +10,7 @@ Subject: Engineering
 Content org: Chapters (main) → Lectures (sub)
 Theme: Arctic Fox (custom Arctic Sunrise variant)
   Mode: Light
-  Background: #F2F6FA
+  Background: #F8F6F1 (soft ivory)
   Surface: #FFFFFF
   Sidebar BG: #0B2E48
   Sidebar Text: #8A9DB0
