@@ -17,10 +17,6 @@ function showSection(sectionId, anchorId) {
   document.querySelectorAll('.sb-item, .sb-sub').forEach(el => el.classList.remove('active'));
   const items = document.querySelectorAll(`[onclick*="'${sectionId}'"]`);
   items.forEach(el => el.classList.add('active'));
-  /* Close mobile sidebar + backdrop */
-  if (window.innerWidth <= 768) {
-    closeMobileSidebar();
-  }
 }
 
 /* ── Chapter Expand/Collapse ── */
@@ -35,19 +31,10 @@ function toggleChapter(chId) {
 
 /* ── Sidebar Toggle ── */
 function toggleSidebar() {
-  if (window.innerWidth <= 768) {
-    var sb = document.getElementById('sidebar');
-    var bd = document.getElementById('sidebarBackdrop');
-    var isOpen = sb.classList.toggle('mobile-open');
-    if (bd) bd.classList.toggle('visible', isOpen);
-  } else {
-    document.body.classList.toggle('sb-closed');
-  }
+  document.body.classList.toggle('sb-closed');
 }
 function closeMobileSidebar() {
-  document.getElementById('sidebar').classList.remove('mobile-open');
-  var bd = document.getElementById('sidebarBackdrop');
-  if (bd) bd.classList.remove('visible');
+  document.body.classList.add('sb-closed');
 }
 
 /* ── Collapsible Sections ── */
