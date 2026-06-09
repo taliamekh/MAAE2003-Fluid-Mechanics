@@ -9,7 +9,7 @@
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Equations</div>
-      <div style="font-size:22px;font-weight:600;color:var(--def);">0</div>
+      <div style="font-size:22px;font-weight:600;color:var(--def);">1</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Lectures</div>
@@ -21,9 +21,9 @@
     </div>
   </div>
 
-  <h2 style="color:var(--ch1-title);">Course Structure</h2>
+  <h2 style="color:var(--ch1-title);">Assessment Breakdown</h2>
   <div class="card-bracket def-card">
-    <div class="card-title">Assessment Breakdown</div>
+    <div class="card-title">Grading</div>
     <p><strong>Midterm 1</strong> (May 21) — 15%</p>
     <p><strong>Midterm 2</strong> (June 11) — 15%</p>
     <p><strong>Final Exam</strong> (TBA) — 55%</p>
@@ -31,25 +31,67 @@
     <p style="font-size:13px;color:var(--muted);margin-top:8px;">Must pass the final exam to pass the course. Must pass all lab reports individually (≥50% each).</p>
   </div>
 
-  <h2>Chapter Map</h2>
+  <!-- ═══ CH 1 SUMMARY ═══ -->
+  <h2 style="color:var(--ch1-title);">Ch 1 — Fluid Properties & Pressure</h2>
+  <p style="font-size:14px;margin-bottom:12px;">Establishes the foundational definitions and assumptions that underpin every equation in the course — what a fluid is, how we treat it mathematically, and the three branches we will study.</p>
 
-  <h3 style="color:var(--ch1-title);">Ch 1: Fluid Properties & Pressure</h3>
-  <p style="color:var(--muted);font-size:13px;">1.1 Introduction ✓ · 1.2–1.4 pending — Text Ch 1.1–1.7, 2.1–2.4, 2.10</p>
+  <div class="cluster">
+    <div class="cluster-title" style="color:var(--ch1-title);">Classification of Matter</div>
+    <dl>
+      <dt class="wh-what">What:</dt><dd>Matter classified as solid, liquid, gas, or plasma based on molecular bonding and response to shear stress.</dd>
+      <dt class="wh-why">Why:</dt><dd>The defining property of a fluid is that it <em>cannot resist shear stress</em> — it deforms continuously. Solids resist shear by deforming to equilibrium.</dd>
+      <dt class="wh-how">How:</dt><dd>Liquids have constant volume/density and form a free surface. Gases expand to fill their container and have no definite volume. Both are fluids.</dd>
+      <dt class="wh-trap">Trap:</dt><dd>Don't confuse "cannot resist shear" with "has no viscosity." Fluids still resist shear through viscous effects — they just never reach static equilibrium under shear.</dd>
+    </dl>
+  </div>
 
-  <h3 style="color:var(--ch2-title);">Ch 2: Hydrostatic Forces & Buoyancy</h3>
+  <div class="cluster">
+    <div class="cluster-title" style="color:var(--ch1-title);">The Continuum Assumption</div>
+    <dl>
+      <dt class="wh-what">What:</dt><dd>Treat fluid properties as smooth, continuous functions of position rather than tracking individual molecules.</dd>
+      <dt class="wh-why">Why:</dt><dd>Enables the use of differential calculus — partial derivatives, integrals, and governing PDEs — for engineering-scale analysis.</dd>
+      <dt class="wh-how">How:</dt><dd>\(\rho = \lim_{\delta V \to \delta V^*} \frac{\delta m}{\delta V}\) where \(\delta V^* \sim 10^{-9}\) mm³ gives a stable local density.</dd>
+      <dt class="wh-trap">Trap:</dt><dd>Fails in rarefied gas flows (high altitude, vacuum systems) where the mean free path approaches the problem's characteristic length.</dd>
+    </dl>
+  </div>
+
+  <div class="cluster">
+    <div class="cluster-title" style="color:var(--ch1-title);">Branches of Fluid Mechanics</div>
+    <dl>
+      <dt class="wh-what">What:</dt><dd>Three branches — hydrostatics (fluids at rest), kinematics (geometry of motion), and fluid dynamics (forces causing acceleration).</dd>
+      <dt class="wh-why">Why:</dt><dd>Structures the entire course: Ch 1–2 cover statics, Ch 4 covers kinematics, Ch 5–6 cover dynamics via the Reynolds Transport Theorem.</dd>
+    </dl>
+  </div>
+
+  <p class="cross-ch">Classification of matter → shear stress concept reappears in viscosity (Ch 1.2) and Newton's law of viscosity</p>
+  <p class="cross-ch">Continuum assumption → justifies every differential equation in Ch 3–6</p>
+  <p class="cross-ch">Density definition → used directly in hydrostatics (Ch 2), Bernoulli (Ch 3), and RTT (Ch 5)</p>
+
+  <!-- Pending chapters -->
+  <h2 style="color:var(--ch2-title);">Ch 2 — Hydrostatic Forces & Buoyancy</h2>
   <p style="color:var(--muted);font-size:13px;">Pending — Text Ch 2.5–2.8</p>
 
-  <h3 style="color:var(--ch3-title);">Ch 3: Bernoulli's Equation</h3>
+  <h2 style="color:var(--ch3-title);">Ch 3 — Bernoulli's Equation</h2>
   <p style="color:var(--muted);font-size:13px;">Pending — Text Ch 2.9, 3.5</p>
 
-  <h3 style="color:var(--ch4-title);">Ch 4: Introduction to Fluid Dynamics</h3>
+  <h2 style="color:var(--ch4-title);">Ch 4 — Introduction to Fluid Dynamics</h2>
   <p style="color:var(--muted);font-size:13px;">Pending — Text Ch 1.5, 3.1, 6.1–6.2, 1.9, 3.2</p>
 
-  <h3 style="color:var(--ch5-title);">Ch 5: Reynolds Transport Theorem</h3>
+  <h2 style="color:var(--ch5-title);">Ch 5 — Reynolds Transport Theorem</h2>
   <p style="color:var(--muted);font-size:13px;">Pending — Text Ch 3.2–3.6</p>
 
-  <h3 style="color:var(--ch6-title);">Ch 6: Pipe Flow & Losses</h3>
+  <h2 style="color:var(--ch6-title);">Ch 6 — Pipe Flow & Losses</h2>
   <p style="color:var(--muted);font-size:13px;">Pending — Text Ch 3.7, 6.3–6.4, 6.6–6.7</p>
+
+  <!-- Quick Reference Table -->
+  <h2>Quick Reference</h2>
+  <table class="qr-table">
+    <thead><tr><th>Test</th><th>Formula</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>Is continuum valid?</td><td>Problem length scale ≫ mean free path</td><td>If yes → use differential approach; if no → molecular dynamics</td></tr>
+      <tr><td>Fluid or solid?</td><td>Apply shear stress</td><td>Continuous deformation → fluid; deforms to equilibrium → solid</td></tr>
+    </tbody>
+  </table>
 
   <h2>Textbook</h2>
   <p><em>Fluid Mechanics</em>, 9th Ed. — Frank M. White, Henry Xue (McGraw Hill, 2021). ISBN 9781260575545.</p>

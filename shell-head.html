@@ -407,6 +407,83 @@ strong { font-weight: 600; }
 }
 .pending-placeholder i { font-size: 32px; display: block; margin-bottom: 12px; opacity: .5; }
 
+/* ── FORMULA SHEET CARDS (distinct from chapter cards) ── */
+.fs-card {
+  background: rgba(255,255,255,.6);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  overflow: visible;
+  margin: 14px 0;
+}
+.fs-card .fs-top {
+  padding: 6px 14px;
+  background: rgba(0,0,0,.03);
+  border-bottom: 1px solid var(--border);
+  border-radius: 8px 8px 0 0;
+}
+.fs-card .fs-name { font-weight: 700; color: var(--text); }
+.fs-chapter .fs-card .fs-name { color: var(--fs-ch-title, var(--text)); }
+.fs-card .fs-body { padding: 12px 14px; }
+.fs-card .fs-formula { font-size: 16px; margin: 6px 0 10px; overflow-x: auto; overflow-y: hidden; }
+.fs-card .fs-explain { font-size: 13px; color: var(--text); margin: 6px 0; line-height: 1.6; }
+.fs-card .fs-when { font-size: 13px; margin: 4px 0; line-height: 1.5; }
+.fs-card .fs-when strong { color: var(--def); }
+.fs-card .fs-when-not strong { color: var(--eq); }
+.fs-views { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.fs-views button {
+  font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 500;
+  padding: 5px 14px; border-radius: 6px; cursor: pointer;
+  background: rgba(0,0,0,.03); border: 1px solid var(--border); color: var(--muted);
+  transition: background .15s, color .15s;
+}
+.fs-views button.active { background: var(--eq); color: #fff; border-color: var(--eq); }
+.fs-card .fs-detail { }
+.fs-card .fs-quick { display: none; }
+.fs-card .fs-eqonly { display: none; }
+[data-view="quick"] .fs-card .fs-detail { display: none; }
+[data-view="quick"] .fs-card .fs-quick { display: block; }
+[data-view="eqonly"] .fs-card .fs-detail { display: none; }
+[data-view="eqonly"] .fs-card .fs-eqonly { display: block; }
+#formulas .katex .frac-line,
+#formulas .katex .sqrt-sign,
+#formulas .katex .sqrt-line,
+#formulas .katex .overline-line,
+#formulas .katex .svg-align,
+#formulas .katex .hide-tail,
+#formulas .katex .rule { pointer-events: none; }
+
+/* ── SUMMARY CLUSTERS ── */
+.cluster { margin: 12px 0 16px; }
+.cluster-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.cluster dl { margin: 0; padding: 0; }
+.cluster dt {
+  font-size: 13px;
+  font-weight: 600;
+  display: inline;
+  margin-right: 4px;
+}
+.cluster dd {
+  font-size: 13px;
+  display: inline;
+  margin: 0 0 0 0;
+  line-height: 1.7;
+}
+.cluster dd::after { content: ''; display: block; margin-bottom: 4px; }
+.wh-what { color: #142850; }
+.wh-why  { color: #27496D; }
+.wh-how  { color: #0C7B93; }
+.wh-trap { color: #00A8CC; }
+.cluster .katex { color: var(--eq) !important; background: rgba(139,26,26,.1); padding: 1px 4px; border-radius: 3px; }
+.cross-ch { font-size: 13px; color: var(--muted); margin: 4px 0; padding-left: 16px; line-height: 1.6; }
+.cross-ch::before { content: '→ '; }
+.qr-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 16px 0; }
+.qr-table th { text-align: left; padding: 6px 10px; border-bottom: 2px solid var(--border); color: var(--muted); font-weight: 600; font-size: 12px; }
+.qr-table td { padding: 6px 10px; border-bottom: 1px solid var(--border); }
+
 /* ── RESPONSIVE — padding/font only, layout handled by flex ── */
 @media (max-width: 600px) {
   .content-area { padding: 20px 18px 40px; }

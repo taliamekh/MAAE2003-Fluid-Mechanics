@@ -37,6 +37,14 @@ function closeMobileSidebar() {
   document.body.classList.add('sb-closed');
 }
 
+/* ── Formula Sheet View Toggle ── */
+function setFormulaView(view, btn) {
+  var el = document.getElementById('formula-content');
+  if (el) el.setAttribute('data-view', view);
+  document.querySelectorAll('.fs-views button').forEach(function(b) { b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+}
+
 /* ── Collapsible Sections ── */
 document.addEventListener('click', function(e) {
   const toggle = e.target.closest('.collapse-toggle');
