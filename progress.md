@@ -61,7 +61,7 @@ Repo: https://github.com/taliamekh/MAAE2003-Fluid-Mechanics
 *(Populated as chapters are added)*
 
 ### Ch 1 — Fluid Properties & Pressure
-Pending
+**1.1 Introduction** — Fluid definition (substance that deforms continuously under shear), classification of matter (solid/liquid/gas/plasma), solid vs fluid distinction (solids resist shear by deforming, fluids cannot), continuum assumption (δV* ~ 10⁻⁹ mm³), density continuum definition (ρ = lim δm/δV), branches of fluid mechanics (hydrostatics, kinematics, fluid dynamics)
 
 ### Ch 2 — Hydrostatic Forces & Buoyancy
 Pending
@@ -83,3 +83,4 @@ Pending
 | # | Date | Task | What was done |
 |---|---|---|---|
 | 1 | 2026-06-09 | Course setup | Initial scaffolding: Arctic Fox theme, 6-chapter structure with 17 lectures, sidebar, placeholders, summary, progress tracker, equation sheet, 3 labs, 2 midterms + final prep. Pushed to GitHub. |
+| 2 | 2026-06-09 | Ch 1.1 Introduction | Added Lec 1.1 notes from slides: applications overview, classification of matter (solid/liquid/gas/plasma), shear stress distinction, continuum assumption + density definition, branches of fluid mechanics. Updated sidebar, summary, concepts index. |

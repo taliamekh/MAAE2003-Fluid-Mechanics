@@ -430,11 +430,11 @@ strong { font-weight: 600; }
 
   <!-- Ch 1 -->
   <div class="sb-group">
-    <a class="sb-item pending" onclick="toggleChapter('ch1'); showSection('ch1-notes')">
+    <a class="sb-item" onclick="toggleChapter('ch1'); showSection('ch1-notes')">
       <span class="ch-arrow" id="ch1-arrow">▸</span>Ch 1: Fluid Properties
     </a>
     <div class="sb-subs" id="ch1-subs">
-      <a class="sb-sub pending" onclick="showSection('ch1-notes','ch1-lec1')">1.1 Introduction</a>
+      <a class="sb-sub" onclick="showSection('ch1-notes','ch1-lec1')">1.1 Introduction</a>
       <a class="sb-sub pending" onclick="showSection('ch1-notes','ch1-lec2')">1.2 Units & Fluid Properties</a>
       <a class="sb-sub pending" onclick="showSection('ch1-notes','ch1-lec3')">1.3 Hydrostatics & Manometers</a>
       <a class="sb-sub pending" onclick="showSection('ch1-notes','ch1-lec4')">1.4 Pressure</a>
@@ -556,7 +556,120 @@ strong { font-weight: 600; }
 <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeMobileSidebar()"></div>
 
 <main class="content-area">
-<!-- pending --><section id="ch1-notes" class="page-section"><div class="pending-placeholder"><i class="ti ti-book" aria-hidden="true"></i>Chapter 1 notes — coming soon</div></section>
+<section id="ch1-notes" class="page-section">
+  <h1 class="page-title" style="color:var(--ch1-title)">Ch 1: Fluid Properties & Pressure</h1>
+  <p class="page-subtitle">Text Ch 1.1–1.7, 2.1–2.4, 2.10 · Week of May 4th</p>
+
+  <!-- ═══════ LECTURE 1.1 ═══════ -->
+  <h2 id="ch1-lec1" style="color:var(--ch1-title)">1.1 — Introduction</h2>
+
+  <p>Fluid mechanics studies how fluids (liquids and gases) behave at rest and in motion. It is one of the most broadly applicable areas in engineering — spanning aerodynamics, marine propulsion, biomedical devices, renewable energy, sports engineering, and environmental science. In this course, we develop governing equations using the <strong>control volume approach</strong> and apply them to practical engineering problems.</p>
+
+  <h3>Applications of Fluid Mechanics</h3>
+
+  <p>The reach of fluid mechanics is enormous. A few representative domains from the lectures:</p>
+
+  <p><strong>Transportation</strong> — Aviation (helicopter vortex ring states, aircraft lift/drag), marine (ship propeller vortices, hull drag), automotive (CFD streamline simulations for race cars).</p>
+
+  <p><strong>Biomedical</strong> — Computational fluid dynamics for artificial heart pump design, lung airflow simulation, blood flow modeling through arteries.</p>
+
+  <p><strong>Energy</strong> — Water flow in hydroelectric dams, airflow through wind turbines, combustion chamber flows.</p>
+
+  <p><strong>Environment</strong> — Ocean current modeling, atmospheric pollution dispersion, weather prediction.</p>
+
+  <p><strong>Sports</strong> — Aerodynamic optimization of golf clubs, drag reduction on bobsleds and cycling helmets.</p>
+
+  <!-- ── CLASSIFICATION OF MATTER ── -->
+  <h3>The Concept of a Fluid: Classification of Matter</h3>
+
+  <p>Matter exists in four states — solid, liquid, gas, and plasma. In this course, we focus on liquids and gases, which are collectively called <strong>fluids</strong>. The critical distinction between solids and fluids comes down to how they respond to shear stress.</p>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Solid</div>
+    <p>Molecules are packed in a lattice or geometric structure with <strong>constant molecular spacing</strong>. Large cohesive forces hold molecules together, preventing relative movement (aside from slight vibration). When subjected to a load, a solid deforms but <strong>continues to support the load</strong>. A solid can resist shear stress by deforming.</p>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Liquid</div>
+    <p>Molecules are not bound in a lattice — they are more mobile than in solids, but molecular spacing is still <strong>approximately constant</strong>. Liquids do not hold their shape; they flow and take the shape of their container, forming a <strong>horizontal free surface</strong> at the top. When confined, their intermolecular forces allow them to resist compressive forces, so liquids have <strong>constant volume and density</strong>. However, they <strong>cannot resist shear loading</strong> — they form waves instead.</p>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Gas</div>
+    <p>Intermolecular forces are weak enough to allow molecules to travel freely until repelled by other molecules. Gases have <strong>no definite volume</strong> — they must be held in a container, otherwise they flow out to form an atmosphere. A gas completely fills any space it occupies. Gravitational effects are negligible compared to buoyancy forces. Gases are still classified as fluids because they flow when subjected to a force.</p>
+  </div>
+
+  <div class="card-bracket tip-card">
+    <div class="card-title">★ Key Distinction</div>
+    <p>A <strong>solid resists shear stress by deforming</strong> (it reaches equilibrium under load). A <strong>fluid cannot resist any shear stress</strong> — it deforms continuously under even the smallest applied shear, no matter how small. This is the defining difference.</p>
+  </div>
+
+  <p>A fourth state, <strong>plasma</strong> (ionized matter), exists and is critical for fusion energy research, but it is not covered in this course.</p>
+
+  <!-- ── CONTINUUM ── -->
+  <h3>The Concept of Continuum</h3>
+
+  <p>At the molecular level, matter is discrete — individual molecules bouncing around with gaps between them. But in engineering, we want to treat fluid properties like density as smooth, continuous functions so we can use calculus. The <strong>continuum assumption</strong> makes this possible.</p>
+
+  <p>Consider measuring density by counting molecules in a small volume:</p>
+
+  <p>If the sample volume is <strong>comparable to intermolecular spacing</strong> (very tiny), the number of molecules inside fluctuates wildly as they move in and out. The measured density is noisy and unstable — this is <strong>microscopic uncertainty</strong>.</p>
+
+  <p>If the sample volume is <strong>much larger than intermolecular spacing</strong>, the number of molecules entering roughly equals the number leaving at any instant. The measured density stabilizes to a constant value — the fluctuations average out.</p>
+
+  <div class="card-bracket eq-card">
+    <div class="card-title">Density (Continuum Definition)</div>
+    <p>\[ \rho = \lim_{\delta V \to \delta V^*} \frac{\delta m}{\delta V} \]</p>
+    <div class="var-row">
+      <span class="pill">\(\rho\) — density (kg/m³)</span>
+      <span class="pill">\(\delta m\) — mass in volume element</span>
+      <span class="pill">\(\delta V\) — volume element</span>
+      <span class="pill">\(\delta V^*\) — smallest volume for stable density</span>
+    </div>
+  </div>
+
+  <p>The critical threshold is \(\delta V^* \sim 10^{-9}\) mm³, which is extremely small compared to any engineering dimension. At standard atmospheric conditions, this volume of air contains roughly \(3 \times 10^7\) molecules — more than enough for a stable average.</p>
+
+  <div class="card-bracket tip-card">
+    <div class="card-title">★ Why Continuum Matters</div>
+    <p>Because \(\delta V^*\) is so small, density (and all other fluid properties) can be treated as <strong>smoothly varying functions of position</strong>. This is what lets us apply <strong>differential calculus</strong> to fluid mechanics — writing partial derivatives, integrals, and governing equations. Without the continuum assumption, we would need to track individual molecules (molecular dynamics), which is computationally impractical for engineering-scale problems.</p>
+  </div>
+
+  <p>If the volume is too large (macroscopic uncertainty), the density starts reflecting spatial variations in the fluid rather than a point value — think of a container where fluid is sloshing and spilling. The continuum definition uses the limit approaching \(\delta V^*\) to capture a true local density.</p>
+
+  <!-- ── BRANCHES ── -->
+  <h3>Branches of Fluid Mechanics</h3>
+
+  <p>The field is divided into three branches, each of which we will study in this course:</p>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Hydrostatics</div>
+    <p>The study of fluids <strong>at rest</strong> or moving with <strong>constant velocity</strong> (no acceleration). Covers pressure distribution, forces on submerged surfaces, and buoyancy. This is the focus of Ch 1–2 in our notes.</p>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Kinematics</div>
+    <p>The study of the <strong>geometry of fluid motion</strong> — velocity fields, streamlines, pathlines, and streaklines — without considering the forces that cause the motion. Covered beginning in Ch 4.</p>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Fluid Dynamics</div>
+    <p>The study of the <strong>forces that cause accelerated motion</strong> in fluids. This is where we develop and apply the momentum and energy equations using the Reynolds Transport Theorem (Ch 5–6).</p>
+  </div>
+
+  <!-- Placeholder for remaining Ch 1 lectures -->
+  <div class="sb-sep" style="margin:30px 0;background:var(--border);"></div>
+
+  <h2 id="ch1-lec2" style="color:var(--ch1-title)">1.2 — Units, Dimensional Analysis & Fluid Properties</h2>
+  <div class="pending-placeholder"><i class="ti ti-book" aria-hidden="true"></i>Coming soon</div>
+
+  <h2 id="ch1-lec3" style="color:var(--ch1-title)">1.3 — Hydrostatics & Manometers</h2>
+  <div class="pending-placeholder"><i class="ti ti-book" aria-hidden="true"></i>Coming soon</div>
+
+  <h2 id="ch1-lec4" style="color:var(--ch1-title)">1.4 — Pressure</h2>
+  <div class="pending-placeholder"><i class="ti ti-book" aria-hidden="true"></i>Coming soon</div>
+
+</section>
 
 <!-- pending --><section id="ch1-prob" class="page-section"><div class="pending-placeholder"><i class="ti ti-math-function" aria-hidden="true"></i>Chapter 1 recommended problems — coming soon</div></section>
 
@@ -625,7 +738,7 @@ strong { font-weight: 600; }
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Lectures</div>
-      <div style="font-size:22px;font-weight:600;color:var(--deriv);">0 <span style="font-size:13px;color:var(--muted);font-weight:400;">/ 17</span></div>
+      <div style="font-size:22px;font-weight:600;color:var(--deriv);">1 <span style="font-size:13px;color:var(--muted);font-weight:400;">/ 17</span></div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Labs</div>
@@ -646,7 +759,7 @@ strong { font-weight: 600; }
   <h2>Chapter Map</h2>
 
   <h3 style="color:var(--ch1-title);">Ch 1: Fluid Properties & Pressure</h3>
-  <p style="color:var(--muted);font-size:13px;">Pending — Text Ch 1.1–1.7, 2.1–2.4, 2.10</p>
+  <p style="color:var(--muted);font-size:13px;">1.1 Introduction ✓ · 1.2–1.4 pending — Text Ch 1.1–1.7, 2.1–2.4, 2.10</p>
 
   <h3 style="color:var(--ch2-title);">Ch 2: Hydrostatic Forces & Buoyancy</h3>
   <p style="color:var(--muted);font-size:13px;">Pending — Text Ch 2.5–2.8</p>
