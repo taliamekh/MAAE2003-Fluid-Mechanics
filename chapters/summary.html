@@ -6,15 +6,15 @@
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:28px;">
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Reference items</div>
-      <div style="font-size:22px;font-weight:600;color:var(--eq);">19</div>
+      <div style="font-size:22px;font-weight:600;color:var(--eq);">25</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Chapters completed</div>
-      <div style="font-size:22px;font-weight:600;color:var(--def);">0 <span style="font-size:13px;color:var(--muted);font-weight:400;">/ 6</span></div>
+      <div style="font-size:22px;font-weight:600;color:var(--def);">2 <span style="font-size:13px;color:var(--muted);font-weight:400;">/ 6</span></div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Examples</div>
-      <div style="font-size:22px;font-weight:600;color:var(--deriv);">6</div>
+      <div style="font-size:22px;font-weight:600;color:var(--deriv);">13</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Assignments</div>
@@ -60,17 +60,33 @@
     </div>
   </div>
 
-  <div class="decision-tree card-bracket" style="border-left-color:var(--ch5-title);">
-    <h3 style="color:var(--ch5-title);margin-top:0;">Continuity &amp; the Reynolds Transport Theorem</h3>
+  <div class="decision-tree card-bracket" style="border-left-color:var(--ch3-title);">
+    <h3 style="color:var(--ch3-title);margin-top:0;">Flow Measurement &amp; Bernoulli</h3>
     <div class="tree">
-      <div class="branch"><strong>Converting a system law to a control volume?</strong> &rarr; RTT: \(\frac{dB_{\text{sys}}}{dt} = \frac{d}{dt}\!\int_{CV}\beta\rho\,d\forall + \int_{CS}\beta\rho(\vec V\cdot\hat n)\,dA\)
-        <div class="sub-branch" style="padding-left:20px;margin-top:4px;">Pick \(\beta\): <strong>mass</strong> &rarr; \(\beta=1\) &nbsp;|&nbsp; <strong>momentum</strong> &rarr; \(\beta=\vec V\) &nbsp;|&nbsp; <strong>energy</strong> &rarr; \(\beta=e\)</div>
+      <div class="branch"><strong>Relating P, V, z between two points on a streamline?</strong> &rarr; Bernoulli: \(P/\rho + V^2/2 + gz = \text{const}\)</div>
+      <div class="branch"><strong>Tank draining / free-jet exit speed?</strong> &rarr; Torricelli: \(V = \sqrt{2gz}\)</div>
+      <div class="branch"><strong>Speed from a Pitot / stagnation tube?</strong> &rarr; \(V = \sqrt{2(P_0 - P)/\rho}\)</div>
+      <div class="branch"><strong>Flow rate through a Venturi?</strong> &rarr; \(Q = C_v A_2\sqrt{\dfrac{2(P_1-P_2)}{\rho\,(1-(A_2/A_1)^2)}}\) &nbsp;(\(C_v \approx 0.98\))</div>
+      <div class="branch"><strong>Flow rate through an orifice plate?</strong> &rarr; \(Q = C_D A_0\sqrt{\dfrac{2(P_1-P_2)}{\rho\,(1-C_c^2(A_0/A_1)^2)}}\)
+        <div class="sub-branch" style="padding-left:20px;margin-top:4px;"><strong>Sharp orifice:</strong> \(C_c \approx 0.6\) &nbsp;|&nbsp; <strong>Bell-mouth inlet:</strong> \(C_c = 1\)</div>
       </div>
-      <div class="branch"><strong>Mass balance, anything filling/emptying?</strong> &rarr; Unsteady continuity: keep the storage term \(\frac{d}{dt}\!\int_{CV}\rho\,d\forall\)</div>
-      <div class="branch"><strong>Steady flow?</strong> &rarr; Storage term = 0: \(\sum\dot m_{\text{out}} = \sum\dot m_{\text{in}}\)</div>
-      <div class="branch"><strong>Incompressible (liquid)?</strong> &rarr; \(\rho\) cancels: \(\sum Q_{\text{out}} = \sum Q_{\text{in}}\), with \(Q = \bar V A\)</div>
-      <div class="branch"><strong>Compressible (gas)?</strong> &rarr; Keep \(\rho\); get each \(\rho = p/(RT)\) at that port (absolute \(p\), \(T\) in K)</div>
-      <div class="branch"><strong>CV riding a moving body?</strong> &rarr; Use relative velocity \(\vec V_r = \vec V - \vec V_s\) in the flux term</div>
+      <div class="branch"><strong>Relating velocities at two pipe sections?</strong> &rarr; Continuity: \(A_1 V_1 = A_2 V_2\)</div>
+    </div>
+  </div>
+
+  <div class="decision-tree card-bracket" style="border-left-color:var(--ch4-title);">
+    <h3 style="color:var(--ch4-title);margin-top:0;">Fluid Kinematics &amp; Rate of Flow</h3>
+    <div class="tree">
+      <div class="branch"><strong>Velocity at fixed points / locating a stagnation point?</strong> &rarr; Eulerian field \(\vec{V} = u\,\vec{i} + v\,\vec{j} + w\,\vec{k}\); stagnation: set \(\vec{V} = 0\)
+        <div class="sub-branch" style="padding-left:20px;margin-top:4px;"><strong>Following one particle instead?</strong> &rarr; that is the Lagrangian view</div>
+      </div>
+      <div class="branch"><strong>Discharge from a velocity profile?</strong> &rarr; \(Q = \int_A v_n\,dA\) &nbsp;(only the component normal to \(dA\))</div>
+      <div class="branch"><strong>One representative speed for a profile?</strong> &rarr; Average velocity \(\bar{U} = Q/A\) &nbsp;(laminar pipe: \(\bar{U} = V_{\max}/2\))</div>
+      <div class="branch"><strong>Mass per unit time?</strong> &rarr; \(\dot{m} = \rho Q = \rho \bar{U} A\)</div>
+      <div class="branch"><strong>Visualizing the flow?</strong> &rarr; streamline (tangent to \(\vec{V}\) now) &nbsp;|&nbsp; pathline (one particle&rsquo;s track) &nbsp;|&nbsp; streakline (dye trace) &nbsp;|&nbsp; timeline (marked row)
+        <div class="sub-branch" style="padding-left:20px;margin-top:4px;"><strong>Steady flow?</strong> &rarr; all three coincide</div>
+      </div>
+      <div class="branch"><strong>Steady or uniform?</strong> &rarr; steady = no change in time at a point (\(\partial/\partial t = 0\)) &nbsp;|&nbsp; uniform = no change in space along the flow</div>
     </div>
   </div>
 
@@ -145,47 +161,79 @@
     </ol>
   </div>
 
-  <!-- ═══ PENDING CHAPTERS ═══ -->
+  <!-- ═══ CH 3 CARD ═══ -->
   <h2 style="color:var(--ch3-title);">Ch 3 — Bernoulli&rsquo;s Equation</h2>
-  <p style="color:var(--muted);font-size:13px;">Pending &mdash; Text Ch 2.9, 3.5</p>
+  <div class="card-bracket" style="border-left:3.5px solid var(--ch3-title);">
+    <div class="eq-name" style="color:var(--ch3-title);">Ch 3 — Bernoulli&rsquo;s Equation</div>
 
-  <h2 style="color:var(--ch4-title);">Ch 4 — Introduction to Fluid Dynamics</h2>
-  <p style="color:var(--muted);font-size:13px;">Pending &mdash; Text Ch 1.5, 3.1, 6.1&ndash;6.2, 1.9, 3.2</p>
-
-  <h2 style="color:var(--ch5-title);">Ch 5 — Reynolds Transport Theorem</h2>
-  <div class="card-bracket" style="border-left:3.5px solid var(--ch5-title);">
-    <div class="eq-name" style="color:var(--ch5-title);">Ch 5 — Reynolds Transport Theorem</div>
-
-    <p><strong style="color:var(--ch5-title)">Key ideas:</strong></p>
+    <p><strong style="color:var(--ch3-title)">Key ideas:</strong></p>
     <ul>
-      <li>&rarr; The fundamental laws (mass, momentum, energy) are written for a fixed-mass <strong>system</strong> (Lagrangian); engineering needs them on a fixed-region <strong>control volume</strong> (Eulerian)</li>
-      <li>&rarr; The <strong>RTT</strong> is the bridge: <em>system change = rate stored in CV + net flux out of CS</em> &mdash; derived once for a generic property pair \((B,\beta)\)</li>
-      <li>&rarr; Choose the intensive property \(\beta = dB/dm\) to specialize: \(\beta=1\) gives <strong>continuity</strong>, \(\beta=\vec V\) gives momentum, \(\beta=e\) gives energy</li>
-      <li>&rarr; The outward-normal sign convention &mdash; \(\vec V\cdot\hat n>0\) outflow, \(<0\) inflow, \(=0\) wall &mdash; drives every flux integral</li>
-      <li>&rarr; Conservation of mass (continuity) is the RTT with \(\beta=1\): mass stored in CV + net mass out of CS = 0</li>
+      <li>&rarr; Bernoulli is the steady, incompressible, frictionless energy balance along a single streamline: \(P/\rho + V^2/2 + gz\) stays constant</li>
+      <li>&rarr; It is the steady-flow Euler equation integrated along a streamline &mdash; so every restriction on Euler carries over to Bernoulli</li>
+      <li>&rarr; In head form (&divide; g) the three terms are the pressure, velocity and elevation heads; their sum is the EGL, and the HGL sits one velocity head \(V^2/2g\) below it</li>
+      <li>&rarr; Stagnation pressure \(P_0 = P + \tfrac12\rho V^2\) (static + dynamic) is the basis of velocity measurement</li>
+      <li>&rarr; The four flow meters (Pitot, Venturi, orifice, bell-mouth) are all Bernoulli + continuity with a calibration coefficient</li>
     </ul>
 
-    <p><strong style="color:var(--ch5-title)">When to use what:</strong></p>
+    <p><strong style="color:var(--ch3-title)">When to use what:</strong></p>
     <ul>
-      <li>&rarr; Need a CV form of a law? &mdash; RTT \(\frac{dB_{\text{sys}}}{dt} = \frac{d}{dt}\!\int_{CV}\beta\rho\,d\forall + \int_{CS}\beta\rho(\vec V\cdot\hat n)\,dA\)</li>
-      <li>&rarr; Filling / emptying (unsteady)? &mdash; keep storage term: \(\frac{d}{dt}\!\int_{CV}\rho\,d\forall = -\int_{CS}\rho(\vec V\cdot\hat n)\,dA\)</li>
-      <li>&rarr; Steady flow? &mdash; storage = 0, so \(\sum\dot m_{\text{out}} = \sum\dot m_{\text{in}}\)</li>
-      <li>&rarr; Incompressible (liquid)? &mdash; \(\rho\) cancels: \(\sum Q_{\text{out}} = \sum Q_{\text{in}}\), \(Q = \bar V A\)</li>
-      <li>&rarr; Compressible (gas)? &mdash; keep \(\rho\); get each \(\rho = p/(RT)\) at that port (absolute p, T in K)</li>
-      <li>&rarr; Mass / velocity / area at a port? &mdash; \(\dot m = \rho A V = \rho Q\)</li>
-      <li>&rarr; CV moving with a body? &mdash; use relative velocity \(\vec V_r = \vec V - \vec V_s\)</li>
+      <li>&rarr; Pressure/speed/height on a streamline? &mdash; \(P/\rho + V^2/2 + gz = \text{const}\)</li>
+      <li>&rarr; Tank draining / free jet? &mdash; Torricelli: \(V = \sqrt{2gz}\)</li>
+      <li>&rarr; Speed from a Pitot tube? &mdash; \(V = \sqrt{2(P_0 - P)/\rho}\)</li>
+      <li>&rarr; Flow rate from a Venturi? &mdash; \(Q = C_v A_2\sqrt{2(P_1-P_2)/[\rho(1-(A_2/A_1)^2)]}\), \(C_v \approx 0.98\)</li>
+      <li>&rarr; Flow rate from an orifice? &mdash; \(Q = C_D A_0\sqrt{2(P_1-P_2)/[\rho(1-C_c^2(A_0/A_1)^2)]}\), \(C_D = C_c C_v\)</li>
+      <li>&rarr; Two pipe sections? &mdash; Continuity: \(A_1 V_1 = A_2 V_2\)</li>
     </ul>
 
-    <p><strong style="color:var(--ch5-title)">&#9888; Traps:</strong></p>
+    <p><strong style="color:var(--ch3-title)">&#9888; Traps:</strong></p>
     <ol>
-      <li>Don&rsquo;t drop the storage term when the CV mass is changing &mdash; a rising tank or filling balloon is <em>unsteady</em></li>
-      <li>The sign convention is set by the <em>outward</em> normal &mdash; inflow contributes a <strong>negative</strong> \(\vec V\cdot\hat n\). Reversing it flips the whole balance</li>
-      <li>Only cancel \(\rho\) for <em>incompressible</em> flow. For gases, \(\rho\) differs at each port and must come from the ideal gas law</li>
-      <li>Ideal gas law needs <strong>absolute</strong> pressure and <strong>Kelvin</strong> &mdash; gauge pressure or &deg;C is the #1 error in compressible mass balances</li>
-      <li>Convert units (km&sup2;&rarr;m&sup2;, kPa&rarr;Pa, &deg;C&rarr;K) <em>before</em> substituting &mdash; not after</li>
-      <li>\(Q\) is <em>volume</em> flow, \(\dot m\) is <em>mass</em> flow &mdash; don&rsquo;t equate them across a density change (use \(\dot m = \rho Q\))</li>
+      <li>Bernoulli holds <em>along one streamline</em> &mdash; only equate two points on the same streamline (or everywhere in irrotational flow)</li>
+      <li>No friction, no pump/turbine, steady &amp; incompressible &mdash; if any of these fails, use the steady-flow energy equation instead</li>
+      <li>The jet area at a sharp orifice is the vena contracta \(C_c A_0\), not the hole \(A_0\) &mdash; ignoring contraction overestimates the flow</li>
+      <li>Use the <em>throat</em> area for a Venturi (\(A_2\)), never the upstream pipe area</li>
+      <li>The dynamic term \(\tfrac12\rho V^2\) assumes incompressible flow &mdash; it needs a correction at high Mach number</li>
+      <li>Keep one datum for z; in BG units mind the \(g_c\) factor and convert psi to lbf/ft&sup2; (&times;144)</li>
     </ol>
   </div>
+
+  <h2 style="color:var(--ch4-title);">Ch 4 &mdash; Introduction to Fluid Dynamics</h2>
+  <div class="card-bracket" style="border-left:3.5px solid var(--ch4-title);">
+    <div class="eq-name" style="color:var(--ch4-title);">Ch 4 &mdash; Introduction to Fluid Dynamics</div>
+
+    <p><strong style="color:var(--ch4-title)">Key ideas:</strong></p>
+    <ul>
+      <li>&rarr; Fluid dynamics studies fluids in motion; <em>kinematics</em> describes the motion &mdash; velocity and acceleration &mdash; without asking what force causes it</li>
+      <li>&rarr; Two viewpoints: the <strong>Lagrangian</strong> view follows individual particles, while the <strong>Eulerian</strong> view records the velocity field \(\vec{V}(x,y,z,t)\) at fixed points in space &mdash; we almost always use Eulerian</li>
+      <li>&rarr; A <strong>stagnation point</strong> is where the flow comes to rest: set \(\vec{V} = 0\) and solve for position</li>
+      <li>&rarr; Flow lines: a <strong>streamline</strong> is tangent to \(\vec{V}\) everywhere at one instant; a <strong>pathline</strong> is the actual track of one particle; a <strong>streakline</strong> joins all particles that passed through one point (a dye trace); a <strong>timeline</strong> is a marked row of particles. In <em>steady</em> flow streamline, pathline and streakline coincide</li>
+      <li>&rarr; Flow is <strong>steady</strong> if nothing changes in time at a point (\(\partial/\partial t = 0\)) and <strong>uniform</strong> if nothing changes in space along the flow direction</li>
+      <li>&rarr; Rate of flow: volume flow \(Q = \int_A v_n\,dA = \bar{U}A\), average velocity \(\bar{U} = Q/A\), mass flow \(\dot{m} = \rho Q = \rho\bar{U}A\) &mdash; only the velocity <em>normal</em> to the area carries flow</li>
+    </ul>
+
+    <p><strong style="color:var(--ch4-title)">When to use what:</strong></p>
+    <ul>
+      <li>&rarr; Velocity at fixed points / find a stagnation point? &mdash; Eulerian field \(\vec{V} = u\,\vec{i} + v\,\vec{j} + w\,\vec{k}\), stagnation at \(\vec{V} = 0\)</li>
+      <li>&rarr; Discharge from a velocity profile? &mdash; \(Q = \int_A v_n\,dA\) (integrate the normal component over the area)</li>
+      <li>&rarr; One representative speed for a profile? &mdash; \(\bar{U} = Q/A\) (laminar pipe: \(\bar{U} = V_{\max}/2\))</li>
+      <li>&rarr; Mass per unit time? &mdash; \(\dot{m} = \rho Q = \rho\bar{U}A\)</li>
+      <li>&rarr; Is the flow steady or uniform? &mdash; steady: \(\partial/\partial t = 0\) at a point; uniform: no change along the flow</li>
+    </ul>
+
+    <p><strong style="color:var(--ch4-title)">&#9888; Traps:</strong></p>
+    <ol>
+      <li>Lagrangian \(\neq\) Eulerian &mdash; a pathline (one particle over time) is not a streamline (the whole field at one instant); they coincide only in steady flow</li>
+      <li>Only the velocity component <em>normal</em> to \(dA\) carries flow &mdash; tangential velocity contributes nothing to \(Q\)</li>
+      <li>Average velocity is not the maximum &mdash; for a laminar (parabolic) pipe profile \(\bar{U} = V_{\max}/2\) and \(Q = \tfrac12 V_{\max}\pi R^2\)</li>
+      <li>Steady is about <em>time</em>, uniform is about <em>space</em> &mdash; a nozzle flow can be steady yet non-uniform</li>
+      <li>\(\dot{m}\) carries the density: incompressible flow conserves \(Q\), but \(\dot{m} = \rho Q\) is what general (compressible) continuity conserves</li>
+      <li>A streakline (dye injected at a fixed point) is not a pathline unless the flow is steady</li>
+    </ol>
+  </div>
+
+  <!-- ═══ PENDING CHAPTERS ═══ -->
+
+  <h2 style="color:var(--ch5-title);">Ch 5 — Reynolds Transport Theorem</h2>
+  <p style="color:var(--muted);font-size:13px;">Pending &mdash; Text Ch 3.2&ndash;3.6</p>
 
   <h2 style="color:var(--ch6-title);">Ch 6 — Pipe Flow &amp; Losses</h2>
   <p style="color:var(--muted);font-size:13px;">Pending &mdash; Text Ch 3.7, 6.3&ndash;6.4, 6.6&ndash;6.7</p>
@@ -206,11 +254,15 @@
       <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Force on flat surface</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(F_R = \gamma \bar{h} A\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\bar{h}\) = depth to centroid</td></tr>
       <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Where does F<sub>R</sub> act?</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(y_{cp} = \bar{y} + I_{xx}/(\bar{y}A)\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Always below centroid</td></tr>
       <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Hinge/gate equilibrium</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">FBD + &Sigma;M about hinge = 0</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Use F<sub>R</sub> at y<sub>cp</sub></td></tr>
-      <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">System law &rarr; control volume</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">RTT: \(\frac{dB_{\text{sys}}}{dt} = \frac{d}{dt}\!\int_{CV}\beta\rho\,d\forall + \int_{CS}\beta\rho(\vec V\cdot\hat n)dA\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Pick \(\beta\) for each law</td></tr>
-      <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Steady mass balance</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\sum\dot m_{\text{out}} = \sum\dot m_{\text{in}}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Storage term = 0</td></tr>
-      <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Incompressible continuity</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\sum Q_{\text{out}} = \sum Q_{\text{in}}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\rho\) cancels; \(Q = \bar V A\)</td></tr>
-      <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Mass / volume flow rate</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\dot m = \rho A V = \rho Q\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Gas \(\rho\) from \(p/(RT)\)</td></tr>
-      <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Unsteady (filling/emptying)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\frac{d}{dt}\!\int_{CV}\rho\,d\forall = -\int_{CS}\rho(\vec V\cdot\hat n)dA\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Rising surface = net inflow</td></tr>
+      <tr style="border-left:3px solid var(--ch3-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Two points on a streamline</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(P/\rho + V^2/2 + gz = \text{const}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Steady, inviscid, 1 streamline</td></tr>
+      <tr style="border-left:3px solid var(--ch3-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Tank draining / free jet</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(V = \sqrt{2gz}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Torricelli; open surface at rest</td></tr>
+      <tr style="border-left:3px solid var(--ch3-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Velocity from Pitot tube</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(V = \sqrt{2(P_0-P)/\rho}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Stagnation &minus; static</td></tr>
+      <tr style="border-left:3px solid var(--ch3-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Flow rate &mdash; Venturi</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(Q = C_v A_2\sqrt{2\Delta P/[\rho(1-(A_2/A_1)^2)]}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(C_v \approx 0.98\); use throat A</td></tr>
+      <tr style="border-left:3px solid var(--ch3-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Flow rate &mdash; orifice</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(Q = C_D A_0\sqrt{2\Delta P/[\rho(1-C_c^2(A_0/A_1)^2)]}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(C_c \approx 0.6\), \(C_D = C_c C_v\)</td></tr>
+      <tr style="border-left:3px solid var(--ch4-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Velocity field / stagnation point</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\vec{V} = u\,\vec{i}+v\,\vec{j}+w\,\vec{k}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Stagnation: set \(\vec{V}=0\)</td></tr>
+      <tr style="border-left:3px solid var(--ch4-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Volume flow rate</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(Q = \int_A v_n\,dA = \bar{U}A\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Normal component only</td></tr>
+      <tr style="border-left:3px solid var(--ch4-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Average velocity</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\bar{U} = Q/A\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Laminar pipe: \(\bar{U}=V_{\max}/2\)</td></tr>
+      <tr style="border-left:3px solid var(--ch4-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Mass flow rate</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\dot{m} = \rho Q = \rho\bar{U}A\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Use for continuity / compressible</td></tr>
     </tbody>
   </table>
 

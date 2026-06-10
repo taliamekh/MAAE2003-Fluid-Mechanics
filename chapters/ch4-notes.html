@@ -1,1 +1,545 @@
-<!-- pending --><section id="ch4-notes" class="page-section"><div class="pending-placeholder"><i class="ti ti-book" aria-hidden="true"></i>Chapter 4 notes — coming soon</div></section>
+<section id="ch4-notes" class="page-section">
+  <h1 class="page-title" style="color:var(--ch4-title)">Ch 4: Introduction to Fluid Dynamics</h1>
+  <p class="page-subtitle">Lecture 4.1 · Text Ch 1.5, 3.1, 6.1&ndash;6.2, 1.9, 3.2 · Week of May 25th</p>
+
+  <h2 id="ch4-lec1" style="color:var(--ch4-title)">4.1 &mdash; Introduction to Fluid Dynamics</h2>
+
+  <p>Everything so far has dealt with fluids <em>at rest</em> &mdash; pressure distributions, hydrostatic forces, buoyancy. Now the fluid starts to <strong>move</strong>, and the central question changes from &ldquo;what force does the fluid exert?&rdquo; to &ldquo;how do we <em>describe</em> the motion?&rdquo; This lecture builds the vocabulary and the bookkeeping tools for the rest of the course: how to describe a flow field, how to picture it, how to classify it, and how to measure how much fluid is passing through a section.</p>
+
+  <h3>Key Definitions</h3>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Fluid Statics</div>
+    <p>The study of fluids <strong>at rest</strong>. There is no relative motion between fluid particles, so no shear stresses act &mdash; pressure is the only stress. (This was Chapters 1&ndash;3.)</p>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Kinematics</div>
+    <p>The study of the <strong>geometry of motion</strong>, without reference to the forces that cause it. The fundamental kinematic quantities describe four things a fluid element can do: <strong>translation</strong>, <strong>rotation</strong>, <strong>linear deformation</strong> (stretching), and <strong>angular deformation</strong> (shearing).</p>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Fluid Dynamics</div>
+    <p>The study of fluids <strong>in motion</strong>, including the forces and energy involved. This is where the course is headed &mdash; continuity, momentum, and energy equations.</p>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Fluid Kinematics</div>
+    <p>The study of the <strong>geometry of fluid motion</strong> &mdash; how fluids flow and how to describe that flow mathematically, before bringing forces into the picture.</p>
+  </div>
+
+  <!-- ════════════ LAGRANGIAN vs EULERIAN ════════════ -->
+  <div class="sb-sep" style="margin:30px 0;background:var(--border);"></div>
+  <h3>Two Ways to Describe Fluid Motion</h3>
+
+  <p>A flow contains an enormous number of fluid particles. There are two fundamentally different bookkeeping strategies for describing what they are doing.</p>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Lagrangian Description</div>
+    <p>Pick a fluid particle and <strong>follow it</strong>. Keep track of the position and velocity of each individual particle as it moves &mdash; and do this <em>simultaneously</em> for every particle in the flow field. This is intuitive (it is just Newtonian particle mechanics applied to fluid blobs), but tracking billions of particles at once is hopeless for most engineering problems.</p>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Eulerian Description</div>
+    <p>Forget individual particles. Instead, fix your attention on <strong>points in space</strong> (a region called the <strong>flow domain</strong> or <strong>control volume</strong>) and record what the fluid is doing <em>as it passes through</em> each point. Rather than following particles, we define <strong>field variables</strong> &mdash; functions of space and time &mdash; such as the pressure field <span>\(p(x,y,z,t)\)</span> and the velocity field <span>\(\vec{V}(x,y,z,t)\)</span>, defined at every location and instant.</p>
+  </div>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 560 240" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;font-family:'Poppins',sans-serif;">
+      <line x1="280" y1="18" x2="280" y2="222" stroke="#E2DDD4" stroke-width="1" stroke-dasharray="3,3"/>
+      <!-- LEFT: Lagrangian -->
+      <text x="135" y="20" text-anchor="middle" fill="#093C5D" font-size="13" font-weight="600">Lagrangian &mdash; follow the particle</text>
+      <path d="M40,92 C95,58 150,135 250,82" fill="none" stroke="#FF6B35" stroke-width="2"/>
+      <polygon points="250,82 239,78 242,88" fill="#FF6B35"/>
+      <circle cx="40" cy="92" r="7" fill="#FF6B35"/>
+      <text x="32" y="80" text-anchor="end" fill="#1A2A3A" font-size="11">Particle 1</text>
+      <path d="M40,172 C100,152 150,205 250,162" fill="none" stroke="#2A6B7C" stroke-width="2"/>
+      <polygon points="250,162 239,158 242,168" fill="#2A6B7C"/>
+      <circle cx="40" cy="172" r="7" fill="#2A6B7C"/>
+      <text x="32" y="194" text-anchor="end" fill="#1A2A3A" font-size="11">Particle 2</text>
+      <text x="135" y="218" text-anchor="middle" fill="#6A7A8A" font-size="10" font-style="italic">track each particle over time</text>
+      <!-- RIGHT: Eulerian -->
+      <text x="420" y="20" text-anchor="middle" fill="#093C5D" font-size="13" font-weight="600">Eulerian &mdash; watch the point</text>
+      <rect x="362" y="72" width="118" height="86" rx="4" fill="rgba(122,143,166,0.10)" stroke="#7A8FA6" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="421" y="66" text-anchor="middle" fill="#7A8FA6" font-size="10">control volume</text>
+      <line x1="322" y1="115" x2="360" y2="115" stroke="#FF6B35" stroke-width="2"/>
+      <polygon points="360,115 350,111 350,119" fill="#FF6B35"/>
+      <text x="328" y="107" text-anchor="middle" fill="#FF6B35" font-size="10">inflow</text>
+      <line x1="482" y1="115" x2="520" y2="115" stroke="#FF6B35" stroke-width="2"/>
+      <polygon points="520,115 510,111 510,119" fill="#FF6B35"/>
+      <text x="512" y="107" text-anchor="middle" fill="#FF6B35" font-size="10">outflow</text>
+      <circle cx="421" cy="116" r="4" fill="#093C5D"/>
+      <text x="421" y="140" text-anchor="middle" fill="#1A2A3A" font-size="10">fixed point (x, y, z)</text>
+      <text x="421" y="218" text-anchor="middle" fill="#6A7A8A" font-size="10" font-style="italic">record fields as fluid passes</text>
+    </svg>
+    <div class="figure-caption">Two descriptions of the same flow. Lagrangian follows individual particles; Eulerian fixes points in space and records the field variables of whatever fluid is there.</div>
+  </div>
+
+  <div class="card-bracket eq-card">
+    <div class="card-title">The Velocity Field (Eulerian)</div>
+    <p>In Cartesian coordinates the velocity field has three scalar components, each a function of position and time:</p>
+    <p>\[ \vec{V} = (u,\,v,\,w) = u(x,y,z,t)\,\vec{i} + v(x,y,z,t)\,\vec{j} + w(x,y,z,t)\,\vec{k} \]</p>
+    <div class="var-row">
+      <span class="pill">\(\vec{V}\) &mdash; velocity vector at a point (m/s)</span>
+      <span class="pill">\(u,\,v,\,w\) &mdash; x, y, z velocity components (m/s)</span>
+      <span class="pill">\(\vec{i},\,\vec{j},\,\vec{k}\) &mdash; unit vectors along x, y, z</span>
+      <span class="pill">\(x,y,z\) &mdash; position; \(t\) &mdash; time</span>
+    </div>
+    <p style="margin-top:10px;font-size:13px;"><strong>When to use:</strong> Any time you need the velocity at a location (not on a specific particle) &mdash; finding stagnation points, plugging into continuity/momentum/energy, evaluating flow rate across a section.</p>
+    <p style="font-size:13px;"><strong>When NOT to use:</strong> If you genuinely need the history of one particle (e.g. a tracer's path), that is a Lagrangian question &mdash; integrate <span>\(d\vec{x}/dt = \vec{V}\)</span> along the particle instead.</p>
+  </div>
+
+  <div class="card-bracket tip-card">
+    <div class="card-title">★ Key Convention for This Course</div>
+    <p>We use the <strong>Eulerian description throughout MAAE 2300.</strong> It does not distinguish individual particles &mdash; we look only at the total effect within a control volume. This is what makes the control-volume governing equations (continuity, momentum, energy) possible.</p>
+  </div>
+
+  <div class="card-bracket ex-card">
+    <div class="card-title">Worked Example &mdash; Finding a Stagnation Point</div>
+    <p><strong>Problem:</strong> A steady, incompressible, two-dimensional velocity field is given by</p>
+    <p>\[ \vec{V} = (u,v) = (0.5 + 0.8x)\,\vec{i} + (1.5 - 0.8y)\,\vec{j} \]</p>
+    <p>where x and y are in metres and velocity is in m/s. A <strong>stagnation point</strong> is a location where the velocity is zero. Determine whether any stagnation points exist and, if so, where.</p>
+    <details>
+      <summary>Solution</summary>
+      <p><strong>Thought process:</strong> A vector is zero only if <em>every</em> component is zero. So set each scalar component to zero and solve the two equations independently &mdash; one gives x, the other gives y.</p>
+      <p><strong>Assumptions:</strong> Flow is steady (no time dependence) and two-dimensional (no z-component, no variation with z), exactly as stated.</p>
+      <p><strong>Step 1 &mdash; Set the x-component to zero:</strong></p>
+      <p>\[ u = 0.5 + 0.8x = 0 \;\;\Rightarrow\;\; x = -\frac{0.5}{0.8} = -0.625\ \text{m} \]</p>
+      <p><strong>Step 2 &mdash; Set the y-component to zero:</strong></p>
+      <p>\[ v = 1.5 - 0.8y = 0 \;\;\Rightarrow\;\; y = \frac{1.5}{0.8} = 1.875\ \text{m} \]</p>
+      <p><strong>Step 3 &mdash; Combine.</strong> Both conditions are satisfied at exactly one point:</p>
+      <p>\[ \boxed{\text{One stagnation point at } (x,y) = (-0.625\ \text{m},\ 1.875\ \text{m})} \]</p>
+      <p style="font-size:13px;color:var(--muted);"><strong>★ Tip:</strong> Because each component depends on only one coordinate here, the solution is unique. If a component were a function of <em>both</em> x and y, you would solve the two equations <em>simultaneously</em> and could get several stagnation points (or none).</p>
+    </details>
+  </div>
+
+  <!-- ════════════ FLOW VISUALIZATION ════════════ -->
+  <div class="sb-sep" style="margin:30px 0;background:var(--border);"></div>
+  <h3>Flow Visualization: Lines of Flow</h3>
+
+  <p>Fluid mechanics is a highly visual subject. We use sketches and photographs to extract qualitative and quantitative information about a flow. There are four standard families of lines used to picture a flow: <strong>streamlines</strong>, <strong>pathlines</strong>, <strong>streaklines</strong>, and <strong>timelines</strong>. They are defined differently, and &mdash; importantly &mdash; they only coincide under special conditions.</p>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Streamline</div>
+    <p>A line that is everywhere <strong>tangent to the velocity</strong> at a given instant. Key properties:</p>
+    <p>&bull; The fluid velocity is tangent to the streamline at every point on it.<br>
+    &bull; Streamlines <strong>do not cross</strong> &mdash; if they did, the velocity at the crossing point would have two directions, which is impossible. There is a unique velocity at each point in space.<br>
+    &bull; Streamlines can <strong>change with time</strong> in an unsteady flow (they are an instantaneous snapshot).</p>
+  </div>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg" style="max-width:460px;font-family:'Poppins',sans-serif;">
+      <!-- four streamlines, roughly parallel curves with tangent velocity arrows -->
+      <path d="M30,50 C150,30 300,55 430,40" fill="none" stroke="#2A6B7C" stroke-width="2"/>
+      <path d="M30,90 C150,72 300,98 430,82" fill="none" stroke="#2A6B7C" stroke-width="2"/>
+      <path d="M30,130 C150,116 300,142 430,128" fill="none" stroke="#2A6B7C" stroke-width="2"/>
+      <path d="M30,170 C150,160 300,184 430,172" fill="none" stroke="#2A6B7C" stroke-width="2"/>
+      <!-- tangent velocity arrows on the second streamline -->
+      <line x1="150" y1="78" x2="190" y2="76" stroke="#FF6B35" stroke-width="2"/>
+      <polygon points="190,76 180,72 181,81" fill="#FF6B35"/>
+      <text x="170" y="66" text-anchor="middle" fill="#FF6B35" font-size="11">V</text>
+      <line x1="300" y1="92" x2="340" y2="90" stroke="#FF6B35" stroke-width="2"/>
+      <polygon points="340,90 330,86 331,95" fill="#FF6B35"/>
+      <text x="35" y="42" fill="#1A2A3A" font-size="11">streamlines</text>
+    </svg>
+    <div class="figure-caption">Streamlines (teal) with the velocity vector (orange) tangent at each point. The arrows show flow direction; streamlines never intersect.</div>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Streamtube</div>
+    <p>A <strong>bundle of streamlines</strong> that surrounds a region of flow. Because the bounding lines are streamlines, the velocity is tangent to the walls &mdash; so <strong>no fluid crosses the walls of a streamtube</strong>; flow is contained inside it like fluid in a conduit. In 2-D, a streamtube is formed by just two streamlines.</p>
+  </div>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg" style="max-width:460px;font-family:'Poppins',sans-serif;">
+      <!-- two bounding streamlines forming a tube that narrows then widens -->
+      <path d="M30,55 C150,40 300,30 430,55" fill="none" stroke="#093C5D" stroke-width="2.5"/>
+      <path d="M30,145 C150,160 300,170 430,145" fill="none" stroke="#093C5D" stroke-width="2.5"/>
+      <!-- interior streamlines -->
+      <path d="M30,85 C150,75 300,70 430,85" fill="none" stroke="#2A6B7C" stroke-width="1.3"/>
+      <path d="M30,115 C150,125 300,130 430,115" fill="none" stroke="#2A6B7C" stroke-width="1.3"/>
+      <!-- flow arrows -->
+      <line x1="200" y1="100" x2="250" y2="100" stroke="#FF6B35" stroke-width="2"/>
+      <polygon points="250,100 240,96 241,105" fill="#FF6B35"/>
+      <line x1="380" y1="100" x2="420" y2="100" stroke="#FF6B35" stroke-width="2"/>
+      <polygon points="420,100 410,96 411,105" fill="#FF6B35"/>
+      <!-- no-flow-across label -->
+      <line x1="240" y1="33" x2="240" y2="52" stroke="#7A8FA6" stroke-width="1" stroke-dasharray="3,2"/>
+      <text x="240" y="26" text-anchor="middle" fill="#7A8FA6" font-size="10">no flow across walls</text>
+    </svg>
+    <div class="figure-caption">A streamtube: the two outer streamlines (navy) act like solid walls because no flow crosses them. Interior streamlines carry the flow through.</div>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Pathline</div>
+    <p>The <strong>actual path traced by a single particle</strong> as it travels over a period of time <span>\(0 \le t \le t_n\)</span>. It can be obtained experimentally: release one particle into the flow and take a long-exposure photograph. A pathline is a <em>time history of one particle</em>.</p>
+  </div>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 460 170" xmlns="http://www.w3.org/2000/svg" style="max-width:460px;font-family:'Poppins',sans-serif;">
+      <path d="M40,55 C120,120 240,135 320,95 C370,72 410,55 430,55" fill="none" stroke="#7A8FA6" stroke-width="1.5" stroke-dasharray="5,4"/>
+      <polygon points="430,55 419,53 422,62" fill="#7A8FA6"/>
+      <!-- particle positions at successive times -->
+      <circle cx="40" cy="55" r="5" fill="#FF6B35"/><text x="40" y="44" text-anchor="middle" fill="#1A2A3A" font-size="10">t = 0</text>
+      <circle cx="110" cy="103" r="5" fill="#FF6B35"/>
+      <circle cx="185" cy="128" r="5" fill="#FF6B35"/><text x="185" y="148" text-anchor="middle" fill="#6A7A8A" font-size="10">same particle</text>
+      <circle cx="265" cy="118" r="5" fill="#FF6B35"/>
+      <circle cx="345" cy="83" r="5" fill="#FF6B35"/>
+      <circle cx="420" cy="57" r="5" fill="#FF6B35"/><text x="425" y="46" text-anchor="middle" fill="#1A2A3A" font-size="10">t = tₙ</text>
+    </svg>
+    <div class="figure-caption">A pathline: one particle photographed at successive instants. The dashed curve is the route a single particle actually followed.</div>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Streakline</div>
+    <p>The line connecting <strong>all particles that have passed through one fixed point</strong>, photographed at a single instant <span>\(t = t_n\)</span>. Every particle on a streakline shares the same origin. Physically, a streakline is what you see when you <strong>continuously inject dye or smoke</strong> from a point in the flow &mdash; the visible streak of dye is the streakline.</p>
+  </div>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 460 180" xmlns="http://www.w3.org/2000/svg" style="max-width:460px;font-family:'Poppins',sans-serif;">
+      <!-- injection point -->
+      <circle cx="40" cy="70" r="6" fill="#093C5D"/>
+      <text x="40" y="58" text-anchor="middle" fill="#093C5D" font-size="10">dye injected here</text>
+      <!-- streak: a continuous dyed line of particles -->
+      <path d="M40,70 C120,120 240,135 320,100 C370,80 410,68 440,72" fill="none" stroke="#1AAA96" stroke-width="3" opacity="0.55"/>
+      <!-- individual particles along the streak -->
+      <circle cx="95" cy="103" r="4.5" fill="#FF6B35"/>
+      <circle cx="160" cy="126" r="4.5" fill="#F4A261"/>
+      <circle cx="230" cy="128" r="4.5" fill="#1AAA96"/>
+      <circle cx="300" cy="108" r="4.5" fill="#FF6B35"/>
+      <circle cx="375" cy="78" r="4.5" fill="#F4A261"/>
+      <text x="250" y="160" text-anchor="middle" fill="#6A7A8A" font-size="10">all particles share the same origin point</text>
+    </svg>
+    <div class="figure-caption">A streakline: the locus, at one instant, of every particle that has passed through the injection point. This is the dye/smoke streak you see in a wind tunnel.</div>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Timeline</div>
+    <p>A set of fluid particles that form a <strong>line at a given instant</strong>. Mark a row of adjacent particles at one moment, then watch how that row distorts as the flow carries it along &mdash; the deformation of a timeline reveals velocity gradients (shear) in the flow.</p>
+  </div>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 460 190" xmlns="http://www.w3.org/2000/svg" style="max-width:460px;font-family:'Poppins',sans-serif;">
+      <!-- timeline at t0: a straight vertical row of particles -->
+      <line x1="70" y1="35" x2="70" y2="155" stroke="#7A8FA6" stroke-width="1" stroke-dasharray="3,3"/>
+      <circle cx="70" cy="45" r="4.5" fill="#FF6B35"/><circle cx="70" cy="75" r="4.5" fill="#F4A261"/><circle cx="70" cy="95" r="4.5" fill="#1AAA96"/><circle cx="70" cy="115" r="4.5" fill="#FF6B35"/><circle cx="70" cy="145" r="4.5" fill="#F4A261"/>
+      <text x="70" y="25" text-anchor="middle" fill="#1A2A3A" font-size="10">t = t₀ (a straight line)</text>
+      <!-- timeline at t1: same particles, now sheared into a curve -->
+      <path d="M330,45 C310,75 300,95 290,115 C284,128 282,140 280,148" fill="none" stroke="#7A8FA6" stroke-width="1" stroke-dasharray="3,3"/>
+      <circle cx="330" cy="45" r="4.5" fill="#FF6B35"/><circle cx="312" cy="75" r="4.5" fill="#F4A261"/><circle cx="300" cy="95" r="4.5" fill="#1AAA96"/><circle cx="290" cy="115" r="4.5" fill="#FF6B35"/><circle cx="281" cy="146" r="4.5" fill="#F4A261"/>
+      <text x="305" y="25" text-anchor="middle" fill="#1A2A3A" font-size="10">t = t₁ (deformed by shear)</text>
+      <!-- arrow showing advection -->
+      <line x1="120" y1="95" x2="250" y2="95" stroke="#FF6B35" stroke-width="2"/>
+      <polygon points="250,95 240,91 241,100" fill="#FF6B35"/>
+      <text x="185" y="86" text-anchor="middle" fill="#FF6B35" font-size="10">flow carries the row</text>
+    </svg>
+    <div class="figure-caption">A timeline: a straight row of particles marked at <span>\(t_0\)</span> distorts into a curve at <span>\(t_1\)</span>. The bending shows the velocity varies across the row (shear).</div>
+  </div>
+
+  <div class="card-bracket tip-card">
+    <div class="card-title">★ Key Result: Steady Flow</div>
+    <p>In general these four line families are different. But <strong>in steady flow, streamlines, pathlines, and streaklines all coincide.</strong> If the velocity field never changes in time, then the instantaneous tangent direction (streamline), the path one particle follows (pathline), and the dye streak (streakline) are the same curve. This is why dye and smoke can be used to reveal &ldquo;the streamlines&rdquo; of a steady flow &mdash; tools like Particle Image Velocimetry (PIV) and CFD do this quantitatively.</p>
+  </div>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 460 150" xmlns="http://www.w3.org/2000/svg" style="max-width:460px;font-family:'Poppins',sans-serif;">
+      <!-- the same curve drawn three ways, slightly offset for legibility, then a legend says they coincide -->
+      <path d="M30,80 C140,40 300,55 430,45" fill="none" stroke="#2A6B7C" stroke-width="2.5"/>
+      <path d="M30,86 C140,46 300,61 430,51" fill="none" stroke="#FF6B35" stroke-width="1.6" stroke-dasharray="7,4"/>
+      <path d="M30,92 C140,52 300,67 430,57" fill="none" stroke="#093C5D" stroke-width="1.4" stroke-dasharray="2,4"/>
+      <!-- legend -->
+      <line x1="40" y1="120" x2="70" y2="120" stroke="#2A6B7C" stroke-width="2.5"/>
+      <text x="76" y="124" fill="#1A2A3A" font-size="11">streamline</text>
+      <line x1="170" y1="120" x2="200" y2="120" stroke="#FF6B35" stroke-width="1.6" stroke-dasharray="7,4"/>
+      <text x="206" y="124" fill="#1A2A3A" font-size="11">pathline</text>
+      <line x1="290" y1="120" x2="320" y2="120" stroke="#093C5D" stroke-width="1.4" stroke-dasharray="2,4"/>
+      <text x="326" y="124" fill="#1A2A3A" font-size="11">streakline</text>
+    </svg>
+    <div class="figure-caption">In steady flow the three curves lie on top of one another (drawn slightly offset here only so all three are visible). They are physically the same line.</div>
+  </div>
+
+  <!-- ════════════ CLASSIFYING FLOWS ════════════ -->
+  <div class="sb-sep" style="margin:30px 0;background:var(--border);"></div>
+  <h3>Classifying Flows: Steady, Unsteady, Uniform</h3>
+
+  <p>Two independent yes/no questions classify a flow. <strong>Does it change with time?</strong> (steady vs unsteady) and <strong>does it change with location?</strong> (uniform vs non-uniform). These are separate ideas &mdash; do not conflate them.</p>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Steady Flow</div>
+    <p>The velocity at a given <strong>point in space does not vary with time</strong>: <span>\(\partial \vec{V}/\partial t = 0\)</span> at every fixed point. The flow pattern is frozen even though individual particles keep moving through it.</p>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Unsteady Flow</div>
+    <p>The velocity at a point <strong>changes with time.</strong> Unsteady flows may be <strong>nonperiodic</strong> (e.g. a valve being opened), <strong>periodic</strong> (e.g. pulsating pump flow), or <strong>truly random</strong> (turbulence).</p>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Uniform Flow</div>
+    <p>The velocity at a given <strong>instant does not vary with location</strong> over the region of interest. (This is about spatial variation, not time &mdash; a flow can be steady but non-uniform, like flow speeding up through a nozzle.)</p>
+  </div>
+
+  <div class="card-bracket tip-card">
+    <div class="card-title">★ Don't Confuse These</div>
+    <p><strong>Steady/unsteady is about time</strong> (<span>\(\partial/\partial t\)</span>); <strong>uniform/non-uniform is about space</strong> (<span>\(\partial/\partial s\)</span>). A nozzle flow at constant inlet conditions is <em>steady</em> (unchanging in time) but <em>non-uniform</em> (faster downstream). All four combinations are possible.</p>
+  </div>
+
+  <!-- ════════════ RATE OF FLOW ════════════ -->
+  <div class="sb-sep" style="margin:30px 0;background:var(--border);"></div>
+  <h3>Rate of Flow</h3>
+
+  <p>The quantity of fluid passing per unit time across a designated area is the <strong>flow rate</strong>. There are two versions: <strong>volume flow rate</strong> <span>\(Q\)</span> (how much volume per second) and <strong>mass flow rate</strong> <span>\(\dot{m}\)</span> (how much mass per second). These are the workhorses of the continuity equation coming up in Chapter 5.</p>
+
+  <div class="card-bracket eq-card">
+    <div class="card-title">Volume Flow Rate (uniform velocity)</div>
+    <p>If a fluid of velocity <span>\(v\)</span> crosses an area <span>\(A\)</span> at right angles, the volume that passes in time <span>\(\Delta t\)</span> is a slug of length <span>\(\Delta x = v\,\Delta t\)</span>, so:</p>
+    <p>\[ Q = \frac{\Delta V}{\Delta t} = \frac{A\,\Delta x}{\Delta t} = A\,v \qquad \left[\tfrac{\text{m}^3}{\text{s}}\right] \]</p>
+    <div class="var-row">
+      <span class="pill">\(Q\) &mdash; volume flow rate (m³/s)</span>
+      <span class="pill">\(\Delta V\) &mdash; volume passing in \(\Delta t\) (m³)</span>
+      <span class="pill">\(A\) &mdash; cross-sectional area (m²)</span>
+      <span class="pill">\(v\) &mdash; velocity normal to the area (m/s)</span>
+    </div>
+    <p style="margin-top:10px;font-size:13px;"><strong>When to use:</strong> Velocity is uniform across the section and perpendicular to it &mdash; the standard &ldquo;pipe carrying speed v through area A&rdquo; estimate.</p>
+    <p style="font-size:13px;"><strong>When NOT to use:</strong> If velocity varies over the area (any real pipe profile) or is not normal to the area, you must integrate &mdash; see the general form below.</p>
+  </div>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 460 180" xmlns="http://www.w3.org/2000/svg" style="max-width:460px;font-family:'Poppins',sans-serif;">
+      <!-- duct -->
+      <line x1="30" y1="45" x2="430" y2="45" stroke="#093C5D" stroke-width="2"/>
+      <line x1="30" y1="135" x2="430" y2="135" stroke="#093C5D" stroke-width="2"/>
+      <!-- cross-section A at left -->
+      <line x1="120" y1="45" x2="120" y2="135" stroke="#2A6B7C" stroke-width="2"/>
+      <text x="108" y="95" text-anchor="end" fill="#2A6B7C" font-size="12" font-weight="600">A</text>
+      <!-- slug of fluid that passes in Δt -->
+      <rect x="120" y="46" width="90" height="88" fill="rgba(244,162,97,0.22)" stroke="#F4A261" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="120" y1="160" x2="210" y2="160" stroke="#7A8FA6" stroke-width="1"/>
+      <line x1="120" y1="155" x2="120" y2="165" stroke="#7A8FA6" stroke-width="1"/>
+      <line x1="210" y1="155" x2="210" y2="165" stroke="#7A8FA6" stroke-width="1"/>
+      <text x="165" y="174" text-anchor="middle" fill="#6A7A8A" font-size="11">Δx = v·Δt</text>
+      <!-- velocity arrows -->
+      <line x1="250" y1="70" x2="320" y2="70" stroke="#FF6B35" stroke-width="2"/><polygon points="320,70 310,66 311,75" fill="#FF6B35"/>
+      <line x1="250" y1="90" x2="320" y2="90" stroke="#FF6B35" stroke-width="2"/><polygon points="320,90 310,86 311,95" fill="#FF6B35"/>
+      <line x1="250" y1="110" x2="320" y2="110" stroke="#FF6B35" stroke-width="2"/><polygon points="320,110 310,106 311,115" fill="#FF6B35"/>
+      <text x="285" y="58" text-anchor="middle" fill="#FF6B35" font-size="12" font-weight="600">v</text>
+    </svg>
+    <div class="figure-caption">In time <span>\(\Delta t\)</span>, the fluid crossing area <span>\(A\)</span> fills a slug of length <span>\(v\,\Delta t\)</span>. Dividing that volume by <span>\(\Delta t\)</span> gives <span>\(Q = Av\)</span>.</div>
+  </div>
+
+  <div class="card-bracket eq-card">
+    <div class="card-title">Volume Flow Rate (general)</div>
+    <p>In general the velocity is not uniform and the area may be tilted. For an area with outward unit normal <span>\(\vec{n}\)</span>, only the <strong>normal component</strong> of velocity <span>\(v_n = \vec{v}\cdot\vec{n}\)</span> carries fluid across it. Integrating the incremental flow <span>\(dQ = \vec{v}\cdot\vec{n}\,dA\)</span> over the whole area:</p>
+    <p>\[ Q = \int_A \vec{v}\cdot\vec{n}\;dA = \int_A v_n\;dA \]</p>
+    <div class="var-row">
+      <span class="pill">\(Q\) &mdash; total volume flow rate (m³/s)</span>
+      <span class="pill">\(\vec{v}\) &mdash; local velocity vector (m/s)</span>
+      <span class="pill">\(\vec{n}\) &mdash; unit normal to the area</span>
+      <span class="pill">\(v_n = \vec{v}\cdot\vec{n}\) &mdash; velocity component normal to dA (m/s)</span>
+      <span class="pill">\(dA\) &mdash; incremental area element (m²)</span>
+    </div>
+    <p style="margin-top:10px;font-size:13px;"><strong>When to use:</strong> Velocity varies across the section (e.g. a parabolic pipe profile) or the surface is not perpendicular to the flow &mdash; always the safe, general choice.</p>
+    <p style="font-size:13px;"><strong>When NOT to use:</strong> Only the <em>tangential</em> component <span>\(v_t\)</span> exists at the surface &mdash; then nothing crosses it and <span>\(Q=0\)</span>; do not include <span>\(v_t\)</span> in the integral.</p>
+  </div>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 440 240" xmlns="http://www.w3.org/2000/svg" style="max-width:440px;font-family:'Poppins',sans-serif;">
+      <!-- area element dA, edge-on as a tilted line, top leaning left so normal points up-right -->
+      <line x1="250" y1="215" x2="205" y2="60" stroke="#2A6B7C" stroke-width="3"/>
+      <text x="196" y="52" text-anchor="middle" fill="#2A6B7C" font-size="12" font-weight="600">dA</text>
+      <line x1="232" y1="150" x2="300" y2="120" stroke="#7A8FA6" stroke-width="0.8" stroke-dasharray="3,2"/>
+      <text x="330" y="118" text-anchor="middle" fill="#7A8FA6" font-size="10">area element</text>
+      <!-- common origin O -->
+      <circle cx="170" cy="180" r="3" fill="#1A2A3A"/>
+      <!-- velocity vector v (up-right, the full velocity) -->
+      <line x1="170" y1="180" x2="300" y2="92" stroke="#FF6B35" stroke-width="2.5"/>
+      <polygon points="300,92 287,94 292,103" fill="#FF6B35"/>
+      <text x="246" y="120" fill="#FF6B35" font-size="13" font-weight="600">v</text>
+      <!-- normal n (perpendicular to dA, pointing up-right) -->
+      <line x1="170" y1="180" x2="232" y2="161" stroke="#093C5D" stroke-width="2"/>
+      <polygon points="232,161 222,159 224,168" fill="#093C5D"/>
+      <text x="240" y="156" fill="#093C5D" font-size="12" font-weight="600">n</text>
+      <!-- vn: projection of v along n -->
+      <line x1="170" y1="180" x2="300" y2="140" stroke="#F4A261" stroke-width="2" stroke-dasharray="5,3"/>
+      <polygon points="300,140 290,137 291,146" fill="#F4A261"/>
+      <text x="312" y="142" fill="#F4A261" font-size="11" font-weight="600">vₙ = v·n</text>
+      <!-- vt: tangential component, drawn along the surface from head of vn -->
+      <line x1="300" y1="140" x2="300" y2="92" stroke="#7A8FA6" stroke-width="1.6" stroke-dasharray="4,3"/>
+      <text x="322" y="115" fill="#7A8FA6" font-size="11">vₜ</text>
+      <!-- right-angle marker between n and dA -->
+      <path d="M196,160 l-6,-3 l3,-6" fill="none" stroke="#093C5D" stroke-width="1"/>
+    </svg>
+    <div class="figure-caption">Decomposing the velocity at a tilted area element. Only the normal component <span>\(v_n=\vec{v}\cdot\vec{n}\)</span> (sand) transports fluid across <span>\(dA\)</span>; the tangential component <span>\(v_t\)</span> (grey) slides along the surface and carries nothing across it.</div>
+  </div>
+
+  <div class="card-bracket eq-card">
+    <div class="card-title">Average Velocity</div>
+    <p>Real velocity profiles vary across a section, so we define a single <strong>average (or mean) velocity</strong> <span>\(\bar{U}\)</span> &mdash; the uniform velocity that would carry the same total volume flow rate through the area:</p>
+    <p>\[ \bar{U} = \frac{Q}{A} = \frac{1}{A}\int_A v_n\;dA \qquad\Longleftrightarrow\qquad Q = A\,\bar{U} \]</p>
+    <div class="var-row">
+      <span class="pill">\(\bar{U}\) &mdash; average (mean) velocity over the section (m/s)</span>
+      <span class="pill">\(Q\) &mdash; total volume flow rate (m³/s)</span>
+      <span class="pill">\(A\) &mdash; cross-sectional area (m²)</span>
+    </div>
+    <p style="margin-top:10px;font-size:13px;"><strong>When to use:</strong> Reducing a varying profile to one representative speed &mdash; lets you write the simple <span>\(Q=A\bar{U}\)</span> in continuity and energy equations.</p>
+    <p style="font-size:13px;"><strong>When NOT to use:</strong> When the <em>shape</em> of the profile matters (e.g. kinetic-energy or momentum corrections); the average alone discards that information.</p>
+  </div>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg" style="max-width:440px;font-family:'Poppins',sans-serif;">
+      <!-- pipe walls -->
+      <line x1="40" y1="30" x2="400" y2="30" stroke="#093C5D" stroke-width="2.5"/>
+      <line x1="40" y1="170" x2="400" y2="170" stroke="#093C5D" stroke-width="2.5"/>
+      <!-- centreline -->
+      <line x1="40" y1="100" x2="400" y2="100" stroke="#7A8FA6" stroke-width="0.8" stroke-dasharray="6,4"/>
+      <!-- parabolic profile arrows (length max at centre) -->
+      <line x1="150" y1="40" x2="178" y2="40" stroke="#2A6B7C" stroke-width="2"/><polygon points="178,40 169,37 170,44" fill="#2A6B7C"/>
+      <line x1="150" y1="58" x2="200" y2="58" stroke="#2A6B7C" stroke-width="2"/><polygon points="200,58 191,55 192,62" fill="#2A6B7C"/>
+      <line x1="150" y1="78" x2="225" y2="78" stroke="#2A6B7C" stroke-width="2"/><polygon points="225,78 216,75 217,82" fill="#2A6B7C"/>
+      <line x1="150" y1="100" x2="240" y2="100" stroke="#2A6B7C" stroke-width="2"/><polygon points="240,100 231,97 232,104" fill="#2A6B7C"/>
+      <line x1="150" y1="122" x2="225" y2="122" stroke="#2A6B7C" stroke-width="2"/><polygon points="225,122 216,119 217,126" fill="#2A6B7C"/>
+      <line x1="150" y1="142" x2="200" y2="142" stroke="#2A6B7C" stroke-width="2"/><polygon points="200,142 191,139 192,146" fill="#2A6B7C"/>
+      <line x1="150" y1="160" x2="178" y2="160" stroke="#2A6B7C" stroke-width="2"/><polygon points="178,160 169,157 170,164" fill="#2A6B7C"/>
+      <!-- parabola envelope -->
+      <path d="M150,30 Q280,100 150,170" fill="none" stroke="#2A6B7C" stroke-width="1.3"/>
+      <text x="258" y="118" fill="#2A6B7C" font-size="11" font-weight="600">Vₘₐₓ</text>
+      <!-- uniform average velocity (dashed red rectangle width) -->
+      <line x1="150" y1="30" x2="150" y2="170" stroke="#FF6B35" stroke-width="1.5"/>
+      <line x1="205" y1="30" x2="205" y2="170" stroke="#FF6B35" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="345" y="60" fill="#FF6B35" font-size="11" font-weight="600">Ū (uniform)</text>
+      <line x1="338" y1="55" x2="207" y2="60" stroke="#FF6B35" stroke-width="0.8" stroke-dasharray="3,2"/>
+    </svg>
+    <div class="figure-caption">A pipe's actual profile peaks at <span>\(V_{max}\)</span> on the centreline. The average velocity <span>\(\bar{U}\)</span> (orange) is the flat profile that would push the same volume through &mdash; for the parabolic case, <span>\(\bar{U}=V_{max}/2\)</span>.</div>
+  </div>
+
+  <div class="card-bracket eq-card">
+    <div class="card-title">Mass Flow Rate</div>
+    <p>Mass flow rate is the amount of mass crossing a section per unit time. Since mass = density &times; volume, the mass flow rate is the volume flow rate scaled by density:</p>
+    <p>\[ \dot{m} = \rho\int_A v_n\;dA = \rho A\bar{U} = \rho Q \qquad \left[\tfrac{\text{kg}}{\text{s}}\right] \]</p>
+    <div class="var-row">
+      <span class="pill">\(\dot{m}\) &mdash; mass flow rate (kg/s)</span>
+      <span class="pill">\(\rho\) &mdash; fluid density (kg/m³)</span>
+      <span class="pill">\(Q\) &mdash; volume flow rate (m³/s)</span>
+      <span class="pill">\(\bar{U}\) &mdash; average velocity (m/s); \(A\) &mdash; area (m²)</span>
+    </div>
+    <p style="margin-top:10px;font-size:13px;"><strong>When to use:</strong> Mass must be conserved (continuity), or whenever density appears &mdash; compressible flow, mixing, momentum/energy fluxes.</p>
+    <p style="font-size:13px;"><strong>When NOT to use:</strong> Don't assume <span>\(\rho\)</span> is constant in a compressible gas flow &mdash; keep it inside the integral if it varies across the section.</p>
+  </div>
+
+  <div class="card-bracket ex-card">
+    <div class="card-title">Worked Example 1 &mdash; Parabolic Pipe Profile</div>
+    <p><strong>Problem:</strong> The velocity in a pipe of radius <span>\(R\)</span> at radial distance <span>\(r\)</span> from the centre is</p>
+    <p>\[ v(r) = V_{max}\!\left(1 - \frac{r^2}{R^2}\right) \]</p>
+    <p>where <span>\(V_{max}\)</span> is the centreline (maximum) velocity. Find the volume flow rate, average velocity, and mass flow rate. If <span>\(V_{max}\)</span> is held constant, by what factors do these change if the pipe diameter is doubled?</p>
+    <div class="figure-box">
+      <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="max-width:300px;font-family:'Poppins',sans-serif;">
+        <!-- pipe cross-section -->
+        <circle cx="120" cy="100" r="75" fill="rgba(42,107,124,0.06)" stroke="#093C5D" stroke-width="2"/>
+        <!-- annular ring dA -->
+        <circle cx="120" cy="100" r="48" fill="none" stroke="#F4A261" stroke-width="1.4"/>
+        <circle cx="120" cy="100" r="58" fill="none" stroke="#F4A261" stroke-width="1.4"/>
+        <path d="M120,100 m0,-48 a48,48 0 0,1 41.6,24" fill="none" stroke="#F4A261" stroke-width="6" opacity="0.35"/>
+        <!-- centre -->
+        <circle cx="120" cy="100" r="2.5" fill="#1A2A3A"/>
+        <!-- r arrow -->
+        <line x1="120" y1="100" x2="160.6" y2="124" stroke="#2A6B7C" stroke-width="1.6"/>
+        <text x="150" y="118" fill="#2A6B7C" font-size="12" font-weight="600">r</text>
+        <!-- R arrow -->
+        <line x1="120" y1="100" x2="120" y2="25" stroke="#FF6B35" stroke-width="1.6"/>
+        <text x="130" y="50" fill="#FF6B35" font-size="12" font-weight="600">R</text>
+        <text x="210" y="100" fill="#F4A261" font-size="11" font-weight="600">dA = 2πr·dr</text>
+        <line x1="207" y1="96" x2="172" y2="90" stroke="#F4A261" stroke-width="0.8" stroke-dasharray="3,2"/>
+      </svg>
+      <div class="figure-caption">Integrate over thin annular rings of area <span>\(dA = 2\pi r\,dr\)</span> from the centre (<span>\(r=0\)</span>) out to the wall (<span>\(r=R\)</span>).</div>
+    </div>
+    <details>
+      <summary>Solution</summary>
+      <p><strong>Thought process:</strong> The velocity depends only on <span>\(r\)</span>, so split the cross-section into thin rings of constant velocity. A ring at radius <span>\(r\)</span> with thickness <span>\(dr\)</span> has area <span>\(dA = 2\pi r\,dr\)</span>. Integrate <span>\(v(r)\,dA\)</span> from 0 to R.</p>
+      <p><strong>Step 1 &mdash; Set up the volume flow rate integral:</strong></p>
+      <p>\[ Q = \int_A v\,dA = \int_0^R V_{max}\!\left(1-\frac{r^2}{R^2}\right)2\pi r\,dr \]</p>
+      <p><strong>Step 2 &mdash; Pull out constants and expand:</strong></p>
+      <p>\[ Q = 2\pi V_{max}\int_0^R\!\left(r - \frac{r^3}{R^2}\right)dr \]</p>
+      <p><strong>Step 3 &mdash; Integrate:</strong></p>
+      <p>\[ Q = 2\pi V_{max}\left[\frac{r^2}{2} - \frac{r^4}{4R^2}\right]_0^R = 2\pi V_{max}\left(\frac{R^2}{2} - \frac{R^2}{4}\right) = 2\pi V_{max}\cdot\frac{R^2}{4} \]</p>
+      <p>\[ \boxed{Q = \frac{\pi R^2 V_{max}}{2}} \]</p>
+      <p><strong>Step 4 &mdash; Average velocity</strong> (divide by area <span>\(A = \pi R^2\)</span>):</p>
+      <p>\[ \bar{U} = \frac{Q}{A} = \frac{\pi R^2 V_{max}/2}{\pi R^2} \;\Rightarrow\; \boxed{\bar{U} = \frac{V_{max}}{2}} \]</p>
+      <p><strong>Step 5 &mdash; Mass flow rate</strong> (multiply <span>\(Q\)</span> by density):</p>
+      <p>\[ \dot{m} = \rho Q \;\Rightarrow\; \boxed{\dot{m} = \rho V_{max}\frac{\pi R^2}{2}} \]</p>
+      <p><strong>Step 6 &mdash; Doubling the diameter</strong> doubles the radius (<span>\(R \to 2R\)</span>). Both <span>\(Q\)</span> and <span>\(\dot{m}\)</span> scale with <span>\(R^2\)</span>, so each grows by a factor of <span>\(2^2 = 4\)</span>. The average velocity <span>\(\bar{U}=V_{max}/2\)</span> contains no <span>\(R\)</span>, so it is <strong>unchanged.</strong></p>
+      <p>\[ \boxed{Q \to 4Q, \quad \dot{m} \to 4\dot{m}, \quad \bar{U}\ \text{unchanged}} \]</p>
+      <p style="font-size:13px;color:var(--muted);"><strong>★ Tip:</strong> For any laminar parabolic pipe profile, <span>\(\bar{U}=V_{max}/2\)</span> &mdash; memorise this ratio. It saves you the integral on an exam when only the average is needed.</p>
+    </details>
+  </div>
+
+  <div class="card-bracket ex-card">
+    <div class="card-title">Worked Example 2 &mdash; Laminar Pipe Flow (numerical)</div>
+    <p><strong>Problem:</strong> Steady laminar flow in a pipe has the profile <span>\(u(r) = 3(1 - 25r^2)\)</span> m/s, with <span>\(R = 0.2\)</span> m. Find the volumetric flow rate and the average velocity.</p>
+    <details>
+      <summary>Solution</summary>
+      <p><strong>Thought process:</strong> Same annular-ring approach as Example 1 (<span>\(dA = 2\pi r\,dr\)</span>), but now with concrete numbers. First sanity-check: at the wall <span>\(r=R=0.2\)</span>, <span>\(u = 3(1-25(0.04)) = 3(1-1) = 0\)</span> &mdash; good, the no-slip condition holds.</p>
+      <p><strong>Step 1 &mdash; Set up and simplify the integral:</strong></p>
+      <p>\[ Q = \int_A u(r)\,dA = \int_0^{0.2} 3(1-25r^2)\,2\pi r\,dr = 6\pi\int_0^{0.2}\!\left(r - 25r^3\right)dr \]</p>
+      <p><strong>Step 2 &mdash; Integrate:</strong></p>
+      <p>\[ Q = 6\pi\left[\frac{r^2}{2} - \frac{25 r^4}{4}\right]_0^{0.2} \]</p>
+      <p><strong>Step 3 &mdash; Evaluate at the limits.</strong> At <span>\(r=0.2\)</span>: <span>\(\tfrac{r^2}{2} = \tfrac{0.04}{2} = 0.02\)</span> and <span>\(\tfrac{25 r^4}{4} = \tfrac{25(0.0016)}{4} = 0.01\)</span>:</p>
+      <p>\[ Q = 6\pi\,(0.02 - 0.01) = 6\pi(0.01) = 0.06\pi \;\Rightarrow\; \boxed{Q \approx 0.188\ \text{m}^3/\text{s}} \]</p>
+      <p><strong>Step 4 &mdash; Average velocity</strong> (<span>\(A = \pi R^2 = \pi(0.2)^2\)</span>):</p>
+      <p>\[ \bar{U} = \frac{Q}{A} = \frac{0.188}{\pi(0.2)^2} = \frac{0.188}{0.1257} \;\Rightarrow\; \boxed{\bar{U} \approx 1.5\ \text{m/s}} \]</p>
+      <p style="font-size:13px;color:var(--muted);"><strong>★ Check:</strong> Here <span>\(V_{max}=u(0)=3\)</span> m/s, and indeed <span>\(\bar{U}\approx1.5 = V_{max}/2\)</span> &mdash; consistent with the parabolic result from Example 1.</p>
+    </details>
+  </div>
+
+  <div class="card-bracket ex-card">
+    <div class="card-title">Worked Example 3 &mdash; Linear Profile Between Plates</div>
+    <p><strong>Problem:</strong> For the linear velocity profile between two plates of width <span>\(w\)</span> and spacing <span>\(b\)</span> (with <span>\(y\)</span> measured from the centreline), the profile is <span>\(u(y) = u_{max}\!\left(1 - \tfrac{2y}{b}\right)\)</span>. Determine the average velocity and volumetric discharge in terms of <span>\(u_{max}\)</span>.</p>
+    <div class="figure-box">
+      <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="max-width:400px;font-family:'Poppins',sans-serif;">
+        <!-- plates -->
+        <rect x="60" y="28" width="280" height="10" fill="#093C5D"/>
+        <rect x="60" y="162" width="280" height="10" fill="#093C5D"/>
+        <!-- centreline -->
+        <line x1="60" y1="100" x2="340" y2="100" stroke="#7A8FA6" stroke-width="0.8" stroke-dasharray="6,4"/>
+        <!-- linear (triangular) profile: max at centre, zero at walls -->
+        <line x1="120" y1="38" x2="120" y2="162" stroke="#2A6B7C" stroke-width="1.5"/>
+        <polygon points="120,38 120,100 230,100" fill="rgba(42,107,124,0.10)" stroke="#2A6B7C" stroke-width="1.5"/>
+        <polygon points="120,162 120,100 230,100" fill="rgba(42,107,124,0.10)" stroke="#2A6B7C" stroke-width="1.5"/>
+        <!-- profile arrows -->
+        <line x1="120" y1="55" x2="170" y2="55" stroke="#2A6B7C" stroke-width="1.6"/><polygon points="170,55 161,52 162,59" fill="#2A6B7C"/>
+        <line x1="120" y1="100" x2="230" y2="100" stroke="#2A6B7C" stroke-width="2"/><polygon points="230,100 221,97 222,104" fill="#2A6B7C"/>
+        <line x1="120" y1="145" x2="170" y2="145" stroke="#2A6B7C" stroke-width="1.6"/><polygon points="170,145 161,142 162,149" fill="#2A6B7C"/>
+        <text x="238" y="104" fill="#2A6B7C" font-size="11" font-weight="600">uₘₐₓ</text>
+        <!-- b dimension -->
+        <line x1="92" y1="38" x2="92" y2="162" stroke="#FF6B35" stroke-width="1"/>
+        <line x1="88" y1="38" x2="96" y2="38" stroke="#FF6B35" stroke-width="1"/>
+        <line x1="88" y1="162" x2="96" y2="162" stroke="#FF6B35" stroke-width="1"/>
+        <text x="80" y="104" text-anchor="end" fill="#FF6B35" font-size="12" font-weight="600">b</text>
+        <!-- y arrow -->
+        <line x1="300" y1="100" x2="300" y2="60" stroke="#1A2A3A" stroke-width="1"/><polygon points="300,60 297,69 303,69" fill="#1A2A3A"/>
+        <text x="308" y="78" fill="#1A2A3A" font-size="11">y</text>
+      </svg>
+      <div class="figure-caption">Velocity is maximum on the centreline and falls linearly to zero at each plate. By symmetry, integrate one half (<span>\(0\) to \(b/2\)</span>) and double.</div>
+    </div>
+    <details>
+      <summary>Solution</summary>
+      <p><strong>Thought process:</strong> The flow is between flat plates of width <span>\(w\)</span>, so a thin strip at height <span>\(y\)</span> has area <span>\(dA = w\,dy\)</span>. The profile is symmetric about the centreline, so integrate from <span>\(0\)</span> to <span>\(b/2\)</span> and multiply by 2.</p>
+      <p><strong>Step 1 &mdash; Set up the integral</strong> (factor of 2 for symmetry):</p>
+      <p>\[ Q = 2\int_0^{b/2} u(y)\,w\,dy = 2w\,u_{max}\int_0^{b/2}\!\left(1 - \frac{2y}{b}\right)dy \]</p>
+      <p><strong>Step 2 &mdash; Integrate:</strong></p>
+      <p>\[ Q = 2w\,u_{max}\left[\,y - \frac{y^2}{b}\,\right]_0^{b/2} = 2w\,u_{max}\left(\frac{b}{2} - \frac{(b/2)^2}{b}\right) \]</p>
+      <p><strong>Step 3 &mdash; Simplify:</strong></p>
+      <p>\[ Q = 2w\,u_{max}\left(\frac{b}{2} - \frac{b}{4}\right) = 2w\,u_{max}\cdot\frac{b}{4} \;\Rightarrow\; \boxed{Q = \frac{w\,u_{max}\,b}{2}} \]</p>
+      <p><strong>Step 4 &mdash; Average velocity</strong> (the flow area is <span>\(A = wb\)</span>):</p>
+      <p>\[ \bar{U} = \frac{Q}{A} = \frac{w\,u_{max}\,b/2}{wb} \;\Rightarrow\; \boxed{\bar{U} = \frac{u_{max}}{2}} \]</p>
+      <p style="font-size:13px;color:var(--muted);"><strong>★ Pattern:</strong> A linear (triangular) profile gives <span>\(\bar{U}=u_{max}/2\)</span> &mdash; the same one-half ratio as the parabolic pipe. The &ldquo;average is half the peak&rdquo; result is common for these symmetric profiles, but always confirm it by integrating.</p>
+    </details>
+  </div>
+
+  <!-- ════════════ WRAP-UP ════════════ -->
+  <div class="sb-sep" style="margin:30px 0;background:var(--border);"></div>
+  <div class="card-bracket tip-card">
+    <div class="card-title">★ Where This Is Heading</div>
+    <p>This lecture set up the <strong>Eulerian / control-volume</strong> viewpoint and the two flow rates, <span>\(Q\)</span> and <span>\(\dot{m}\)</span>. In <strong>Chapter 5 (Reynolds Transport Theorem)</strong> these flow rates become the &ldquo;flux&rdquo; terms that turn conservation laws (mass, momentum, energy) into usable control-volume equations &mdash; starting with conservation of mass, the <em>continuity equation</em>, which is essentially &ldquo;<span>\(\dot{m}_{\text{in}} = \dot{m}_{\text{out}}\)</span>&rdquo; for steady flow.</p>
+  </div>
+
+</section>
