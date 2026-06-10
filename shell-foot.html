@@ -84,6 +84,20 @@ function updateProgressBar() {
   if (label) label.textContent = pct + '%';
 }
 
+/* ── Assessment Checklist Persistence ── */
+function initChecklists() {
+  const KEY = 'maae2300-checklists';
+  const saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+  document.querySelectorAll('input[data-key]').forEach(cb => {
+    if (saved[cb.dataset.key]) cb.checked = true;
+    cb.addEventListener('change', () => {
+      const state = JSON.parse(localStorage.getItem(KEY) || '{}');
+      state[cb.dataset.key] = cb.checked;
+      localStorage.setItem(KEY, JSON.stringify(state));
+    });
+  });
+}
+
 /* ── Init ── */
 document.addEventListener('DOMContentLoaded', function() {
   renderMathInElement(document.body, {
@@ -95,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
     strict: false
   });
   initProgress();
+  initChecklists();
   /* Show summary as landing page */
   showSection('summary');
 });
