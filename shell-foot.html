@@ -45,6 +45,64 @@ function setFormulaView(view, btn) {
   if (btn) btn.classList.add('active');
 }
 
+/* ── Formula Sheet Variable Popup ── */
+(function() {
+  var pop = document.getElementById('varpop');
+  if (!pop) return;
+  document.addEventListener('click', function(e) {
+    var vc = e.target.closest('.vc');
+    if (!vc) { pop.style.display = 'none'; return; }
+    var desc = vc.getAttribute('data-t') || '';
+    var symHtml = '<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base">' + vc.innerHTML + '</span></span></span>';
+    pop.querySelector('.vp-sym').innerHTML = symHtml;
+    pop.querySelector('.vp-desc').textContent = desc;
+    pop.style.display = 'block';
+    var rect = vc.getBoundingClientRect();
+    var pw = pop.offsetWidth, ph = pop.offsetHeight;
+    var left = rect.left + rect.width / 2 - pw / 2;
+    var top = rect.top - ph - 10;
+    if (left < 8) left = 8;
+    if (left + pw > window.innerWidth - 8) left = window.innerWidth - pw - 8;
+    if (top < 8) top = rect.bottom + 10;
+    pop.style.left = left + 'px';
+    pop.style.top = top + 'px';
+  });
+})();
+
+/* ── Formula Sheet Search ── */
+(function() {
+  var input = document.getElementById('fs-search');
+  var results = document.getElementById('fs-results');
+  if (!input || !results) return;
+  var cards = Array.from(document.querySelectorAll('.fs-card'));
+  input.addEventListener('input', function() {
+    var q = input.value.toLowerCase().trim();
+    results.innerHTML = '';
+    if (!q) { results.hidden = true; return; }
+    cards
+      .filter(function(c) {
+        return ((c.dataset.name || '') + ' #' + (c.dataset.num || '') + ' ch' + (c.dataset.ch || '') + ' ' + c.textContent).toLowerCase().indexOf(q) !== -1;
+      })
+      .slice(0, 8)
+      .forEach(function(c) {
+        var li = document.createElement('li');
+        li.textContent = '#' + c.dataset.num + ' — ' + c.dataset.name + ' (Ch ' + c.dataset.ch + ')';
+        li.onclick = function() {
+          c.scrollIntoView({behavior: 'smooth', block: 'center'});
+          c.classList.add('fs-flash');
+          setTimeout(function() { c.classList.remove('fs-flash'); }, 1500);
+          results.hidden = true;
+          input.value = '';
+        };
+        results.appendChild(li);
+      });
+    results.hidden = results.children.length === 0;
+  });
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.fs-search-wrap')) results.hidden = true;
+  });
+})();
+
 /* ── Collapsible Sections ── */
 document.addEventListener('click', function(e) {
   const toggle = e.target.closest('.collapse-toggle');
@@ -114,5 +172,6 @@ document.addEventListener('DOMContentLoaded', function() {
   showSection('summary');
 });
 </script>
+<div id="varpop"><div class="vp-sym"></div><div class="vp-desc"></div></div>
 </body>
 </html>

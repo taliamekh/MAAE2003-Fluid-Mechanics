@@ -35,6 +35,13 @@
   --ch4-title: #F4A261;
   --ch5-title: #1AAA96;
   --ch6-title: #7A8FA6;
+  /* Variable palette (formula sheet only — distinct from content accents) */
+  --vc-primary: #D32F2F;   /* primary quantities: F, P */
+  --vc-secondary: #1565C0; /* areas, depths: A, h */
+  --vc-tertiary: #2E7D32;  /* fluid properties: γ, ρ, g */
+  --vc-angle: #7B1FA2;     /* angles: θ, sin, cos */
+  --vc-scale: #E65100;     /* dimensions: L, b, R */
+  --vc-field: #00838F;     /* moments of area: Ixx, Ixy */
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
@@ -451,6 +458,38 @@ strong { font-weight: 600; }
 #formulas .katex .svg-align,
 #formulas .katex .hide-tail,
 #formulas .katex .rule { pointer-events: none; }
+.vc { cursor: pointer; padding: 6px 3px; margin: -6px -3px; display: inline-block; position: relative; z-index: 2; pointer-events: auto; border-radius: 3px; transition: background .15s; }
+.vc:hover { background: rgba(0,0,0,.06); }
+#varpop {
+  display: none; position: fixed; z-index: 9999;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  padding: 10px 14px; box-shadow: 0 4px 16px rgba(0,0,0,.12);
+  font-family: 'Poppins', sans-serif; font-size: 13px; color: var(--text);
+  max-width: 280px; line-height: 1.5; pointer-events: none;
+}
+#varpop .vp-sym { font-size: 18px; margin-bottom: 4px; }
+#varpop .vp-desc { color: var(--muted); }
+.fs-num { font-size: 11px; font-weight: 500; color: var(--eq); margin-left: 6px; opacity: .8; }
+.fs-search-wrap { position: relative; margin-bottom: 12px; }
+#fs-search {
+  width: 100%; padding: 8px 14px; font-size: 13px; font-family: 'Poppins', sans-serif;
+  border: 1px solid var(--border); border-radius: 8px; background: var(--surface);
+  color: var(--text); outline: none;
+}
+#fs-search:focus { border-color: var(--eq); box-shadow: 0 0 0 2px rgba(255,107,53,.12); }
+#fs-results {
+  position: absolute; top: 100%; left: 0; right: 0; z-index: 100;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  list-style: none; padding: 4px 0; margin-top: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+}
+#fs-results li {
+  padding: 6px 14px; font-size: 13px; cursor: pointer; color: var(--text);
+}
+#fs-results li:hover { background: rgba(0,0,0,.04); }
+.fs-flash { outline: 2px solid var(--eq); outline-offset: 2px; transition: outline-color .3s; }
+.fs-legend { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; font-size: 12px; color: var(--muted); }
+.fs-legend span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; vertical-align: middle; background: var(--dot); }
 
 /* ── SUMMARY CLUSTERS ── */
 .cluster { margin: 12px 0 16px; }
