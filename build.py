@@ -12,7 +12,7 @@ CHAPTER_ORDER = [
     "ch4-notes", "ch4-prob",
     "ch5-notes", "ch5-prob",
     "ch6-notes", "ch6-prob",
-    "formulas", "m1prep", "m2prep", "final",
+    "formulas", "m1prep", "m2prep", "m2prep-sample", "final",
     "lab1", "lab2", "lab3",
     "summary", "progress",
 ]
