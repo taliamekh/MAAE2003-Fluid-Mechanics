@@ -67,9 +67,34 @@
   <p class="cross-ch">Continuum assumption → justifies every differential equation in Ch 3–6</p>
   <p class="cross-ch">Density definition → used directly in hydrostatics (Ch 2), Bernoulli (Ch 3), and RTT (Ch 5)</p>
 
-  <!-- Pending chapters -->
-  <h2 style="color:var(--ch2-title);">Ch 2 — Hydrostatic Forces & Buoyancy</h2>
-  <p style="color:var(--muted);font-size:13px;">Pending — Text Ch 2.5–2.8</p>
+  <!-- Ch 2 — Hydrostatic Forces & Buoyancy -->
+  <h2 style="color:var(--ch2-title);">Ch 2 — Hydrostatic Forces &amp; Buoyancy</h2>
+  <div class="card-bracket" style="border-left:3.5px solid var(--ch2-title);">
+    <div class="eq-name" style="color:var(--ch2-title);">Ch 2 — Hydrostatic Forces &amp; Buoyancy</div>
+
+    <p><strong style="color:var(--ch2-title)">Key ideas:</strong></p>
+    <ul>
+      <li>→ Resultant hydrostatic force = pressure at the centroid × area: \(F = p_{\text{CG}} A\)</li>
+      <li>→ Center of pressure (CP) is always below the centroid — deeper surfaces have CP closer to CG</li>
+      <li>→ Gate/dam problems combine hydrostatics with static equilibrium (moments + forces)</li>
+    </ul>
+
+    <p><strong style="color:var(--ch2-title)">When to use what:</strong></p>
+    <ul>
+      <li>→ Force on a plane surface? — \(F = \gamma h_{\text{CG}} A\) (gage) or \(F = (p_a + \gamma h_{\text{CG}})A\) (absolute)</li>
+      <li>→ Where does the force act? — \(y_{\text{CP}} = -I_{xx}\sin\theta/(h_{\text{CG}} A)\)</li>
+      <li>→ Symmetric shape (rect, circle)? — \(I_{xy}=0\), so \(x_{\text{CP}}=0\)</li>
+      <li>→ Hinge reaction? — moment equilibrium about the hinge using CP location</li>
+      <li>→ Horizontal surface? — CP = CG (uniform pressure)</li>
+    </ul>
+
+    <p><strong style="color:var(--ch2-title)">⚠ Traps:</strong></p>
+    <ol>
+      <li>\(h_{\text{CG}}\) is the <em>vertical</em> depth of the centroid, not the distance along the incline</li>
+      <li>\(I_{xx}\) must be about the <em>centroidal</em> axis, not about the free surface</li>
+      <li>For the moment arm from hinge to CP: combine the CG-to-hinge distance with the CG-to-CP distance — watch the signs</li>
+    </ol>
+  </div>
 
   <h2 style="color:var(--ch3-title);">Ch 3 — Bernoulli's Equation</h2>
   <p style="color:var(--muted);font-size:13px;">Pending — Text Ch 2.9, 3.5</p>
@@ -90,6 +115,9 @@
     <tbody>
       <tr><td>Is continuum valid?</td><td>Problem length scale ≫ mean free path</td><td>If yes → use differential approach; if no → molecular dynamics</td></tr>
       <tr><td>Fluid or solid?</td><td>Apply shear stress</td><td>Continuous deformation → fluid; deforms to equilibrium → solid</td></tr>
+      <tr style="border-left:3px solid var(--ch2-title)"><td>Force on plane surface?</td><td>\(F = \gamma h_{\text{CG}} A\)</td><td>Pressure at centroid × area</td></tr>
+      <tr style="border-left:3px solid var(--ch2-title)"><td>Where does F act?</td><td>\(y_{\text{CP}} = -I_{xx}\sin\theta/(h_{\text{CG}}A)\)</td><td>CP is below CG by this distance</td></tr>
+      <tr style="border-left:3px solid var(--ch2-title)"><td>Hinge reaction?</td><td>\(\sum M_{\text{hinge}} = 0\) with F at CP</td><td>Locate F, take moments about hinge</td></tr>
     </tbody>
   </table>
 

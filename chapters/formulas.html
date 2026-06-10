@@ -40,5 +40,50 @@
       </div>
 
     </div><!-- /fs-chapter -->
+
+    <!-- ═══ Ch 2: Hydrostatic Forces & Buoyancy ═══ -->
+    <h2 style="color:var(--ch2-title);">Ch 2 — Hydrostatic Forces &amp; Buoyancy</h2>
+
+    <div class="fs-chapter" style="--fs-ch-title:var(--ch2-title)">
+
+      <div class="fs-card" data-num="19" data-ch="2" data-name="Resultant Force — Inclined Plane">
+        <div class="fs-top"><span class="fs-name">Resultant Force — Inclined Plane <span class="fs-num">#19</span></span></div>
+        <div class="fs-body">
+          <div class="fs-detail">
+            <div class="fs-formula">\[ F = p_{\text{CG}} \, A = (p_a + \gamma h_{\text{CG}}) \, A \]</div>
+            <p class="fs-explain"><strong>What it means:</strong> The total hydrostatic force on a flat submerged surface equals the pressure at its centroid multiplied by its area — as if the entire surface were at the centroid depth.</p>
+            <p class="fs-explain"><strong>Origin:</strong> Integration of \(p\,dA\) over the surface, using \(\int h\,dA = h_{\text{CG}} A\) by definition of centroid.</p>
+            <p class="fs-when"><strong>When to use:</strong> Any plane surface (vertical, inclined, or horizontal) submerged in a static fluid. For open surfaces, set \(p_a = 0\) (gage): \(F = \gamma h_{\text{CG}} A\).</p>
+            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Curved surfaces (use component method instead — see Ch 2.2). Moving fluids (not hydrostatic).</p>
+            <p class="fs-explain"><strong>Use cases:</strong> "Find the force on a dam face" → identify \(h_{\text{CG}}\), compute \(F\). "Force on a gate" → same, then use CP for moment analysis.</p>
+          </div>
+          <div class="fs-quick">
+            <div class="fs-formula">\[ F = (p_a + \gamma h_{\text{CG}}) A \]</div>
+            <p class="fs-explain">Total hydrostatic force on a plane surface. \(h_{\text{CG}}\) = centroid depth. For open surfaces: \(F = \gamma h_{\text{CG}} A\).</p>
+          </div>
+          <div class="fs-eqonly"><div class="fs-formula">\[ F = p_{\text{CG}} A = (p_a + \gamma h_{\text{CG}}) A \]</div></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="20" data-ch="2" data-name="Center of Pressure">
+        <div class="fs-top"><span class="fs-name">Center of Pressure <span class="fs-num">#20</span></span></div>
+        <div class="fs-body">
+          <div class="fs-detail">
+            <div class="fs-formula">\[ y_{\text{CP}} = -\frac{\gamma \sin\theta \, I_{xx}}{p_{\text{CG}} A} \qquad x_{\text{CP}} = -\frac{\gamma \sin\theta \, I_{xy}}{p_{\text{CG}} A} \]</div>
+            <p class="fs-explain"><strong>What it means:</strong> The center of pressure is where the resultant force effectively acts. It is always displaced toward the high-pressure (deeper) side of the surface relative to the centroid.</p>
+            <p class="fs-explain"><strong>Origin:</strong> Moment balance of the distributed pressure about the centroid. \(I_{xx}\), \(I_{xy}\) are 2nd moments of area about centroidal axes of the surface.</p>
+            <p class="fs-when"><strong>When to use:</strong> After finding \(F\), use CP to locate the force for moment/equilibrium analysis (gates, hinges, dams). For gage pressure: \(y_{\text{CP}} = -I_{xx}\sin\theta / (h_{\text{CG}} A)\).</p>
+            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Horizontal surfaces (\(\theta = 0\)) where CP = CG. Curved surfaces (different method).</p>
+            <p class="fs-explain"><strong>Use cases:</strong> "Where does the force act on a gate?" → compute \(y_{\text{CP}}\), locate CP below CG. "Find hinge reactions" → use CP in moment equation.</p>
+          </div>
+          <div class="fs-quick">
+            <div class="fs-formula">\[ y_{\text{CP}} = -\frac{\gamma \sin\theta \, I_{xx}}{p_{\text{CG}} A} \]</div>
+            <p class="fs-explain">Distance of CP below centroid. For gage: \(y_{\text{CP}} = -I_{xx}\sin\theta/(h_{\text{CG}} A)\). CP is always below CG. Rectangle: \(I_{xx} = bL^3/12\). Circle: \(I_{xx} = \pi R^4/4\).</p>
+          </div>
+          <div class="fs-eqonly"><div class="fs-formula">\[ y_{\text{CP}} = -\frac{\gamma \sin\theta \, I_{xx}}{p_{\text{CG}} A} \qquad x_{\text{CP}} = -\frac{\gamma \sin\theta \, I_{xy}}{p_{\text{CG}} A} \]</div></div>
+        </div>
+      </div>
+
+    </div><!-- /fs-chapter -->
   </div><!-- /formula-content -->
 </section>
