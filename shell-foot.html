@@ -50,8 +50,9 @@ function setFormulaView(view, btn) {
   var pop = document.getElementById('varpop');
   if (!pop) return;
   document.addEventListener('click', function(e) {
-    var vc = e.target.closest('.vc');
-    if (!vc) { pop.style.display = 'none'; return; }
+    /* Target [data-t] spans created by KaTeX \htmlData — no .vc class needed */
+    var vc = e.target.closest('[data-t]');
+    if (!vc || !vc.closest('#formulas')) { pop.style.display = 'none'; return; }
     var desc = vc.getAttribute('data-t') || '';
     var symHtml = '<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base">' + vc.innerHTML + '</span></span></span>';
     pop.querySelector('.vp-sym').innerHTML = symHtml;
@@ -165,12 +166,6 @@ document.addEventListener('DOMContentLoaded', function() {
     ],
     trust: true,
     strict: false
-  });
-  /* After KaTeX renders, \htmlData{t=desc}{...} creates <span data-t="desc">
-     but does NOT add the .vc class. The popup click handler targets .vc,
-     so we must add it post-render to every [data-t] element in #formulas. */
-  document.querySelectorAll('#formulas [data-t]').forEach(function(el) {
-    el.classList.add('vc');
   });
   initProgress();
   initChecklists();
