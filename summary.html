@@ -108,6 +108,41 @@
     </ol>
   </div>
 
+  <!-- Lec 1.3 clusters -->
+  <div class="cluster-card" style="border-left:3px solid var(--ch1-title);padding:10px 14px;margin:10px 0;border-radius:6px;background:rgba(0,0,0,.015);">
+    <div class="cluster-title" style="font-weight:700;color:var(--ch1-title);font-size:13px;margin-bottom:6px;">Hydrostatic Pressure</div>
+    <ul style="margin:0;padding-left:18px;font-size:13px;">
+      <li>Pressure is a scalar (same in all directions at a point)</li>
+      <li>\(dp/dz = -\gamma = -\rho g\); no horizontal pressure change</li>
+      <li>Incompressible: \(p_2 - p_1 = -\gamma(z_2 - z_1)\)</li>
+      <li>Pascal&rsquo;s Law: pressure change transmitted everywhere in confined fluid</li>
+    </ul>
+  </div>
+  <div class="cluster-card" style="border-left:3px solid var(--ch1-title);padding:10px 14px;margin:10px 0;border-radius:6px;background:rgba(0,0,0,.015);">
+    <div class="cluster-title" style="font-weight:700;color:var(--ch1-title);font-size:13px;margin-bottom:6px;">Pressure References &amp; Head</div>
+    <ul style="margin:0;padding-left:18px;font-size:13px;">
+      <li>Absolute = from perfect vacuum; gage = above atmosphere; vacuum = below atmosphere</li>
+      <li>Pressure head: \(h = p_{\text{gage}}/\gamma\) (equivalent liquid column height)</li>
+      <li>Hydraulic machinery: \(F_2/F_1 = A_2/A_1\) (Pascal&rsquo;s Law)</li>
+    </ul>
+  </div>
+  <div class="cluster-card" style="border-left:3px solid var(--ch1-title);padding:10px 14px;margin:10px 0;border-radius:6px;background:rgba(0,0,0,.015);">
+    <div class="cluster-title" style="font-weight:700;color:var(--ch1-title);font-size:13px;margin-bottom:6px;">Atmospheric Pressure</div>
+    <ul style="margin:0;padding-left:18px;font-size:13px;">
+      <li>Troposphere (0&ndash;11 km): \(p = p_0(1 - Bz/T_0)^{5.26}\)</li>
+      <li>Isothermal: \(p = p_0 e^{-gz/(RT)}\) (stratosphere, or quick approx)</li>
+      <li>Must use absolute \(p\) and \(T\) in all gas-law formulas</li>
+    </ul>
+  </div>
+  <div class="cluster-card" style="border-left:3px solid var(--ch1-title);padding:10px 14px;margin:10px 0;border-radius:6px;background:rgba(0,0,0,.015);">
+    <div class="cluster-title" style="font-weight:700;color:var(--ch1-title);font-size:13px;margin-bottom:6px;">Manometry</div>
+    <ul style="margin:0;padding-left:18px;font-size:13px;">
+      <li>General rule: \(p_n - p_1 = \sum_{\downarrow}\gamma_i|h_i| - \sum_{\uparrow}\gamma_i|h_i|\)</li>
+      <li>Barometer: \(p_{\text{atm}} = \gamma h\); differential: \(\Delta p = (\rho_2 - \rho_1)gh\)</li>
+      <li>Don&rsquo;t forget to subtract working-fluid density in differential manometers</li>
+    </ul>
+  </div>
+
   <!-- ═══ PENDING CHAPTERS ═══ -->
   <h2 style="color:var(--ch2-title);">Ch 2 — Hydrostatic Forces &amp; Buoyancy</h2>
   <p style="color:var(--muted);font-size:13px;">Pending &mdash; Text Ch 2.5&ndash;2.8</p>
@@ -138,6 +173,12 @@
       <tr style="border-left:3px solid var(--ch1-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Capillary rise</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(h = 2\Upsilon\cos\theta/\gamma R\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Negative = non-wetting</td></tr>
       <tr style="border-left:3px solid var(--ch1-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Gas density at p, T</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\rho = p/(RT)\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Absolute p and T only</td></tr>
       <tr style="border-left:3px solid var(--ch1-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Equation valid?</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Check dimensional homogeneity</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">All terms same {MLT} combo</td></tr>
+      <tr style="border-left:3px solid var(--ch1-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Pressure at depth</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(p_2 - p_1 = -\gamma(z_2 - z_1)\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Incompressible only</td></tr>
+      <tr style="border-left:3px solid var(--ch1-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Gage vs absolute</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(p_g = p_{\text{abs}} - p_{\text{atm}}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Gas law needs absolute</td></tr>
+      <tr style="border-left:3px solid var(--ch1-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Manometer reading</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Down: +\(\gamma h\); Up: &minus;\(\gamma h\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Jump across at same level</td></tr>
+      <tr style="border-left:3px solid var(--ch1-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Differential manometer</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\Delta p = (\rho_2 - \rho_1)gh\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Subtract working fluid &rho;</td></tr>
+      <tr style="border-left:3px solid var(--ch1-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Hydraulic jack</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(F_2 = F_1(A_2/A_1)\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Pascal&rsquo;s Law</td></tr>
+      <tr style="border-left:3px solid var(--ch1-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Pressure at altitude</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(p = p_0(1-Bz/T_0)^{5.26}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Troposphere only</td></tr>
     </tbody>
   </table>
 

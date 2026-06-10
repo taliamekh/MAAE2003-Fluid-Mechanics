@@ -22,7 +22,10 @@ def build():
     foot = open(os.path.join(REPO, "shell-foot.html"), encoding="utf-8").read()
     fragments = []
     for name in CHAPTER_ORDER:
+        # Check chapters/ first, then root (lecture files may live at root)
         path = os.path.join(REPO, "chapters", f"{name}.html")
+        if not os.path.exists(path):
+            path = os.path.join(REPO, f"{name}.html")
         if os.path.exists(path):
             fragments.append(open(path, encoding="utf-8").read())
     with open(OUT, "w", encoding="utf-8") as f:

@@ -176,6 +176,163 @@
         </div>
       </div>
 
+      <!-- ═══ Lec 1.3: Hydrostatics & Manometers ═══ -->
+
+      <div class="fs-card" data-num="10" data-ch="1" data-name="Hydrostatic Pressure Gradient">
+        <div class="fs-top"><span class="fs-name">Hydrostatic Pressure Gradient <span class="fs-num">#10</span></span></div>
+        <div class="fs-body">
+          <div class="fs-detail">
+            <div class="fs-formula">\[\frac{dp}{dz} = -\gamma = -\rho g\]</div>
+            <p class="fs-explain"><strong>What it means:</strong> In a static fluid, pressure only changes in the vertical direction. It increases with depth (going down) and decreases with altitude (going up).</p>
+            <p class="fs-explain"><strong>Origin:</strong> Force balance on an infinitesimal control volume of static fluid — horizontal forces cancel, vertical forces give \(dp = -\gamma\,dz\).</p>
+            <p class="fs-when"><strong>When to use:</strong> Any hydrostatic problem. Foundation for manometry, pressure-depth calculations, atmospheric pressure.</p>
+            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Moving fluids (use Bernoulli/momentum instead). Also not valid if \(\gamma\) varies spatially in a non-trivial way without integration.</p>
+          </div>
+          <div class="fs-quick">
+            <div class="fs-formula">\[\frac{dp}{dz} = -\gamma = -\rho g\]</div>
+            <p class="fs-explain">Pressure changes only vertically: increases with depth, decreases with altitude.</p>
+          </div>
+          <div class="fs-eqonly"><div class="fs-formula">\[\frac{dp}{dz} = -\gamma = -\rho g\]</div></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="11" data-ch="1" data-name="Pressure-Depth (Incompressible)">
+        <div class="fs-top"><span class="fs-name">Pressure&ndash;Depth (Incompressible) <span class="fs-num">#11</span></span></div>
+        <div class="fs-body">
+          <div class="fs-detail">
+            <div class="fs-formula">\[p_2 - p_1 = -\gamma(z_2 - z_1) \qquad\text{or}\qquad z_1 + \frac{p_1}{\gamma} = z_2 + \frac{p_2}{\gamma}\]</div>
+            <p class="fs-explain"><strong>What it means:</strong> For an incompressible fluid (constant \(\gamma\)), the pressure difference between two points depends only on their elevation difference.</p>
+            <p class="fs-when"><strong>When to use:</strong> Most liquid problems (water, oil, mercury). Manometry. Any problem asking "find pressure at depth h."</p>
+            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Gases over large altitude changes (density varies — use tropospheric or isothermal formulas instead).</p>
+          </div>
+          <div class="fs-quick">
+            <div class="fs-formula">\[p_2 - p_1 = -\gamma(z_2 - z_1)\]</div>
+            <p class="fs-explain">Pressure-depth for constant-density fluids. Going down increases pressure.</p>
+          </div>
+          <div class="fs-eqonly"><div class="fs-formula">\[p_2 - p_1 = -\gamma(z_2 - z_1)\]</div></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="12" data-ch="1" data-name="Gage &amp; Vacuum Pressure">
+        <div class="fs-top"><span class="fs-name">Gage &amp; Vacuum Pressure <span class="fs-num">#12</span></span></div>
+        <div class="fs-body">
+          <div class="fs-detail">
+            <div class="fs-formula">\[p_{\text{gage}} = p_{\text{abs}} - p_{\text{atm}} \qquad p_{\text{vacuum}} = p_{\text{atm}} - p_{\text{abs}}\]</div>
+            <p class="fs-explain"><strong>What it means:</strong> Gage pressure is how far above atmospheric; vacuum pressure is how far below.</p>
+            <p class="fs-when"><strong>When to use:</strong> Converting between gage and absolute. Most gauges read gage pressure. Use absolute for gas law and thermodynamic calculations.</p>
+            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Never use gage pressure in the ideal gas law or tropospheric formula — those require absolute pressure.</p>
+          </div>
+          <div class="fs-quick">
+            <div class="fs-formula">\[p_{\text{gage}} = p_{\text{abs}} - p_{\text{atm}}\]</div>
+            <p class="fs-explain">Gage = above atm; vacuum = below atm. Use absolute for gas law.</p>
+          </div>
+          <div class="fs-eqonly"><div class="fs-formula">\[p_{\text{gage}} = p_{\text{abs}} - p_{\text{atm}}\]</div></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="13" data-ch="1" data-name="Pressure Head">
+        <div class="fs-top"><span class="fs-name">Pressure Head <span class="fs-num">#13</span></span></div>
+        <div class="fs-body">
+          <div class="fs-detail">
+            <div class="fs-formula">\[h = \frac{p_{\text{gage}}}{\gamma}\]</div>
+            <p class="fs-explain"><strong>What it means:</strong> Express any pressure as an equivalent liquid column height. Useful for intuitive understanding and manometry.</p>
+            <p class="fs-when"><strong>When to use:</strong> Interpreting manometer readings. Comparing pressures in different fluids. "Express pressure in meters of water / mm of mercury."</p>
+            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Compressible fluids — the concept breaks down when \(\gamma\) varies with altitude.</p>
+          </div>
+          <div class="fs-quick">
+            <div class="fs-formula">\[h = p_{\text{gage}} / \gamma\]</div>
+            <p class="fs-explain">Height of liquid column that produces gage pressure \(p\).</p>
+          </div>
+          <div class="fs-eqonly"><div class="fs-formula">\[h = p_{\text{gage}} / \gamma\]</div></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="14" data-ch="1" data-name="Troposphere Pressure">
+        <div class="fs-top"><span class="fs-name">Troposphere Pressure <span class="fs-num">#14</span></span></div>
+        <div class="fs-body">
+          <div class="fs-detail">
+            <div class="fs-formula">\[p = p_0\!\left(1 - \frac{Bz}{T_0}\right)^{g/(RB)}\]</div>
+            <p class="fs-explain"><strong>What it means:</strong> Atmospheric pressure in the troposphere (0–11 km), where temperature decreases linearly with altitude at lapse rate \(B\).</p>
+            <p class="fs-explain"><strong>Constants:</strong> \(T_0 = 288.16\) K, \(B = 0.00650\) K/m, \(g/(RB) \approx 5.26\) for air.</p>
+            <p class="fs-when"><strong>When to use:</strong> "Find pressure at altitude z" in the troposphere. Standard atmosphere calculations.</p>
+            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Above 11 km (use isothermal formula). Liquids (use incompressible formula).</p>
+          </div>
+          <div class="fs-quick">
+            <div class="fs-formula">\[p = p_0(1 - Bz/T_0)^{5.26}\]</div>
+            <p class="fs-explain">Troposphere (0–11 km) with linear temperature lapse. \(B = 0.00650\) K/m.</p>
+          </div>
+          <div class="fs-eqonly"><div class="fs-formula">\[p = p_0(1 - Bz/T_0)^{g/(RB)}\]</div></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="15" data-ch="1" data-name="Isothermal Atmosphere">
+        <div class="fs-top"><span class="fs-name">Isothermal Atmosphere <span class="fs-num">#15</span></span></div>
+        <div class="fs-body">
+          <div class="fs-detail">
+            <div class="fs-formula">\[p = p_0\,e^{-gz/(RT_0)}\]</div>
+            <p class="fs-explain"><strong>What it means:</strong> Pressure in an isothermal (constant temperature) atmosphere — exponential decay with altitude.</p>
+            <p class="fs-when"><strong>When to use:</strong> Stratosphere (11–20 km). Also a quick-and-dirty approximation for the troposphere (~4% error at 5 km).</p>
+            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Troposphere for accurate results — the temperature lapse makes ~4% difference at 5 km.</p>
+          </div>
+          <div class="fs-quick">
+            <div class="fs-formula">\[p = p_0\,e^{-gz/(RT)}\]</div>
+            <p class="fs-explain">Exponential decay for constant-T atmosphere. ~4% error in troposphere.</p>
+          </div>
+          <div class="fs-eqonly"><div class="fs-formula">\[p = p_0\,e^{-gz/(RT)}\]</div></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="16" data-ch="1" data-name="Hydraulic Force Multiplication">
+        <div class="fs-top"><span class="fs-name">Hydraulic Force Multiplication <span class="fs-num">#16</span></span></div>
+        <div class="fs-body">
+          <div class="fs-detail">
+            <div class="fs-formula">\[F_2 = F_1\,\frac{A_2}{A_1}\]</div>
+            <p class="fs-explain"><strong>What it means:</strong> Pascal's Law: equal pressure throughout a confined fluid means a small force on a small piston can support a large force on a large piston.</p>
+            <p class="fs-when"><strong>When to use:</strong> Hydraulic jack/press/lift problems. Finding force ratios or mechanical advantage.</p>
+            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Open systems or compressible fluids. Also assumes pistons are at the same elevation (otherwise add \(\gamma\Delta h\) correction).</p>
+          </div>
+          <div class="fs-quick">
+            <div class="fs-formula">\[F_2 = F_1(A_2/A_1)\]</div>
+            <p class="fs-explain">Pascal's Law: force multiplication via area ratio. Mechanical advantage = \(A_2/A_1\).</p>
+          </div>
+          <div class="fs-eqonly"><div class="fs-formula">\[F_2 = F_1(A_2/A_1)\]</div></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="17" data-ch="1" data-name="General Manometer Rule">
+        <div class="fs-top"><span class="fs-name">General Manometer Rule <span class="fs-num">#17</span></span></div>
+        <div class="fs-body">
+          <div class="fs-detail">
+            <div class="fs-formula">\[p_n - p_1 = \sum_{\text{down}} \gamma_i\,|h_i| - \sum_{\text{up}} \gamma_i\,|h_i|\]</div>
+            <p class="fs-explain"><strong>What it means:</strong> Walk through a manometer from known to unknown pressure. Going down adds \(\gamma h\), going up subtracts \(\gamma h\). Jump across at same level in same fluid.</p>
+            <p class="fs-when"><strong>When to use:</strong> ANY manometer problem — single-fluid, multi-fluid, U-tube, inclined, differential.</p>
+            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Moving fluids in the manometer tube (rare). The fluid in the manometer must be static.</p>
+          </div>
+          <div class="fs-quick">
+            <div class="fs-formula">\[p_n - p_1 = \sum_{\downarrow}\gamma_i|h_i| - \sum_{\uparrow}\gamma_i|h_i|\]</div>
+            <p class="fs-explain">Down = add \(\gamma h\), up = subtract \(\gamma h\). Jump across at same level.</p>
+          </div>
+          <div class="fs-eqonly"><div class="fs-formula">\[p_n - p_1 = \sum_{\downarrow}\gamma_i|h_i| - \sum_{\uparrow}\gamma_i|h_i|\]</div></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="18" data-ch="1" data-name="Differential Manometer">
+        <div class="fs-top"><span class="fs-name">Differential Manometer <span class="fs-num">#18</span></span></div>
+        <div class="fs-body">
+          <div class="fs-detail">
+            <div class="fs-formula">\[p_a - p_b = (\rho_2 - \rho_1)\,g\,h\]</div>
+            <p class="fs-explain"><strong>What it means:</strong> Pressure drop across a flow device measured by a U-tube. Only the manometer reading \(h\) and the density difference matter — the connecting leg height cancels.</p>
+            <p class="fs-when"><strong>When to use:</strong> Measuring pressure drop across valves, orifices, venturi meters, or any flow restriction.</p>
+            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Don't forget to subtract \(\rho_1\)! The formula uses the DIFFERENCE in densities, not just the gauge fluid density.</p>
+          </div>
+          <div class="fs-quick">
+            <div class="fs-formula">\[p_a - p_b = (\rho_2 - \rho_1)gh\]</div>
+            <p class="fs-explain">Differential U-tube: density DIFFERENCE times \(gh\). Don't forget \(\rho_1\)!</p>
+          </div>
+          <div class="fs-eqonly"><div class="fs-formula">\[\Delta p = (\rho_2 - \rho_1)gh\]</div></div>
+        </div>
+      </div>
+
     </div><!-- /fs-chapter -->
   </div><!-- /formula-content -->
 </section>
