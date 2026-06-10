@@ -8,12 +8,12 @@
   </div>
 
   <div class="fs-legend">
-    <span><span class="fs-legend-dot" style="background:#D32F2F"></span>Forces / pressures</span>
-    <span><span class="fs-legend-dot" style="background:#1565C0"></span>Areas / depths</span>
-    <span><span class="fs-legend-dot" style="background:#2E7D32"></span>Fluid properties</span>
-    <span><span class="fs-legend-dot" style="background:#7B1FA2"></span>Angles</span>
-    <span><span class="fs-legend-dot" style="background:#E65100"></span>Dimensions / radii</span>
-    <span><span class="fs-legend-dot" style="background:#00838F"></span>Moments of area</span>
+    <span><span class="fs-legend-dot" style="background:#d32f2f"></span>Forces / pressures</span>
+    <span><span class="fs-legend-dot" style="background:#1565c0"></span>Areas / depths</span>
+    <span><span class="fs-legend-dot" style="background:#2e7d32"></span>Fluid properties</span>
+    <span><span class="fs-legend-dot" style="background:#7b1fa2"></span>Angles</span>
+    <span><span class="fs-legend-dot" style="background:#e65100"></span>Dimensions / radii</span>
+    <span><span class="fs-legend-dot" style="background:#00838f"></span>Moments of area</span>
   </div>
 
   <div class="fs-views">
@@ -27,10 +27,10 @@
     <h2 style="color:var(--ch1-title);">Ch 1 — Fluid Properties & Pressure</h2>
     <div class="fs-chapter" data-ch="1">
 
-      <div class="fs-card" data-num="1" data-ch="1" data-name="Density" data-vars='{"#2E7D32|ρ":"ρ — density (kg/m³)","#E65100|m":"m — mass (kg)","#E65100|V":"V — volume (m³)"}'>
+      <div class="fs-card" data-num="1" data-ch="1" data-name="Density" data-vars='{"#2e7d32|ρ": "ρ — density of the fluid (kg/m³ in SI, slugs/ft³ in BG)", "#e65100|m": "m — total mass of the fluid sample (kg)", "#e65100|V": "V — total volume occupied by the fluid (m³)"}'>
         <div class="fs-top"><span class="fs-name">Density <span class="fs-num">#1</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#2E7D32}{\rho} = \frac{\textcolor{#E65100}{m}}{\textcolor{#E65100}{V}} \]</div>
+          <div class="fs-formula">\[ \textcolor{#2e7d32}{\rho} = \frac{\textcolor{#e65100}{m}}{\textcolor{#e65100}{V}} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">The <strong>mass</strong> of fluid per unit <strong>volume</strong> — the most fundamental intensive property.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>asked for mass per volume, need ρ for continuity / momentum / energy equations.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>weight per volume — that is γ = ρg. Do not confuse with SG (dimensionless).</div></div>
@@ -39,10 +39,10 @@
         </div>
       </div>
 
-      <div class="fs-card" data-num="2" data-ch="1" data-name="Specific Weight" data-vars='{"#2E7D32|γ":"γ — specific weight (N/m³)","#2E7D32|ρ":"ρ — density (kg/m³)","#2E7D32|g":"g — gravitational acceleration (9.81 m/s²)"}'>
+      <div class="fs-card" data-num="2" data-ch="1" data-name="Specific Weight" data-vars='{"#2e7d32|γ": "γ — specific weight: weight per unit volume of the fluid (N/m³)", "#2e7d32|ρ": "ρ — density of the fluid (kg/m³)", "#2e7d32|g": "g — local gravitational acceleration (9.81 m/s² at sea level)"}'>
         <div class="fs-top"><span class="fs-name">Specific Weight <span class="fs-num">#2</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#2E7D32}{\gamma} = \textcolor{#2E7D32}{\rho} \, \textcolor{#2E7D32}{g} \]</div>
+          <div class="fs-formula">\[ \textcolor{#2e7d32}{\gamma} = \textcolor{#2e7d32}{\rho} \, \textcolor{#2e7d32}{g} \]</div>
           <div class="fs-detail">
             <p class="fs-explain"><strong>Weight</strong> of fluid per unit volume — density scaled by gravity.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>hydrostatic pressure (p = γh), buoyancy, manometers.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>interchangeable with density — γ includes gravity. γ_water = 9810 N/m³.</div></div>
@@ -51,10 +51,10 @@
         </div>
       </div>
 
-      <div class="fs-card" data-num="3" data-ch="1" data-name="Specific Gravity" data-vars='{"#2E7D32|SG":"SG — specific gravity (dimensionless)","#2E7D32|ρ":"ρ — density of fluid","#1565C0|ρ":"ρ_W — density of water at 4°C (1000 kg/m³)"}'>
+      <div class="fs-card" data-num="3" data-ch="1" data-name="Specific Gravity" data-vars='{"#2e7d32|SG": "SG — specific gravity: dimensionless density ratio (no units)", "#2e7d32|ρ": "ρ — density of the fluid being compared", "#1565c0|ρ": "ρ_W — reference density of water at 4°C = 1000 kg/m³"}'>
         <div class="fs-top"><span class="fs-name">Specific Gravity <span class="fs-num">#3</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#2E7D32}{SG} = \frac{\textcolor{#2E7D32}{\rho}}{\textcolor{#1565C0}{\rho_W}} \]</div>
+          <div class="fs-formula">\[ \textcolor{#2e7d32}{SG} = \frac{\textcolor{#2e7d32}{\rho}}{\textcolor{#1565c0}{\rho_W}} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">Dimensionless ratio of a fluid's density to water's at 4°C.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>quick comparison with water, buoyancy (SG > 1 sinks), manometer multi-fluid problems.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>plugging directly into equations — convert: ρ = SG × ρ_W first.</div></div>
@@ -63,10 +63,10 @@
         </div>
       </div>
 
-      <div class="fs-card" data-num="4" data-ch="1" data-name="Newton's Law of Viscosity" data-vars='{"#D32F2F|τ":"τ — shear stress (Pa)","#2E7D32|μ":"μ — dynamic viscosity (Pa·s)","#E65100|u":"u — velocity (m/s)","#1565C0|y":"y — distance from wall (m)"}'>
+      <div class="fs-card" data-num="4" data-ch="1" data-name="Newton's Law of Viscosity" data-vars='{"#d32f2f|τ": "τ — shear stress acting on the fluid element (Pa = N/m²)", "#2e7d32|μ": "μ — dynamic (absolute) viscosity of the fluid (Pa·s)", "#e65100|u": "u — fluid velocity parallel to the surface (m/s)", "#1565c0|y": "y — perpendicular distance from the solid wall (m)"}'>
         <div class="fs-top"><span class="fs-name">Newton's Law of Viscosity <span class="fs-num">#4</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#D32F2F}{\tau} = \textcolor{#2E7D32}{\mu} \frac{d\textcolor{#E65100}{u}}{d\textcolor{#1565C0}{y}} \]</div>
+          <div class="fs-formula">\[ \textcolor{#d32f2f}{\tau} = \textcolor{#2e7d32}{\mu} \frac{d\textcolor{#e65100}{u}}{d\textcolor{#1565c0}{y}} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">Shear stress is proportional to velocity gradient. The constant μ is the <strong>dynamic viscosity</strong>.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>finding shear force on plates, determining viscosity from experiment, pipe flow wall shear.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>non-Newtonian fluids (variable μ). Not for turbulent flow.</div></div>
@@ -75,10 +75,10 @@
         </div>
       </div>
 
-      <div class="fs-card" data-num="5" data-ch="1" data-name="Kinematic Viscosity" data-vars='{"#2E7D32|ν":"ν — kinematic viscosity (m²/s)","#2E7D32|μ":"μ — dynamic viscosity (Pa·s)","#2E7D32|ρ":"ρ — density (kg/m³)"}'>
+      <div class="fs-card" data-num="5" data-ch="1" data-name="Kinematic Viscosity" data-vars='{"#2e7d32|ν": "ν — kinematic viscosity: momentum diffusivity (m²/s)", "#2e7d32|μ": "μ — dynamic viscosity of the fluid (Pa·s)", "#2e7d32|ρ": "ρ — density of the fluid (kg/m³)"}'>
         <div class="fs-top"><span class="fs-name">Kinematic Viscosity <span class="fs-num">#5</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#2E7D32}{\nu} = \frac{\textcolor{#2E7D32}{\mu}}{\textcolor{#2E7D32}{\rho}} \]</div>
+          <div class="fs-formula">\[ \textcolor{#2e7d32}{\nu} = \frac{\textcolor{#2e7d32}{\mu}}{\textcolor{#2e7d32}{\rho}} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">Dynamic viscosity normalized by density. Has dimensions of <strong>diffusivity</strong> (m²/s).</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>Reynolds number: Re = VL/ν. Comparing fluids of different densities.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>finding shear stress — need μ for that (τ = μ du/dy).</div></div>
@@ -87,10 +87,10 @@
         </div>
       </div>
 
-      <div class="fs-card" data-num="6" data-ch="1" data-name="Droplet / Bubble Pressure" data-vars='{"#D32F2F|Δ":"Δp — pressure difference (Pa)","#2E7D32|Υ":"Υ — surface tension (N/m)","#E65100|R":"R — radius (m)"}'>
+      <div class="fs-card" data-num="6" data-ch="1" data-name="Droplet / Bubble Pressure" data-vars='{"#d32f2f|Δ": "Δp — pressure excess inside the droplet or bubble (Pa)", "#2e7d32|Υ": "Υ — surface tension coefficient of the liquid (N/m)", "#e65100|R": "R — radius of the spherical droplet or bubble (m)"}'>
         <div class="fs-top"><span class="fs-name">Droplet / Bubble Pressure <span class="fs-num">#6</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#D32F2F}{\Delta p} = \frac{2\textcolor{#2E7D32}{\Upsilon}}{\textcolor{#E65100}{R}} \;\text{(droplet)} \qquad \frac{4\textcolor{#2E7D32}{\Upsilon}}{\textcolor{#E65100}{R}} \;\text{(bubble)} \]</div>
+          <div class="fs-formula">\[ \textcolor{#d32f2f}{\Delta p} = \frac{2\textcolor{#2e7d32}{\Upsilon}}{\textcolor{#e65100}{R}} \;\text{(droplet)} \qquad \frac{4\textcolor{#2e7d32}{\Upsilon}}{\textcolor{#e65100}{R}} \;\text{(bubble)} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">Surface tension creates internal pressure. Bubbles have <strong>two</strong> surfaces → 2× droplet pressure.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>pressure inside droplets, bubbles, or curved menisci.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>non-spherical geometries. Gravity effects neglected.</div></div>
@@ -99,10 +99,10 @@
         </div>
       </div>
 
-      <div class="fs-card" data-num="7" data-ch="1" data-name="Capillary Height" data-vars='{"#1565C0|h":"h — capillary rise height (m)","#2E7D32|Υ":"Υ — surface tension (N/m)","#7B1FA2|cos":"cos θ — contact angle factor","#2E7D32|γ":"γ — specific weight (N/m³)","#E65100|R":"R — tube radius (m)"}'>
+      <div class="fs-card" data-num="7" data-ch="1" data-name="Capillary Height" data-vars='{"#1565c0|h": "h — capillary rise height above the reservoir surface (m)", "#2e7d32|Υ": "Υ — surface tension coefficient of the liquid (N/m)", "#7b1fa2|cos": "cos θ — cosine of the contact angle between liquid and tube wall", "#2e7d32|γ": "γ — specific weight of the liquid (N/m³)", "#e65100|R": "R — inner radius of the capillary tube (m)"}'>
         <div class="fs-top"><span class="fs-name">Capillary Height <span class="fs-num">#7</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#1565C0}{h} = \frac{2\textcolor{#2E7D32}{\Upsilon} \textcolor{#7B1FA2}{\cos\theta}}{\textcolor{#2E7D32}{\gamma} \, \textcolor{#E65100}{R}} \]</div>
+          <div class="fs-formula">\[ \textcolor{#1565c0}{h} = \frac{2\textcolor{#2e7d32}{\Upsilon} \textcolor{#7b1fa2}{\cos\theta}}{\textcolor{#2e7d32}{\gamma} \, \textcolor{#e65100}{R}} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">Height a liquid rises or falls in a narrow tube. Positive for wetting (θ < 90°), negative for non-wetting.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>capillary tube problems, correcting manometer readings in small tubes.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>non-circular tubes. Requires known θ and Υ.</div></div>
@@ -111,10 +111,10 @@
         </div>
       </div>
 
-      <div class="fs-card" data-num="8" data-ch="1" data-name="Ideal Gas Law" data-vars='{"#D32F2F|p":"p — absolute pressure (Pa)","#2E7D32|ρ":"ρ — density (kg/m³)","#E65100|R":"R — specific gas constant (J/(kg·K))","#E65100|T":"T — absolute temperature (K)"}'>
+      <div class="fs-card" data-num="8" data-ch="1" data-name="Ideal Gas Law" data-vars='{"#d32f2f|p": "p — absolute pressure of the gas (Pa) — must be absolute, never gauge", "#2e7d32|ρ": "ρ — density of the gas at this state (kg/m³)", "#e65100|R": "R — specific gas constant for this gas (J/(kg·K)) — not the universal R", "#e65100|T": "T — absolute temperature (K) — must be Kelvin, never °C"}'>
         <div class="fs-top"><span class="fs-name">Ideal Gas Law <span class="fs-num">#8</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#D32F2F}{p} = \textcolor{#2E7D32}{\rho} \, \textcolor{#E65100}{R} \, \textcolor{#E65100}{T} \]</div>
+          <div class="fs-formula">\[ \textcolor{#d32f2f}{p} = \textcolor{#2e7d32}{\rho} \, \textcolor{#e65100}{R} \, \textcolor{#e65100}{T} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">Equation of state for ideal gases — relates absolute pressure, density, and absolute temperature.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>gas density at given conditions, compressible flow, atmosphere problems.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>very high p or low T (real gas). Must use absolute p and T — never gauge or °C.</div></div>
@@ -123,10 +123,10 @@
         </div>
       </div>
 
-      <div class="fs-card" data-num="9" data-ch="1" data-name="Absolute / Gage Pressure" data-vars='{"#D32F2F|p":"p — pressure (Pa)"}'>
+      <div class="fs-card" data-num="9" data-ch="1" data-name="Absolute / Gage Pressure" data-vars='{"#d32f2f|p": "p — pressure: p_abs = total from vacuum, p_gage = above atmospheric, p_atm ≈ 101.325 kPa"}'>
         <div class="fs-top"><span class="fs-name">Absolute / Gage Pressure <span class="fs-num">#9</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#D32F2F}{p_{\text{abs}}} = \textcolor{#D32F2F}{p_{\text{gage}}} + \textcolor{#D32F2F}{p_{\text{atm}}} \]</div>
+          <div class="fs-formula">\[ \textcolor{#d32f2f}{p_{\text{abs}}} = \textcolor{#d32f2f}{p_{\text{gage}}} + \textcolor{#d32f2f}{p_{\text{atm}}} \]</div>
           <div class="fs-detail">
             <p class="fs-explain"><strong>Absolute</strong> = total from vacuum. <strong>Gage</strong> = above atmospheric. <strong>Vacuum</strong> = below atmospheric.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>converting gage ↔ absolute, ideal gas law (needs absolute p).</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>p_gage can be negative (vacuum). p_abs is never negative.</div></div>
@@ -135,10 +135,10 @@
         </div>
       </div>
 
-      <div class="fs-card" data-num="10" data-ch="1" data-name="Hydrostatic Pressure" data-vars='{"#D32F2F|p":"p — pressure (Pa)","#2E7D32|γ":"γ — specific weight (N/m³)","#1565C0|h":"h — depth below free surface (m)"}'>
+      <div class="fs-card" data-num="10" data-ch="1" data-name="Hydrostatic Pressure" data-vars='{"#d32f2f|p": "p — pressure at depth h below the free surface (Pa)", "#2e7d32|γ": "γ — specific weight of the static fluid (N/m³)", "#1565c0|h": "h — vertical depth below the free surface (m) — always positive downward"}'>
         <div class="fs-top"><span class="fs-name">Hydrostatic Pressure <span class="fs-num">#10</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#D32F2F}{p} = \textcolor{#D32F2F}{p_a} + \textcolor{#2E7D32}{\gamma} \, \textcolor{#1565C0}{h} \]</div>
+          <div class="fs-formula">\[ \textcolor{#d32f2f}{p} = \textcolor{#d32f2f}{p_a} + \textcolor{#2e7d32}{\gamma} \, \textcolor{#1565c0}{h} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">Pressure increases linearly with depth in a static incompressible fluid.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>pressure at depth, manometer analysis, pressure on submerged surfaces.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>compressible fluids (γ varies). Not for moving fluids.</div></div>
@@ -147,10 +147,10 @@
         </div>
       </div>
 
-      <div class="fs-card" data-num="11" data-ch="1" data-name="Manometer Equation" data-vars='{"#D32F2F|p":"p — pressure (Pa)","#2E7D32|γ":"γ_i — specific weight of fluid i","#1565C0|Δ":"Δh_i — height change in fluid i (m)"}'>
+      <div class="fs-card" data-num="11" data-ch="1" data-name="Manometer Equation" data-vars='{"#d32f2f|p": "p — pressure at the measurement point (Pa)", "#2e7d32|γ": "γ_i — specific weight of fluid i in the manometer leg (N/m³)", "#1565c0|Δ": "Δh_i — height change through fluid i: positive going down, negative going up (m)"}'>
         <div class="fs-top"><span class="fs-name">Manometer Equation <span class="fs-num">#11</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#D32F2F}{p_A} - \textcolor{#D32F2F}{p_B} = \sum \textcolor{#2E7D32}{\gamma_i} \, \textcolor{#1565C0}{\Delta h_i} \]</div>
+          <div class="fs-formula">\[ \textcolor{#d32f2f}{p_A} - \textcolor{#d32f2f}{p_B} = \sum \textcolor{#2e7d32}{\gamma_i} \, \textcolor{#1565c0}{\Delta h_i} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">Walk A→B through manometer: <strong>go down</strong> → add γΔh, <strong>go up</strong> → subtract γΔh.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>pressure difference via U-tube or multi-fluid manometer.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>dynamic flows. Down adds pressure, up subtracts.</div></div>
@@ -164,10 +164,10 @@
     <h2 style="color:var(--ch2-title);">Ch 2 — Hydrostatic Forces & Buoyancy</h2>
     <div class="fs-chapter" data-ch="2">
 
-      <div class="fs-card" data-num="12" data-ch="2" data-name="Resultant Hydrostatic Force" data-vars='{"#D32F2F|F":"F_R — resultant hydrostatic force (N)","#2E7D32|γ":"γ — specific weight (N/m³)","#1565C0|h":"h̄ — vertical depth to centroid (m)","#1565C0|A":"A — area of submerged surface (m²)"}'>
+      <div class="fs-card" data-num="12" data-ch="2" data-name="Resultant Hydrostatic Force" data-vars='{"#d32f2f|F": "F_R — total resultant hydrostatic force on the submerged plane surface (N)", "#2e7d32|γ": "γ — specific weight of the fluid pressing on the surface (N/m³)", "#1565c0|h": "h̄ — vertical depth from free surface to the centroid of the submerged area (m)", "#1565c0|A": "A — total area of the submerged plane surface (m²)"}'>
         <div class="fs-top"><span class="fs-name">Resultant Hydrostatic Force <span class="fs-num">#12</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#D32F2F}{F_R} = \textcolor{#2E7D32}{\gamma} \, \textcolor{#1565C0}{\bar{h}} \, \textcolor{#1565C0}{A} \]</div>
+          <div class="fs-formula">\[ \textcolor{#d32f2f}{F_R} = \textcolor{#2e7d32}{\gamma} \, \textcolor{#1565c0}{\bar{h}} \, \textcolor{#1565c0}{A} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">Total force on a submerged plane surface = pressure at <strong>centroid</strong> × area.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>total force on a gate, dam, tank wall, or any flat submerged surface.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>curved surfaces (project onto planes). \(\bar{h}\) is vertical depth, not along surface.</div></div>
@@ -176,10 +176,10 @@
         </div>
       </div>
 
-      <div class="fs-card" data-num="13" data-ch="2" data-name="Center of Pressure" data-vars='{"#1565C0|y":"y — position along inclined surface","#00838F|I":"I_xx — second moment of area about centroid (m⁴)","#1565C0|A":"A — surface area (m²)"}'>
+      <div class="fs-card" data-num="13" data-ch="2" data-name="Center of Pressure" data-vars='{"#1565c0|y": "y — distance measured along the inclined surface from the intersection with the free-surface line (m)", "#00838f|I": "I_xx — second moment of area of the surface shape about its centroidal axis (m⁴)", "#1565c0|A": "A — total area of the submerged plane surface (m²)"}'>
         <div class="fs-top"><span class="fs-name">Center of Pressure <span class="fs-num">#13</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#1565C0}{y_{cp}} = \textcolor{#1565C0}{\bar{y}} + \frac{\textcolor{#00838F}{I_{xx}}}{\textcolor{#1565C0}{\bar{y}} \, \textcolor{#1565C0}{A}} \]</div>
+          <div class="fs-formula">\[ \textcolor{#1565c0}{y_{cp}} = \textcolor{#1565c0}{\bar{y}} + \frac{\textcolor{#00838f}{I_{xx}}}{\textcolor{#1565c0}{\bar{y}} \, \textcolor{#1565c0}{A}} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">Center of pressure is always <strong>below</strong> the centroid. Offset I_xx/(ȳA) is always positive.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>finding where F_R acts — needed for moment/equilibrium on gates, hinges.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>\(\bar{y}\) is along the incline from free-surface line, not vertical. Use centroidal I_xx.</div></div>

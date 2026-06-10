@@ -475,12 +475,13 @@ strong { font-weight: 600; }
 #varpop {
   display: none; position: fixed; z-index: 9999;
   background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
-  padding: 10px 14px; box-shadow: 0 4px 16px rgba(0,0,0,.12);
-  font-family: 'Poppins', sans-serif; font-size: 13px; color: var(--text);
-  max-width: 280px; line-height: 1.5; pointer-events: none;
+  padding: 12px 16px; box-shadow: 0 4px 16px rgba(0,0,0,.12);
+  font-size: 13px; color: var(--text);
+  max-width: 300px; line-height: 1.5; pointer-events: none;
 }
-#varpop .vp-sym { font-size: 18px; margin-bottom: 4px; }
-#varpop .vp-desc { color: var(--muted); }
+/* .vp-sym inherits KaTeX's own font-family and color from the copied innerHTML */
+#varpop .vp-sym { font-size: 24px; margin-bottom: 6px; line-height: 1.2; }
+#varpop .vp-desc { color: var(--muted); font-family: 'Poppins', sans-serif; font-size: 13px; }
 .fs-num { font-size: 11px; font-weight: 500; color: var(--eq); margin-left: 6px; opacity: .8; }
 .fs-search-wrap { position: relative; margin-bottom: 12px; }
 #fs-search {
