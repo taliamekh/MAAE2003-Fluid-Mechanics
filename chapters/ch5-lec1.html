@@ -1,0 +1,551 @@
+<!-- ═══ Ch 5 Lecture 1: Reynolds Transport Theorem — Conservation of Mass ═══ -->
+<section id="ch5-lec1" class="page-section">
+  <h1 class="page-title" style="color:var(--ch5-title)">5.1 &mdash; Reynolds Transport Theorem: Conservation of Mass</h1>
+  <p class="page-subtitle">System &rarr; control volume &bull; Extensive vs intensive properties &bull; The RTT &bull; Continuity equation &bull; Worked examples: reservoir &amp; jet engine</p>
+
+  <!-- ════════ MOTIVATION ════════ -->
+  <h2 style="color:var(--ch5-title)">The Big Picture: Why We Need the RTT</h2>
+
+  <p>Every fundamental law of mechanics &mdash; conservation of mass, Newton&rsquo;s second law, conservation of energy &mdash; is written for a fixed lump of matter. In fluid mechanics we call that fixed lump a <strong>system</strong>: a fixed collection of atoms that we follow as it moves and deforms. This is the <strong>Lagrangian</strong> viewpoint, and it makes the laws easy to state:</p>
+
+  <div class="card-bracket def-card">
+    <div class="eq-name" style="color:var(--def)">The System Laws (Lagrangian form)</div>
+    <div style="overflow-x:auto">\[ \underbrace{\frac{dm}{dt} = 0}_{\text{mass}} \qquad \underbrace{\vec F = \frac{d}{dt}(m\vec V)}_{\text{linear momentum}} \qquad \underbrace{\vec M = \frac{d}{dt}\!\int (\vec r \times \vec V)\,dm}_{\text{angular momentum}} \qquad \underbrace{\dot Q - \dot W = \frac{dE}{dt}}_{\text{energy}} \]</div>
+    <p>Each law tracks a property of <strong>one fixed mass</strong> as it travels through space. Exact, no averaging &mdash; but to use them we&rsquo;d have to <em>follow every fluid particle individually</em>. For a flowing fluid that is hopeless.</p>
+  </div>
+
+  <p>What we actually care about in engineering is what happens at a <em>fixed location in space</em> &mdash; the thrust at a nozzle, the flow through a pump, the rise of water behind a dam. That is the <strong>Eulerian</strong> viewpoint: we draw a fixed region called a <strong>control volume (CV)</strong> and watch fluid stream in and out of it. The problem is that the laws above are written for systems, not for control volumes.</p>
+
+  <div class="card-bracket tip-card">
+    <div class="eq-name" style="color:var(--tip)">★ The Core Idea</div>
+    <p>The <strong>Reynolds Transport Theorem (RTT)</strong> is the bridge between the two viewpoints. It rewrites the rate of change of <em>any</em> system property as something we can evaluate entirely on a fixed control volume. Once we have it, we get continuity, the momentum equation, and the energy equation just by choosing which property to track.</p>
+  </div>
+
+  <!-- ════════ SYSTEM vs CV ════════ -->
+  <h2 style="color:var(--ch5-title)">System vs. Control Volume</h2>
+
+  <div class="card-bracket def-card">
+    <div class="eq-name" style="color:var(--def)">Two Ways to Define Your &ldquo;Stuff&rdquo;</div>
+    <p>&bull; A <strong>system</strong> (closed system) is a collection of matter with a <strong>fixed set of atoms</strong>. Mass is constant; the boundary moves and deforms with the fluid. Equations apply to individual masses and quantities are exact.</p>
+    <p>&bull; A <strong>control volume</strong> (open system) is a <strong>selected region in space</strong> that fluid may flow into and out of. It can be fixed, move, or deform. Equations apply to a region and quantities are averaged over it. The CV is enclosed by a <strong>control surface (CS)</strong> &mdash; part real wall (pipe, nozzle), part imaginary (an inlet/outlet plane).</p>
+  </div>
+
+  <p>The classic mental image is a deodorant can. Treat the can <em>plus the spray it ejects</em> as a system (fixed mass, but it spreads everywhere &mdash; awkward to track). Or draw the CV as just the can itself: mass leaves through the nozzle, and we only track what crosses that surface. The CV is far more practical.</p>
+
+  <p>Control volumes come in three flavours, chosen to suit the problem:</p>
+
+  <div class="card-bracket def-card" style="display:flex;gap:24px;flex-wrap:wrap;">
+    <div style="flex:1;min-width:170px;">
+      <div class="eq-name" style="color:var(--def)">Fixed CV</div>
+      <p style="font-size:13px;">Locked in space. Use for nozzle/duct stress, pipe junctions. <em>(e.g. nozzle reaction force)</em></p>
+    </div>
+    <div style="flex:1;min-width:170px;">
+      <div class="eq-name" style="color:var(--def)">Moving CV</div>
+      <p style="font-size:13px;">Travels at constant velocity \(\vec V_s\). Use for drag on a moving vehicle. <em>(e.g. ship/aircraft drag)</em></p>
+    </div>
+    <div style="flex:1;min-width:170px;">
+      <div class="eq-name" style="color:var(--def)">Deforming CV</div>
+      <p style="font-size:13px;">Boundary changes shape/size. Use for transient filling/emptying. <em>(e.g. inflating balloon)</em></p>
+    </div>
+  </div>
+
+  <!-- ════════ EXTENSIVE vs INTENSIVE ════════ -->
+  <h2 style="color:var(--ch5-title)">Recall: Extensive (B) vs. Intensive (&beta;) Properties</h2>
+
+  <p>To write one master equation that works for mass, momentum, <em>and</em> energy, we need generic symbols. Recall from <strong>&sect;1.2</strong> the distinction between extensive and intensive properties:</p>
+
+  <div class="card-bracket eq-card">
+    <div class="eq-name" style="color:var(--eq)">Generic Property and Its Per-Unit-Mass Value</div>
+    <div style="overflow-x:auto">\[ \beta = \frac{dB}{dm} \qquad\Longleftrightarrow\qquad B = \int_{\text{sys}} \beta\,\rho\,d\forall \]</div>
+    <div class="pill-row">
+      <span class="pill">\(B\) &mdash; any <em>extensive</em> property (scales with mass): total mass, momentum, or energy</span>
+      <span class="pill">\(\beta = dB/dm\) &mdash; the matching <em>intensive</em> property (the amount of \(B\) per unit mass)</span>
+      <span class="pill">\(\rho\) &mdash; fluid density [kg/m³]</span>
+      <span class="pill">\(d\forall\) &mdash; differential volume element [m³]</span>
+    </div>
+  </div>
+
+  <p>The whole power of the RTT is that we derive it once for the generic pair \((B,\beta)\), then simply plug in:</p>
+
+  <table class="qr-table" style="width:100%;border-collapse:collapse;font-size:13.5px;margin:14px 0;">
+    <thead><tr>
+      <th style="text-align:left;padding:6px 10px;border-bottom:2px solid var(--border);color:var(--muted);">Conservation law</th>
+      <th style="text-align:left;padding:6px 10px;border-bottom:2px solid var(--border);color:var(--muted);">Extensive \(B\)</th>
+      <th style="text-align:left;padding:6px 10px;border-bottom:2px solid var(--border);color:var(--muted);">Intensive \(\beta = dB/dm\)</th>
+    </tr></thead>
+    <tbody>
+      <tr><td style="padding:6px 10px;border-bottom:1px solid var(--border);"><strong>Mass</strong> (this lecture)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(m\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\beta = m/m = 1\)</td></tr>
+      <tr><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Linear momentum</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(m\vec V\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\beta = \vec V\)</td></tr>
+      <tr><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Energy</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(E\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\beta = e = E/m\)</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ════════ FLUX THROUGH A SURFACE ════════ -->
+  <h2 style="color:var(--ch5-title)">Recall: Flow Rate &amp; Flux Through a Surface</h2>
+
+  <p>Before deriving the theorem we need to count how much fluid crosses a surface per second. Consider a small patch of area \(dA\) with an outward <strong>unit normal</strong> \(\hat n\), through which fluid moves at velocity \(\vec V\). In a time \(dt\) the fluid sweeps out a slanted slab. Only the velocity component <em>along the normal</em> moves fluid across the patch:</p>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;width:100%;height:auto;">
+      <defs>
+        <marker id="ah-blue" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 Z" fill="#1565C0"/></marker>
+        <marker id="ah-green" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 Z" fill="#2E7D32"/></marker>
+      </defs>
+      <!-- swept slab -->
+      <polygon points="200,200 300,200 380,130 280,130" fill="rgba(21,101,192,.08)" stroke="#1565C0" stroke-width="1" stroke-dasharray="4 3"/>
+      <!-- patch dA (edge-on) -->
+      <line x1="200" y1="200" x2="300" y2="200" stroke="#2E7D32" stroke-width="5"/>
+      <!-- normal n -->
+      <line x1="250" y1="200" x2="250" y2="120" stroke="#2E7D32" stroke-width="2.5" marker-end="url(#ah-green)"/>
+      <!-- velocity V -->
+      <line x1="250" y1="200" x2="332" y2="128" stroke="#1565C0" stroke-width="2.5" marker-end="url(#ah-blue)"/>
+      <!-- angle arc -->
+      <path d="M 250,165 A 35 35 0 0 1 277,178" fill="none" stroke="#7A8FA6" stroke-width="1.5"/>
+      <!-- labels -->
+      <text x="250" y="224" font-size="15" fill="#1A2A3A" text-anchor="middle" font-style="italic">dA</text>
+      <text x="241" y="112" font-size="16" fill="#2E7D32" text-anchor="end" font-weight="600">n&#770;</text>
+      <text x="344" y="124" font-size="16" fill="#1565C0" font-weight="600">V</text>
+      <text x="285" y="150" font-size="15" fill="#7A8FA6">&theta;</text>
+      <text x="350" y="170" font-size="13.5" fill="#6A7A8A" font-style="italic">V&middot;dt</text>
+    </svg>
+    <div class="figure-caption">Figure 5.1.1 &mdash; Fluid crossing an area patch \(dA\). In time \(dt\) it sweeps the slanted slab of volume \(d\forall = (\vec V\cdot\hat n)\,dA\,dt = V\,dA\cos\theta\,dt\). Only the normal component \(V\cos\theta\) carries fluid across.</div>
+  </div>
+
+  <div class="card-bracket eq-card">
+    <div class="eq-name" style="color:var(--eq)">Volume &amp; Mass Flow Rate Through a Surface</div>
+    <div style="overflow-x:auto">\[ Q = \int_{S} (\vec V\cdot\hat n)\,dA = \int_{S} V_n\,dA \qquad\qquad \dot m = \int_{S} \rho\,(\vec V\cdot\hat n)\,dA \]</div>
+    <div class="pill-row">
+      <span class="pill">\(Q\) &mdash; volume flow rate through the surface [m³/s]</span>
+      <span class="pill">\(\dot m\) &mdash; mass flow rate through the surface [kg/s]</span>
+      <span class="pill">\(V_n = \vec V\cdot\hat n = V\cos\theta\) &mdash; velocity component normal to the surface [m/s]</span>
+      <span class="pill">\(\hat n\) &mdash; outward unit normal of the control surface</span>
+    </div>
+  </div>
+
+  <div class="card-bracket tip-card">
+    <div class="eq-name" style="color:var(--tip)">★ Sign Convention &mdash; Memorize This</div>
+    <p>Because \(\hat n\) always points <strong>out</strong> of the control surface:</p>
+    <p>&bull; \(\vec V\cdot\hat n > 0\) &rarr; fluid leaves &rarr; <strong>outflow</strong> (mass/volume rates are positive)<br>
+    &bull; \(\vec V\cdot\hat n < 0\) &rarr; fluid enters &rarr; <strong>inflow</strong> (rates are negative)<br>
+    &bull; \(\vec V\cdot\hat n = 0\) &rarr; flow is parallel to the surface (a solid wall, where \(\vec V = 0\) anyway).</p>
+  </div>
+
+  <p>For a flow with a non-uniform velocity profile (like the parabolic profile in a pipe), it is convenient to replace the profile with a single <strong>average velocity</strong> \(\bar V\) that carries the same flow rate:</p>
+
+  <div class="card-bracket eq-card">
+    <div class="eq-name" style="color:var(--eq)">Average Velocity &amp; 1-D Flow Rates</div>
+    <div style="overflow-x:auto">\[ \bar V = \frac{1}{A}\int_A u(r)\,dA \qquad\Rightarrow\qquad Q = \bar V A \qquad \dot m = \rho\,\bar V A = \rho Q \]</div>
+    <div class="pill-row">
+      <span class="pill">\(\bar V\) &mdash; cross-sectional average velocity [m/s]</span>
+      <span class="pill">\(u(r)\) &mdash; local (pointwise) velocity across the section [m/s]</span>
+      <span class="pill">\(A\) &mdash; cross-sectional area [m²]</span>
+      <span class="pill">\(\rho\) &mdash; density [kg/m³]</span>
+    </div>
+  </div>
+
+  <!-- ════════ FLOW THROUGH A CONTROL SURFACE ════════ -->
+  <h2 style="color:var(--ch5-title)">Net Flow Through a Control Surface</h2>
+
+  <p>Now wrap a control surface around a piece of pipe. Following the convention, each face gets an <strong>area vector</strong> \(\vec A_i\) (magnitude = area, direction = outward normal). The net rate at which any quantity leaves the CV is simply <em>flow out minus flow in</em>, summed over every face.</p>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;width:100%;height:auto;">
+      <defs>
+        <marker id="ah-red2" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 Z" fill="#D32F2F"/></marker>
+        <marker id="ah-blue2" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 Z" fill="#1565C0"/></marker>
+        <marker id="ah-grn2" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 Z" fill="#2E7D32"/></marker>
+      </defs>
+      <!-- pipe walls -->
+      <rect x="130" y="95" width="340" height="110" fill="rgba(42,107,124,.08)"/>
+      <line x1="60" y1="95" x2="540" y2="95" stroke="#093C5D" stroke-width="3"/>
+      <line x1="60" y1="205" x2="540" y2="205" stroke="#093C5D" stroke-width="3"/>
+      <!-- control surface (dashed) -->
+      <rect x="130" y="95" width="340" height="110" fill="none" stroke="#2A6B7C" stroke-width="2" stroke-dasharray="7 5"/>
+      <!-- inlet area vector A1 (out = left) -->
+      <line x1="130" y1="150" x2="78" y2="150" stroke="#D32F2F" stroke-width="2.5" marker-end="url(#ah-red2)"/>
+      <text x="70" y="143" font-size="15" fill="#D32F2F" text-anchor="end" font-weight="600">A&#8321;</text>
+      <!-- inlet velocity v1 (right, into CV) -->
+      <line x1="150" y1="150" x2="212" y2="150" stroke="#1565C0" stroke-width="2.5" marker-end="url(#ah-blue2)"/>
+      <text x="180" y="139" font-size="15" fill="#1565C0" text-anchor="middle" font-weight="600">v&#8321;</text>
+      <!-- outlet area vector A2 (out = right) -->
+      <line x1="470" y1="150" x2="522" y2="150" stroke="#D32F2F" stroke-width="2.5" marker-end="url(#ah-red2)"/>
+      <text x="530" y="143" font-size="15" fill="#D32F2F" font-weight="600">A&#8322;</text>
+      <!-- outlet velocity v2 (right, out of CV) -->
+      <line x1="408" y1="150" x2="460" y2="150" stroke="#1565C0" stroke-width="2.5" marker-end="url(#ah-blue2)"/>
+      <text x="434" y="139" font-size="15" fill="#1565C0" text-anchor="middle" font-weight="600">v&#8322;</text>
+      <!-- wall area vectors A4 (top, up) A3 (bottom, down) -->
+      <line x1="300" y1="95" x2="300" y2="58" stroke="#D32F2F" stroke-width="2.5" marker-end="url(#ah-red2)"/>
+      <text x="300" y="50" font-size="14" fill="#D32F2F" text-anchor="middle" font-weight="600">A&#8324;</text>
+      <line x1="300" y1="205" x2="300" y2="242" stroke="#D32F2F" stroke-width="2.5" marker-end="url(#ah-red2)"/>
+      <text x="300" y="260" font-size="14" fill="#D32F2F" text-anchor="middle" font-weight="600">A&#8323;</text>
+      <!-- sign labels -->
+      <text x="95" y="180" font-size="12.5" fill="#093C5D" text-anchor="middle">V&middot;n &lt; 0</text>
+      <text x="95" y="194" font-size="12" fill="#6A7A8A" text-anchor="middle" font-style="italic">inflow</text>
+      <text x="505" y="180" font-size="12.5" fill="#093C5D" text-anchor="middle">V&middot;n &gt; 0</text>
+      <text x="505" y="194" font-size="12" fill="#6A7A8A" text-anchor="middle" font-style="italic">outflow</text>
+      <text x="355" y="120" font-size="12.5" fill="#6A7A8A" text-anchor="middle" font-style="italic">wall: v = 0</text>
+      <text x="300" y="285" font-size="13" fill="#2A6B7C" text-anchor="middle">control surface (dashed)</text>
+    </svg>
+    <div class="figure-caption">Figure 5.1.2 &mdash; 1-D flow through a control surface. Area vectors \(\vec A_i\) point <strong>out</strong>. No flow crosses the walls (\(\vec A_3,\vec A_4\)). Inlet: \(\vec V\cdot\hat n &lt; 0\); outlet: \(\vec V\cdot\hat n &gt; 0\).</div>
+  </div>
+
+  <div class="card-bracket drv-card">
+    <div class="eq-name" style="color:var(--deriv)">Building the Net-Outflow Integral</div>
+    <p>Net rate of volume <strong>outflow</strong> = flow out &minus; flow in. With \(\theta_i\) the angle between \(\vec V_i\) and \(\vec A_i\):</p>
+    <div style="overflow-x:auto">\[ Q = v_2 A_2\cos\theta_2 - v_1 A_1\cos\theta_1 = \vec V_2\cdot\vec A_2 - \vec V_1\cdot\vec A_1 \]</div>
+    <p>Generalizing to every face of the control surface, the discrete sum becomes a surface integral:</p>
+    <div style="overflow-x:auto">\[ Q = \sum_{CS}\vec V_i\cdot\vec A_i = \int_{CS}\vec V\cdot d\vec A \]</div>
+    <p>Weighting by density gives the net <strong>mass</strong> outflow, and weighting by \(\beta\) gives the net outflow of <em>any</em> property \(B\):</p>
+    <div style="overflow-x:auto">\[ \dot m = \int_{CS}\rho\,\vec V\cdot d\vec A \qquad\qquad \dot B_{\text{out,net}} = \int_{CS}\beta\,\rho\,\vec V\cdot d\vec A \]</div>
+  </div>
+
+  <!-- ════════ DERIVATION OF RTT ════════ -->
+  <h2 style="color:var(--ch5-title)">Derivation of the Reynolds Transport Theorem</h2>
+
+  <p>Here is the key construction. Take a <strong>fixed</strong> control volume and let a <strong>moving</strong> system coincide with it at time \(t\). An instant \(dt\) later, the system has drifted downstream: it has vacated a sliver at the back of the CV (where new fluid enters, \(\Delta M_{IN}\)) and pushed a sliver out the front (where fluid leaves, \(\Delta M_{OUT}\)).</p>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" style="max-width:680px;width:100%;height:auto;">
+      <defs>
+        <marker id="ah-flow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#1565C0"/></marker>
+      </defs>
+
+      <!-- ░░ PANEL A: t = 0 ░░ -->
+      <line x1="30" y1="95" x2="330" y2="95" stroke="#093C5D" stroke-width="3"/>
+      <line x1="30" y1="255" x2="330" y2="255" stroke="#093C5D" stroke-width="3"/>
+      <!-- CV = system (one box) -->
+      <rect x="110" y="110" width="150" height="130" fill="rgba(255,107,53,.10)" stroke="#2A6B7C" stroke-width="2" stroke-dasharray="7 5"/>
+      <rect x="110" y="110" width="150" height="130" fill="none" stroke="#FF6B35" stroke-width="2"/>
+      <!-- flow arrow -->
+      <line x1="55" y1="175" x2="100" y2="175" stroke="#1565C0" stroke-width="2.5" marker-end="url(#ah-flow)"/>
+      <text x="185" y="180" font-size="13" fill="#1A2A3A" text-anchor="middle">System &equiv; CV</text>
+      <text x="180" y="300" font-size="13.5" fill="#6A7A8A" text-anchor="middle" font-style="italic">t = 0</text>
+      <text x="180" y="318" font-size="12" fill="#6A7A8A" text-anchor="middle">CS = system boundary</text>
+
+      <!-- divider -->
+      <line x1="362" y1="40" x2="362" y2="330" stroke="#E2DDD4" stroke-width="1.5" stroke-dasharray="3 4"/>
+
+      <!-- ░░ PANEL B: t = Δt ░░ -->
+      <line x1="392" y1="95" x2="700" y2="95" stroke="#093C5D" stroke-width="3"/>
+      <line x1="392" y1="255" x2="700" y2="255" stroke="#093C5D" stroke-width="3"/>
+      <!-- ΔM_in sliver (left, inside CV, system vacated) -->
+      <rect x="470" y="110" width="40" height="130" fill="rgba(244,162,97,.30)" stroke="none"/>
+      <!-- ΔM_out sliver (right, outside CV, system entered) -->
+      <rect x="610" y="110" width="40" height="130" fill="rgba(26,170,150,.28)" stroke="none"/>
+      <!-- fixed CV (dashed) -->
+      <rect x="470" y="110" width="140" height="130" fill="none" stroke="#2A6B7C" stroke-width="2" stroke-dasharray="7 5"/>
+      <!-- shifted system (solid orange) -->
+      <rect x="510" y="110" width="140" height="130" fill="none" stroke="#FF6B35" stroke-width="2"/>
+      <!-- flow arrow -->
+      <line x1="417" y1="175" x2="462" y2="175" stroke="#1565C0" stroke-width="2.5" marker-end="url(#ah-flow)"/>
+      <!-- leaders + labels for slivers -->
+      <line x1="490" y1="240" x2="455" y2="295" stroke="#6A7A8A" stroke-width="1"/>
+      <text x="450" y="310" font-size="13" fill="#093C5D" text-anchor="middle" font-weight="600">&Delta;M&#8336;&#8345;</text>
+      <line x1="630" y1="240" x2="665" y2="295" stroke="#6A7A8A" stroke-width="1"/>
+      <text x="672" y="310" font-size="13" fill="#1AAA96" text-anchor="middle" font-weight="600">&Delta;M&#8338;&#8348;&#8348;</text>
+      <!-- box labels -->
+      <text x="500" y="78" font-size="12.5" fill="#2A6B7C" text-anchor="middle">CV (fixed)</text>
+      <text x="618" y="78" font-size="12.5" fill="#FF6B35" text-anchor="middle">System (t+&Delta;t)</text>
+      <text x="546" y="330" font-size="13.5" fill="#6A7A8A" text-anchor="middle" font-style="italic">t = &Delta;t &mdash; system has shifted</text>
+    </svg>
+    <div class="figure-caption">Figure 5.1.3 &mdash; A fixed control volume (teal dashed) and a moving system (orange). At \(t=0\) they coincide. At \(t=\Delta t\) the system has shifted: it leaves \(\Delta M_{IN}\) behind (new fluid entering the CV) and pushes \(\Delta M_{OUT}\) out the front.</div>
+  </div>
+
+  <div class="card-bracket drv-card">
+    <div class="eq-name" style="color:var(--deriv)">Step-by-Step Derivation</div>
+    <p><strong>Step 1 &mdash; rate of change of a system property</strong> is, by definition, the limit of its change over \(\Delta t\):</p>
+    <div style="overflow-x:auto">\[ \frac{dB_{\text{sys}}}{dt} = \lim_{\Delta t\to 0}\frac{B_{t+\Delta t} - B_{t}}{\Delta t} \]</div>
+
+    <p><strong>Step 2 &mdash; relate system content to CV content.</strong> At \(t\) the system fills the CV exactly:</p>
+    <div style="overflow-x:auto">\[ B_{t} = B_{CV,\,t} \]</div>
+    <p>At \(t+\Delta t\) the system equals the CV content, minus the inflow sliver it has not yet reoccupied, plus the outflow sliver it now occupies outside the CV:</p>
+    <div style="overflow-x:auto">\[ B_{t+\Delta t} = B_{CV,\,t+\Delta t} - \Delta B_{IN} + \Delta B_{OUT} \]</div>
+
+    <p><strong>Step 3 &mdash; substitute and split the limit:</strong></p>
+    <div style="overflow-x:auto">\[ \frac{dB_{\text{sys}}}{dt} = \lim_{\Delta t\to 0}\frac{B_{CV,\,t+\Delta t} - B_{CV,\,t}}{\Delta t} \;+\; \lim_{\Delta t\to 0}\frac{\Delta B_{OUT} - \Delta B_{IN}}{\Delta t} \]</div>
+
+    <p><strong>Step 4 &mdash; identify each limit physically.</strong> The first is the rate of change of \(B\) <em>stored inside</em> the CV; the second is the <em>net rate \(B\) flows out</em> across the control surface (the integral we built in Figure 5.1.2):</p>
+    <div style="overflow-x:auto">\[ \frac{dB_{\text{sys}}}{dt} = \underbrace{\frac{d}{dt}\!\int_{CV}\beta\,\rho\,d\forall}_{\text{rate stored in CV}} \;+\; \underbrace{\int_{CS}\beta\,\rho\,\vec V\cdot d\vec A}_{\text{net rate out through CS}} \]</div>
+  </div>
+
+  <div class="card-bracket eq-card">
+    <div class="eq-name" style="color:var(--eq)">Reynolds Transport Theorem (fixed CV)</div>
+    <div style="overflow-x:auto">\[ \boxed{\;\frac{dB_{\text{sys}}}{dt} = \frac{d}{dt}\int_{CV}\beta\,\rho\,d\forall \;+\; \int_{CS}\beta\,\rho\,(\vec V\cdot\hat n)\,dA\;} \]</div>
+    <div class="pill-row">
+      <span class="pill">\(dB_{\text{sys}}/dt\) &mdash; rate of change of the property for the <em>moving system</em> (what the physical law gives us)</span>
+      <span class="pill">\(\dfrac{d}{dt}\!\int_{CV}\beta\rho\,d\forall\) &mdash; rate the property <em>accumulates inside</em> the fixed CV</span>
+      <span class="pill">\(\int_{CS}\beta\rho(\vec V\cdot\hat n)\,dA\) &mdash; <em>net flux</em> of the property out through the control surface</span>
+      <span class="pill">\(\beta = dB/dm\) &mdash; intensive property; \(\rho\) &mdash; density; \(\hat n\) &mdash; outward normal</span>
+    </div>
+  </div>
+
+  <div class="card-bracket tip-card">
+    <div class="eq-name" style="color:var(--tip)">★ Read It In Words</div>
+    <p><strong>System change = what builds up inside the CV + what escapes through its surface.</strong> The left side is Lagrangian (a law we know); the entire right side is Eulerian (things we can measure at a fixed location). The changes of a moving system are now expressed <em>solely</em> in terms of a stationary control volume.</p>
+  </div>
+
+  <!-- ════════ STEADY FLOW ════════ -->
+  <h2 style="color:var(--ch5-title)">Steady-Flow Simplification</h2>
+
+  <p>For <strong>steady flow</strong> with a CV of fixed geometry, nothing inside the CV changes with time, so the storage term vanishes \(\left(\dfrac{d}{dt}\!\int_{CV}\beta\rho\,d\forall = 0\right)\) and the RTT collapses to a pure surface integral:</p>
+
+  <div class="card-bracket eq-card">
+    <div class="eq-name" style="color:var(--eq)">RTT &mdash; Steady Flow</div>
+    <div style="overflow-x:auto">\[ \frac{dB_{\text{sys}}}{dt} = \int_{CS}\beta\,\rho\,(\vec V\cdot\hat n)\,dA \qquad\text{(steady, fixed geometry)} \]</div>
+  </div>
+
+  <!-- ════════ CONTINUITY ════════ -->
+  <h2 style="color:var(--ch5-title)">Conservation of Mass: The Continuity Equation</h2>
+
+  <p>Now choose the property. <strong>Mass conservation</strong> says the mass of a system is constant, so \(B = m\) and the left side is zero. The intensive value is \(\beta = m/m = 1\). Substituting into the RTT gives the master continuity equation:</p>
+
+  <div class="card-bracket drv-card">
+    <div class="eq-name" style="color:var(--deriv)">From RTT to Continuity</div>
+    <p>Set \(B = m\Rightarrow\beta = 1\), and use \(\dfrac{dm_{\text{sys}}}{dt} = 0\):</p>
+    <div style="overflow-x:auto">\[ 0 = \frac{dm_{\text{sys}}}{dt} = \frac{d}{dt}\int_{CV}\rho\,d\forall + \int_{CS}\rho\,(\vec V\cdot\hat n)\,dA \]</div>
+    <p>Rearranging shows the physical balance directly &mdash; the net mass flowing out equals the rate the CV is losing mass:</p>
+    <div style="overflow-x:auto">\[ \underbrace{\int_{CS}\rho\,(\vec V\cdot\hat n)\,dA}_{\text{net mass outflow}} = \underbrace{-\frac{d}{dt}\int_{CV}\rho\,d\forall}_{\text{rate of mass decrease in CV}} \]</div>
+  </div>
+
+  <div class="card-bracket eq-card">
+    <div class="eq-name" style="color:var(--eq)">Continuity Equation (general, deforming CV)</div>
+    <div style="overflow-x:auto">\[ \boxed{\;\frac{d}{dt}\int_{CV}\rho\,d\forall + \int_{CS}\rho\,(\vec V\cdot\hat n)\,dA = 0\;} \]</div>
+    <div class="pill-row">
+      <span class="pill">\(\dfrac{d}{dt}\!\int_{CV}\rho\,d\forall\) &mdash; rate of change of mass stored in the CV (local mass change)</span>
+      <span class="pill">\(\int_{CS}\rho(\vec V\cdot\hat n)\,dA\) &mdash; net convective mass flow out of the CS</span>
+      <span class="pill">\(\rho\) &mdash; density [kg/m³]; \(d\forall\) &mdash; volume element [m³]; \(dA\) &mdash; area element [m²]</span>
+    </div>
+  </div>
+
+  <p>The general equation specializes through a ladder of assumptions. Each one knocks out a term or a factor:</p>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;width:100%;height:auto;">
+      <defs>
+        <marker id="ah-bl3" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 Z" fill="#1565C0"/></marker>
+        <marker id="ah-gr3" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 Z" fill="#2E7D32"/></marker>
+      </defs>
+      <!-- main duct -->
+      <rect x="60" y="135" width="210" height="70" fill="rgba(42,107,124,.08)"/>
+      <!-- upper branch (rotated rect via polygon) -->
+      <polygon points="255,135 480,55 510,95 285,175" fill="rgba(42,107,124,.08)"/>
+      <!-- lower branch -->
+      <polygon points="285,165 510,245 480,285 255,205" fill="rgba(42,107,124,.08)"/>
+      <!-- control surface outline -->
+      <polygon points="60,135 255,135 480,55 510,95 305,170 510,245 480,285 285,175 270,205 60,205"
+               fill="none" stroke="#2A6B7C" stroke-width="2" stroke-dasharray="7 5"/>
+      <!-- inlet A: velocity in, normal out(left) -->
+      <line x1="90" y1="170" x2="150" y2="170" stroke="#1565C0" stroke-width="2.5" marker-end="url(#ah-bl3)"/>
+      <line x1="60" y1="170" x2="28" y2="170" stroke="#2E7D32" stroke-width="2.5" marker-end="url(#ah-gr3)"/>
+      <text x="115" y="159" font-size="13" fill="#1565C0" font-weight="600" text-anchor="middle">V</text>
+      <text x="44" y="160" font-size="13" fill="#2E7D32" font-weight="600">n&#770;</text>
+      <text x="120" y="195" font-size="13" fill="#1A2A3A" text-anchor="middle">A (in)</text>
+      <text x="120" y="225" font-size="12" fill="#6A7A8A" text-anchor="middle" font-style="italic">V&middot;n &lt; 0</text>
+      <!-- upper outlet B -->
+      <line x1="430" y1="85" x2="486" y2="65" stroke="#1565C0" stroke-width="2.5" marker-end="url(#ah-bl3)"/>
+      <line x1="500" y1="78" x2="540" y2="64" stroke="#2E7D32" stroke-width="2.5" marker-end="url(#ah-gr3)"/>
+      <text x="455" y="58" font-size="13" fill="#1565C0" font-weight="600">V</text>
+      <text x="548" y="58" font-size="13" fill="#2E7D32" font-weight="600">n&#770;</text>
+      <text x="500" y="108" font-size="13" fill="#1A2A3A">B (out)</text>
+      <text x="512" y="124" font-size="12" fill="#6A7A8A" font-style="italic">V&middot;n &gt; 0</text>
+      <!-- lower outlet C -->
+      <line x1="430" y1="255" x2="486" y2="275" stroke="#1565C0" stroke-width="2.5" marker-end="url(#ah-bl3)"/>
+      <line x1="500" y1="262" x2="540" y2="276" stroke="#2E7D32" stroke-width="2.5" marker-end="url(#ah-gr3)"/>
+      <text x="455" y="248" font-size="13" fill="#1565C0" font-weight="600">V</text>
+      <text x="548" y="284" font-size="13" fill="#2E7D32" font-weight="600">n&#770;</text>
+      <text x="500" y="240" font-size="13" fill="#1A2A3A">C (out)</text>
+      <text x="512" y="224" font-size="12" fill="#6A7A8A" font-style="italic">V&middot;n &gt; 0</text>
+      <!-- CS label -->
+      <text x="210" y="300" font-size="12.5" fill="#2A6B7C" text-anchor="middle">control surface</text>
+    </svg>
+    <div class="figure-caption">Figure 5.1.4 &mdash; A branching duct: one inlet \(A\), two outlets \(B,C\). For steady flow, \(\sum\dot m_{\text{out}} = \sum\dot m_{\text{in}}\): whatever enters at \(A\) must leave through \(B\) and \(C\) combined.</div>
+  </div>
+
+  <div class="card-bracket eq-card">
+    <div class="eq-name" style="color:var(--eq)">Continuity &mdash; The Practical Forms</div>
+    <p><strong>Steady flow</strong> (storage term = 0): mass in = mass out.</p>
+    <div style="overflow-x:auto">\[ \int_{CS}\rho\,(\vec V\cdot\hat n)\,dA = \sum\dot m_{\text{out}} - \sum\dot m_{\text{in}} = 0 \]</div>
+    <p><strong>Steady &amp; uniform (1-D)</strong> &mdash; one average velocity per port:</p>
+    <div style="overflow-x:auto">\[ \sum (\rho A V)_{\text{out}} - \sum (\rho A V)_{\text{in}} = 0 \]</div>
+    <p><strong>Incompressible, steady &amp; uniform</strong> &mdash; \(\rho\) cancels, so volume flow is conserved:</p>
+    <div style="overflow-x:auto">\[ \sum (A V)_{\text{out}} = \sum (A V)_{\text{in}} \qquad\Longleftrightarrow\qquad \sum Q_{\text{out}} = \sum Q_{\text{in}} \]</div>
+    <div class="pill-row">
+      <span class="pill">\(\dot m = \rho A V\) &mdash; mass flow per port [kg/s]</span>
+      <span class="pill">\(Q = A V\) &mdash; volume flow per port [m³/s]</span>
+      <span class="pill">\(A\) &mdash; port area; \(V\) &mdash; average normal velocity at the port</span>
+    </div>
+  </div>
+
+  <!-- ════════ MOVING CV ════════ -->
+  <h2 style="color:var(--ch5-title)">Control Volume Moving at Constant Velocity</h2>
+
+  <p>If the control volume itself moves at a steady velocity \(\vec V_s\) (a CV riding along with a vehicle, say), the only change is that fluid crosses the control surface at its <strong>velocity relative to the CV</strong>, not its absolute velocity:</p>
+
+  <div class="card-bracket eq-card">
+    <div class="eq-name" style="color:var(--eq)">RTT &mdash; CV Moving at Constant Velocity</div>
+    <div style="overflow-x:auto">\[ \frac{d}{dt}B_{\text{sys}} = \frac{d}{dt}\int_{CV}\beta\,\rho\,d\forall + \int_{CS}\beta\,\rho\,(\vec V_r\cdot\hat n)\,dA, \qquad \vec V_r = \vec V - \vec V_s \]</div>
+    <div class="pill-row">
+      <span class="pill">\(\vec V_r\) &mdash; velocity of fluid <em>relative</em> to the control surface [m/s]</span>
+      <span class="pill">\(\vec V\) &mdash; absolute fluid velocity (ground frame) [m/s]</span>
+      <span class="pill">\(\vec V_s\) &mdash; absolute velocity of the control volume [m/s]</span>
+    </div>
+  </div>
+
+  <div class="card-bracket tip-card">
+    <div class="eq-name" style="color:var(--tip)">★ Recall: Material Derivative</div>
+    <p>The split into a <strong>storage</strong> term and a <strong>flux</strong> term mirrors the material derivative from kinematics: \(\dfrac{D}{Dt} = \dfrac{\partial}{\partial t} + \vec V\cdot\nabla\) (local rate of change + advective transport). In the RTT the local part lives in the CV integral and the advective part lives in the CS integral.</p>
+  </div>
+
+  <!-- ════════ WORKED EXAMPLES ════════ -->
+  <h2 style="color:var(--ch5-title)">Worked Examples</h2>
+
+  <!-- ── Example 1: Reservoir ── -->
+  <div class="card-bracket ex-card">
+    <div class="eq-name" style="color:var(--example)">Example 5.1 &mdash; Rise Rate of a Reservoir (unsteady mass balance)</div>
+    <p><strong>Problem:</strong> A river discharges into a reservoir at \(Q_1 = 11{,}320\ \text{m}^3/\text{s}\). The outflow through the flow passages in the dam is \(Q_2 = 7{,}079.2\ \text{m}^3/\text{s}\). The free-surface area of the reservoir is \(A_3 = 110\ \text{km}^2\). How fast is the water level rising?</p>
+
+    <div class="figure-box">
+      <svg viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;width:100%;height:auto;">
+        <defs>
+          <marker id="ah-q" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#C2185B"/></marker>
+          <marker id="ah-rv" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto"><path d="M0,0 L8,3.5 L0,7 Z" fill="#D32F2F"/></marker>
+        </defs>
+        <!-- water body -->
+        <path d="M 40,150 L 560,150 L 560,250 L 120,250 C 90,230 70,190 40,170 Z" fill="rgba(21,101,192,.16)"/>
+        <!-- terrain (brown) -->
+        <path d="M 40,170 C 70,190 90,230 120,250 L 560,250 L 560,300 L 40,300 Z" fill="rgba(150,110,60,.30)"/>
+        <!-- free surface line -->
+        <line x1="40" y1="150" x2="560" y2="150" stroke="#1565C0" stroke-width="2"/>
+        <!-- dam -->
+        <polygon points="500,150 530,150 545,255 500,255" fill="#6A7A8A"/>
+        <text x="520" y="142" font-size="13" fill="#1A2A3A" text-anchor="middle">dam</text>
+        <!-- control surface (dashed) around reservoir -->
+        <path d="M 60,150 L 500,150 L 500,250 L 120,250 C 95,232 78,196 60,178 Z" fill="none" stroke="#2A6B7C" stroke-width="2" stroke-dasharray="7 5"/>
+        <!-- Q1 river in (left, into reservoir) -->
+        <line x1="20" y1="135" x2="100" y2="135" stroke="#C2185B" stroke-width="3" marker-end="url(#ah-q)"/>
+        <text x="120" y="130" font-size="14" fill="#C2185B" font-weight="600">Q&#8321; (river in)</text>
+        <line x1="60" y1="150" x2="24" y2="150" stroke="#D32F2F" stroke-width="2.5" marker-end="url(#ah-rv)"/>
+        <text x="20" y="166" font-size="12.5" fill="#D32F2F" text-anchor="end" font-weight="600">A&#8321;</text>
+        <!-- Q3 surface rise (up) -->
+        <line x1="300" y1="150" x2="300" y2="95" stroke="#C2185B" stroke-width="3" marker-end="url(#ah-q)"/>
+        <text x="300" y="84" font-size="14" fill="#C2185B" font-weight="600" text-anchor="middle">Q&#8323; = v&#8323;&middot;A&#8323; &uarr; surface rises</text>
+        <!-- Q2 dam out (right) -->
+        <line x1="500" y1="220" x2="575" y2="220" stroke="#C2185B" stroke-width="3" marker-end="url(#ah-q)"/>
+        <text x="560" y="245" font-size="14" fill="#C2185B" font-weight="600" text-anchor="end">Q&#8322; (dam out)</text>
+        <text x="300" y="205" font-size="14" fill="#1565C0" text-anchor="middle" font-style="italic">reservoir</text>
+      </svg>
+      <div class="figure-caption">Figure 5.1.5 &mdash; Reservoir control volume. Inflow \(Q_1\) (river) and outflow \(Q_2\) (dam) are unequal, so the free surface rises at \(v_3\) over area \(A_3\).</div>
+    </div>
+
+    <details><summary style="color:var(--example);cursor:pointer;font-weight:600">Show Solution</summary>
+    <div style="margin-top:10px">
+
+      <div class="thought-block">
+        <div class="thought-header"><i class="ti ti-brain" aria-hidden="true"></i> Thought process</div>
+        <div class="thought-body">
+          <p>Inflow doesn&rsquo;t equal outflow, so mass is accumulating &mdash; this is an <strong>unsteady</strong> continuity problem. The accumulation shows up as a rising free surface.</p>
+          <p>Water is incompressible, so I track <em>volume</em>. The slides treat the rising surface as a third &ldquo;outflow&rdquo; \(Q_3 = v_3 A_3\) through the top of a fixed CV; the balance \(Q_3 + Q_2 - Q_1 = 0\) then gives \(v_3\). (Equivalently, \(A_3\,dh/dt = Q_1 - Q_2\) &mdash; same result.)</p>
+        </div>
+      </div>
+
+      <p><strong>Formulas needed:</strong> incompressible continuity \(\sum Q_{\text{out}} = \sum Q_{\text{in}}\), surface flux \(Q_3 = v_3 A_3\).</p>
+
+      <p><strong>Given:</strong> \(Q_1 = 11{,}320\ \text{m}^3/\text{s}\), \(\;Q_2 = 7{,}079.2\ \text{m}^3/\text{s}\), \(\;A_3 = 110\ \text{km}^2\). \(A_1\) and \(A_2\) are unknown but not needed.</p>
+
+      <p><strong>Step 1 &mdash; write the incompressible continuity balance</strong> on the reservoir CV. With the rising surface as outflow \(Q_3\):</p>
+      \[ v_3 A_3 + \underbrace{v_2 A_2}_{Q_2} - \underbrace{v_1 A_1}_{Q_1} = 0 \;\;\Rightarrow\;\; v_3 A_3 = Q_1 - Q_2 \]
+
+      <p><strong>Step 2 &mdash; solve for the surface velocity:</strong></p>
+      \[ v_3 = \frac{Q_1 - Q_2}{A_3} = \frac{11{,}320 - 7{,}079.2}{A_3} = \frac{4{,}240.8\ \text{m}^3/\text{s}}{A_3} \]
+
+      <p><strong>Step 3 &mdash; convert the area to SI</strong> before dividing (this is where unit slips happen):</p>
+      \[ A_3 = 110\ \text{km}^2 = 110\times 10^{6}\ \text{m}^2 = 1.10\times 10^{8}\ \text{m}^2 \]
+      \[ v_3 = \frac{4{,}240.8}{1.10\times 10^{8}} = 3.86\times 10^{-5}\ \text{m/s} \]
+
+      <p><strong>Step 4 &mdash; express in convenient units</strong> (m/s is tiny &mdash; report cm/hr):</p>
+      \[ v_3 = 3.86\times 10^{-5}\,\tfrac{\text{m}}{\text{s}}\times 100\,\tfrac{\text{cm}}{\text{m}}\times 3600\,\tfrac{\text{s}}{\text{hr}} = \boxed{13.9\ \text{cm/hr}} \]
+
+      <p>The reservoir surface rises about 14 cm every hour &mdash; slow, but over a day that is more than 3 m.</p>
+    </div></details>
+  </div>
+
+  <!-- ── Example 2: Engine ── -->
+  <div class="card-bracket ex-card">
+    <div class="eq-name" style="color:var(--example)">Example 5.2 &mdash; Jet-Engine Exit Velocity (steady, compressible)</div>
+    <p><strong>Problem:</strong> During an engine test, air enters at \(\dot m = 40\ \text{kg/s}\) and is discharged at an absolute pressure of \(750\ \text{kPa}\) and temperature \(120^{\circ}\text{C}\). The exit diameter is \(0.3\ \text{m}\). Determine the exit velocity. Treat the exhaust as an ideal gas with \(R = 286.9\ \text{J/(kg}\!\cdot\!\text{K)}\).</p>
+
+    <div class="figure-box">
+      <svg viewBox="0 0 560 240" xmlns="http://www.w3.org/2000/svg" style="max-width:520px;width:100%;height:auto;">
+        <defs>
+          <marker id="ah-in" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#1565C0"/></marker>
+          <marker id="ah-out" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" fill="#D32F2F"/></marker>
+        </defs>
+        <!-- engine body -->
+        <path d="M 150,80 L 380,80 L 430,95 L 430,145 L 380,160 L 150,160 L 130,120 Z" fill="rgba(106,122,134,.25)" stroke="#6A7A8A" stroke-width="2"/>
+        <!-- control surface -->
+        <rect x="120" y="72" width="320" height="96" fill="none" stroke="#2A6B7C" stroke-width="2" stroke-dasharray="7 5"/>
+        <!-- inlet arrow -->
+        <line x1="55" y1="120" x2="125" y2="120" stroke="#1565C0" stroke-width="3" marker-end="url(#ah-in)"/>
+        <text x="90" y="108" font-size="13.5" fill="#1565C0" text-anchor="middle" font-weight="600">air in</text>
+        <text x="90" y="148" font-size="13" fill="#1A2A3A" text-anchor="middle">m&#775; = 40 kg/s</text>
+        <!-- exit arrow -->
+        <line x1="432" y1="120" x2="510" y2="120" stroke="#D32F2F" stroke-width="3" marker-end="url(#ah-out)"/>
+        <text x="478" y="108" font-size="13.5" fill="#D32F2F" text-anchor="middle" font-weight="600">v = ?</text>
+        <!-- exit conditions -->
+        <text x="290" y="195" font-size="12.5" fill="#6A7A8A" text-anchor="middle" font-style="italic">exit: P = 750 kPa,  T = 120&deg;C,  D = 0.3 m</text>
+        <text x="270" y="125" font-size="13" fill="#1A2A3A" text-anchor="middle">engine (control volume)</text>
+      </svg>
+      <div class="figure-caption">Figure 5.1.6 &mdash; Steady flow through the engine: one inlet, one exit. Mass in = mass out, so \(\dot m = \rho_{\text{exit}}A_{\text{exit}}v_{\text{exit}}\).</div>
+    </div>
+
+    <details><summary style="color:var(--example);cursor:pointer;font-weight:600">Show Solution</summary>
+    <div style="margin-top:10px">
+
+      <div class="thought-block">
+        <div class="thought-header"><i class="ti ti-brain" aria-hidden="true"></i> Thought process</div>
+        <div class="thought-body">
+          <p>One inlet, one outlet, nothing accumulating &rarr; <strong>steady</strong> continuity: \(\dot m_{\text{in}} = \dot m_{\text{out}}\). The gas is <em>compressible</em>, so I cannot cancel \(\rho\) &mdash; I need the exit density from the ideal gas law first, then back out velocity from \(\dot m = \rho A V\).</p>
+        </div>
+      </div>
+
+      <p><strong>Formulas needed:</strong> steady continuity \(\dot m_{\text{in}} = \dot m_{\text{out}}\), mass flow \(\dot m = \rho A V\), ideal gas \(\rho = p/(RT)\).</p>
+
+      <p><strong>Step 1 &mdash; exit density from the ideal gas law.</strong> Convert temperature to absolute first:</p>
+      \[ T = 120 + 273 = 393\ \text{K} \]
+      \[ \rho_{\text{exit}} = \frac{p}{RT} = \frac{750{,}000\ \text{Pa}}{(286.9)(393)} = 6.65\ \text{kg/m}^3 \]
+
+      <p><strong>Step 2 &mdash; exit area</strong> from the diameter:</p>
+      \[ A_{\text{exit}} = \frac{\pi D^2}{4} = \frac{\pi (0.3)^2}{4} = 0.0707\ \text{m}^2 \]
+
+      <p><strong>Step 3 &mdash; apply steady continuity</strong> \(\dot m_{\text{in}} = \dot m_{\text{exit}} = \rho_{\text{exit}}A_{\text{exit}}v_{\text{exit}}\) and solve for velocity:</p>
+      \[ v_{\text{exit}} = \frac{\dot m}{\rho_{\text{exit}}A_{\text{exit}}} = \frac{40}{(6.65)(0.0707)} = \boxed{85.1\ \text{m/s}} \]
+
+      <div class="callout callout-warning">
+        <div class="callout-icon"><i class="ti ti-alert-triangle" aria-hidden="true"></i></div>
+        <div class="callout-body">
+          <div class="callout-title">Watch the absolutes</div>
+          <div class="callout-text">The ideal gas law demands <strong>absolute</strong> pressure and <strong>Kelvin</strong>. Plugging in gauge pressure or &deg;C is the #1 error here. Also use the specific gas constant for air (286.9), not the universal \(R_u\).</div>
+        </div>
+      </div>
+    </div></details>
+  </div>
+
+  <!-- ════════ STRATEGY ════════ -->
+  <div class="card-bracket tip-card">
+    <div class="eq-name" style="color:var(--tip)">★ Problem-Solving Strategy &mdash; Continuity</div>
+    <p><strong>Step 1 &mdash; draw the CV</strong> and mark every port with its outward normal \(\hat n\). Label inflows (\(\vec V\cdot\hat n &lt; 0\)) and outflows (\(\vec V\cdot\hat n &gt; 0\)).<br>
+    <strong>Step 2 &mdash; steady or unsteady?</strong> If the CV mass is constant in time, drop the storage term. If something is filling/emptying (a rising tank), keep it.<br>
+    <strong>Step 3 &mdash; compressible or incompressible?</strong> Liquids &rarr; cancel \(\rho\) and conserve volume \(Q\). Gases &rarr; keep \(\rho\), and get each \(\rho\) from the ideal gas law at that port&rsquo;s \(p,T\).<br>
+    <strong>Step 4 &mdash; uniform or profile?</strong> One number per port &rarr; use \(\dot m = \rho A V\). A profile &rarr; integrate \(\int\rho u\,dA\) or use \(\bar V\).<br>
+    <strong>Step 5 &mdash; convert units</strong> (km² &rarr; m², kPa &rarr; Pa, &deg;C &rarr; K) <em>before</em> substituting.</p>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="eq-name" style="color:var(--def)">Lecture Recap</div>
+    <p>&bull; The <strong>RTT</strong> converts a Lagrangian system law into an Eulerian control-volume statement: <em>system change = storage in CV + net flux out of CS</em>.<br>
+    &bull; Choose \((B,\beta)\) to get the law you want; \(B=m,\ \beta=1\) gives <strong>continuity</strong>.<br>
+    &bull; The outward-normal sign convention (\(\vec V\cdot\hat n\): + out, &minus; in) drives every flux term.<br>
+    &bull; Steady flow kills the storage term; incompressibility cancels \(\rho\). Next lecture sets \(\beta = \vec V\) to get the <strong>linear-momentum</strong> equation.</p>
+  </div>
+
+</section>

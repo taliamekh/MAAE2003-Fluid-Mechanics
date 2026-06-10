@@ -467,17 +467,21 @@ strong { font-weight: 600; }
 #formulas .katex .svg-align,
 #formulas .katex .hide-tail,
 #formulas .katex .rule { pointer-events: none; }
+/* Fallback: any KaTeX span with inline color inside #formulas gets pointer cursor.
+   The title attr (set by wireUpVarPopups) gives a native tooltip even if custom popup fails. */
+#formulas .katex-html span[style] { cursor: pointer; }
 .vp-click { cursor: pointer; position: relative; z-index: 2; pointer-events: auto; border-radius: 3px; transition: background .15s; }
 .vp-click:hover { background: rgba(0,0,0,.08); }
 #varpop {
   display: none; position: fixed; z-index: 9999;
   background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
-  padding: 10px 14px; box-shadow: 0 4px 16px rgba(0,0,0,.12);
-  font-family: 'Poppins', sans-serif; font-size: 13px; color: var(--text);
-  max-width: 280px; line-height: 1.5; pointer-events: none;
+  padding: 12px 16px; box-shadow: 0 4px 16px rgba(0,0,0,.12);
+  font-size: 13px; color: var(--text);
+  max-width: 300px; line-height: 1.5; pointer-events: none;
 }
-#varpop .vp-sym { font-size: 18px; margin-bottom: 4px; }
-#varpop .vp-desc { color: var(--muted); }
+/* .vp-sym inherits KaTeX's own font-family and color from the copied innerHTML */
+#varpop .vp-sym { font-size: 24px; margin-bottom: 6px; line-height: 1.2; }
+#varpop .vp-desc { color: var(--muted); font-family: 'Poppins', sans-serif; font-size: 13px; }
 .fs-num { font-size: 11px; font-weight: 500; color: var(--eq); margin-left: 6px; opacity: .8; }
 .fs-search-wrap { position: relative; margin-bottom: 12px; }
 #fs-search {
@@ -604,12 +608,12 @@ strong { font-weight: 600; }
 
   <!-- Ch 3 -->
   <div class="sb-group">
-    <a class="sb-item" onclick="toggleChapter('ch3'); showSection('ch3-lec1')">
+    <a class="sb-item pending" onclick="toggleChapter('ch3'); showSection('ch3-notes')">
       <span class="ch-arrow" id="ch3-arrow">▸</span>Ch 3: Bernoulli's Equation
     </a>
     <div class="sb-subs" id="ch3-subs">
-      <a class="sb-sub" onclick="showSection('ch3-lec1')">3.1 Bernoulli's Equation I</a>
-      <a class="sb-sub" onclick="showSection('ch3-lec2')">3.2 Bernoulli's Equation II</a>
+      <a class="sb-sub pending" onclick="showSection('ch3-notes','ch3-lec1')">3.1 Bernoulli's Equation I</a>
+      <a class="sb-sub pending" onclick="showSection('ch3-notes','ch3-lec2')">3.2 Bernoulli's Equation II</a>
       <a class="sb-sub prob-link pending" onclick="showSection('ch3-prob')">Recommended Problems</a>
     </div>
   </div>
@@ -627,14 +631,14 @@ strong { font-weight: 600; }
 
   <!-- Ch 5 -->
   <div class="sb-group">
-    <a class="sb-item pending" onclick="toggleChapter('ch5'); showSection('ch5-notes')">
+    <a class="sb-item" onclick="toggleChapter('ch5'); showSection('ch5-lec1')">
       <span class="ch-arrow" id="ch5-arrow">▸</span>Ch 5: Reynolds Transport
     </a>
     <div class="sb-subs" id="ch5-subs">
-      <a class="sb-sub pending" onclick="showSection('ch5-notes','ch5-lec1')">5.1 RTT — Mass</a>
-      <a class="sb-sub pending" onclick="showSection('ch5-notes','ch5-lec2')">5.2 RTT — Linear Momentum</a>
-      <a class="sb-sub pending" onclick="showSection('ch5-notes','ch5-lec3')">5.3 RTT — Angular Momentum</a>
-      <a class="sb-sub pending" onclick="showSection('ch5-notes','ch5-lec4')">5.4 RTT — Energy</a>
+      <a class="sb-sub" onclick="showSection('ch5-lec1')">5.1 RTT — Mass</a>
+      <a class="sb-sub pending" onclick="showSection('ch5-lec2')">5.2 RTT — Linear Momentum</a>
+      <a class="sb-sub pending" onclick="showSection('ch5-lec3')">5.3 RTT — Angular Momentum</a>
+      <a class="sb-sub pending" onclick="showSection('ch5-lec4')">5.4 RTT — Energy</a>
       <a class="sb-sub prob-link pending" onclick="showSection('ch5-prob')">Recommended Problems</a>
     </div>
   </div>
