@@ -344,5 +344,58 @@
 
     </div>
 
+    <h2 style="color:var(--ch5-title);">Ch 5 &mdash; Reynolds Transport Theorem</h2>
+    <div class="fs-chapter" data-ch="5">
+
+      <div class="fs-card" data-num="26" data-ch="5" data-name="Linear Momentum Equation (General)" data-vars='{"#E65100|F":"ΣF⃗_ext — vector sum of all external forces on the CV (N)","#1565C0|V":"V⃗ — velocity vector of the fluid (m/s)","#2E7D32|ρ":"ρ — fluid density (kg/m³)","#9C27B0|n":"n̂ — outward unit normal on the control surface"}'>
+        <div class="fs-top"><span class="fs-name">Linear Momentum Equation (General) <span class="fs-num">#26</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \sum \textcolor{#E65100}{\vec{F}_{\text{ext}}} = \frac{\partial}{\partial t}\!\int_{\text{CV}} \textcolor{#1565C0}{\vec{V}}\,\textcolor{#2E7D32}{\rho}\;d\forall \;+\; \int_{\text{CS}} \textcolor{#1565C0}{\vec{V}}\,\textcolor{#2E7D32}{\rho}\,(\textcolor{#1565C0}{\vec{V}}\!\cdot\!\textcolor{#9C27B0}{\hat{n}})\;dA \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">The RTT applied to linear momentum. Left side = external forces. First integral = rate of momentum change stored inside the CV (zero for steady flow). Second integral = net momentum flux through the control surface.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>finding forces on ducts, nozzles, vanes, gates, or any surface interacting with fluid; works for steady or unsteady, uniform or non-uniform flow.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>non-inertial (accelerating) CVs — use the modified form with apparent forces. Also not for angular momentum — that needs the moment-of-momentum equation.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">ΣF⃗ = ∂/∂t ∫ V⃗ρ dV + ∫ V⃗ρ(V⃗·n̂) dA. General form; drop storage term for steady flow.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="27" data-ch="5" data-name="Steady Ideal Flow Momentum" data-vars='{"#E65100|F":"ΣF⃗_ext — sum of all external forces on the CV (N)","#1565C0|V":"V⃗ — velocity vector at each port (m/s)","#2E7D32|ρ":"ρ — fluid density (kg/m³)","#9C27B0|n":"n̂ — outward unit normal","#D32F2F|A":"A — cross-sectional area at each port (m²)"}'>
+        <div class="fs-top"><span class="fs-name">Steady Ideal Flow Momentum <span class="fs-num">#27</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \sum \textcolor{#E65100}{\vec{F}_{\text{ext}}} = \sum_{\text{ports}} \textcolor{#1565C0}{\vec{V}}\,\textcolor{#2E7D32}{\rho}\,(\textcolor{#1565C0}{\vec{V}}\!\cdot\!\textcolor{#9C27B0}{\hat{n}})\,\textcolor{#D32F2F}{A} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">Steady + incompressible + inviscid (ideal) flow with uniform velocity at each port. The integral collapses to a sum over discrete inlets and outlets. V⃗·n̂ is <strong>negative</strong> at inlets, <strong>positive</strong> at outlets.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>flow is steady, ideal, and uniform at each port — most MAAE 2300 problems; multiple inlets/outlets handled naturally.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>unsteady filling/emptying problems or non-uniform velocity profiles — go back to the integral form #26.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">ΣF⃗ = Σ V⃗ρ(V⃗·n̂)A. Discrete-port form; V⃗·n̂ < 0 at inlets.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="28" data-ch="5" data-name="Simplified Momentum (1-in / 1-out)" data-vars='{"#E65100|F":"ΣF⃗_ext — sum of external forces (N)","#1565C0|vout":"v⃗_out — velocity at the outlet (m/s)","#1565C0|vin":"v⃗_in — velocity at the inlet (m/s)","#D32F2F|mout":"ṁ_out — mass flow rate at outlet (kg/s)","#D32F2F|min":"ṁ_in — mass flow rate at inlet (kg/s)"}'>
+        <div class="fs-top"><span class="fs-name">Simplified Momentum (1-in / 1-out) <span class="fs-num">#28</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \sum \textcolor{#E65100}{\vec{F}_{\text{ext}}} = \textcolor{#1565C0}{\vec{v}_{\text{out}}}\,\textcolor{#D32F2F}{\dot{m}_{\text{out}}} - \textcolor{#1565C0}{\vec{v}_{\text{in}}}\,\textcolor{#D32F2F}{\dot{m}_{\text{in}}} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">The simplest form: steady, uniform, non-moving CV with exactly one inlet and one outlet. Each velocity carries its own directional sign from geometry. Prone to sign errors for angled flows.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>simple one-inlet/one-outlet problems with a stationary CV (e.g. pipe bend, nozzle reaction).</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>multiple outlets/inlets (use #27), moving CVs (use #29), or problems where sign confusion is likely — the full form is safer.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">ΣF⃗ = v⃗_out·ṁ_out − v⃗_in·ṁ_in. One inlet, one outlet, stationary CV.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="29" data-ch="5" data-name="Moving CV Momentum" data-vars='{"#E65100|F":"ΣF⃗_ext — sum of external forces (N)","#1565C0|Vfb":"V⃗_f/b — fluid velocity relative to the body/CV (m/s)","#1565C0|Vflow":"V⃗_flow — absolute fluid velocity (m/s)","#9C27B0|Vb":"V⃗_b — velocity of the body/CV (constant, m/s)","#2E7D32|ρ":"ρ — fluid density (kg/m³)","#D32F2F|A":"A — port area (m²)"}'>
+        <div class="fs-top"><span class="fs-name">Moving CV Momentum <span class="fs-num">#29</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \sum \textcolor{#E65100}{\vec{F}_{\text{ext}}} = \sum \textcolor{#1565C0}{\vec{V}_{f/b}}\;\textcolor{#2E7D32}{\rho}\,(\textcolor{#1565C0}{\vec{V}_{f/b}}\!\cdot\!\hat{n})\,\textcolor{#D32F2F}{A} \quad\text{where}\quad \textcolor{#1565C0}{\vec{V}_{f/b}} = \textcolor{#1565C0}{\vec{V}_{\text{flow}}} - \textcolor{#9C27B0}{\vec{V}_b} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">When the CV moves at constant velocity V⃗_b, replace every velocity with the <strong>relative velocity</strong> V⃗_f/b. The forces remain in the absolute frame. The relative velocity determines the mass flow rate crossing the CS.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>the CV is attached to a moving object (truck, boat, turbine blade) at constant speed.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>accelerating CVs — those need the non-inertial modification with an extra −a_CV ∫ρ dV term.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">ΣF⃗ = Σ V⃗_f/b ρ(V⃗_f/b·n̂)A. V⃗_f/b = V⃗_flow − V⃗_b. Relative velocity everywhere.</p></div>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 </section>
