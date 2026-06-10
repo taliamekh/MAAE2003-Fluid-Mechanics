@@ -2858,6 +2858,8 @@ function showSection(sectionId, anchorId) {
   document.querySelectorAll('.sb-item, .sb-sub').forEach(el => el.classList.remove('active'));
   const items = document.querySelectorAll(`[onclick*="'${sectionId}'"]`);
   items.forEach(el => el.classList.add('active'));
+  /* Re-wire popups when formulas section becomes visible (hidden elements may skip initial wiring) */
+  if (sectionId === 'formulas' && window._wireUpVarPopups) window._wireUpVarPopups();
 }
 
 /* ── Chapter Expand/Collapse ── */
@@ -2918,12 +2920,19 @@ function setFormulaView(view, btn) {
       var spans = card.querySelectorAll('.katex-html span');
       for (var s = 0; s < spans.length; s++) {
         var el = spans[s];
-        if (!el.style.color) continue;
-        var hex = rgbToHex(el.style.color);
+        /* Try DOM property first, fall back to parsing the attribute (hidden elements) */
+        var col = el.style.color;
+        var hex;
+        if (col) {
+          hex = rgbToHex(col);
+        } else {
+          var raw = el.getAttribute('style') || '';
+          var cm = raw.match(/color:\s*(#[0-9a-fA-F]{6})/);
+          if (!cm) continue;
+          hex = cm[1].toLowerCase();
+        }
         if (!lookup[hex]) continue;
-        /* Skip nested children of already-tagged spans */
         if (el.closest('.vp-click')) continue;
-        /* Skip structural elements */
         if (el.classList.contains('frac-line') || el.classList.contains('mrel') || el.classList.contains('mspace')) continue;
         var entries = lookup[hex];
         var txt = el.textContent || '';
