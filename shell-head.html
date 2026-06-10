@@ -355,6 +355,85 @@ strong { font-weight: 600; }
 .step-work { font-size: 14px; line-height: 1.6; }
 .step-tip { font-size: 12px; color: var(--muted); margin-top: 4px; font-style: italic; }
 
+/* ── LEGACY SOLUTION CLASSES (aliases for thought-block / step / callout) ── */
+.thought-box {
+  background: rgba(255,107,53,.04);
+  border: 1px solid rgba(255,107,53,.12);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin: 16px 0;
+}
+.thought-box h4 {
+  color: var(--eq);
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.thought-box > p { font-size: 13px; margin: 6px 0; line-height: 1.6; }
+.solution-toggle { margin: 8px 0; border: none; }
+.solution-toggle > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--eq);
+  cursor: pointer;
+  padding: 6px 12px;
+  background: rgba(255,107,53,.06);
+  border: 1px solid rgba(255,107,53,.12);
+  border-radius: 6px;
+  user-select: none;
+  list-style: none;
+}
+.solution-toggle > summary::-webkit-details-marker { display: none; }
+.solution-toggle > summary:hover { background: rgba(255,107,53,.10); }
+.solution-body { margin-top: 8px; }
+p.given strong:first-child { color: var(--eq); }
+.step-block {
+  display: flex;
+  gap: 12px;
+  margin: 12px 0;
+  align-items: flex-start;
+}
+.step-block > .step-num {
+  background: rgba(255,107,53,.18);
+  color: var(--eq);
+}
+.step-block > .step-content { flex: 1; }
+.step-block > .step-content > h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  margin-top: 0;
+}
+.step-block > .step-content > p { font-size: 14px; line-height: 1.6; }
+.answer-block {
+  padding-left: 40px;
+  position: relative;
+  margin: 12px 0;
+}
+.answer-block::before {
+  content: '\2713';
+  position: absolute;
+  left: 0; top: 0;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(244,162,97,.22);
+  color: var(--example);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 600;
+}
+.answer-block > h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+}
+.answer-block > div, .answer-block > p { flex: 1; }
+.answer-block .answer-line { font-size: 14px; line-height: 1.6; }
+.answer-block .answer-line strong { color: var(--example); }
+p.concept-bridge { font-size: 13px !important; color: var(--muted) !important; }
+
 /* ── FIGURE BOX ── */
 .figure-box {
   background: var(--surface);
