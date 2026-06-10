@@ -39,297 +39,48 @@
         </div>
       </div>
 
-      <div class="fs-card" data-num="2" data-ch="1" data-name="Density">
-        <div class="fs-top"><span class="fs-name">Density <span class="fs-num">#2</span></span></div>
+    </div><!-- /fs-chapter -->
+
+    <!-- ═══ Ch 2: Hydrostatic Forces & Buoyancy ═══ -->
+    <h2 style="color:var(--ch2-title);">Ch 2 — Hydrostatic Forces &amp; Buoyancy</h2>
+
+    <div class="fs-chapter" style="--fs-ch-title:var(--ch2-title)">
+
+      <div class="fs-card" data-num="19" data-ch="2" data-name="Resultant Force — Inclined Plane">
+        <div class="fs-top"><span class="fs-name">Resultant Force — Inclined Plane <span class="fs-num">#19</span></span></div>
         <div class="fs-body">
           <div class="fs-detail">
-            <div class="fs-formula">\[ \rho = \frac{m}{V} \]</div>
-            <p class="fs-explain"><strong>What it means:</strong> Mass of fluid per unit volume — the most fundamental intensive property.</p>
-            <p class="fs-explain"><strong>Origin:</strong> Direct definition. For incompressible fluids \(\rho = \text{const}\); for gases, \(\rho\) varies with \(p\) and \(T\) via the ideal gas law.</p>
-            <p class="fs-when"><strong>When to use:</strong> Every governing equation — continuity, momentum, energy, Bernoulli. Unit conversion problems. Buoyancy calculations.</p>
-            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Don't confuse with specific weight (\(\gamma = \rho g\)) or specific gravity (\(SG = \rho/\rho_W\)).</p>
+            <div class="fs-formula">\[ F = p_{\text{CG}} \, A = (p_a + \gamma h_{\text{CG}}) \, A \]</div>
+            <p class="fs-explain"><strong>What it means:</strong> The total hydrostatic force on a flat submerged surface equals the pressure at its centroid multiplied by its area — as if the entire surface were at the centroid depth.</p>
+            <p class="fs-explain"><strong>Origin:</strong> Integration of \(p\,dA\) over the surface, using \(\int h\,dA = h_{\text{CG}} A\) by definition of centroid.</p>
+            <p class="fs-when"><strong>When to use:</strong> Any plane surface (vertical, inclined, or horizontal) submerged in a static fluid. For open surfaces, set \(p_a = 0\) (gage): \(F = \gamma h_{\text{CG}} A\).</p>
+            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Curved surfaces (use component method instead — see Ch 2.2). Moving fluids (not hydrostatic).</p>
+            <p class="fs-explain"><strong>Use cases:</strong> "Find the force on a dam face" → identify \(h_{\text{CG}}\), compute \(F\). "Force on a gate" → same, then use CP for moment analysis.</p>
           </div>
           <div class="fs-quick">
-            <div class="fs-formula">\[ \rho = \frac{m}{V} \]</div>
-            <p class="fs-explain">Mass per unit volume. SI: kg/m³. BG: slugs/ft³.</p>
+            <div class="fs-formula">\[ F = (p_a + \gamma h_{\text{CG}}) A \]</div>
+            <p class="fs-explain">Total hydrostatic force on a plane surface. \(h_{\text{CG}}\) = centroid depth. For open surfaces: \(F = \gamma h_{\text{CG}} A\).</p>
           </div>
-          <div class="fs-eqonly"><div class="fs-formula">\[ \rho = \frac{m}{V} \]</div></div>
+          <div class="fs-eqonly"><div class="fs-formula">\[ F = p_{\text{CG}} A = (p_a + \gamma h_{\text{CG}}) A \]</div></div>
         </div>
       </div>
 
-      <div class="fs-card" data-num="3" data-ch="1" data-name="Specific Weight">
-        <div class="fs-top"><span class="fs-name">Specific Weight <span class="fs-num">#3</span></span></div>
+      <div class="fs-card" data-num="20" data-ch="2" data-name="Center of Pressure">
+        <div class="fs-top"><span class="fs-name">Center of Pressure <span class="fs-num">#20</span></span></div>
         <div class="fs-body">
           <div class="fs-detail">
-            <div class="fs-formula">\[ \gamma = \rho g \]</div>
-            <p class="fs-explain"><strong>What it means:</strong> Weight of fluid per unit volume — density scaled by gravitational acceleration.</p>
-            <p class="fs-when"><strong>When to use:</strong> Hydrostatic pressure problems (\(p = \gamma h\)), buoyancy, manometers. Often more convenient than \(\rho\) in BG units.</p>
-            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Don't use interchangeably with density — \(\gamma\) includes gravity.</p>
+            <div class="fs-formula">\[ y_{\text{CP}} = -\frac{\gamma \sin\theta \, I_{xx}}{p_{\text{CG}} A} \qquad x_{\text{CP}} = -\frac{\gamma \sin\theta \, I_{xy}}{p_{\text{CG}} A} \]</div>
+            <p class="fs-explain"><strong>What it means:</strong> The center of pressure is where the resultant force effectively acts. It is always displaced toward the high-pressure (deeper) side of the surface relative to the centroid.</p>
+            <p class="fs-explain"><strong>Origin:</strong> Moment balance of the distributed pressure about the centroid. \(I_{xx}\), \(I_{xy}\) are 2nd moments of area about centroidal axes of the surface.</p>
+            <p class="fs-when"><strong>When to use:</strong> After finding \(F\), use CP to locate the force for moment/equilibrium analysis (gates, hinges, dams). For gage pressure: \(y_{\text{CP}} = -I_{xx}\sin\theta / (h_{\text{CG}} A)\).</p>
+            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Horizontal surfaces (\(\theta = 0\)) where CP = CG. Curved surfaces (different method).</p>
+            <p class="fs-explain"><strong>Use cases:</strong> "Where does the force act on a gate?" → compute \(y_{\text{CP}}\), locate CP below CG. "Find hinge reactions" → use CP in moment equation.</p>
           </div>
           <div class="fs-quick">
-            <div class="fs-formula">\[ \gamma = \rho g \]</div>
-            <p class="fs-explain">Weight per unit volume. SI: N/m³. BG: lbf/ft³.</p>
+            <div class="fs-formula">\[ y_{\text{CP}} = -\frac{\gamma \sin\theta \, I_{xx}}{p_{\text{CG}} A} \]</div>
+            <p class="fs-explain">Distance of CP below centroid. For gage: \(y_{\text{CP}} = -I_{xx}\sin\theta/(h_{\text{CG}} A)\). CP is always below CG. Rectangle: \(I_{xx} = bL^3/12\). Circle: \(I_{xx} = \pi R^4/4\).</p>
           </div>
-          <div class="fs-eqonly"><div class="fs-formula">\[ \gamma = \rho g \]</div></div>
-        </div>
-      </div>
-
-      <div class="fs-card" data-num="4" data-ch="1" data-name="Specific Gravity">
-        <div class="fs-top"><span class="fs-name">Specific Gravity <span class="fs-num">#4</span></span></div>
-        <div class="fs-body">
-          <div class="fs-detail">
-            <div class="fs-formula">\[ SG = \frac{\rho}{\rho_W} = \frac{\gamma}{\gamma_W} \]</div>
-            <p class="fs-explain"><strong>What it means:</strong> Dimensionless ratio of a fluid's density to water's density at 4°C (\(\rho_W = 1000\;\text{kg/m}^3\)).</p>
-            <p class="fs-when"><strong>When to use:</strong> Quick comparison with water. Buoyancy (SG > 1 → sinks). Manometer problems involving multiple fluids.</p>
-            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Never use SG in place of \(\rho\) in equations — multiply by \(\rho_W\) first.</p>
-          </div>
-          <div class="fs-quick">
-            <div class="fs-formula">\[ SG = \frac{\rho}{\rho_W} \]</div>
-            <p class="fs-explain">Dimensionless density ratio. Reference: water at 4°C, 101.3 kPa.</p>
-          </div>
-          <div class="fs-eqonly"><div class="fs-formula">\[ SG = \frac{\rho}{\rho_W} \]</div></div>
-        </div>
-      </div>
-
-      <div class="fs-card" data-num="5" data-ch="1" data-name="Newton's Law of Viscosity">
-        <div class="fs-top"><span class="fs-name">Newton's Law of Viscosity <span class="fs-num">#5</span></span></div>
-        <div class="fs-body">
-          <div class="fs-detail">
-            <div class="fs-formula">\[ \tau = \mu \frac{du}{dy} \]</div>
-            <p class="fs-explain"><strong>What it means:</strong> Shear stress in a fluid is proportional to the velocity gradient. The proportionality constant \(\mu\) is the dynamic viscosity.</p>
-            <p class="fs-explain"><strong>Origin:</strong> Derived from the strain rate of a fluid element. The no-slip condition requires \(u = 0\) at a stationary wall and \(u = V\) at a moving surface.</p>
-            <p class="fs-when"><strong>When to use:</strong> Finding shear force on plates/surfaces. Determining viscosity from experiment. Pipe flow wall shear stress.</p>
-            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Only valid for Newtonian fluids (constant \(\mu\)). Non-Newtonian fluids require modified constitutive relations.</p>
-          </div>
-          <div class="fs-quick">
-            <div class="fs-formula">\[ \tau = \mu \frac{du}{dy} \]</div>
-            <p class="fs-explain">Shear stress = viscosity × velocity gradient. Newtonian fluids only.</p>
-          </div>
-          <div class="fs-eqonly"><div class="fs-formula">\[ \tau = \mu \frac{du}{dy} \]</div></div>
-        </div>
-      </div>
-
-      <div class="fs-card" data-num="6" data-ch="1" data-name="Kinematic Viscosity">
-        <div class="fs-top"><span class="fs-name">Kinematic Viscosity <span class="fs-num">#6</span></span></div>
-        <div class="fs-body">
-          <div class="fs-detail">
-            <div class="fs-formula">\[ \nu = \frac{\mu}{\rho} \]</div>
-            <p class="fs-explain"><strong>What it means:</strong> Dynamic viscosity normalized by density. Dimensions of diffusivity (m²/s) with no force involved.</p>
-            <p class="fs-when"><strong>When to use:</strong> Reynolds number calculation: \(Re = VL/\nu\). Comparing fluids of different densities. Navier-Stokes equation.</p>
-          </div>
-          <div class="fs-quick">
-            <div class="fs-formula">\[ \nu = \frac{\mu}{\rho} \]</div>
-            <p class="fs-explain">Viscosity normalized by density. SI: m²/s. Used in Reynolds number.</p>
-          </div>
-          <div class="fs-eqonly"><div class="fs-formula">\[ \nu = \frac{\mu}{\rho} \]</div></div>
-        </div>
-      </div>
-
-      <div class="fs-card" data-num="7" data-ch="1" data-name="Droplet / Bubble Pressure">
-        <div class="fs-top"><span class="fs-name">Droplet / Bubble Pressure <span class="fs-num">#7</span></span></div>
-        <div class="fs-body">
-          <div class="fs-detail">
-            <div class="fs-formula">\[ \Delta p_{\text{droplet}} = \frac{2\Upsilon}{R} \qquad \Delta p_{\text{bubble}} = \frac{4\Upsilon}{R} \]</div>
-            <p class="fs-explain"><strong>What it means:</strong> Surface tension creates internal pressure in curved liquid surfaces. Bubbles have 2× the pressure of droplets because they have two surfaces.</p>
-            <p class="fs-when"><strong>When to use:</strong> Finding pressure inside droplets, bubbles, or curved menisci.</p>
-            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Not valid for non-spherical geometries without modification. Gravity neglected.</p>
-          </div>
-          <div class="fs-quick">
-            <div class="fs-formula">\[ \Delta p = \frac{2\Upsilon}{R} \;\text{(droplet)} \qquad \frac{4\Upsilon}{R} \;\text{(bubble)} \]</div>
-            <p class="fs-explain">Pressure excess inside curved surfaces due to surface tension.</p>
-          </div>
-          <div class="fs-eqonly"><div class="fs-formula">\[ \Delta p = \frac{2\Upsilon}{R} \;\text{(drop)},\; \frac{4\Upsilon}{R} \;\text{(bubble)} \]</div></div>
-        </div>
-      </div>
-
-      <div class="fs-card" data-num="8" data-ch="1" data-name="Capillary Height">
-        <div class="fs-top"><span class="fs-name">Capillary Height <span class="fs-num">#8</span></span></div>
-        <div class="fs-body">
-          <div class="fs-detail">
-            <div class="fs-formula">\[ h = \frac{2\Upsilon \cos\theta}{\gamma R} \]</div>
-            <p class="fs-explain"><strong>What it means:</strong> Height a liquid rises (or falls) in a narrow tube due to surface tension. Positive for wetting liquids (\(\theta < 90°\)), negative for non-wetting (\(\theta > 90°\)).</p>
-            <p class="fs-when"><strong>When to use:</strong> Capillary tube problems. Correcting pressure measurements in small-diameter tubes.</p>
-            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Only valid for circular tubes. Requires known contact angle and surface tension.</p>
-          </div>
-          <div class="fs-quick">
-            <div class="fs-formula">\[ h = \frac{2\Upsilon \cos\theta}{\gamma R} \]</div>
-            <p class="fs-explain">Capillary rise in a tube. Positive = wetting (rises), negative = non-wetting (falls).</p>
-          </div>
-          <div class="fs-eqonly"><div class="fs-formula">\[ h = \frac{2\Upsilon \cos\theta}{\gamma R} \]</div></div>
-        </div>
-      </div>
-
-      <div class="fs-card" data-num="9" data-ch="1" data-name="Ideal Gas Law">
-        <div class="fs-top"><span class="fs-name">Ideal Gas Law <span class="fs-num">#9</span></span></div>
-        <div class="fs-body">
-          <div class="fs-detail">
-            <div class="fs-formula">\[ p = \rho R T \]</div>
-            <p class="fs-explain"><strong>What it means:</strong> Relates absolute pressure, density, and absolute temperature for an ideal gas through the specific gas constant \(R\).</p>
-            <p class="fs-when"><strong>When to use:</strong> Finding gas density at given conditions. Compressible flow density changes. Atmosphere problems.</p>
-            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Fails at very high pressures or very low temperatures where gas behavior deviates from ideal (real gas effects).</p>
-          </div>
-          <div class="fs-quick">
-            <div class="fs-formula">\[ p = \rho R T \]</div>
-            <p class="fs-explain">Ideal gas equation of state. Use absolute pressure and temperature.</p>
-          </div>
-          <div class="fs-eqonly"><div class="fs-formula">\[ p = \rho R T \]</div></div>
-        </div>
-      </div>
-
-      <!-- ═══ Lec 1.3: Hydrostatics & Manometers ═══ -->
-
-      <div class="fs-card" data-num="10" data-ch="1" data-name="Hydrostatic Pressure Gradient">
-        <div class="fs-top"><span class="fs-name">Hydrostatic Pressure Gradient <span class="fs-num">#10</span></span></div>
-        <div class="fs-body">
-          <div class="fs-detail">
-            <div class="fs-formula">\[\frac{dp}{dz} = -\gamma = -\rho g\]</div>
-            <p class="fs-explain"><strong>What it means:</strong> In a static fluid, pressure only changes in the vertical direction. It increases with depth (going down) and decreases with altitude (going up).</p>
-            <p class="fs-explain"><strong>Origin:</strong> Force balance on an infinitesimal control volume of static fluid — horizontal forces cancel, vertical forces give \(dp = -\gamma\,dz\).</p>
-            <p class="fs-when"><strong>When to use:</strong> Any hydrostatic problem. Foundation for manometry, pressure-depth calculations, atmospheric pressure.</p>
-            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Moving fluids (use Bernoulli/momentum instead). Also not valid if \(\gamma\) varies spatially in a non-trivial way without integration.</p>
-          </div>
-          <div class="fs-quick">
-            <div class="fs-formula">\[\frac{dp}{dz} = -\gamma = -\rho g\]</div>
-            <p class="fs-explain">Pressure changes only vertically: increases with depth, decreases with altitude.</p>
-          </div>
-          <div class="fs-eqonly"><div class="fs-formula">\[\frac{dp}{dz} = -\gamma = -\rho g\]</div></div>
-        </div>
-      </div>
-
-      <div class="fs-card" data-num="11" data-ch="1" data-name="Pressure-Depth (Incompressible)">
-        <div class="fs-top"><span class="fs-name">Pressure&ndash;Depth (Incompressible) <span class="fs-num">#11</span></span></div>
-        <div class="fs-body">
-          <div class="fs-detail">
-            <div class="fs-formula">\[p_2 - p_1 = -\gamma(z_2 - z_1) \qquad\text{or}\qquad z_1 + \frac{p_1}{\gamma} = z_2 + \frac{p_2}{\gamma}\]</div>
-            <p class="fs-explain"><strong>What it means:</strong> For an incompressible fluid (constant \(\gamma\)), the pressure difference between two points depends only on their elevation difference.</p>
-            <p class="fs-when"><strong>When to use:</strong> Most liquid problems (water, oil, mercury). Manometry. Any problem asking "find pressure at depth h."</p>
-            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Gases over large altitude changes (density varies — use tropospheric or isothermal formulas instead).</p>
-          </div>
-          <div class="fs-quick">
-            <div class="fs-formula">\[p_2 - p_1 = -\gamma(z_2 - z_1)\]</div>
-            <p class="fs-explain">Pressure-depth for constant-density fluids. Going down increases pressure.</p>
-          </div>
-          <div class="fs-eqonly"><div class="fs-formula">\[p_2 - p_1 = -\gamma(z_2 - z_1)\]</div></div>
-        </div>
-      </div>
-
-      <div class="fs-card" data-num="12" data-ch="1" data-name="Gage &amp; Vacuum Pressure">
-        <div class="fs-top"><span class="fs-name">Gage &amp; Vacuum Pressure <span class="fs-num">#12</span></span></div>
-        <div class="fs-body">
-          <div class="fs-detail">
-            <div class="fs-formula">\[p_{\text{gage}} = p_{\text{abs}} - p_{\text{atm}} \qquad p_{\text{vacuum}} = p_{\text{atm}} - p_{\text{abs}}\]</div>
-            <p class="fs-explain"><strong>What it means:</strong> Gage pressure is how far above atmospheric; vacuum pressure is how far below.</p>
-            <p class="fs-when"><strong>When to use:</strong> Converting between gage and absolute. Most gauges read gage pressure. Use absolute for gas law and thermodynamic calculations.</p>
-            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Never use gage pressure in the ideal gas law or tropospheric formula — those require absolute pressure.</p>
-          </div>
-          <div class="fs-quick">
-            <div class="fs-formula">\[p_{\text{gage}} = p_{\text{abs}} - p_{\text{atm}}\]</div>
-            <p class="fs-explain">Gage = above atm; vacuum = below atm. Use absolute for gas law.</p>
-          </div>
-          <div class="fs-eqonly"><div class="fs-formula">\[p_{\text{gage}} = p_{\text{abs}} - p_{\text{atm}}\]</div></div>
-        </div>
-      </div>
-
-      <div class="fs-card" data-num="13" data-ch="1" data-name="Pressure Head">
-        <div class="fs-top"><span class="fs-name">Pressure Head <span class="fs-num">#13</span></span></div>
-        <div class="fs-body">
-          <div class="fs-detail">
-            <div class="fs-formula">\[h = \frac{p_{\text{gage}}}{\gamma}\]</div>
-            <p class="fs-explain"><strong>What it means:</strong> Express any pressure as an equivalent liquid column height. Useful for intuitive understanding and manometry.</p>
-            <p class="fs-when"><strong>When to use:</strong> Interpreting manometer readings. Comparing pressures in different fluids. "Express pressure in meters of water / mm of mercury."</p>
-            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Compressible fluids — the concept breaks down when \(\gamma\) varies with altitude.</p>
-          </div>
-          <div class="fs-quick">
-            <div class="fs-formula">\[h = p_{\text{gage}} / \gamma\]</div>
-            <p class="fs-explain">Height of liquid column that produces gage pressure \(p\).</p>
-          </div>
-          <div class="fs-eqonly"><div class="fs-formula">\[h = p_{\text{gage}} / \gamma\]</div></div>
-        </div>
-      </div>
-
-      <div class="fs-card" data-num="14" data-ch="1" data-name="Troposphere Pressure">
-        <div class="fs-top"><span class="fs-name">Troposphere Pressure <span class="fs-num">#14</span></span></div>
-        <div class="fs-body">
-          <div class="fs-detail">
-            <div class="fs-formula">\[p = p_0\!\left(1 - \frac{Bz}{T_0}\right)^{g/(RB)}\]</div>
-            <p class="fs-explain"><strong>What it means:</strong> Atmospheric pressure in the troposphere (0–11 km), where temperature decreases linearly with altitude at lapse rate \(B\).</p>
-            <p class="fs-explain"><strong>Constants:</strong> \(T_0 = 288.16\) K, \(B = 0.00650\) K/m, \(g/(RB) \approx 5.26\) for air.</p>
-            <p class="fs-when"><strong>When to use:</strong> "Find pressure at altitude z" in the troposphere. Standard atmosphere calculations.</p>
-            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Above 11 km (use isothermal formula). Liquids (use incompressible formula).</p>
-          </div>
-          <div class="fs-quick">
-            <div class="fs-formula">\[p = p_0(1 - Bz/T_0)^{5.26}\]</div>
-            <p class="fs-explain">Troposphere (0–11 km) with linear temperature lapse. \(B = 0.00650\) K/m.</p>
-          </div>
-          <div class="fs-eqonly"><div class="fs-formula">\[p = p_0(1 - Bz/T_0)^{g/(RB)}\]</div></div>
-        </div>
-      </div>
-
-      <div class="fs-card" data-num="15" data-ch="1" data-name="Isothermal Atmosphere">
-        <div class="fs-top"><span class="fs-name">Isothermal Atmosphere <span class="fs-num">#15</span></span></div>
-        <div class="fs-body">
-          <div class="fs-detail">
-            <div class="fs-formula">\[p = p_0\,e^{-gz/(RT_0)}\]</div>
-            <p class="fs-explain"><strong>What it means:</strong> Pressure in an isothermal (constant temperature) atmosphere — exponential decay with altitude.</p>
-            <p class="fs-when"><strong>When to use:</strong> Stratosphere (11–20 km). Also a quick-and-dirty approximation for the troposphere (~4% error at 5 km).</p>
-            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Troposphere for accurate results — the temperature lapse makes ~4% difference at 5 km.</p>
-          </div>
-          <div class="fs-quick">
-            <div class="fs-formula">\[p = p_0\,e^{-gz/(RT)}\]</div>
-            <p class="fs-explain">Exponential decay for constant-T atmosphere. ~4% error in troposphere.</p>
-          </div>
-          <div class="fs-eqonly"><div class="fs-formula">\[p = p_0\,e^{-gz/(RT)}\]</div></div>
-        </div>
-      </div>
-
-      <div class="fs-card" data-num="16" data-ch="1" data-name="Hydraulic Force Multiplication">
-        <div class="fs-top"><span class="fs-name">Hydraulic Force Multiplication <span class="fs-num">#16</span></span></div>
-        <div class="fs-body">
-          <div class="fs-detail">
-            <div class="fs-formula">\[F_2 = F_1\,\frac{A_2}{A_1}\]</div>
-            <p class="fs-explain"><strong>What it means:</strong> Pascal's Law: equal pressure throughout a confined fluid means a small force on a small piston can support a large force on a large piston.</p>
-            <p class="fs-when"><strong>When to use:</strong> Hydraulic jack/press/lift problems. Finding force ratios or mechanical advantage.</p>
-            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Open systems or compressible fluids. Also assumes pistons are at the same elevation (otherwise add \(\gamma\Delta h\) correction).</p>
-          </div>
-          <div class="fs-quick">
-            <div class="fs-formula">\[F_2 = F_1(A_2/A_1)\]</div>
-            <p class="fs-explain">Pascal's Law: force multiplication via area ratio. Mechanical advantage = \(A_2/A_1\).</p>
-          </div>
-          <div class="fs-eqonly"><div class="fs-formula">\[F_2 = F_1(A_2/A_1)\]</div></div>
-        </div>
-      </div>
-
-      <div class="fs-card" data-num="17" data-ch="1" data-name="General Manometer Rule">
-        <div class="fs-top"><span class="fs-name">General Manometer Rule <span class="fs-num">#17</span></span></div>
-        <div class="fs-body">
-          <div class="fs-detail">
-            <div class="fs-formula">\[p_n - p_1 = \sum_{\text{down}} \gamma_i\,|h_i| - \sum_{\text{up}} \gamma_i\,|h_i|\]</div>
-            <p class="fs-explain"><strong>What it means:</strong> Walk through a manometer from known to unknown pressure. Going down adds \(\gamma h\), going up subtracts \(\gamma h\). Jump across at same level in same fluid.</p>
-            <p class="fs-when"><strong>When to use:</strong> ANY manometer problem — single-fluid, multi-fluid, U-tube, inclined, differential.</p>
-            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Moving fluids in the manometer tube (rare). The fluid in the manometer must be static.</p>
-          </div>
-          <div class="fs-quick">
-            <div class="fs-formula">\[p_n - p_1 = \sum_{\downarrow}\gamma_i|h_i| - \sum_{\uparrow}\gamma_i|h_i|\]</div>
-            <p class="fs-explain">Down = add \(\gamma h\), up = subtract \(\gamma h\). Jump across at same level.</p>
-          </div>
-          <div class="fs-eqonly"><div class="fs-formula">\[p_n - p_1 = \sum_{\downarrow}\gamma_i|h_i| - \sum_{\uparrow}\gamma_i|h_i|\]</div></div>
-        </div>
-      </div>
-
-      <div class="fs-card" data-num="18" data-ch="1" data-name="Differential Manometer">
-        <div class="fs-top"><span class="fs-name">Differential Manometer <span class="fs-num">#18</span></span></div>
-        <div class="fs-body">
-          <div class="fs-detail">
-            <div class="fs-formula">\[p_a - p_b = (\rho_2 - \rho_1)\,g\,h\]</div>
-            <p class="fs-explain"><strong>What it means:</strong> Pressure drop across a flow device measured by a U-tube. Only the manometer reading \(h\) and the density difference matter — the connecting leg height cancels.</p>
-            <p class="fs-when"><strong>When to use:</strong> Measuring pressure drop across valves, orifices, venturi meters, or any flow restriction.</p>
-            <p class="fs-when fs-when-not"><strong>When NOT to use:</strong> Don't forget to subtract \(\rho_1\)! The formula uses the DIFFERENCE in densities, not just the gauge fluid density.</p>
-          </div>
-          <div class="fs-quick">
-            <div class="fs-formula">\[p_a - p_b = (\rho_2 - \rho_1)gh\]</div>
-            <p class="fs-explain">Differential U-tube: density DIFFERENCE times \(gh\). Don't forget \(\rho_1\)!</p>
-          </div>
-          <div class="fs-eqonly"><div class="fs-formula">\[\Delta p = (\rho_2 - \rho_1)gh\]</div></div>
+          <div class="fs-eqonly"><div class="fs-formula">\[ y_{\text{CP}} = -\frac{\gamma \sin\theta \, I_{xx}}{p_{\text{CG}} A} \qquad x_{\text{CP}} = -\frac{\gamma \sin\theta \, I_{xy}}{p_{\text{CG}} A} \]</div></div>
         </div>
       </div>
 
