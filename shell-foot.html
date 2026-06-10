@@ -50,55 +50,60 @@ function setFormulaView(view, btn) {
   var pop = document.getElementById('varpop');
   if (!pop) return;
 
-  /* After KaTeX renders, find colored spans inside #formulas and mark them clickable.
-     KaTeX \color{#HEX}{var} produces: <span class="mord" style="color:#HEX;">...</span>
-     We find these, add class vp-click + data-desc from the card's data-vars JSON map. */
+  function rgbToHex(c) {
+    if (!c) return '';
+    if (c.charAt(0) === '#') return c.toLowerCase();
+    var m = c.match(/(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
+    if (!m) return c.toLowerCase();
+    return '#' + ((1<<24)+(+m[1]<<16)+(+m[2]<<8)+(+m[3])).toString(16).slice(1);
+  }
+
   function wireUpVarPopups() {
     var cards = document.querySelectorAll('#formulas .fs-card[data-vars]');
-    cards.forEach(function(card) {
+    var total = 0;
+    for (var c = 0; c < cards.length; c++) {
+      var card = cards[c];
       var map;
-      try { map = JSON.parse(card.getAttribute('data-vars')); } catch(e) { return; }
-      /* Build lookup: hex -> [{symbol, desc}] */
+      try { map = JSON.parse(card.getAttribute('data-vars')); } catch(e) { continue; }
       var lookup = {};
-      Object.keys(map).forEach(function(key) {
-        var parts = key.split('|');
+      var keys = Object.keys(map);
+      for (var k = 0; k < keys.length; k++) {
+        var parts = keys[k].split('|');
         var hex = parts[0].toLowerCase();
         if (!lookup[hex]) lookup[hex] = [];
-        lookup[hex].push({ sym: parts[1] || '', desc: map[key] });
-      });
-      /* Find colored spans — tag only outermost. Skip if already inside a tagged ancestor. */
-      var katexEls = card.querySelectorAll('.katex-html [style*="color:"]');
-      katexEls.forEach(function(el) {
-        /* Skip if an ancestor is already tagged (this is a nested child) */
-        if (el.closest('.vp-click')) return;
-        /* Skip structural elements that aren't variables */
-        if (el.classList.contains('frac-line') || el.classList.contains('mrel') ||
-            el.classList.contains('mspace') || el.classList.contains('delimsizing') ||
-            el.classList.contains('vlist') || el.tagName !== 'SPAN') return;
-        var m = (el.getAttribute('style') || '').match(/color:\s*(#[0-9a-fA-F]{6})/);
-        if (!m) return;
-        var hex = m[1].toLowerCase();
+        lookup[hex].push({ sym: parts[1] || '', desc: map[keys[k]] });
+      }
+      /* Use DOM .style.color property — more reliable than attribute selector */
+      var spans = card.querySelectorAll('.katex-html span');
+      for (var s = 0; s < spans.length; s++) {
+        var el = spans[s];
+        if (!el.style.color) continue;
+        var hex = rgbToHex(el.style.color);
+        if (!lookup[hex]) continue;
+        /* Skip nested children of already-tagged spans */
+        if (el.closest('.vp-click')) continue;
+        /* Skip structural elements */
+        if (el.classList.contains('frac-line') || el.classList.contains('mrel') || el.classList.contains('mspace')) continue;
         var entries = lookup[hex];
-        if (!entries || entries.length === 0) return;
-        /* Match by text content if multiple entries share a color */
-        var txt = (el.textContent || '').trim();
+        var txt = el.textContent || '';
         var best = entries[0];
         for (var i = 0; i < entries.length; i++) {
           if (txt.indexOf(entries[i].sym) !== -1) { best = entries[i]; break; }
         }
         el.classList.add('vp-click');
         el.setAttribute('data-desc', best.desc);
-      });
-    });
+        el.title = best.desc;
+        total++;
+      }
+    }
+    console.log('[formulas] wireUpVarPopups tagged ' + total + ' variables across ' + cards.length + ' cards');
   }
 
-  /* Click handler */
   document.addEventListener('click', function(e) {
     var el = e.target.closest('.vp-click');
     if (!el) { pop.style.display = 'none'; return; }
-    var desc = el.getAttribute('data-desc') || '';
     pop.querySelector('.vp-sym').innerHTML = el.innerHTML;
-    pop.querySelector('.vp-desc').textContent = desc;
+    pop.querySelector('.vp-desc').textContent = el.getAttribute('data-desc') || '';
     pop.style.display = 'block';
     var rect = el.getBoundingClientRect();
     var pw = pop.offsetWidth, ph = pop.offsetHeight;
@@ -111,7 +116,6 @@ function setFormulaView(view, btn) {
     pop.style.top = top + 'px';
   });
 
-  /* Expose so it runs after KaTeX */
   window._wireUpVarPopups = wireUpVarPopups;
 })();
 

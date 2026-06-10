@@ -467,6 +467,9 @@ strong { font-weight: 600; }
 #formulas .katex .svg-align,
 #formulas .katex .hide-tail,
 #formulas .katex .rule { pointer-events: none; }
+/* Fallback: any KaTeX span with inline color inside #formulas gets pointer cursor.
+   The title attr (set by wireUpVarPopups) gives a native tooltip even if custom popup fails. */
+#formulas .katex-html span[style] { cursor: pointer; }
 .vp-click { cursor: pointer; position: relative; z-index: 2; pointer-events: auto; border-radius: 3px; transition: background .15s; }
 .vp-click:hover { background: rgba(0,0,0,.08); }
 #varpop {
