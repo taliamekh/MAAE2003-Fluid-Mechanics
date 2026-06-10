@@ -6,7 +6,7 @@
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:28px;">
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Reference items</div>
-      <div style="font-size:22px;font-weight:600;color:var(--eq);">25</div>
+      <div style="font-size:22px;font-weight:600;color:var(--eq);">31</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Chapters completed</div>
@@ -14,7 +14,7 @@
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Examples</div>
-      <div style="font-size:22px;font-weight:600;color:var(--deriv);">13</div>
+      <div style="font-size:22px;font-weight:600;color:var(--deriv);">19</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Assignments</div>
@@ -245,6 +245,8 @@
       <li>&rarr; \(\vec{V}\cdot\hat{n} &lt; 0\) at inlets, \(&gt; 0\) at outlets &mdash; the dot product handles signs automatically</li>
       <li>&rarr; LHS from a free-body diagram: pressure + weight + normal + shear forces on the CV</li>
       <li>&rarr; Moving CV at constant \(\vec{V}_b\): replace all velocities with \(\vec{V}_{f/b} = \vec{V}_{\text{flow}} - \vec{V}_b\)</li>
+      <li>&rarr; For angular momentum: set \(\beta = \vec{r} \times \vec{V}\) &rArr; \(\sum \vec{M}_{\text{ext}} = \frac{\partial}{\partial t}\int_{\text{CV}} (\vec{r}\times\vec{V})\rho\,d\forall + \int_{\text{CS}} (\vec{r}\times\vec{V})\rho(\vec{V}\cdot\hat{n})\,dA\)</li>
+      <li>&rarr; Steady ideal angular momentum: \(\sum \vec{M}_{\text{ext}} = \sum(\vec{r}\times\vec{V})\dot{m}\) &mdash; only ports offset from the moment point contribute</li>
     </ul>
 
     <p><strong style="color:var(--ch5-title)">When to use what:</strong></p>
@@ -254,6 +256,8 @@
       <li>&rarr; Simple one-in/one-out? &mdash; \(\sum F = v_{\text{out}}\dot{m}_{\text{out}} - v_{\text{in}}\dot{m}_{\text{in}}\)</li>
       <li>&rarr; CV moves at constant speed? &mdash; use \(V_{f/b} = V_{\text{flow}} - V_b\) everywhere</li>
       <li>&rarr; Sluice gate / open channel? &mdash; Bernoulli + continuity + momentum (three-tool combo)</li>
+      <li>&rarr; Need the moment/torque at a support? &mdash; angular momentum: \(\sum M = \sum(\vec{r}\times\vec{V})\dot{m}\)</li>
+      <li>&rarr; Tipping/overturning? &mdash; moment balance: weight stabilizes, momentum flux destabilizes</li>
     </ul>
 
     <p><strong style="color:var(--ch5-title)">&#9888; Traps:</strong></p>
@@ -263,6 +267,8 @@
       <li>The simplified \(\sum F = v_{\text{out}}\dot{m} - v_{\text{in}}\dot{m}\) is error-prone with angled outlets &mdash; use the full form for safety</li>
       <li>Moving-CV problems: \(V_{f/b}\) replaces V <em>everywhere</em> in the momentum equation, including inside the mass-flow dot product</li>
       <li>In ideal flow along a deflecting surface, speed stays the same (Bernoulli with same pressure) &mdash; only direction changes</li>
+      <li>Angular momentum: if the inlet velocity passes through the moment point, its r&times;V is zero &mdash; only offset ports contribute moments</li>
+      <li>Moment arm d is the perpendicular distance from the moment point to the <em>line of action</em> of the velocity, not the distance to the port center</li>
     </ol>
   </div>
 
@@ -298,6 +304,8 @@
       <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Simple 1-in/1-out</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\sum F = v_{\text{out}}\dot{m}_{\text{out}} - v_{\text{in}}\dot{m}_{\text{in}}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Stationary CV only</td></tr>
       <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Moving CV force</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(V_{f/b} = V_{\text{flow}} - V_b\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Replace V with relative V everywhere</td></tr>
       <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Sluice gate / open channel</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Bernoulli + continuity + momentum</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Add hydrostatic F<sub>A</sub>, F<sub>B</sub> to FBD</td></tr>
+      <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Moment at pipe elbow</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\sum M = \sum(\vec{r}\times\vec{V})\dot{m}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Choose moment point at support</td></tr>
+      <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Tipping / overturning</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">W&middot;d<sub>stab</sub> = &rho;QV&middot;h</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Moment about base edge at incipient tip</td></tr>
     </tbody>
   </table>
 
