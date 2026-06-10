@@ -484,6 +484,21 @@ strong { font-weight: 600; }
 .qr-table th { text-align: left; padding: 6px 10px; border-bottom: 2px solid var(--border); color: var(--muted); font-weight: 600; font-size: 12px; }
 .qr-table td { padding: 6px 10px; border-bottom: 1px solid var(--border); }
 
+/* ── DECISION TREES (summary page) ── */
+.decision-tree { margin: 14px 0; }
+.decision-tree h3 { margin-bottom: 10px; font-size: 16px; }
+.tree { padding-left: 4px; }
+.branch { padding: 6px 0; font-size: 13.5px; line-height: 1.6; border-bottom: 1px solid var(--border); }
+.branch:last-child { border-bottom: none; }
+.branch strong { color: var(--def); }
+.sub-branch { font-size: 13px; color: var(--muted); }
+.sub-branch strong { color: var(--tip); }
+
+/* ── QUICK REFERENCE TABLE (summary page) ── */
+.quick-ref { width: 100%; border-collapse: collapse; font-size: 13px; margin: 16px 0; }
+.quick-ref th { text-align: left; padding: 6px 10px; border-bottom: 2px solid var(--border); color: var(--muted); font-weight: 600; font-size: 12px; }
+.quick-ref td { padding: 6px 10px; border-bottom: 1px solid var(--border); }
+
 /* ── RESPONSIVE — padding/font only, layout handled by flex ── */
 @media (max-width: 600px) {
   .content-area { padding: 20px 18px 40px; }
