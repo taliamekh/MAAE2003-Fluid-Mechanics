@@ -436,6 +436,15 @@ strong { font-weight: 600; }
 .fs-card .fs-when { font-size: 13px; margin: 4px 0; line-height: 1.5; }
 .fs-card .fs-when strong { color: var(--def); }
 .fs-card .fs-when-not strong { color: var(--eq); }
+.fs-use-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0 6px; }
+@media(max-width:560px){ .fs-use-grid { grid-template-columns: 1fr; } }
+.fs-use-box, .fs-notfor-box { font-size: 12.5px; line-height: 1.55; padding: 10px 12px; border-radius: 6px; }
+.fs-use-box { background: rgba(46,125,50,.06); border: 1px solid rgba(46,125,50,.18); }
+.fs-use-box .fs-ub-label { font-weight: 600; color: #2E7D32; margin-bottom: 4px; }
+.fs-notfor-box { background: rgba(211,47,47,.05); border: 1px solid rgba(211,47,47,.16); }
+.fs-notfor-box .fs-ub-label { font-weight: 600; color: #D32F2F; margin-bottom: 4px; }
+.fs-legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 14px; font-size: 12px; color: var(--muted); }
+.fs-legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 4px; vertical-align: middle; }
 .fs-views { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
 .fs-views button {
   font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 500;
