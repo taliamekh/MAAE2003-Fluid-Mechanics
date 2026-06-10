@@ -232,8 +232,38 @@
 
   <!-- ═══ PENDING CHAPTERS ═══ -->
 
-  <h2 style="color:var(--ch5-title);">Ch 5 — Reynolds Transport Theorem</h2>
-  <p style="color:var(--muted);font-size:13px;">Pending &mdash; Text Ch 3.2&ndash;3.6</p>
+  <h2 style="color:var(--ch5-title);">Ch 5 &mdash; Reynolds Transport Theorem</h2>
+
+  <div class="summary-cluster">
+    <div class="cluster-title" style="color:var(--ch5-title);">Linear Momentum Equation</div>
+    <p><strong style="color:var(--ch5-title)">Key ideas:</strong></p>
+    <ul>
+      <li>Set \(B = m\vec{V}\), \(\beta = \vec{V}\) in the RTT &rArr; momentum equation</li>
+      <li>General form: \(\sum \vec{F}_{\text{ext}} = \frac{\partial}{\partial t}\int_{\text{CV}} \vec{V}\rho\,d\forall + \int_{\text{CS}} \vec{V}\rho(\vec{V}\cdot\hat{n})\,dA\)</li>
+      <li>Steady ideal flow: \(\sum \vec{F}_{\text{ext}} = \sum \vec{V}\rho(\vec{V}\cdot\hat{n})A\)</li>
+      <li>\(\vec{V}\cdot\hat{n} < 0\) at inlets, \(> 0\) at outlets &mdash; handles signs automatically</li>
+      <li>LHS from FBD: pressure + weight + normal + shear forces</li>
+      <li>Moving CV at constant \(\vec{V}_b\): replace \(\vec{V}\) with \(\vec{V}_{f/b} = \vec{V}_{\text{flow}} - \vec{V}_b\)</li>
+    </ul>
+
+    <p><strong style="color:var(--ch5-title)">When to use what:</strong></p>
+    <ul>
+      <li>&rarr; Force on a duct/nozzle/vane/gate? &mdash; draw CV, write \(\sum F = \sum V\rho(V\!\cdot\!n)A\)</li>
+      <li>&rarr; Multiple inlets/outlets? &mdash; use the discrete-port form with one term per port</li>
+      <li>&rarr; Simple one-in/one-out? &mdash; \(\sum F = v_{\text{out}}\dot{m}_{\text{out}} - v_{\text{in}}\dot{m}_{\text{in}}\)</li>
+      <li>&rarr; CV moves at constant speed? &mdash; use \(V_{f/b} = V_{\text{flow}} - V_b\) everywhere</li>
+      <li>&rarr; Sluice gate / open channel? &mdash; Bernoulli + continuity + momentum (three-tool combo)</li>
+    </ul>
+
+    <p><strong style="color:var(--ch5-title)">&#9888; Traps:</strong></p>
+    <ol>
+      <li>Two V&rsquo;s in every flux term: the first carries momentum direction, the second (the dot product) carries the mass-flow sign &mdash; don&rsquo;t confuse them</li>
+      <li>Hydrostatic pressure forces on the CV faces still exist even in flowing problems &mdash; include them in the FBD (e.g. sluice gate \(F_A\), \(F_B\))</li>
+      <li>The simplified \(\sum F = v_{\text{out}}\dot{m} - v_{\text{in}}\dot{m}\) is error-prone with angled outlets &mdash; use the full form for safety</li>
+      <li>Moving-CV problems: \(V_{f/b}\) replaces V <em>everywhere</em> in the momentum equation, including inside the mass-flow dot product</li>
+      <li>In ideal flow along a deflecting surface, speed stays the same (Bernoulli with same pressure) &mdash; only direction changes</li>
+    </ol>
+  </div>
 
   <h2 style="color:var(--ch6-title);">Ch 6 — Pipe Flow &amp; Losses</h2>
   <p style="color:var(--muted);font-size:13px;">Pending &mdash; Text Ch 3.7, 6.3&ndash;6.4, 6.6&ndash;6.7</p>
@@ -263,6 +293,10 @@
       <tr style="border-left:3px solid var(--ch4-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Volume flow rate</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(Q = \int_A v_n\,dA = \bar{U}A\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Normal component only</td></tr>
       <tr style="border-left:3px solid var(--ch4-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Average velocity</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\bar{U} = Q/A\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Laminar pipe: \(\bar{U}=V_{\max}/2\)</td></tr>
       <tr style="border-left:3px solid var(--ch4-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Mass flow rate</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\dot{m} = \rho Q = \rho\bar{U}A\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Use for continuity / compressible</td></tr>
+      <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Force on duct/vane/gate</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\sum F = \sum V\rho(V\!\cdot\!n)A\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Steady ideal flow; &minus; at inlets</td></tr>
+      <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Simple 1-in/1-out</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\sum F = v_{\text{out}}\dot{m}_{\text{out}} - v_{\text{in}}\dot{m}_{\text{in}}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Stationary CV only</td></tr>
+      <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Moving CV force</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(V_{f/b} = V_{\text{flow}} - V_b\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Replace V with relative V everywhere</td></tr>
+      <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Sluice gate / open channel</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Bernoulli + continuity + momentum</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Add hydrostatic F<sub>A</sub>, F<sub>B</sub> to FBD</td></tr>
     </tbody>
   </table>
 
