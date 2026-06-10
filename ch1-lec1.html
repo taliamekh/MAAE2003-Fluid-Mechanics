@@ -1,0 +1,203 @@
+<section id="ch1-lec1" class="page-section">
+  <h1 class="page-title" style="color:var(--ch1-title)">Ch 1: Fluid Properties & Pressure</h1>
+  <p class="page-subtitle">Lecture 1.1 · Text Ch 1.1–1.7 · Week of May 4th</p>
+
+  <h2 id="ch1-lec1" style="color:var(--ch1-title)">1.1 — Introduction</h2>
+
+  <p>Fluid mechanics studies how fluids (liquids and gases) behave at rest and in motion. It is one of the most broadly applicable areas in engineering — spanning aerodynamics, marine propulsion, biomedical devices, renewable energy, sports engineering, and environmental science. In this course, we develop governing equations using the <strong>control volume approach</strong> and apply them to practical engineering problems.</p>
+
+  <h3>Applications of Fluid Mechanics</h3>
+
+  <p>The reach of fluid mechanics is enormous. Some representative domains:</p>
+
+  <p><strong>Transportation</strong> — helicopter vortex ring states, ship propeller vortices, CFD streamline simulations for race car aerodynamics. Understanding lift, drag, and flow separation is central to vehicle design across aviation, marine, and automotive engineering.</p>
+
+  <p><strong>Biomedical</strong> — computational fluid dynamics for artificial heart pump design (modeling blood flow through impellers), lung airflow simulation through branching airways, arterial blood flow modeling for detecting aneurysms and stenosis.</p>
+
+  <p><strong>Energy</strong> — water flow simulation in hydroelectric dams (velocity magnitude fields through spillways), airflow through wind turbine blades (vortex shedding and wake interactions), combustion chamber flows in gas turbines.</p>
+
+  <p><strong>Environment &amp; Geophysics</strong> — ocean current modeling for climate prediction, atmospheric pollution dispersion driven by wind patterns.</p>
+
+  <p><strong>Sports</strong> — aerodynamic drag optimization of golf club heads, bobsled body shaping, cyclist helmet streamlining — all use CFD velocity field analysis to minimize drag coefficients.</p>
+
+  <!-- ── CLASSIFICATION OF MATTER ── -->
+  <h3>The Concept of a Fluid: Classification of Matter</h3>
+
+  <p>Matter exists in four states — solid, liquid, gas, and plasma. In this course, we focus on liquids and gases, which are collectively called <strong>fluids</strong>. The critical distinction between solids and fluids comes down to how they respond to shear stress.</p>
+
+  <!-- SVG: Classification of matter tree -->
+  <div class="figure-box">
+    <svg viewBox="0 0 540 210" xmlns="http://www.w3.org/2000/svg" style="max-width:540px;font-family:'Poppins',sans-serif;">
+      <!-- Matter box -->
+      <rect x="220" y="10" width="100" height="32" rx="6" fill="#0B2E48" />
+      <text x="270" y="31" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Matter</text>
+      <!-- Lines down -->
+      <line x1="245" y1="42" x2="80" y2="80" stroke="#D0D0D0" stroke-width="1.5"/>
+      <line x1="260" y1="42" x2="200" y2="80" stroke="#D0D0D0" stroke-width="1.5"/>
+      <line x1="280" y1="42" x2="340" y2="80" stroke="#D0D0D0" stroke-width="1.5"/>
+      <line x1="295" y1="42" x2="460" y2="80" stroke="#D0D0D0" stroke-width="1.5"/>
+      <!-- State boxes -->
+      <rect x="30" y="80" width="100" height="30" rx="5" fill="none" stroke="#7A8FA6" stroke-width="1.5"/>
+      <text x="80" y="100" text-anchor="middle" fill="#1A2A3A" font-size="13" font-weight="500">Solid</text>
+      <rect x="150" y="80" width="100" height="30" rx="5" fill="none" stroke="#2A6B7C" stroke-width="1.5"/>
+      <text x="200" y="100" text-anchor="middle" fill="#2A6B7C" font-size="13" font-weight="600">Liquid</text>
+      <rect x="290" y="80" width="100" height="30" rx="5" fill="none" stroke="#2A6B7C" stroke-width="1.5"/>
+      <text x="340" y="100" text-anchor="middle" fill="#2A6B7C" font-size="13" font-weight="600">Gas</text>
+      <rect x="410" y="80" width="100" height="30" rx="5" fill="none" stroke="#7A8FA6" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <text x="460" y="100" text-anchor="middle" fill="#7A8FA6" font-size="13">Plasma</text>
+      <!-- Fluids bracket -->
+      <line x1="155" y1="115" x2="155" y2="135" stroke="#FF6B35" stroke-width="1.5"/>
+      <line x1="385" y1="115" x2="385" y2="135" stroke="#FF6B35" stroke-width="1.5"/>
+      <line x1="155" y1="135" x2="385" y2="135" stroke="#FF6B35" stroke-width="1.5"/>
+      <line x1="270" y1="135" x2="270" y2="155" stroke="#FF6B35" stroke-width="1.5"/>
+      <rect x="220" y="155" width="100" height="30" rx="5" fill="#FF6B35" />
+      <text x="270" y="175" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Fluids</text>
+      <!-- Not covered label -->
+      <text x="460" y="125" text-anchor="middle" fill="#7A8FA6" font-size="10" font-style="italic">not covered</text>
+    </svg>
+    <div class="figure-caption">Classification of matter by state. Liquids and gases are collectively called fluids.</div>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Solid</div>
+    <p>Molecules are packed in a <strong>lattice or geometric structure</strong> with constant molecular spacing. Large cohesive forces hold molecules together, preventing relative movement except for slight vibration. When subjected to a load, a solid deforms but <strong>continues to support the load</strong> — internal shear stresses build up and reach equilibrium. A solid can resist shear stress by deforming.</p>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Liquid</div>
+    <p>Molecules are not bound in a lattice — they are more mobile than in solids, but molecular spacing is still <strong>approximately constant</strong>. Liquids do not hold their shape; they flow and take the shape of their container, forming a <strong>horizontal free surface</strong> at the top. When confined, their intermolecular forces allow them to resist compressive forces, so liquids have <strong>constant volume and density</strong>. However, they <strong>cannot resist shear loading</strong> — instead of reaching equilibrium, they deform continuously and form waves (think of coffee sloshing in a mug).</p>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Gas</div>
+    <p>Intermolecular forces are weak enough to allow molecules to travel freely until repelled by other molecules. Gases have <strong>no definite volume</strong> — they must be held in a container, otherwise they flow out to form an atmosphere. A gas completely fills any space it occupies. Gravitational effects are negligible compared to buoyancy forces. Gases are still classified as fluids because they flow when subjected to a force (e.g., gas flow in pipes).</p>
+  </div>
+
+  <p>A fourth state, <strong>plasma</strong> (ionized matter), exists and is critical for fusion energy research (e.g., tokamak reactors), but it is not covered in MAAE 2300.</p>
+
+  <p>Common examples to keep in mind: <strong>Solids</strong> — steel, aluminum, wood. <strong>Liquids</strong> — water, alcohol, oil. <strong>Gases</strong> — oxygen, nitrogen, air.</p>
+
+  <div class="card-bracket tip-card">
+    <div class="card-title">★ Key Distinction: Solid vs Fluid</div>
+    <p>A <strong>solid resists shear stress by deforming</strong> to a static equilibrium — loading causes internal shear stresses that balance the applied force. A <strong>fluid cannot resist any shear stress</strong> — it deforms <em>continuously</em> under even the smallest applied shear, no matter how small. This continuous deformation under shear is the defining property of a fluid. Note: this does not mean fluids have no viscosity — viscous effects resist the <em>rate</em> of deformation, but the fluid never reaches static equilibrium under shear.</p>
+  </div>
+
+  <!-- ── CONTINUUM ── -->
+  <h3>The Concept of Continuum</h3>
+
+  <p>At the molecular level, matter is discrete — individual molecules bouncing around with gaps between them. But in engineering, we want to treat fluid properties like density as smooth, continuous functions so we can use calculus. The <strong>continuum assumption</strong> makes this possible.</p>
+
+  <p>Consider measuring density by counting mass in a sample volume of size \(\delta V\):</p>
+
+  <p><strong>Case 1: Volume comparable to intermolecular spacing</strong> (very small \(\delta V\)). The number of molecules inside fluctuates wildly as they move in and out. The measured density \(\rho = \delta m / \delta V\) is noisy and unstable — this is <strong>microscopic uncertainty</strong>.</p>
+
+  <p><strong>Case 2: Volume much larger than intermolecular spacing.</strong> The number of molecules entering roughly equals the number leaving at any instant. The measured density stabilizes to a constant value — fluctuations average out. This is the <strong>continuum regime</strong>.</p>
+
+  <p><strong>Case 3: Volume too large</strong> (macroscopic scale). The density starts reflecting spatial variations across the fluid (e.g., a container with sloshing, spilling fluid) rather than a local point value — this is <strong>macroscopic uncertainty</strong>.</p>
+
+  <div class="card-bracket eq-card">
+    <div class="card-title">Density (Continuum Definition)</div>
+    <p>\[ \rho = \lim_{\delta V \to \delta V^*} \frac{\delta m}{\delta V} \]</p>
+    <div class="var-row">
+      <span class="pill">\(\rho\) — density (kg/m³)</span>
+      <span class="pill">\(\delta m\) — mass in volume element (kg)</span>
+      <span class="pill">\(\delta V\) — volume element (m³)</span>
+      <span class="pill">\(\delta V^*\) — smallest volume for stable density (~\(10^{-9}\) mm³)</span>
+    </div>
+    <p style="margin-top:10px;font-size:13px;"><strong>When to use:</strong> Any problem requiring fluid density as a point property — underlies every governing equation in this course (continuity, momentum, energy).</p>
+    <p style="font-size:13px;"><strong>When NOT to use:</strong> Rarefied gas flows (high altitude, vacuum systems) where the mean free path approaches the characteristic length of the problem. In those cases, molecular dynamics or kinetic theory is needed instead.</p>
+  </div>
+
+  <!-- SVG: Density vs δV conceptual plot -->
+  <div class="figure-box">
+    <svg viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;font-family:'Poppins',sans-serif;">
+      <!-- Axes -->
+      <line x1="60" y1="220" x2="450" y2="220" stroke="#1A2A3A" stroke-width="1.5" marker-end="url(#arrowD)"/>
+      <line x1="60" y1="220" x2="60" y2="20" stroke="#1A2A3A" stroke-width="1.5" marker-end="url(#arrowD)"/>
+      <defs><marker id="arrowD" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#1A2A3A"/></marker></defs>
+      <!-- Axis labels -->
+      <text x="40" y="130" text-anchor="middle" fill="#1A2A3A" font-size="14" font-weight="600" transform="rotate(-90,40,130)">ρ</text>
+      <text x="450" y="240" text-anchor="end" fill="#1A2A3A" font-size="13">δV</text>
+      <!-- Dashed stable density line -->
+      <line x1="60" y1="100" x2="440" y2="100" stroke="#2A6B7C" stroke-width="1" stroke-dasharray="6,4"/>
+      <text x="445" y="97" fill="#2A6B7C" font-size="11">ρ = 1200</text>
+      <!-- Microscopic region: noisy fluctuations -->
+      <polyline points="70,180 80,40 90,160 100,50 110,150 120,70 130,140 140,85 150,120 160,95 170,108 180,102" fill="none" stroke="#FF6B35" stroke-width="2"/>
+      <!-- Stable region -->
+      <polyline points="180,102 200,100 220,100 240,100 260,100 280,100 300,100 320,100" fill="none" stroke="#FF6B35" stroke-width="2"/>
+      <!-- Macroscopic region: gradual drift -->
+      <polyline points="320,100 340,98 360,94 380,88 400,80 420,70" fill="none" stroke="#FF6B35" stroke-width="2"/>
+      <!-- δV* marker -->
+      <line x1="180" y1="220" x2="180" y2="110" stroke="#093C5D" stroke-width="1" stroke-dasharray="3,3"/>
+      <text x="180" y="245" text-anchor="middle" fill="#093C5D" font-size="11" font-weight="600">δV* ≈ 10⁻⁹ mm³</text>
+      <!-- Region labels -->
+      <text x="115" y="30" text-anchor="middle" fill="#7A8FA6" font-size="10">Microscopic</text>
+      <text x="115" y="42" text-anchor="middle" fill="#7A8FA6" font-size="10">uncertainty</text>
+      <text x="250" y="85" text-anchor="middle" fill="#2A6B7C" font-size="11" font-weight="500">Stable ρ</text>
+      <text x="390" y="60" text-anchor="middle" fill="#7A8FA6" font-size="10">Macroscopic</text>
+      <text x="390" y="72" text-anchor="middle" fill="#7A8FA6" font-size="10">uncertainty</text>
+    </svg>
+    <div class="figure-caption">Density measured as a function of sample volume δV. Below δV*, molecular fluctuations dominate. Above δV*, density stabilizes — this is the continuum regime. At very large volumes, spatial non-uniformity introduces macroscopic uncertainty.</div>
+  </div>
+
+  <p>At standard atmospheric conditions, \(\delta V^*_{\text{air}}\) contains approximately \(3 \times 10^7\) molecules — a sufficiently large number for a stable statistical average. Since \(\delta V^*\) is extremely small compared to any engineering dimension, density (and all other fluid properties) can be treated as <strong>smoothly varying functions of position</strong>.</p>
+
+  <div class="card-bracket tip-card">
+    <div class="card-title">★ Why Continuum Matters</div>
+    <p>The continuum assumption is what lets us write <strong>partial derivatives, integrals, and governing PDEs</strong> for fluid flow. Every equation in Ch 3–6 (continuity, momentum, energy, Bernoulli) relies on density, velocity, and pressure being differentiable functions of space and time. Without continuum, we would need molecular dynamics — computationally impractical for engineering-scale problems.</p>
+  </div>
+
+  <!-- ── BRANCHES ── -->
+  <h3>Branches of Fluid Mechanics</h3>
+
+  <p>The field is divided into three branches, each of which we study in this course:</p>
+
+  <!-- SVG: Branches tree -->
+  <div class="figure-box">
+    <svg viewBox="0 0 540 170" xmlns="http://www.w3.org/2000/svg" style="max-width:540px;font-family:'Poppins',sans-serif;">
+      <!-- Root -->
+      <rect x="178" y="10" width="184" height="30" rx="6" fill="#0B2E48"/>
+      <text x="270" y="30" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Fluid Mechanics</text>
+      <!-- Lines -->
+      <line x1="230" y1="40" x2="90" y2="70" stroke="#D0D0D0" stroke-width="1.5"/>
+      <line x1="270" y1="40" x2="270" y2="70" stroke="#D0D0D0" stroke-width="1.5"/>
+      <line x1="310" y1="40" x2="450" y2="70" stroke="#D0D0D0" stroke-width="1.5"/>
+      <!-- Branches -->
+      <rect x="20" y="70" width="140" height="28" rx="5" fill="none" stroke="#2A6B7C" stroke-width="1.5"/>
+      <text x="90" y="89" text-anchor="middle" fill="#2A6B7C" font-size="12" font-weight="600">Hydrostatics</text>
+      <rect x="200" y="70" width="140" height="28" rx="5" fill="none" stroke="#FF6B35" stroke-width="1.5"/>
+      <text x="270" y="89" text-anchor="middle" fill="#FF6B35" font-size="12" font-weight="600">Kinematics</text>
+      <rect x="380" y="70" width="140" height="28" rx="5" fill="none" stroke="#093C5D" stroke-width="1.5"/>
+      <text x="450" y="89" text-anchor="middle" fill="#093C5D" font-size="12" font-weight="600">Fluid Dynamics</text>
+      <!-- Descriptions -->
+      <text x="90" y="115" text-anchor="middle" fill="#6A7A8A" font-size="10">Fluids at rest or</text>
+      <text x="90" y="127" text-anchor="middle" fill="#6A7A8A" font-size="10">constant velocity</text>
+      <text x="90" y="148" text-anchor="middle" fill="#093C5D" font-size="10" font-weight="500">Ch 1–2</text>
+      <text x="270" y="115" text-anchor="middle" fill="#6A7A8A" font-size="10">Geometry of</text>
+      <text x="270" y="127" text-anchor="middle" fill="#6A7A8A" font-size="10">fluid motion</text>
+      <text x="270" y="148" text-anchor="middle" fill="#093C5D" font-size="10" font-weight="500">Ch 4</text>
+      <text x="450" y="115" text-anchor="middle" fill="#6A7A8A" font-size="10">Forces causing</text>
+      <text x="450" y="127" text-anchor="middle" fill="#6A7A8A" font-size="10">accelerated motion</text>
+      <text x="450" y="148" text-anchor="middle" fill="#093C5D" font-size="10" font-weight="500">Ch 5–6</text>
+    </svg>
+    <div class="figure-caption">The three branches of fluid mechanics and their corresponding chapters in this course.</div>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Hydrostatics</div>
+    <p>The study of fluids <strong>at rest</strong> or moving with <strong>constant velocity</strong> (no acceleration). Covers pressure distribution, forces on submerged surfaces, and buoyancy. Focus of Ch 1–2.</p>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Kinematics</div>
+    <p>The study of the <strong>geometry of fluid motion</strong> — velocity fields, streamlines, pathlines, and streaklines — without considering the forces that cause the motion. Covered beginning in Ch 4.</p>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Fluid Dynamics</div>
+    <p>The study of the <strong>forces that cause accelerated motion</strong> in fluids. This is where we develop and apply the momentum and energy equations using the Reynolds Transport Theorem (Ch 5–6).</p>
+  </div>
+
+  <!-- Remaining Ch 1 lectures -->
+
+</section>
