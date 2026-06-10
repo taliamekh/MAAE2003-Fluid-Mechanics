@@ -232,18 +232,19 @@
 
   <!-- ═══ PENDING CHAPTERS ═══ -->
 
+  <!-- ═══ CH 5 CARD ═══ -->
   <h2 style="color:var(--ch5-title);">Ch 5 &mdash; Reynolds Transport Theorem</h2>
+  <div class="card-bracket" style="border-left:3.5px solid var(--ch5-title);">
+    <div class="eq-name" style="color:var(--ch5-title);">Ch 5 &mdash; Reynolds Transport Theorem</div>
 
-  <div class="summary-cluster">
-    <div class="cluster-title" style="color:var(--ch5-title);">Linear Momentum Equation</div>
     <p><strong style="color:var(--ch5-title)">Key ideas:</strong></p>
     <ul>
-      <li>Set \(B = m\vec{V}\), \(\beta = \vec{V}\) in the RTT &rArr; momentum equation</li>
-      <li>General form: \(\sum \vec{F}_{\text{ext}} = \frac{\partial}{\partial t}\int_{\text{CV}} \vec{V}\rho\,d\forall + \int_{\text{CS}} \vec{V}\rho(\vec{V}\cdot\hat{n})\,dA\)</li>
-      <li>Steady ideal flow: \(\sum \vec{F}_{\text{ext}} = \sum \vec{V}\rho(\vec{V}\cdot\hat{n})A\)</li>
-      <li>\(\vec{V}\cdot\hat{n} < 0\) at inlets, \(> 0\) at outlets &mdash; handles signs automatically</li>
-      <li>LHS from FBD: pressure + weight + normal + shear forces</li>
-      <li>Moving CV at constant \(\vec{V}_b\): replace \(\vec{V}\) with \(\vec{V}_{f/b} = \vec{V}_{\text{flow}} - \vec{V}_b\)</li>
+      <li>&rarr; The RTT rewrites any system law (mass, momentum, energy) in control-volume form: storage inside the CV + net flux through the CS</li>
+      <li>&rarr; For linear momentum: set \(B = m\vec{V}\), \(\beta = \vec{V}\) &rArr; \(\sum \vec{F}_{\text{ext}} = \frac{\partial}{\partial t}\int_{\text{CV}} \vec{V}\rho\,d\forall + \int_{\text{CS}} \vec{V}\rho(\vec{V}\cdot\hat{n})\,dA\)</li>
+      <li>&rarr; Steady ideal flow collapses to a discrete-port sum: \(\sum \vec{F}_{\text{ext}} = \sum \vec{V}\rho(\vec{V}\cdot\hat{n})A\)</li>
+      <li>&rarr; \(\vec{V}\cdot\hat{n} &lt; 0\) at inlets, \(&gt; 0\) at outlets &mdash; the dot product handles signs automatically</li>
+      <li>&rarr; LHS from a free-body diagram: pressure + weight + normal + shear forces on the CV</li>
+      <li>&rarr; Moving CV at constant \(\vec{V}_b\): replace all velocities with \(\vec{V}_{f/b} = \vec{V}_{\text{flow}} - \vec{V}_b\)</li>
     </ul>
 
     <p><strong style="color:var(--ch5-title)">When to use what:</strong></p>
