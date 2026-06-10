@@ -200,41 +200,99 @@
       <div class="figure-caption">CV selection and force components for the fire hose problem. (Slide 12)</div>
     </div>
 
+    <div class="thought-box">
+      <h4>🧠 Thought process</h4>
+      <p>Three stages. First, this is a <strong>multi-outlet</strong> problem: one inlet (A, entering at 45&deg; below horizontal) and two outlets (B straight down, C at 60&deg;). Since ideal steady flow with atmospheric pressure everywhere, Bernoulli tells us all three speeds are <em>equal</em>. Second, convert BG units carefully (gal/min &rarr; ft&sup3;/s, inches &rarr; feet). Third, apply the momentum equation component by component (x and y separately), using \(\rho Q V\) for each port&rsquo;s flux.</p>
+      <p>Watch the units: with \(\rho\) in slug/ft&sup3; and \(V\) in ft/s, \(\rho Q V\) comes out in lbf directly &mdash; no \(g_c\) needed in the slug system.</p>
+    </div>
+
     <details class="solution-toggle">
-      <summary>Solution</summary>
+      <summary>Show full solution</summary>
       <div class="solution-body">
 
-        <p><strong>Step 1 &mdash; Flow rates and velocities.</strong></p>
-        <p>Convert the discharge:</p>
-        \[ Q_A = \frac{180\;\text{gal}}{\text{min}} \times \frac{1\;\text{min}}{60\;\text{s}} \times \frac{1\;\text{ft}^3}{7.48\;\text{gal}} = 0.4011\;\text{ft}^3/\text{s} \]
-        <p>Nozzle area and velocity at A (diameter = 1 in = 1/12 ft):</p>
-        \[ A_A = \pi\!\left(\frac{0.5}{12}\right)^{\!2} = 5.454 \times 10^{-3}\;\text{ft}^2 \]
-        \[ V_A = \frac{Q_A}{A_A} = \frac{0.4011}{5.454 \times 10^{-3}} = 73.53\;\text{ft/s} \]
-        <p>Flow splits: \(Q_B = \tfrac{3}{4}Q_A = 0.3008\;\text{ft}^3/\text{s}\), \(Q_C = \tfrac{1}{4}Q_A = 0.1003\;\text{ft}^3/\text{s}\).</p>
-        <p>For ideal flow (no friction losses), Bernoulli along each streamline from A&nbsp;&rarr;&nbsp;B and A&nbsp;&rarr;&nbsp;C with atmospheric pressure everywhere gives \(V_B = V_C = V_A = 73.53\;\text{ft/s}\).</p>
-        <p>Density: \(\rho = \gamma/g = 62.4/32.2 = 1.938\;\text{slug/ft}^3\).</p>
+        <p class="given"><strong>Given:</strong> \(Q_A = 180\;\text{gal/min}\), \(D_A = 1\;\text{in}\), \(\gamma_{\text{water}} = 62.4\;\text{lbf/ft}^3\). Flow splits: &frac34; to B (&minus;y), &frac14; to C (60&deg; from +x). Inlet at &minus;45&deg; from +x. Ideal steady flow.</p>
 
-        <p><strong>Step 2 &mdash; Momentum equation, x-component.</strong></p>
-        <p>Select CV around the surface. For steady ideal flow:</p>
-        \[ \overset{+}{\rightarrow}\;\sum F_x = \sum V_x\;\rho\,(\vec{V}\cdot\hat{n})\,A \]
-        <p>Evaluate each port. The inlet flow direction is at \(-45°\) (below the +x axis):</p>
-        \[ -F_x = \underbrace{Q_B V_B \cos(-90°)}_{=\;0} + Q_C V_C \cos(60°) - Q_A V_A \cos(-45°) \]
-        \[ -F_x = 0 + (0.1003)(73.53)\cos 60° - (0.4011)(73.53)\cos 45° \]
-        \[ -F_x = 3.69 - 20.86 = -17.17 \]
-        <p>Wait &mdash; let me redo this more carefully using the \(\rho\) factor. Each flux term is \(V_x \cdot \rho \cdot Q\):</p>
-        \[ -F_x = \rho\bigl[Q_B V_B \cos(-90°) + Q_C V_C \cos(60°) - Q_A V_A \cos(45°)\bigr] \]
-        \[ = 1.938\bigl[0 + (0.1003)(73.53)(0.5) - (0.4011)(73.53)(0.7071)\bigr] \]
-        \[ = 1.938\bigl[3.688 - 20.86\bigr] = 1.938(-17.17) = -33.3\;\text{lb} \]
-        \[ \boxed{F_x = 33.3\;\text{lb} \;\leftarrow} \]
+        <div class="formulas-needed">
+          <h4>📋 Formulas Needed</h4>
+          <ol>
+            <li><strong>Flow rate / velocity</strong> &mdash; \(Q = VA\), \(A = \pi D^2/4\)</li>
+            <li><strong>Bernoulli (ideal flow)</strong> &mdash; equal speeds at all ports when \(p\) = atm everywhere &rarr; sheet #17</li>
+            <li><strong>Momentum equation (steady, ideal, discrete)</strong> &mdash; \(\sum \vec{F}_{\text{ext}} = \sum \vec{V}\,\rho\,(\vec{V}\cdot\hat{n})\,A\) &rarr; sheet #18</li>
+          </ol>
+        </div>
 
-        <p><strong>Step 3 &mdash; y-component.</strong></p>
-        \[ F_y = \rho\bigl[Q_B V_B \sin(-90°) + Q_C V_C \sin(60°) - Q_A V_A \sin(-45°)\bigr] \]
-        \[ = 1.938\bigl[(0.3008)(73.53)(-1) + (0.1003)(73.53)(0.8660) - (0.4011)(73.53)(-0.7071)\bigr] \]
-        \[ = 1.938\bigl[-22.12 + 6.389 + 20.86\bigr] = 1.938(5.12) = 9.92\;\text{lb} \]
-        \[ \boxed{F_y = 9.92\;\text{lb} \;\uparrow} \]
+        <div class="step-block">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Convert units and find velocities</h4>
+            <p>First convert the volume flow rate from gal/min to ft&sup3;/s. There are 7.48 gal in 1 ft&sup3;:</p>
+            \[ Q_A = \frac{180\;\text{gal}}{\text{min}} \times \frac{1\;\text{min}}{60\;\text{s}} \times \frac{1\;\text{ft}^3}{7.48\;\text{gal}} = 0.4011\;\text{ft}^3/\text{s} \]
+            <p>Nozzle area (convert diameter: 1 in = 1/12 ft, so radius = 0.5/12 ft):</p>
+            \[ A_A = \pi\!\left(\frac{0.5}{12}\right)^{\!2} = 5.454 \times 10^{-3}\;\text{ft}^2 \]
+            <p>Velocity at the nozzle exit (inlet A):</p>
+            \[ V_A = \frac{Q_A}{A_A} = \frac{0.4011}{5.454 \times 10^{-3}} = 73.53\;\text{ft/s} \]
+            <p>The flow splits into two paths. The volume flow rates at B and C are:</p>
+            \[ Q_B = \tfrac{3}{4}Q_A = 0.3008\;\text{ft}^3/\text{s}, \qquad Q_C = \tfrac{1}{4}Q_A = 0.1003\;\text{ft}^3/\text{s} \]
+          </div>
+        </div>
 
-        <p><strong>Resultant:</strong></p>
-        \[ |\vec{F}| = \sqrt{F_x^2 + F_y^2} = \sqrt{33.3^2 + 9.92^2} = \boxed{34.7\;\text{lb}} \]
+        <div class="step-block">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Apply Bernoulli &mdash; equal speeds</h4>
+            <p>For ideal flow (no friction losses), Bernoulli along each streamline from A&nbsp;&rarr;&nbsp;B and A&nbsp;&rarr;&nbsp;C with atmospheric pressure everywhere gives:</p>
+            \[ V_B = V_C = V_A = 73.53\;\text{ft/s} \]
+            <p>This is the key simplification: in ideal free jets with constant pressure, <strong>speed is conserved</strong> &mdash; only direction changes.</p>
+            <p>Also compute the density from specific weight: \(\rho = \gamma/g = 62.4/32.2 = 1.938\;\text{slug/ft}^3\).</p>
+          </div>
+        </div>
+
+        <div class="step-block">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>x-momentum equation</h4>
+            <p>Select CV around the fixed surface. For steady ideal flow, the momentum equation is:</p>
+            \[ \overset{+}{\rightarrow}\;\sum F_x = \sum_{\text{ports}} V_x\;\rho\,(\vec{V}\cdot\hat{n})\,A \]
+            <p>The <strong>only external force</strong> in the x-direction is the surface reaction \(F_x\) (we assume it acts in the &minus;x direction). Pressure forces are zero because all ports are open to atmosphere.</p>
+            <p>Now evaluate each port&rsquo;s momentum flux (remember: \(\vec{V}\cdot\hat{n}\) is &minus; at inlets, + at outlets):</p>
+            <p>&bull; <strong>Inlet A</strong> (enters at &minus;45&deg;): \(V_{Ax} = V_A\cos 45° = 52.0\), \(\vec{V}\cdot\hat{n} = -V_A\), flux = \(V_{Ax}(-\rho V_A A_A) = -\rho Q_A V_A \cos 45°\)</p>
+            <p>&bull; <strong>Outlet B</strong> (straight down, &minus;y): \(V_{Bx} = 0\), so x-flux = 0</p>
+            <p>&bull; <strong>Outlet C</strong> (at 60&deg;): \(V_{Cx} = V_C\cos 60°\), \(\vec{V}\cdot\hat{n} = +V_C\), flux = \(\rho Q_C V_C \cos 60°\)</p>
+            <p>Putting it together:</p>
+            \[ -F_x = \rho\bigl[\underbrace{Q_B V_B \cos(-90°)}_{=\;0} + Q_C V_C \cos 60° - Q_A V_A \cos 45°\bigr] \]
+            \[ = 1.938\bigl[0 + (0.1003)(73.53)(0.5) - (0.4011)(73.53)(0.7071)\bigr] \]
+            \[ = 1.938\bigl[3.688 - 20.86\bigr] = 1.938(-17.17) = -33.3\;\text{lb} \]
+            \[ \boxed{F_x = 33.3\;\text{lb} \;\leftarrow} \]
+          </div>
+        </div>
+
+        <div class="step-block">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>y-momentum equation</h4>
+            <p>Same approach, but now the y-components. The surface reaction \(F_y\) is the unknown.</p>
+            <p>&bull; <strong>Inlet A</strong>: \(V_{Ay} = V_A \sin(-45°) = -V_A \cdot 0.7071\), flux = \(-\rho Q_A V_A \sin(-45°)\)</p>
+            <p>&bull; <strong>Outlet B</strong> (&minus;y direction): \(V_{By} = -V_B\), flux = \(\rho Q_B V_B(-1)\)</p>
+            <p>&bull; <strong>Outlet C</strong> (60&deg;): \(V_{Cy} = V_C\sin 60°\), flux = \(\rho Q_C V_C \sin 60°\)</p>
+            \[ F_y = \rho\bigl[Q_B V_B \sin(-90°) + Q_C V_C \sin 60° - Q_A V_A \sin(-45°)\bigr] \]
+            \[ = 1.938\bigl[(0.3008)(73.53)(-1) + (0.1003)(73.53)(0.8660) - (0.4011)(73.53)(-0.7071)\bigr] \]
+            \[ = 1.938\bigl[-22.12 + 6.389 + 20.86\bigr] = 1.938(5.12) = 9.92\;\text{lb} \]
+            \[ \boxed{F_y = 9.92\;\text{lb} \;\uparrow} \]
+          </div>
+        </div>
+
+        <div class="answer-block">
+          <h4>✔ Answer</h4>
+          <p class="answer-line">\(F_x = 33.3\;\text{lb}\) (&larr;), \(F_y = 9.92\;\text{lb}\) (&uarr;)</p>
+          <p class="answer-line">\(|\vec{F}| = \sqrt{33.3^2 + 9.92^2} = \boxed{34.7\;\text{lb}}\)</p>
+        </div>
+
+        <div class="card-bracket tip-card" style="margin-top:12px">
+          <div class="eq-name" style="color:var(--tip)">⚠ Common trap</div>
+          <p>Don&rsquo;t forget the \(\rho\) factor in each momentum flux term! The quantity \(Q \cdot V\) has units of ft&sup5;/s&sup2;, which is <strong>not</strong> a force. You need \(\rho Q V\) (slug/ft&sup3; &times; ft&sup3;/s &times; ft/s = slug&middot;ft/s&sup2; = lbf) to get force. Also, angles must be measured from the same reference axis consistently.</p>
+        </div>
+
+        <p class="concept-bridge" style="color:var(--example);margin-top:10px"><strong>Concept bridge:</strong> Bernoulli (sheet #17) provides the speed equality, and the momentum equation (sheet #18) converts that velocity information into the force on the surface.</p>
       </div>
     </details>
   </div>
@@ -272,33 +330,88 @@
     <div class="eq-name" style="color:var(--example)">Example &mdash; Hose Hitting a Moving Truck</div>
     <p>A hose with nozzle diameter \(D = 50\;\text{mm}\) discharges water at \(Q = 8\;\text{L/s}\). The stream hits the windshield of a truck moving at \(5\;\text{m/s}\) toward the hose. The deflected stream leaves at \(40°\) above the horizontal. Determine the force on the windshield. Assume steady ideal flow; \(\rho = 1000\;\text{kg/m}^3\).</p>
 
+    <div class="thought-box">
+      <h4>🧠 Thought process</h4>
+      <p>This is a <strong>moving CV</strong> problem because the truck is moving. The key step is replacing every velocity in the momentum equation with the <em>relative</em> velocity \(\vec{V}_{f/b} = \vec{V}_{\text{flow}} - \vec{V}_b\). Since the truck moves <em>toward</em> the hose, the relative speed is the <em>sum</em> of the jet speed and truck speed. For ideal flow with equal inlet/outlet areas, the relative speed is the same at both ports &mdash; only direction changes.</p>
+      <p>Forces remain in the absolute frame (the windshield force doesn&rsquo;t change reference), but the fluxes use relative velocities because the CV&rsquo;s mass flow depends on how fast the fluid enters/leaves <em>relative to the moving surface</em>.</p>
+    </div>
+
     <details class="solution-toggle">
-      <summary>Solution</summary>
+      <summary>Show full solution</summary>
       <div class="solution-body">
 
-        <p><strong>Step 1 &mdash; Absolute velocity of the jet.</strong></p>
-        \[ V = \frac{Q}{\pi D^2/4} = \frac{8 \times 10^{-3}}{\pi(0.05)^2/4} = 4.074\;\text{m/s} \]
+        <p class="given"><strong>Given:</strong> \(D = 50\;\text{mm}\), \(Q = 8\;\text{L/s} = 8 \times 10^{-3}\;\text{m}^3/\text{s}\), \(V_b = 5\;\text{m/s}\) (truck, toward hose), deflection angle = 40&deg;, \(\rho = 1000\;\text{kg/m}^3\). Steady ideal flow.</p>
 
-        <p><strong>Step 2 &mdash; Relative velocity.</strong> Attach the CV to the truck (moving left at 5 m/s). The jet moves right at 4.074 m/s. In the truck&rsquo;s frame:</p>
-        \[ V_{f/A} = V_{\text{flow}} - V_b = 4.074 - (-5) = 9.074\;\text{m/s} \]
-        <p>(The truck moves at \(-5\) m/s in our sign convention since it heads toward the hose.)</p>
-        <p>For ideal flow with equal inlet and outlet areas, \(V_{f/B} = V_{f/A} = 9.074\;\text{m/s}\).</p>
+        <div class="formulas-needed">
+          <h4>📋 Formulas Needed</h4>
+          <ol>
+            <li><strong>Flow rate / velocity</strong> &mdash; \(V = Q/A\), \(A = \pi D^2/4\)</li>
+            <li><strong>Relative velocity</strong> &mdash; \(\vec{V}_{f/b} = \vec{V}_{\text{flow}} - \vec{V}_b\)</li>
+            <li><strong>Moving-CV momentum (steady, ideal)</strong> &mdash; \(\sum \vec{F}_{\text{ext}} = \sum \vec{V}_{f/b}\,\rho\,(\vec{V}_{f/b}\cdot\hat{n})\,A\) &rarr; sheet #19</li>
+          </ol>
+        </div>
 
-        <p><strong>Step 3 &mdash; x-momentum (moving CV).</strong></p>
-        \[ \sum F_x = V_{f/B}\cos 40°\;(\rho V_{f/B} A_B) - V_{f/A}\;(\rho V_{f/A} A_A) \]
-        <p>With \(A_A = A_B = \pi(0.025)^2 = 1.9635 \times 10^{-3}\;\text{m}^2\):</p>
-        \[ \sum F_x = (9.074\cos 40°)(1000)(9.074)(1.9635\times10^{-3}) - (9.074)(1000)(9.074)(1.9635\times10^{-3}) \]
-        \[ = \rho\,V_{f}^{2}\,A\,(\cos 40° - 1) = (1000)(9.074)^2(1.9635\times10^{-3})(0.766 - 1) \]
-        \[ = 161.7 \times (-0.234) = -37.83\;\text{N} \]
-        \[ \boxed{F_x = 37.83\;\text{N}\;\leftarrow} \]
+        <div class="step-block">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Absolute velocity of the jet</h4>
+            <p>From the nozzle discharge and area:</p>
+            \[ A = \frac{\pi D^2}{4} = \frac{\pi(0.05)^2}{4} = 1.9635 \times 10^{-3}\;\text{m}^2 \]
+            \[ V = \frac{Q}{A} = \frac{8 \times 10^{-3}}{1.9635 \times 10^{-3}} = 4.074\;\text{m/s} \]
+            <p>This is the speed of the water in the <em>lab frame</em> (absolute).</p>
+          </div>
+        </div>
 
-        <p><strong>Step 4 &mdash; y-momentum.</strong></p>
-        \[ \sum F_y = V_{f/B}\sin 40°\;(\rho V_{f/B} A_B) = \rho\,V_{f}^{2}\,A\,\sin 40° \]
-        \[ = (1000)(9.074)^2(1.9635\times10^{-3})(0.6428) = 103.9\;\text{N} \]
-        \[ \boxed{F_y = 103.9\;\text{N}\;\uparrow} \]
+        <div class="step-block">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Compute relative velocity</h4>
+            <p>Attach the CV to the truck. Take rightward as positive. The jet moves right at \(+4.074\;\text{m/s}\); the truck moves <em>left</em> at \(-5\;\text{m/s}\) (toward the hose).</p>
+            \[ V_{f/b} = V_{\text{flow}} - V_b = 4.074 - (-5) = 9.074\;\text{m/s} \]
+            <p>The truck is heading <em>into</em> the jet, so the water approaches the windshield faster than in the lab frame. This makes intuitive sense: if you drive into rain, it hits harder.</p>
+            <p>For ideal flow with equal inlet and outlet areas, \(V_{f/B} = V_{f/A} = 9.074\;\text{m/s}\) (speed conserved, only direction changes).</p>
+          </div>
+        </div>
 
-        <p><strong>Resultant:</strong></p>
-        \[ |\vec{F}| = \sqrt{37.83^2 + 103.9^2} = \boxed{111\;\text{N}} \]
+        <div class="step-block">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>x-momentum (moving CV)</h4>
+            <p>With the moving-CV equation, every \(V\) is replaced by \(V_{f/b}\). The inlet enters horizontally (&minus;x in the truck frame), the outlet leaves at 40&deg; above horizontal.</p>
+            <p>The x-component of the momentum flux at each port:</p>
+            <p>&bull; <strong>Inlet:</strong> \(V_{f/A,x} = V_{f/A}\) (horizontal), dot product negative (inflow)</p>
+            <p>&bull; <strong>Outlet:</strong> \(V_{f/B,x} = V_{f/B}\cos 40°\), dot product positive (outflow)</p>
+            \[ \sum F_x = \rho\,V_f^2\,A\,(\cos 40° - 1) \]
+            <p>Substituting:</p>
+            \[ = (1000)(9.074)^2(1.9635 \times 10^{-3})(0.766 - 1) \]
+            \[ = 161.7 \times (-0.234) = -37.83\;\text{N} \]
+            \[ \boxed{F_x = 37.83\;\text{N}\;\leftarrow} \]
+          </div>
+        </div>
+
+        <div class="step-block">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>y-momentum (moving CV)</h4>
+            <p>The inlet has no y-component (horizontal jet), so only the outlet contributes to y-flux:</p>
+            \[ \sum F_y = V_{f/B}\sin 40°\;(\rho\,V_{f/B}\,A_B) = \rho\,V_f^2\,A\,\sin 40° \]
+            \[ = (1000)(9.074)^2(1.9635 \times 10^{-3})(0.6428) = 103.9\;\text{N} \]
+            \[ \boxed{F_y = 103.9\;\text{N}\;\uparrow} \]
+          </div>
+        </div>
+
+        <div class="answer-block">
+          <h4>✔ Answer</h4>
+          <p class="answer-line">\(F_x = 37.83\;\text{N}\) (&larr;), \(F_y = 103.9\;\text{N}\) (&uarr;)</p>
+          <p class="answer-line">\(|\vec{F}| = \sqrt{37.83^2 + 103.9^2} = \boxed{111\;\text{N}}\)</p>
+        </div>
+
+        <div class="card-bracket tip-card" style="margin-top:12px">
+          <div class="eq-name" style="color:var(--tip)">⚠ Common trap</div>
+          <p>The sign of \(V_b\) matters critically. When the truck moves <em>toward</em> the jet, \(V_b\) is negative (opposite to the jet direction), so \(V_{f/b} = V - (-|V_b|) = V + |V_b|\). Students often subtract instead of add, getting a relative velocity <em>smaller</em> than the absolute one &mdash; which makes no physical sense for a vehicle driving into a stream.</p>
+        </div>
+
+        <p class="concept-bridge" style="color:var(--example);margin-top:10px"><strong>Concept bridge:</strong> the moving-CV momentum equation (sheet #19) requires replacing all \(V\) with \(V_{f/b}\), while the forces stay in the absolute frame.</p>
       </div>
     </details>
   </div>
@@ -319,28 +432,87 @@
       <div class="figure-caption">CV and FBD for the concrete cart: cable tension T, weight W, normal force N. (Slide 19)</div>
     </div>
 
+    <div class="thought-box">
+      <h4>🧠 Thought process</h4>
+      <p>This is a <strong>one-inlet, no-outlet</strong> problem. Concrete enters the CV (the cart) but doesn&rsquo;t leave &mdash; it accumulates. For the <em>instant</em> shown, we treat it as steady flow. The FBD has three forces: cable tension \(T\) (horizontal), weight \(W\) (down), and scale normal force \(N\) (up). Since there&rsquo;s only one port, the RHS of the momentum equation has just one flux term &mdash; from the inlet.</p>
+      <p>The stream enters at 60&deg; below horizontal, so it carries horizontal momentum (resisted by the cable) <em>and</em> downward momentum (adds to the scale reading). The angle decomposition is the critical step.</p>
+    </div>
+
     <details class="solution-toggle">
-      <summary>Solution</summary>
+      <summary>Show full solution</summary>
       <div class="solution-body">
-        <p>The CV encloses the cart and concrete. There is <strong>one inlet</strong> (the stream) and <strong>no outlet</strong> (concrete accumulates, but we assume steady flow at this instant).</p>
 
-        <p><strong>x-momentum:</strong></p>
-        \[ \sum F_x = \sum_{\text{CS}} v_x\;\rho\;\vec{v}\cdot\vec{A} \]
-        <p>The only CS flux is at the inlet. The stream enters at angle \(\alpha = 60°\) below horizontal, so \(v_{1x} = v_1\cos\alpha\), and the dot product \(\vec{v}\cdot\hat{n}\) is \(-v_1\) (flow into the CV):</p>
-        \[ T = -v_{1x} \cdot \rho \cdot v_1 \cdot A_1 = -v_1\cos\alpha \cdot \rho v_1 A_1 = -\rho A_1 v_1^2 \cos\alpha \]
-        \[ T = -(1700)(0.12)(3)^2\cos 60° = -(1700)(0.12)(9)(0.5) = -918\;\text{N} \]
-        <p>The negative sign means T acts <strong>opposite</strong> to our assumed direction &mdash; the cable is in <strong>tension</strong> (pulls the cart to the right, resisting the horizontal momentum of the incoming stream).</p>
-        \[ \boxed{T = 918\;\text{N (tension)}} \]
+        <p class="given"><strong>Given:</strong> \(\rho = 1700\;\text{kg/m}^3\), \(A = 0.12\;\text{m}^2\), \(v_1 = 3\;\text{m/s}\), \(\alpha = 60°\) (below horizontal), \(W = 3600\;\text{N}\). Steady flow. Find: cable tension \(T\) and scale reading \(N\).</p>
 
-        <p><strong>y-momentum:</strong></p>
-        \[ N - W = +v_{1y}\;\rho\;v_1\;A_1 \]
-        <p>The stream enters with a downward vertical component \(v_{1y} = -v_1\sin\alpha\), so the flux brings <em>downward</em> momentum into the CV:</p>
-        \[ N - W = -(-v_1\sin\alpha)(\rho v_1 A_1) = +\rho A_1 v_1^2 \sin\alpha \]
-        <p>Wait &mdash; let me be careful. The dot product at the inlet is \(\vec{v}\cdot\hat{n} = -v_1\) (inflow), so the y-flux is \(v_{1y}(-\rho v_1 A_1)\). With \(v_{1y} = -v_1 \sin\alpha\) (downward):</p>
-        \[ N - W = (-v_1\sin\alpha)(-\rho v_1 A_1) = \rho A_1 v_1^2 \sin\alpha \]
-        \[ N = W + \rho A_1 v_1^2 \sin\alpha = 3600 + (1700)(0.12)(9)\sin 60° = 3600 + 1590 = 5190\;\text{N} \]
-        \[ \boxed{N = 5190\;\text{N} \;\text{(scale reads 5190 N)}} \]
-        <p>The scale reads <em>more</em> than the weight because it also supports the downward momentum of the incoming concrete stream.</p>
+        <div class="formulas-needed">
+          <h4>📋 Formulas Needed</h4>
+          <ol>
+            <li><strong>Mass flow rate</strong> &mdash; \(\dot{m} = \rho A v_1\)</li>
+            <li><strong>Momentum equation (steady)</strong> &mdash; \(\sum \vec{F}_{\text{ext}} = \sum \vec{V}\,\rho\,(\vec{V}\cdot\hat{n})\,A\) &rarr; sheet #18</li>
+          </ol>
+        </div>
+
+        <div class="step-block">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Compute the mass flow rate</h4>
+            <p>The mass flow rate of the incoming concrete stream is:</p>
+            \[ \dot{m} = \rho A v_1 = (1700)(0.12)(3) = 612\;\text{kg/s} \]
+            <p>This is a large mass flow &mdash; concrete is dense and the stream is fast.</p>
+          </div>
+        </div>
+
+        <div class="step-block">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Draw the free-body diagram</h4>
+            <p>The CV encloses the cart and concrete inside it. External forces acting on the CV:</p>
+            <p>&bull; \(T\) = cable tension (assume acting to the left, opposing the incoming horizontal momentum)</p>
+            <p>&bull; \(W = 3600\;\text{N}\) (weight, downward)</p>
+            <p>&bull; \(N\) = normal force from the scale (upward)</p>
+            <p>The only momentum flux is at the <strong>inlet</strong> (there is no outlet). The dot product \(\vec{v}\cdot\hat{n} = -v_1\) because flow enters the CV (opposes the outward normal).</p>
+          </div>
+        </div>
+
+        <div class="step-block">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>x-momentum &rarr; cable tension T</h4>
+            <p>Take rightward as positive. The stream has a horizontal velocity component \(v_{1x} = v_1 \cos\alpha\). The cable tension \(T\) acts to the left (&minus;x). The momentum flux at the inlet is:</p>
+            \[ -T = v_{1x} \cdot (-\rho v_1 A) = -\rho A v_1^2 \cos\alpha \]
+            <p>Substituting values:</p>
+            \[ -T = -(1700)(0.12)(3)^2 \cos 60° = -(1700)(0.12)(9)(0.5) = -918\;\text{N} \]
+            <p>So \(T = 918\;\text{N}\). The positive value confirms the cable is in tension, pulling the cart to the right to resist the horizontal push from the incoming stream.</p>
+            \[ \boxed{T = 918\;\text{N (tension)}} \]
+          </div>
+        </div>
+
+        <div class="step-block">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>y-momentum &rarr; scale reading N</h4>
+            <p>Take upward as positive. External forces: \(+N\) (up) and \(-W\) (down). The stream enters with downward component \(v_{1y} = -v_1 \sin\alpha\):</p>
+            \[ N - W = v_{1y} \cdot (-\rho v_1 A) = (-v_1 \sin\alpha)(-\rho v_1 A) = +\rho A v_1^2 \sin\alpha \]
+            <p>Substituting:</p>
+            \[ N = W + \rho A v_1^2 \sin\alpha = 3600 + (1700)(0.12)(9)\sin 60° \]
+            \[ = 3600 + 1590 = 5190\;\text{N} \]
+            <p>The scale reads <em>more</em> than the weight because it must also support the downward momentum carried by the incoming concrete stream.</p>
+            \[ \boxed{N = 5190\;\text{N}\;\text{(scale reads 5190 N)}} \]
+          </div>
+        </div>
+
+        <div class="answer-block">
+          <h4>✔ Answer</h4>
+          <p class="answer-line">\(T = 918\;\text{N}\) (cable tension)</p>
+          <p class="answer-line">\(N = 5190\;\text{N}\) (scale reading)</p>
+        </div>
+
+        <div class="card-bracket tip-card" style="margin-top:12px">
+          <div class="eq-name" style="color:var(--tip)">⚠ Common trap</div>
+          <p>There is <strong>no outlet</strong>! Students often try to add an outlet flux of zero or accidentally double-count. Since the concrete stays in the cart, the RHS of the momentum equation has only the single <strong>inlet</strong> flux term. Also, the angle \(\alpha\) is measured from the <em>horizontal</em>, so the x-component uses \(\cos\alpha\) and the y-component uses \(\sin\alpha\) &mdash; don&rsquo;t swap them.</p>
+        </div>
+
+        <p class="concept-bridge" style="color:var(--example);margin-top:10px"><strong>Concept bridge:</strong> the momentum equation (sheet #18) with only one port is the simplest case &mdash; no outlet means only inlet flux on the RHS. The FBD approach separates x and y neatly.</p>
       </div>
     </details>
   </div>
@@ -361,41 +533,104 @@
       <div class="figure-caption">CV free-body diagram: hydrostatic forces F_A and F_B, gate reaction F_G, weight W, normal N. (Slide 24)</div>
     </div>
 
+    <div class="thought-box">
+      <h4>🧠 Thought process</h4>
+      <p>Two stages. First, Bernoulli from the still water upstream (point 1, \(V \approx V_A\), \(P = P_{\text{atm}}\)) to the fast water downstream (point 2, \(V_B\)) gives the <em>difference</em> of squared velocities. Second, continuity relates \(V_A\) and \(V_B\) through the depths. Together they give both velocities. Third, the momentum equation with <strong>hydrostatic pressure forces</strong> on the CV faces gives the gate force.</p>
+      <p>Watch the units: speed must be in ft/s, densities in slug/ft&sup3; so that \(\tfrac{1}{2}\rho V^2\) comes out in lbf/ft&sup2; directly &mdash; no \(g_c\) needed in the slug system. The pressure forces on the CV come from <strong>hydrostatics</strong> (triangular pressure distributions), not the momentum flux.</p>
+    </div>
+
     <details class="solution-toggle">
-      <summary>Solution</summary>
+      <summary>Show full solution</summary>
       <div class="solution-body">
-        <p>This problem combines <strong>Bernoulli</strong> (to find velocities) with the <strong>momentum equation</strong> (to find the gate force). It also uses <strong>hydrostatics</strong> for the pressure forces on the CV faces.</p>
 
-        <p><strong>Step 1 &mdash; Bernoulli between &#9312; and &#9313;.</strong></p>
-        <p>Both free surfaces are at atmospheric pressure (\(p_1 = p_2 = 0\) gage). Take the datum at the channel bed:</p>
-        \[ \frac{p_1}{\gamma} + \frac{V_A^2}{2g} + z_1 = \frac{p_2}{\gamma} + \frac{V_B^2}{2g} + z_2 \]
-        \[ 0 + \frac{V_A^2}{2(32.2)} + 10 = 0 + \frac{V_B^2}{2(32.2)} + 2 \]
-        \[ V_B^2 - V_A^2 = 2(32.2)(8) = 515.2\;\text{(ft/s)}^2 \]
+        <p class="given"><strong>Given:</strong> Upstream depth \(h_A = 10\;\text{ft}\), downstream depth \(h_B = 2\;\text{ft}\), channel width \(w = 5\;\text{ft}\), \(\gamma_{\text{water}} = 62.4\;\text{lbf/ft}^3\), \(g = 32.2\;\text{ft/s}^2\). Steady ideal flow. Find: force on the gate \(F_G\).</p>
 
-        <p><strong>Step 2 &mdash; Continuity.</strong></p>
-        <p>Width \(w = 5\;\text{ft}\). Areas: \(A_A = 10 \times 5 = 50\;\text{ft}^2\), \(A_B = 2 \times 5 = 10\;\text{ft}^2\).</p>
-        \[ \rho A_A V_A = \rho A_B V_B \quad\Longrightarrow\quad 50\,V_A = 10\,V_B \quad\Longrightarrow\quad V_B = 5\,V_A \]
+        <div class="formulas-needed">
+          <h4>📋 Formulas Needed</h4>
+          <ol>
+            <li><strong>Bernoulli</strong> &mdash; \(\frac{p_1}{\gamma} + \frac{V_1^2}{2g} + z_1 = \frac{p_2}{\gamma} + \frac{V_2^2}{2g} + z_2\) &rarr; sheet #17</li>
+            <li><strong>Continuity</strong> &mdash; \(\rho A_A V_A = \rho A_B V_B\) &rarr; sheet #11</li>
+            <li><strong>Momentum equation</strong> &mdash; \(\sum F_{\text{ext}} = \rho(V_B^2 A_B - V_A^2 A_A)\) &rarr; sheet #18</li>
+            <li><strong>Hydrostatic force</strong> &mdash; \(F = \frac{1}{2}\gamma h^2 w\) (on a rectangular face) &rarr; sheet #11</li>
+          </ol>
+        </div>
 
-        <p><strong>Step 3 &mdash; Solve for velocities.</strong></p>
-        <p>Substitute \(V_B = 5V_A\) into Bernoulli:</p>
-        \[ (5V_A)^2 - V_A^2 = 515.2 \quad\Longrightarrow\quad 24\,V_A^2 = 515.2 \quad\Longrightarrow\quad V_A = 4.633\;\text{ft/s} \]
-        \[ V_B = 5(4.633) = 23.17\;\text{ft/s} \]
+        <div class="step-block">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Pressure drop from Bernoulli</h4>
+            <p>Both free surfaces are at atmospheric pressure (\(p_1 = p_2 = 0\) gage). Take the datum at the channel bed:</p>
+            \[ \frac{p_1}{\gamma} + \frac{V_A^2}{2g} + z_1 = \frac{p_2}{\gamma} + \frac{V_B^2}{2g} + z_2 \]
+            \[ 0 + \frac{V_A^2}{2(32.2)} + 10 = 0 + \frac{V_B^2}{2(32.2)} + 2 \]
+            <p>Rearranging gives the relationship between the two velocities:</p>
+            \[ V_B^2 - V_A^2 = 2(32.2)(10 - 2) = 2(32.2)(8) = 515.2\;\text{(ft/s)}^2 \]
+            <p>This is <em>one equation with two unknowns</em> &mdash; we need a second equation (continuity).</p>
+          </div>
+        </div>
 
-        <p><strong>Step 4 &mdash; Free-body diagram and momentum.</strong></p>
-        <p>The CV encloses the water between section A and section B. External forces in the x-direction:</p>
-        <p>&bull; \(F_A\) = hydrostatic force on upstream face = \(\frac{1}{2}\gamma h_A^2 w = \frac{1}{2}(62.4)(10)^2(5) = 15{,}600\;\text{lb}\) (pushing right)</p>
-        <p>&bull; \(F_B\) = hydrostatic force on downstream face = \(\frac{1}{2}\gamma h_B^2 w = \frac{1}{2}(62.4)(2)^2(5) = 624\;\text{lb}\) (pushing left)</p>
-        <p>&bull; \(F_G\) = force from the gate (pushing left, unknown)</p>
+        <div class="step-block">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Continuity</h4>
+            <p>Width \(w = 5\;\text{ft}\). The cross-sectional areas at upstream (A) and downstream (B) are:</p>
+            \[ A_A = h_A \times w = 10 \times 5 = 50\;\text{ft}^2, \quad A_B = h_B \times w = 2 \times 5 = 10\;\text{ft}^2 \]
+            <p>For incompressible flow, \(\rho\) cancels:</p>
+            \[ A_A V_A = A_B V_B \quad\Longrightarrow\quad 50\,V_A = 10\,V_B \quad\Longrightarrow\quad V_B = 5\,V_A \]
+            <p>Now we have two equations and two unknowns.</p>
+          </div>
+        </div>
 
-        <p>x-momentum:</p>
-        \[ \overset{+}{\rightarrow}\;\sum F_x = V_B(\rho V_B A_B) - V_A(\rho V_A A_A) \]
-        \[ F_A - F_G - F_B = \rho(V_B^2 A_B - V_A^2 A_A) \]
-        <p>With \(\rho = 62.4/32.2 = 1.938\;\text{slug/ft}^3\):</p>
-        \[ \rho V_B^2 A_B = 1.938(23.17)^2(10) = 10{,}404\;\text{lb} \]
-        \[ \rho V_A^2 A_A = 1.938(4.633)^2(50) = 2{,}080\;\text{lb} \]
-        \[ 15{,}600 - F_G - 624 = 10{,}404 - 2{,}080 = 8{,}324 \]
-        \[ F_G = 15{,}600 - 624 - 8{,}324 = \boxed{6{,}652\;\text{lb}} \]
-        <p>(The small difference from the slide value of 6656 lb is due to rounding in intermediate steps.)</p>
+        <div class="step-block">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>Solve for velocities</h4>
+            <p>Substitute \(V_B = 5V_A\) into the Bernoulli result:</p>
+            \[ (5V_A)^2 - V_A^2 = 515.2 \quad\Longrightarrow\quad 25V_A^2 - V_A^2 = 515.2 \]
+            \[ 24\,V_A^2 = 515.2 \quad\Longrightarrow\quad V_A = \sqrt{515.2/24} = 4.633\;\text{ft/s} \]
+            \[ V_B = 5(4.633) = 23.17\;\text{ft/s} \]
+            <p>The downstream velocity is 5&times; faster because the depth drops from 10 ft to 2 ft &mdash; a 5:1 area ratio.</p>
+          </div>
+        </div>
+
+        <div class="step-block">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>Free-body diagram and hydrostatic forces</h4>
+            <p>The CV encloses the water between section A and section B. The pressure on each face varies linearly with depth &mdash; this is <strong>hydrostatic</strong>, giving a triangular distribution. The resultant hydrostatic force on each rectangular face is:</p>
+            <p>&bull; \(F_A = \tfrac{1}{2}\gamma h_A^2 w = \tfrac{1}{2}(62.4)(10)^2(5) = 15{,}600\;\text{lb}\) (pushing right &rarr;)</p>
+            <p>&bull; \(F_B = \tfrac{1}{2}\gamma h_B^2 w = \tfrac{1}{2}(62.4)(2)^2(5) = 624\;\text{lb}\) (pushing left &larr;)</p>
+            <p>&bull; \(F_G\) = unknown force from the gate on the water (pushing left &larr;)</p>
+          </div>
+        </div>
+
+        <div class="step-block">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <h4>Momentum equation &rarr; gate force</h4>
+            <p>Apply x-momentum for steady ideal flow. The LHS is the sum of external forces; the RHS is the net momentum flux:</p>
+            \[ \overset{+}{\rightarrow}\;F_A - F_G - F_B = \rho(V_B^2 A_B - V_A^2 A_A) \]
+            <p>Compute the density: \(\rho = \gamma/g = 62.4/32.2 = 1.938\;\text{slug/ft}^3\).</p>
+            <p>Evaluate each momentum flux term:</p>
+            \[ \rho V_B^2 A_B = 1.938(23.17)^2(10) = 10{,}404\;\text{lb} \]
+            \[ \rho V_A^2 A_A = 1.938(4.633)^2(50) = 2{,}080\;\text{lb} \]
+            <p>Net flux = \(10{,}404 - 2{,}080 = 8{,}324\;\text{lb}\). Now solve for \(F_G\):</p>
+            \[ 15{,}600 - F_G - 624 = 8{,}324 \]
+            \[ F_G = 15{,}600 - 624 - 8{,}324 = 6{,}652\;\text{lb} \]
+            <p>(The small difference from the slide value of 6656 lb is due to rounding in intermediate steps.)</p>
+          </div>
+        </div>
+
+        <div class="answer-block">
+          <h4>✔ Answer</h4>
+          <p class="answer-line">\(F_G = \boxed{6{,}652\;\text{lb}}\)</p>
+        </div>
+
+        <div class="card-bracket tip-card" style="margin-top:12px">
+          <div class="eq-name" style="color:var(--tip)">⚠ Common trap</div>
+          <p>Keep everything in <strong>slugs and feet</strong>: in that system \(\tfrac{1}{2}\rho V^2\) is already lbf/ft&sup2; with no \(g_c\). Also, the pressure forces on the CV faces come from <strong>hydrostatics</strong> (triangular distributions, \(\tfrac{1}{2}\gamma h^2 w\)) &mdash; these are <em>not</em> part of the momentum flux. They go on the <strong>LHS</strong> (forces), not the RHS (fluxes).</p>
+        </div>
+
+        <p class="concept-bridge" style="color:var(--example);margin-top:10px"><strong>Concept bridge:</strong> Bernoulli (sheet #17) provides the velocity relationship, continuity (sheet #11) gives the second equation, and the momentum equation (sheet #18) converts it all into the gate force. The hydrostatic force formula (sheet #11) handles the pressure loads on the CV faces.</p>
       </div>
     </details>
   </div>
