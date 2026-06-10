@@ -1,0 +1,521 @@
+<!-- ═══ Ch 5 Lecture 2: Reynolds Transport Theorem — Linear Momentum ═══ -->
+<section id="ch5-lec2" class="page-section">
+  <h1 class="page-title" style="color:var(--ch5-title)">5.2 &mdash; Reynolds Transport Theorem: Linear Momentum</h1>
+  <p class="page-subtitle">Newton&rsquo;s 2nd law for a CV &bull; Momentum equation &bull; Steady-flow form &bull; FBD approach &bull; Moving CV &bull; Four worked examples</p>
+
+  <!-- ════════ MOTIVATION ════════ -->
+  <h2 style="color:var(--ch5-title)">Why Linear Momentum?</h2>
+
+  <p>In Chapter 2 we computed forces on surfaces due to <strong>stationary</strong> fluids &mdash; hydrostatics. But what about a fire hose hitting a wall, a jet deflected by a vane, or water flowing under a sluice gate? These involve <strong>moving</strong> fluids that change velocity, and velocity changes require forces. The momentum equation lets us compute those forces without ever resolving the messy internal flow details &mdash; we only need what crosses the control surface.</p>
+
+  <div class="card-bracket tip-card">
+    <div class="eq-name" style="color:var(--tip)">★ Key Insight</div>
+    <p>The <strong>momentum equation</strong> is the most powerful problem-solving tool in this course. It replaces page-long pressure integrations with a simple bookkeeping exercise: draw a control volume, identify what flows in and out, and the forces fall out directly.</p>
+  </div>
+
+  <!-- ════════ NEWTON'S 2ND LAW → RTT ════════ -->
+  <h2 style="color:var(--ch5-title)">From Newton&rsquo;s Second Law to the RTT</h2>
+
+  <p>Recall from &sect;5.1 that the RTT rewrites the rate of change of <em>any</em> extensive system property \(B\) in terms of a control volume. For linear momentum we set:</p>
+
+  <div class="card-bracket eq-card">
+    <div class="eq-name" style="color:var(--eq)">Momentum as the Extensive Property</div>
+    <div style="overflow-x:auto">\[ B = m\vec{V} \qquad \Longrightarrow \qquad \beta = \frac{dB}{dm} = \vec{V} \]</div>
+    <div class="pill-row">
+      <span class="pill">\(B = m\vec{V}\) &mdash; total linear momentum of the system (kg&middot;m/s)</span>
+      <span class="pill">\(\beta = \vec{V}\) &mdash; velocity = momentum per unit mass (m/s)</span>
+    </div>
+  </div>
+
+  <p>Newton&rsquo;s second law for a <strong>system</strong> (fixed collection of matter) says:</p>
+
+  <div class="card-bracket eq-card">
+    <div class="eq-name" style="color:var(--eq)">Newton&rsquo;s Second Law (System Form)</div>
+    <div style="overflow-x:auto">\[ \sum \vec{F}_{\text{external}} = \frac{d(m\vec{V})}{dt}\bigg|_{\text{system}} \]</div>
+    <div class="pill-row">
+      <span class="pill">\(\sum \vec{F}_{\text{ext}}\) &mdash; vector sum of all external forces on the system</span>
+      <span class="pill">\(d(m\vec{V})/dt\) &mdash; rate of change of the system&rsquo;s momentum</span>
+    </div>
+  </div>
+
+  <p>This is valid <strong>only for a system</strong> &mdash; a fixed mass. To apply it to a control volume (where mass flows in and out), we substitute \(\beta = \vec{V}\) into the general RTT from &sect;5.1:</p>
+
+  <!-- ════════ THE LINEAR MOMENTUM EQUATION ════════ -->
+  <h2 style="color:var(--ch5-title)">The Linear Momentum Equation</h2>
+
+  <div class="card-bracket eq-card">
+    <div class="eq-name" style="color:var(--eq)">Linear Momentum Equation (General Form)</div>
+    <div style="overflow-x:auto">\[ \boxed{\sum \vec{F}_{\text{ext}} = \frac{\partial}{\partial t}\int_{\text{CV}} \vec{V}\,\rho\;d\forall \;+\; \int_{\text{CS}} \vec{V}\,\rho\,(\vec{V}\cdot\hat{n})\;dA} \]</div>
+    <div class="pill-row">
+      <span class="pill">\(\sum \vec{F}_{\text{ext}}\) &mdash; sum of all external forces acting on the contents of the CV</span>
+      <span class="pill">\(\displaystyle\frac{\partial}{\partial t}\!\int_{\text{CV}} \vec{V}\,\rho\;d\forall\) &mdash; <strong>local (storage)</strong> term: rate of change of momentum stored inside the CV</span>
+      <span class="pill">\(\displaystyle\int_{\text{CS}} \vec{V}\,\rho\,(\vec{V}\cdot\hat{n})\;dA\) &mdash; <strong>convective (flux)</strong> term: net momentum carried out through the CS</span>
+      <span class="pill">\(\hat{n}\) &mdash; outward unit normal on the control surface</span>
+    </div>
+  </div>
+
+  <div class="card-bracket tip-card">
+    <div class="eq-name" style="color:var(--tip)">★ Three-Term Interpretation</div>
+    <p>Read the equation left to right: <em>&ldquo;Forces on the CV = rate the momentum inside the CV is growing + rate momentum is being carried out.&rdquo;</em> The LHS is forces (draw a free-body diagram). The first RHS term is zero for steady flow. The second RHS term is the momentum flux.</p>
+  </div>
+
+  <!-- ════════ STEADY FLOW ════════ -->
+  <h2 style="color:var(--ch5-title)">Steady-Flow Simplification</h2>
+
+  <p>For <strong>steady flow</strong> (\(\partial/\partial t = 0\) everywhere), the storage term vanishes. Nothing inside the CV is changing with time &mdash; the same pattern repeats each instant:</p>
+
+  <div class="card-bracket eq-card">
+    <div class="eq-name" style="color:var(--eq)">Steady-Flow Linear Momentum</div>
+    <div style="overflow-x:auto">\[ \sum \vec{F}_{\text{ext}} = \int_{\text{CS}} \vec{V}\,\rho\,(\vec{V}\cdot\hat{n})\;dA \]</div>
+    <div class="pill-row">
+      <span class="pill">Steady flow &rArr; storage term = 0</span>
+      <span class="pill">Only the momentum flux through the CS remains</span>
+    </div>
+  </div>
+
+  <p>If the flow is also <strong>incompressible and inviscid</strong> (ideal), the velocity is uniform across each inlet and outlet. The integral collapses to a sum over discrete ports:</p>
+
+  <div class="card-bracket eq-card">
+    <div class="eq-name" style="color:var(--eq)">Steady Ideal Flow &mdash; Discrete Form</div>
+    <div style="overflow-x:auto">\[ \sum \vec{F}_{\text{ext}} = \sum_{\text{ports}} \vec{V}\,\rho\,(\vec{V}\cdot\hat{n})\,A \]</div>
+    <div class="pill-row">
+      <span class="pill">Each port contributes one term: the velocity vector \(\vec{V}\) times the mass flow rate \(\rho(\vec{V}\cdot\hat{n})A\)</span>
+      <span class="pill">At an inlet: \(\vec{V}\cdot\hat{n} < 0\) (flow opposes outward normal) &rArr; negative contribution</span>
+      <span class="pill">At an outlet: \(\vec{V}\cdot\hat{n} > 0\) (flow aligns with outward normal) &rArr; positive contribution</span>
+    </div>
+  </div>
+
+  <!-- ════════ TACKLING THE RHS ════════ -->
+  <h2 style="color:var(--ch5-title)">Tackling the Right-Hand Side (Momentum Flux)</h2>
+
+  <p>Resolve the momentum equation into <strong>scalar x- and y-components</strong>. For each component, the flux term becomes:</p>
+
+  <div class="card-bracket eq-card">
+    <div class="eq-name" style="color:var(--eq)">x-Component Example</div>
+    <div style="overflow-x:auto">\[ \overset{+}{\rightarrow}\;\sum F_x = \sum V_x\;\rho\,(\vec{V}\cdot\hat{n})\,A = (V_{\text{in}})_x\underbrace{(-\rho V_{\text{in}} A_{\text{in}})}_{\dot{m}_{\text{in}}} + (V_{\text{out}})_x\underbrace{(\rho V_{\text{out}} A_{\text{out}})}_{\dot{m}_{\text{out}}} \]</div>
+    <div class="pill-row">
+      <span class="pill">\(V_x\) &mdash; the x-component of the velocity at each port (carries the sign from geometry)</span>
+      <span class="pill">\(\rho V A\) &mdash; the mass flow rate at each port (always positive as a magnitude)</span>
+      <span class="pill">The sign of \(\vec{V}\cdot\hat{n}\) handles inlet vs outlet automatically: negative at inlets, positive at outlets</span>
+    </div>
+  </div>
+
+  <div class="card-bracket tip-card">
+    <div class="eq-name" style="color:var(--tip)">★ Pay Attention to Signs</div>
+    <p>There are <strong>two</strong> velocity appearances in each term: \(\vec{V}\) outside (gives the direction of momentum) and \(\vec{V}\cdot\hat{n}\) inside (gives the sign of mass flow). The first carries component signs from geometry. The second is negative at inlets (flow opposes the outward normal) and positive at outlets.</p>
+  </div>
+
+  <!-- ════════ TACKLING THE LHS: FBD ════════ -->
+  <h2 style="color:var(--ch5-title)">Tackling the Left-Hand Side (Free-Body Diagram)</h2>
+
+  <p>The left-hand side is the <strong>vector sum of all external forces</strong> on the control volume. Start every problem by drawing a <strong>free-body diagram (FBD)</strong> of the CV:</p>
+
+  <div class="card-bracket def-card">
+    <div class="eq-name" style="color:var(--def)">External Forces on a CV</div>
+    <div style="overflow-x:auto">\[ \sum \vec{F}_{\text{ext}} = \vec{F}_{\text{pressure}} + \vec{F}_{\text{weight}} + \vec{F}_{\text{normal}} + \vec{F}_{\text{shear}} \]</div>
+    <div class="pill-row">
+      <span class="pill">\(\vec{F}_{\text{pressure}}\) &mdash; pressure forces at each inlet/outlet (push fluid into the CV)</span>
+      <span class="pill">\(\vec{F}_{\text{weight}}\) &mdash; gravity (= \(W\) downward, often negligible for horizontal gas flows)</span>
+      <span class="pill">\(\vec{F}_{\text{normal}}\) &mdash; support reactions from walls, flanges, bolts</span>
+      <span class="pill">\(\vec{F}_{\text{shear}}\) &mdash; friction along walls (zero for inviscid/ideal flow assumptions)</span>
+    </div>
+  </div>
+
+  <p>Resolve these into x- and y-components and handle each direction independently. For many problems (jets hitting surfaces, nozzle reactions), pressure forces at open inlets/outlets to atmosphere are zero (gage pressure = 0), and for ideal flow shear forces are zero &mdash; leaving only the reaction force you&rsquo;re solving for.</p>
+
+  <!-- FBD SVG diagram -->
+  <div class="figure-box">
+    <svg viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg" style="max-width:520px;margin:auto;display:block;">
+      <!-- Curved duct body -->
+      <path d="M80,80 Q80,160 160,200 Q240,240 340,200 Q400,180 440,120" fill="none" stroke="#2A6B7C" stroke-width="2.5"/>
+      <path d="M80,120 Q80,200 160,240 Q240,280 340,240 Q400,220 440,160" fill="none" stroke="#2A6B7C" stroke-width="2.5"/>
+      <!-- Fill -->
+      <path d="M80,80 Q80,160 160,200 Q240,240 340,200 Q400,180 440,120 L440,160 Q400,220 340,240 Q240,280 160,240 Q80,200 80,120 Z" fill="#2A6B7C" fill-opacity="0.08"/>
+      <!-- Inlet arrow -->
+      <line x1="20" y1="100" x2="75" y2="100" stroke="#FF6B35" stroke-width="2.5" marker-end="url(#arrowOrange5)"/>
+      <text x="10" y="88" font-family="Poppins,sans-serif" font-size="13" fill="#FF6B35" font-weight="600">P₁A₁</text>
+      <!-- Outlet arrow -->
+      <line x1="445" y1="140" x2="500" y2="130" stroke="#FF6B35" stroke-width="2.5" marker-end="url(#arrowOrange5)"/>
+      <text x="504" y="125" font-family="Poppins,sans-serif" font-size="13" fill="#FF6B35" font-weight="600">P₂A₂</text>
+      <!-- Weight -->
+      <line x1="260" y1="210" x2="260" y2="270" stroke="#093C5D" stroke-width="2.5" marker-end="url(#arrowNavy5)"/>
+      <text x="270" y="268" font-family="Poppins,sans-serif" font-size="13" fill="#093C5D" font-weight="600">W</text>
+      <!-- Reaction forces -->
+      <line x1="260" y1="250" x2="260" y2="190" stroke="#1AAA96" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowTeal5)"/>
+      <text x="230" y="185" font-family="Poppins,sans-serif" font-size="12" fill="#1AAA96">F<tspan font-size="9" dy="3">y</tspan></text>
+      <line x1="340" y1="220" x2="290" y2="220" stroke="#1AAA96" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowTeal5)"/>
+      <text x="346" y="225" font-family="Poppins,sans-serif" font-size="12" fill="#1AAA96">F<tspan font-size="9" dy="3">x</tspan></text>
+      <!-- Shear label -->
+      <line x1="400" y1="175" x2="430" y2="155" stroke="#F4A261" stroke-width="1.5" marker-end="url(#arrowSand5)"/>
+      <text x="434" y="155" font-family="Poppins,sans-serif" font-size="11" fill="#F4A261">Shear</text>
+      <!-- Labels -->
+      <text x="140" y="68" font-family="Poppins,sans-serif" font-size="14" fill="#2A6B7C" font-weight="600">Control Volume</text>
+      <!-- Arrowhead defs -->
+      <defs>
+        <marker id="arrowOrange5" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#FF6B35"/></marker>
+        <marker id="arrowNavy5" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#093C5D"/></marker>
+        <marker id="arrowTeal5" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#1AAA96"/></marker>
+        <marker id="arrowSand5" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#F4A261"/></marker>
+      </defs>
+    </svg>
+    <div class="figure-caption">Free-body diagram of a curved duct CV: pressure forces at inlet/outlet, weight, normal reaction, and shear.</div>
+  </div>
+
+  <div class="card-bracket tip-card">
+    <div class="eq-name" style="color:var(--tip)">★ Why Momentum Is So Powerful</div>
+    <p>The momentum equation computes forces <strong>without resolving the details inside the CV</strong>. You could calculate the same result by integrating \(p \cdot dA\) and \(\tau \cdot dA\) around every surface inside the duct &mdash; but that would be enormously tedious. The momentum approach needs only the conditions at the <em>inlets and outlets</em>.</p>
+  </div>
+
+  <!-- ════════ OVERSIMPLIFIED FORM ════════ -->
+  <h2 style="color:var(--ch5-title)">Oversimplified Form (One Inlet, One Outlet)</h2>
+
+  <p>For the special case of <strong>steady, uniform, non-moving CV with one inlet and one outlet</strong>, the general equation collapses to:</p>
+
+  <div class="card-bracket eq-card">
+    <div class="eq-name" style="color:var(--eq)">Simplified Momentum (Single Inlet/Outlet)</div>
+    <div style="overflow-x:auto">\[ \sum \vec{F}_{\text{ext}} = \vec{v}_{\text{out}}\,\dot{m}_{\text{out}} - \vec{v}_{\text{in}}\,\dot{m}_{\text{in}} \]</div>
+    <div class="pill-row">
+      <span class="pill">\(\vec{v}_{\text{out}}\) &mdash; velocity vector at the outlet</span>
+      <span class="pill">\(\vec{v}_{\text{in}}\) &mdash; velocity vector at the inlet</span>
+      <span class="pill">\(\dot{m}_{\text{out}} = \rho V_{\text{out}} A_{\text{out}}\), \(\dot{m}_{\text{in}} = \rho V_{\text{in}} A_{\text{in}}\) &mdash; mass flow rates</span>
+    </div>
+  </div>
+
+  <div class="card-bracket tip-card">
+    <div class="eq-name" style="color:var(--tip)">★ Exam Warning</div>
+    <p>This simplified form works for simple one-inlet/one-outlet problems, but <strong>it is easy to make sign errors</strong> when there are multiple outlets, angled flows, or moving CVs. Dr. Bano recommends using the <em>full formulas</em> with the \(\vec{V}\cdot\hat{n}\) sign convention for anything beyond the simplest cases. The full form handles signs automatically.</p>
+  </div>
+
+  <!-- ════════ PROBLEM-SOLVING STRATEGY ════════ -->
+  <h2 style="color:var(--ch5-title)">Problem-Solving Strategy</h2>
+
+  <div class="card-bracket def-card">
+    <div class="eq-name" style="color:var(--def)">Momentum Problem Checklist</div>
+    <p><strong>Step 1:</strong> Draw the CV and CS. Mark all inlets and outlets. Choose a coordinate system.</p>
+    <p><strong>Step 2:</strong> Draw the FBD of the CV. Include pressure forces, weight, reaction forces, and shear (if viscous).</p>
+    <p><strong>Step 3:</strong> Write continuity (\(\dot{m}_{\text{in}} = \dot{m}_{\text{out}}\)) to relate velocities and areas.</p>
+    <p><strong>Step 4:</strong> Write the momentum equation in x and y components. Evaluate the \(\vec{V}\cdot\hat{n}\) dot product at each port (negative at inlets, positive at outlets).</p>
+    <p><strong>Step 5:</strong> Substitute known values and solve for the unknown forces.</p>
+  </div>
+
+  <!-- ════════ EXAMPLE 1: FIRE HOSE ════════ -->
+  <h2 style="color:var(--ch5-title)">Example 1: Fire Hose Hitting a Fixed Surface</h2>
+
+  <div class="card-bracket ex-card">
+    <div class="eq-name" style="color:var(--example)">Example &mdash; Fire Hose Splitting Flow</div>
+    <p>Water is discharged from a 1 in diameter nozzle at 180 gal/min. The flow strikes a fixed surface such that &frac34; flows along path B (straight down, &minus;y), while &frac14; flows along path C (at 60&deg; from the positive x-axis). The nozzle enters at 45&deg; below the positive x-axis. Determine the x- and y-components of the resultant force on the surface. Assume ideal steady flow. \(\gamma_{\text{water}} = 62.4\;\text{lbf/ft}^3\).</p>
+
+    <!-- Diagram -->
+    <div class="figure-box">
+      <svg viewBox="0 0 480 380" xmlns="http://www.w3.org/2000/svg" style="max-width:440px;margin:auto;display:block;">
+        <!-- Surface -->
+        <path d="M160,180 Q200,120 240,140 Q280,160 310,130 Q340,100 370,120" fill="none" stroke="#2A6B7C" stroke-width="3"/>
+        <!-- Inlet A -->
+        <line x1="70" y1="240" x2="170" y2="175" stroke="#FF6B35" stroke-width="2.5" marker-end="url(#arrowO5b)"/>
+        <text x="60" y="255" font-family="Poppins,sans-serif" font-size="14" fill="#FF6B35" font-weight="600">V<tspan font-size="10" dy="3">A</tspan></text>
+        <text x="100" y="218" font-family="Poppins,sans-serif" font-size="11" fill="#7A8FA6">45°</text>
+        <text x="130" y="250" font-family="Poppins,sans-serif" font-size="12" fill="#093C5D">A (inlet)</text>
+        <!-- Outlet B (straight down) -->
+        <line x1="240" y1="200" x2="240" y2="300" stroke="#1AAA96" stroke-width="2.5" marker-end="url(#arrowT5b)"/>
+        <text x="250" y="290" font-family="Poppins,sans-serif" font-size="14" fill="#1AAA96" font-weight="600">V<tspan font-size="10" dy="3">B</tspan></text>
+        <text x="250" y="310" font-family="Poppins,sans-serif" font-size="12" fill="#093C5D">B (¾Q)</text>
+        <!-- Outlet C (60° from +x) -->
+        <line x1="340" y1="125" x2="405" y2="85" stroke="#F4A261" stroke-width="2.5" marker-end="url(#arrowS5b)"/>
+        <text x="410" y="82" font-family="Poppins,sans-serif" font-size="14" fill="#F4A261" font-weight="600">V<tspan font-size="10" dy="3">C</tspan></text>
+        <text x="408" y="100" font-family="Poppins,sans-serif" font-size="11" fill="#7A8FA6">60°</text>
+        <text x="350" y="108" font-family="Poppins,sans-serif" font-size="12" fill="#093C5D">C (¼Q)</text>
+        <!-- Reaction forces -->
+        <line x1="260" y1="175" x2="310" y2="175" stroke="#D32F2F" stroke-width="2" marker-end="url(#arrowR5b)"/>
+        <text x="315" y="172" font-family="Poppins,sans-serif" font-size="13" fill="#D32F2F" font-weight="600">F<tspan font-size="9" dy="3">x</tspan></text>
+        <line x1="260" y1="175" x2="260" y2="140" stroke="#D32F2F" stroke-width="2" marker-end="url(#arrowR5b)"/>
+        <text x="265" y="135" font-family="Poppins,sans-serif" font-size="13" fill="#D32F2F" font-weight="600">F<tspan font-size="9" dy="3">y</tspan></text>
+        <!-- Coordinate axes -->
+        <line x1="30" y1="350" x2="80" y2="350" stroke="#7A8FA6" stroke-width="1.5" marker-end="url(#arrowG5b)"/>
+        <text x="85" y="354" font-family="Poppins,sans-serif" font-size="12" fill="#7A8FA6">x</text>
+        <line x1="30" y1="350" x2="30" y2="300" stroke="#7A8FA6" stroke-width="1.5" marker-end="url(#arrowG5b)"/>
+        <text x="24" y="295" font-family="Poppins,sans-serif" font-size="12" fill="#7A8FA6">y</text>
+        <defs>
+          <marker id="arrowO5b" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#FF6B35"/></marker>
+          <marker id="arrowT5b" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#1AAA96"/></marker>
+          <marker id="arrowS5b" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#F4A261"/></marker>
+          <marker id="arrowR5b" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#D32F2F"/></marker>
+          <marker id="arrowG5b" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#7A8FA6"/></marker>
+        </defs>
+      </svg>
+      <div class="figure-caption">CV around the deflecting surface: inlet A (45&deg; below +x), outlet B (straight down), outlet C (60&deg; above +x).</div>
+    </div>
+
+    <details class="solution-toggle">
+      <summary>Solution</summary>
+      <div class="solution-body">
+
+        <p><strong>Step 1 &mdash; Flow rates and velocities.</strong></p>
+        <p>Convert the discharge:</p>
+        \[ Q_A = \frac{180\;\text{gal}}{\text{min}} \times \frac{1\;\text{min}}{60\;\text{s}} \times \frac{1\;\text{ft}^3}{7.48\;\text{gal}} = 0.4011\;\text{ft}^3/\text{s} \]
+        <p>Nozzle area and velocity at A (diameter = 1 in = 1/12 ft):</p>
+        \[ A_A = \pi\!\left(\frac{0.5}{12}\right)^{\!2} = 5.454 \times 10^{-3}\;\text{ft}^2 \]
+        \[ V_A = \frac{Q_A}{A_A} = \frac{0.4011}{5.454 \times 10^{-3}} = 73.53\;\text{ft/s} \]
+        <p>Flow splits: \(Q_B = \tfrac{3}{4}Q_A = 0.3008\;\text{ft}^3/\text{s}\), \(Q_C = \tfrac{1}{4}Q_A = 0.1003\;\text{ft}^3/\text{s}\).</p>
+        <p>For ideal flow (no friction losses), Bernoulli along each streamline from A&nbsp;&rarr;&nbsp;B and A&nbsp;&rarr;&nbsp;C with atmospheric pressure everywhere gives \(V_B = V_C = V_A = 73.53\;\text{ft/s}\).</p>
+        <p>Density: \(\rho = \gamma/g = 62.4/32.2 = 1.938\;\text{slug/ft}^3\).</p>
+
+        <p><strong>Step 2 &mdash; Momentum equation, x-component.</strong></p>
+        <p>Select CV around the surface. For steady ideal flow:</p>
+        \[ \overset{+}{\rightarrow}\;\sum F_x = \sum V_x\;\rho\,(\vec{V}\cdot\hat{n})\,A \]
+        <p>Evaluate each port. The inlet flow direction is at \(-45°\) (below the +x axis):</p>
+        \[ -F_x = \underbrace{Q_B V_B \cos(-90°)}_{=\;0} + Q_C V_C \cos(60°) - Q_A V_A \cos(-45°) \]
+        \[ -F_x = 0 + (0.1003)(73.53)\cos 60° - (0.4011)(73.53)\cos 45° \]
+        \[ -F_x = 3.69 - 20.86 = -17.17 \]
+        <p>Wait &mdash; let me redo this more carefully using the \(\rho\) factor. Each flux term is \(V_x \cdot \rho \cdot Q\):</p>
+        \[ -F_x = \rho\bigl[Q_B V_B \cos(-90°) + Q_C V_C \cos(60°) - Q_A V_A \cos(45°)\bigr] \]
+        \[ = 1.938\bigl[0 + (0.1003)(73.53)(0.5) - (0.4011)(73.53)(0.7071)\bigr] \]
+        \[ = 1.938\bigl[3.688 - 20.86\bigr] = 1.938(-17.17) = -33.3\;\text{lb} \]
+        \[ \boxed{F_x = 33.3\;\text{lb} \;\leftarrow} \]
+
+        <p><strong>Step 3 &mdash; y-component.</strong></p>
+        \[ F_y = \rho\bigl[Q_B V_B \sin(-90°) + Q_C V_C \sin(60°) - Q_A V_A \sin(-45°)\bigr] \]
+        \[ = 1.938\bigl[(0.3008)(73.53)(-1) + (0.1003)(73.53)(0.8660) - (0.4011)(73.53)(-0.7071)\bigr] \]
+        \[ = 1.938\bigl[-22.12 + 6.389 + 20.86\bigr] = 1.938(5.12) = 9.92\;\text{lb} \]
+        \[ \boxed{F_y = 9.92\;\text{lb} \;\uparrow} \]
+
+        <p><strong>Resultant:</strong></p>
+        \[ |\vec{F}| = \sqrt{F_x^2 + F_y^2} = \sqrt{33.3^2 + 9.92^2} = \boxed{34.7\;\text{lb}} \]
+      </div>
+    </details>
+  </div>
+
+  <!-- ════════ MOVING CV ════════ -->
+  <h2 style="color:var(--ch5-title)">Moving Control Volume at Constant Velocity</h2>
+
+  <p>When the CV moves at a constant velocity \(\vec{V}_b\) (e.g. the CV is attached to a truck, boat, or vane), the momentum equation still holds but <strong>all velocities must be relative to the CV</strong>:</p>
+
+  <div class="card-bracket eq-card">
+    <div class="eq-name" style="color:var(--eq)">Steady Ideal Flow &mdash; Moving CV</div>
+    <div style="overflow-x:auto">\[ \sum \vec{F}_{\text{ext}} = \sum \vec{V}_{f/b}\;\rho\,(\vec{V}_{f/b}\cdot\hat{n})\,A \]</div>
+    <div class="pill-row">
+      <span class="pill">\(\vec{V}_{f/b} = \vec{V}_{\text{flow}} - \vec{V}_b\) &mdash; velocity of the fluid <strong>relative to the body/CV</strong></span>
+      <span class="pill">\(\vec{V}_{\text{flow}}\) &mdash; absolute velocity of the fluid (in the lab frame)</span>
+      <span class="pill">\(\vec{V}_b\) &mdash; velocity of the body/CV (constant)</span>
+    </div>
+  </div>
+
+  <div class="card-bracket tip-card">
+    <div class="eq-name" style="color:var(--tip)">★ Relative Velocity Rule</div>
+    <p>Replace <em>every</em> \(\vec{V}\) in the momentum equation with \(\vec{V}_{f/b}\). The forces remain in the <strong>absolute frame</strong> (they don&rsquo;t change), but the momentum fluxes are computed with the relative velocity because the CV&rsquo;s mass flow depends on how fast the fluid enters/leaves <em>relative to the moving surface</em>.</p>
+  </div>
+
+  <!-- ════════ EXAMPLE 2: WINDSHIELD ════════ -->
+  <h2 style="color:var(--ch5-title)">Example 2: Force on a Windshield (Moving CV)</h2>
+
+  <div class="card-bracket ex-card">
+    <div class="eq-name" style="color:var(--example)">Example &mdash; Hose Hitting a Moving Truck</div>
+    <p>A hose with nozzle diameter \(D = 50\;\text{mm}\) discharges water at \(Q = 8\;\text{L/s}\). The stream hits the windshield of a truck moving at \(5\;\text{m/s}\) toward the hose. The deflected stream leaves at \(40°\) above the horizontal. Determine the force on the windshield. Assume steady ideal flow; \(\rho = 1000\;\text{kg/m}^3\).</p>
+
+    <details class="solution-toggle">
+      <summary>Solution</summary>
+      <div class="solution-body">
+
+        <p><strong>Step 1 &mdash; Absolute velocity of the jet.</strong></p>
+        \[ V = \frac{Q}{\pi D^2/4} = \frac{8 \times 10^{-3}}{\pi(0.05)^2/4} = 4.074\;\text{m/s} \]
+
+        <p><strong>Step 2 &mdash; Relative velocity.</strong> Attach the CV to the truck (moving left at 5 m/s). The jet moves right at 4.074 m/s. In the truck&rsquo;s frame:</p>
+        \[ V_{f/A} = V_{\text{flow}} - V_b = 4.074 - (-5) = 9.074\;\text{m/s} \]
+        <p>(The truck moves at \(-5\) m/s in our sign convention since it heads toward the hose.)</p>
+        <p>For ideal flow with equal inlet and outlet areas, \(V_{f/B} = V_{f/A} = 9.074\;\text{m/s}\).</p>
+
+        <p><strong>Step 3 &mdash; x-momentum (moving CV).</strong></p>
+        \[ \sum F_x = V_{f/B}\cos 40°\;(\rho V_{f/B} A_B) - V_{f/A}\;(\rho V_{f/A} A_A) \]
+        <p>With \(A_A = A_B = \pi(0.025)^2 = 1.9635 \times 10^{-3}\;\text{m}^2\):</p>
+        \[ \sum F_x = (9.074\cos 40°)(1000)(9.074)(1.9635\times10^{-3}) - (9.074)(1000)(9.074)(1.9635\times10^{-3}) \]
+        \[ = \rho\,V_{f}^{2}\,A\,(\cos 40° - 1) = (1000)(9.074)^2(1.9635\times10^{-3})(0.766 - 1) \]
+        \[ = 161.7 \times (-0.234) = -37.83\;\text{N} \]
+        \[ \boxed{F_x = 37.83\;\text{N}\;\leftarrow} \]
+
+        <p><strong>Step 4 &mdash; y-momentum.</strong></p>
+        \[ \sum F_y = V_{f/B}\sin 40°\;(\rho V_{f/B} A_B) = \rho\,V_{f}^{2}\,A\,\sin 40° \]
+        \[ = (1000)(9.074)^2(1.9635\times10^{-3})(0.6428) = 103.9\;\text{N} \]
+        \[ \boxed{F_y = 103.9\;\text{N}\;\uparrow} \]
+
+        <p><strong>Resultant:</strong></p>
+        \[ |\vec{F}| = \sqrt{37.83^2 + 103.9^2} = \boxed{111\;\text{N}} \]
+      </div>
+    </details>
+  </div>
+
+  <!-- ════════ EXAMPLE 3: CONCRETE CART ════════ -->
+  <h2 style="color:var(--ch5-title)">Example 3: Concrete Flowing Into a Cart</h2>
+
+  <div class="card-bracket ex-card">
+    <div class="eq-name" style="color:var(--example)">Example &mdash; Cable Tension and Scale Reading</div>
+    <p>Concrete flows into a cart sitting on a scale. The concrete stream has density \(\rho = 1700\;\text{kg/m}^3\), cross-sectional area \(A = 0.12\;\text{m}^2\), and speed \(v_1 = 3\;\text{m/s}\), entering at angle \(\alpha = 60°\) below the horizontal. The cart plus concrete weighs \(W = 3600\;\text{N}\). Determine the tension in the cable and the weight recorded by the scale. Assume steady flow.</p>
+
+    <!-- Diagram -->
+    <div class="figure-box">
+      <svg viewBox="0 0 440 320" xmlns="http://www.w3.org/2000/svg" style="max-width:400px;margin:auto;display:block;">
+        <!-- Cart -->
+        <rect x="120" y="170" width="200" height="80" rx="4" fill="#2A6B7C" fill-opacity="0.08" stroke="#2A6B7C" stroke-width="2"/>
+        <!-- Wheels -->
+        <circle cx="160" cy="260" r="12" fill="none" stroke="#093C5D" stroke-width="2"/>
+        <circle cx="260" cy="260" r="12" fill="none" stroke="#093C5D" stroke-width="2"/>
+        <circle cx="320" cy="260" r="12" fill="none" stroke="#093C5D" stroke-width="2"/>
+        <!-- Scale -->
+        <rect x="110" y="275" width="230" height="12" fill="#7A8FA6" fill-opacity="0.15" stroke="#7A8FA6" stroke-width="1.5"/>
+        <text x="345" y="285" font-family="Poppins,sans-serif" font-size="12" fill="#7A8FA6">Scale</text>
+        <!-- Concrete stream -->
+        <line x1="300" y1="40" x2="220" y2="140" stroke="#F4A261" stroke-width="3" marker-end="url(#arrowS5c)"/>
+        <text x="305" y="35" font-family="Poppins,sans-serif" font-size="13" fill="#F4A261" font-weight="600">v₁, A₁</text>
+        <!-- Angle label -->
+        <line x1="230" y1="110" x2="280" y2="110" stroke="#7A8FA6" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="265" y="100" font-family="Poppins,sans-serif" font-size="11" fill="#7A8FA6">α=60°</text>
+        <!-- Cable T -->
+        <line x1="120" y1="210" x2="60" y2="210" stroke="#1AAA96" stroke-width="2.5" marker-end="url(#arrowT5c)"/>
+        <text x="40" y="205" font-family="Poppins,sans-serif" font-size="14" fill="#1AAA96" font-weight="600">T</text>
+        <!-- W (weight) -->
+        <line x1="220" y1="235" x2="220" y2="200" stroke="#093C5D" stroke-width="2" stroke-dasharray="5,3"/>
+        <text x="225" y="245" font-family="Poppins,sans-serif" font-size="13" fill="#093C5D" font-weight="600">W</text>
+        <!-- N (normal) -->
+        <line x1="220" y1="275" x2="220" y2="255" stroke="#D32F2F" stroke-width="2" marker-end="url(#arrowR5c)"/>
+        <text x="225" y="272" font-family="Poppins,sans-serif" font-size="13" fill="#D32F2F" font-weight="600">N</text>
+        <!-- CV dashed border -->
+        <rect x="105" y="50" width="230" height="220" rx="6" fill="none" stroke="#FF6B35" stroke-width="1.5" stroke-dasharray="8,4"/>
+        <text x="112" y="65" font-family="Poppins,sans-serif" font-size="11" fill="#FF6B35">CV</text>
+        <!-- axes -->
+        <line x1="30" y1="300" x2="70" y2="300" stroke="#7A8FA6" stroke-width="1.2" marker-end="url(#arrowG5c)"/>
+        <text x="75" y="304" font-family="Poppins,sans-serif" font-size="11" fill="#7A8FA6">x</text>
+        <line x1="30" y1="300" x2="30" y2="260" stroke="#7A8FA6" stroke-width="1.2" marker-end="url(#arrowG5c)"/>
+        <text x="24" y="256" font-family="Poppins,sans-serif" font-size="11" fill="#7A8FA6">y</text>
+        <defs>
+          <marker id="arrowS5c" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#F4A261"/></marker>
+          <marker id="arrowT5c" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto"><path d="M8,0 L0,3 L8,6" fill="#1AAA96"/></marker>
+          <marker id="arrowR5c" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#D32F2F"/></marker>
+          <marker id="arrowG5c" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#7A8FA6"/></marker>
+        </defs>
+      </svg>
+      <div class="figure-caption">CV around the cart: concrete enters at angle &alpha; = 60&deg;. FBD shows cable tension T, weight W, and normal force N from the scale.</div>
+    </div>
+
+    <details class="solution-toggle">
+      <summary>Solution</summary>
+      <div class="solution-body">
+        <p>The CV encloses the cart and concrete. There is <strong>one inlet</strong> (the stream) and <strong>no outlet</strong> (concrete accumulates, but we assume steady flow at this instant).</p>
+
+        <p><strong>x-momentum:</strong></p>
+        \[ \sum F_x = \sum_{\text{CS}} v_x\;\rho\;\vec{v}\cdot\vec{A} \]
+        <p>The only CS flux is at the inlet. The stream enters at angle \(\alpha = 60°\) below horizontal, so \(v_{1x} = v_1\cos\alpha\), and the dot product \(\vec{v}\cdot\hat{n}\) is \(-v_1\) (flow into the CV):</p>
+        \[ T = -v_{1x} \cdot \rho \cdot v_1 \cdot A_1 = -v_1\cos\alpha \cdot \rho v_1 A_1 = -\rho A_1 v_1^2 \cos\alpha \]
+        \[ T = -(1700)(0.12)(3)^2\cos 60° = -(1700)(0.12)(9)(0.5) = -918\;\text{N} \]
+        <p>The negative sign means T acts <strong>opposite</strong> to our assumed direction &mdash; the cable is in <strong>tension</strong> (pulls the cart to the right, resisting the horizontal momentum of the incoming stream).</p>
+        \[ \boxed{T = 918\;\text{N (tension)}} \]
+
+        <p><strong>y-momentum:</strong></p>
+        \[ N - W = +v_{1y}\;\rho\;v_1\;A_1 \]
+        <p>The stream enters with a downward vertical component \(v_{1y} = -v_1\sin\alpha\), so the flux brings <em>downward</em> momentum into the CV:</p>
+        \[ N - W = -(-v_1\sin\alpha)(\rho v_1 A_1) = +\rho A_1 v_1^2 \sin\alpha \]
+        <p>Wait &mdash; let me be careful. The dot product at the inlet is \(\vec{v}\cdot\hat{n} = -v_1\) (inflow), so the y-flux is \(v_{1y}(-\rho v_1 A_1)\). With \(v_{1y} = -v_1 \sin\alpha\) (downward):</p>
+        \[ N - W = (-v_1\sin\alpha)(-\rho v_1 A_1) = \rho A_1 v_1^2 \sin\alpha \]
+        \[ N = W + \rho A_1 v_1^2 \sin\alpha = 3600 + (1700)(0.12)(9)\sin 60° = 3600 + 1590 = 5190\;\text{N} \]
+        \[ \boxed{N = 5190\;\text{N} \;\text{(scale reads 5190 N)}} \]
+        <p>The scale reads <em>more</em> than the weight because it also supports the downward momentum of the incoming concrete stream.</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- ════════ EXAMPLE 4: SLUICE GATE ════════ -->
+  <h2 style="color:var(--ch5-title)">Example 4: Force on a Sluice Gate</h2>
+
+  <div class="card-bracket ex-card">
+    <div class="eq-name" style="color:var(--example)">Example &mdash; Sluice Gate with Bernoulli + Momentum</div>
+    <p>When sluice gate G is open, water flows out from under the gate at a depth of 2 ft. The gate is 5 ft wide. The channel behind the gate maintains a constant depth of 10 ft. Determine the horizontal force that must be applied to the gate to keep it in place. Assume ideal steady flow. \(\gamma = 62.4\;\text{lbf/ft}^3\).</p>
+
+    <!-- Sluice gate diagram -->
+    <div class="figure-box">
+      <svg viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg" style="max-width:470px;margin:auto;display:block;">
+        <!-- Channel bed -->
+        <line x1="30" y1="250" x2="470" y2="250" stroke="#093C5D" stroke-width="2"/>
+        <!-- Upstream water -->
+        <rect x="30" y="50" width="200" height="200" fill="#2A6B7C" fill-opacity="0.10"/>
+        <!-- Downstream water -->
+        <rect x="260" y="210" width="210" height="40" fill="#2A6B7C" fill-opacity="0.10"/>
+        <!-- Gate -->
+        <rect x="230" y="20" width="8" height="210" fill="#7A8FA6" fill-opacity="0.3" stroke="#093C5D" stroke-width="2"/>
+        <!-- Gate opening -->
+        <rect x="230" y="210" width="8" height="40" fill="none"/>
+        <!-- Upstream level label -->
+        <line x1="50" y1="50" x2="50" y2="250" stroke="#7A8FA6" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="15" y="155" font-family="Poppins,sans-serif" font-size="13" fill="#093C5D" font-weight="600">10 ft</text>
+        <!-- Downstream level label -->
+        <line x1="450" y1="210" x2="450" y2="250" stroke="#7A8FA6" stroke-width="1" stroke-dasharray="4,3"/>
+        <text x="455" y="235" font-family="Poppins,sans-serif" font-size="13" fill="#093C5D" font-weight="600">2 ft</text>
+        <!-- Velocities -->
+        <line x1="130" y1="150" x2="195" y2="150" stroke="#FF6B35" stroke-width="2.5" marker-end="url(#arrowO5d)"/>
+        <text x="140" y="140" font-family="Poppins,sans-serif" font-size="13" fill="#FF6B35" font-weight="600">V<tspan font-size="10" dy="3">A</tspan></text>
+        <line x1="300" y1="230" x2="370" y2="230" stroke="#FF6B35" stroke-width="2.5" marker-end="url(#arrowO5d)"/>
+        <text x="320" y="222" font-family="Poppins,sans-serif" font-size="13" fill="#FF6B35" font-weight="600">V<tspan font-size="10" dy="3">B</tspan></text>
+        <!-- Gate force -->
+        <line x1="238" y1="130" x2="280" y2="130" stroke="#D32F2F" stroke-width="2.5" marker-end="url(#arrowR5d)"/>
+        <text x="284" y="135" font-family="Poppins,sans-serif" font-size="14" fill="#D32F2F" font-weight="600">F<tspan font-size="10" dy="3">G</tspan></text>
+        <!-- Hydrostatic pressure distributions -->
+        <path d="M110,50 L60,50 L60,250 L110,250" fill="#FF6B35" fill-opacity="0.06" stroke="#FF6B35" stroke-width="1.2"/>
+        <text x="65" y="265" font-family="Poppins,sans-serif" font-size="11" fill="#FF6B35">F<tspan font-size="8" dy="2">A</tspan></text>
+        <path d="M380,210 L360,210 L360,250 L380,250" fill="#1AAA96" fill-opacity="0.06" stroke="#1AAA96" stroke-width="1.2"/>
+        <text x="362" y="265" font-family="Poppins,sans-serif" font-size="11" fill="#1AAA96">F<tspan font-size="8" dy="2">B</tspan></text>
+        <!-- Point labels -->
+        <circle cx="130" cy="50" r="4" fill="#093C5D"/>
+        <text x="120" y="42" font-family="Poppins,sans-serif" font-size="12" fill="#093C5D">①</text>
+        <circle cx="350" cy="210" r="4" fill="#093C5D"/>
+        <text x="340" y="204" font-family="Poppins,sans-serif" font-size="12" fill="#093C5D">②</text>
+        <text x="235" y="16" font-family="Poppins,sans-serif" font-size="13" fill="#093C5D" font-weight="600">G</text>
+        <text x="430" y="260" font-family="Poppins,sans-serif" font-size="11" fill="#7A8FA6">Datum</text>
+        <defs>
+          <marker id="arrowO5d" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#FF6B35"/></marker>
+          <marker id="arrowR5d" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#D32F2F"/></marker>
+        </defs>
+      </svg>
+      <div class="figure-caption">Sluice gate: upstream depth 10 ft, downstream depth 2 ft, gate 5 ft wide. Bernoulli between &#9312; and &#9313; gives velocities; momentum gives the gate force.</div>
+    </div>
+
+    <details class="solution-toggle">
+      <summary>Solution</summary>
+      <div class="solution-body">
+        <p>This problem combines <strong>Bernoulli</strong> (to find velocities) with the <strong>momentum equation</strong> (to find the gate force). It also uses <strong>hydrostatics</strong> for the pressure forces on the CV faces.</p>
+
+        <p><strong>Step 1 &mdash; Bernoulli between &#9312; and &#9313;.</strong></p>
+        <p>Both free surfaces are at atmospheric pressure (\(p_1 = p_2 = 0\) gage). Take the datum at the channel bed:</p>
+        \[ \frac{p_1}{\gamma} + \frac{V_A^2}{2g} + z_1 = \frac{p_2}{\gamma} + \frac{V_B^2}{2g} + z_2 \]
+        \[ 0 + \frac{V_A^2}{2(32.2)} + 10 = 0 + \frac{V_B^2}{2(32.2)} + 2 \]
+        \[ V_B^2 - V_A^2 = 2(32.2)(8) = 515.2\;\text{(ft/s)}^2 \]
+
+        <p><strong>Step 2 &mdash; Continuity.</strong></p>
+        <p>Width \(w = 5\;\text{ft}\). Areas: \(A_A = 10 \times 5 = 50\;\text{ft}^2\), \(A_B = 2 \times 5 = 10\;\text{ft}^2\).</p>
+        \[ \rho A_A V_A = \rho A_B V_B \quad\Longrightarrow\quad 50\,V_A = 10\,V_B \quad\Longrightarrow\quad V_B = 5\,V_A \]
+
+        <p><strong>Step 3 &mdash; Solve for velocities.</strong></p>
+        <p>Substitute \(V_B = 5V_A\) into Bernoulli:</p>
+        \[ (5V_A)^2 - V_A^2 = 515.2 \quad\Longrightarrow\quad 24\,V_A^2 = 515.2 \quad\Longrightarrow\quad V_A = 4.633\;\text{ft/s} \]
+        \[ V_B = 5(4.633) = 23.17\;\text{ft/s} \]
+
+        <p><strong>Step 4 &mdash; Free-body diagram and momentum.</strong></p>
+        <p>The CV encloses the water between section A and section B. External forces in the x-direction:</p>
+        <p>&bull; \(F_A\) = hydrostatic force on upstream face = \(\frac{1}{2}\gamma h_A^2 w = \frac{1}{2}(62.4)(10)^2(5) = 15{,}600\;\text{lb}\) (pushing right)</p>
+        <p>&bull; \(F_B\) = hydrostatic force on downstream face = \(\frac{1}{2}\gamma h_B^2 w = \frac{1}{2}(62.4)(2)^2(5) = 624\;\text{lb}\) (pushing left)</p>
+        <p>&bull; \(F_G\) = force from the gate (pushing left, unknown)</p>
+
+        <p>x-momentum:</p>
+        \[ \overset{+}{\rightarrow}\;\sum F_x = V_B(\rho V_B A_B) - V_A(\rho V_A A_A) \]
+        \[ F_A - F_G - F_B = \rho(V_B^2 A_B - V_A^2 A_A) \]
+        <p>With \(\rho = 62.4/32.2 = 1.938\;\text{slug/ft}^3\):</p>
+        \[ \rho V_B^2 A_B = 1.938(23.17)^2(10) = 10{,}404\;\text{lb} \]
+        \[ \rho V_A^2 A_A = 1.938(4.633)^2(50) = 2{,}080\;\text{lb} \]
+        \[ 15{,}600 - F_G - 624 = 10{,}404 - 2{,}080 = 8{,}324 \]
+        \[ F_G = 15{,}600 - 624 - 8{,}324 = \boxed{6{,}652\;\text{lb}} \]
+        <p>(The small difference from the slide value of 6656 lb is due to rounding in intermediate steps.)</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="card-bracket tip-card">
+    <div class="eq-name" style="color:var(--tip)">★ Sluice Gate Pattern</div>
+    <p>Sluice gate problems <strong>always</strong> combine three tools: (1) Bernoulli to relate velocities, (2) continuity to get velocities from depths, (3) momentum to find the gate force. The pressure forces on the CV faces come from <strong>hydrostatics</strong> (triangular pressure distributions). Watch for this pattern on the exam.</p>
+  </div>
+
+</section>
