@@ -166,6 +166,12 @@ document.addEventListener('DOMContentLoaded', function() {
     trust: true,
     strict: false
   });
+  /* After KaTeX renders, \htmlData{t=desc}{...} creates <span data-t="desc">
+     but does NOT add the .vc class. The popup click handler targets .vc,
+     so we must add it post-render to every [data-t] element in #formulas. */
+  document.querySelectorAll('#formulas [data-t]').forEach(function(el) {
+    el.classList.add('vc');
+  });
   initProgress();
   initChecklists();
   /* Show summary as landing page */
