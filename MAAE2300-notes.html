@@ -467,21 +467,17 @@ strong { font-weight: 600; }
 #formulas .katex .svg-align,
 #formulas .katex .hide-tail,
 #formulas .katex .rule { pointer-events: none; }
-/* Fallback: any KaTeX span with inline color inside #formulas gets pointer cursor.
-   The title attr (set by wireUpVarPopups) gives a native tooltip even if custom popup fails. */
-#formulas .katex-html span[style] { cursor: pointer; }
 .vp-click { cursor: pointer; position: relative; z-index: 2; pointer-events: auto; border-radius: 3px; transition: background .15s; }
 .vp-click:hover { background: rgba(0,0,0,.08); }
 #varpop {
   display: none; position: fixed; z-index: 9999;
   background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
-  padding: 12px 16px; box-shadow: 0 4px 16px rgba(0,0,0,.12);
-  font-size: 13px; color: var(--text);
-  max-width: 300px; line-height: 1.5; pointer-events: none;
+  padding: 10px 14px; box-shadow: 0 4px 16px rgba(0,0,0,.12);
+  font-family: 'Poppins', sans-serif; font-size: 13px; color: var(--text);
+  max-width: 280px; line-height: 1.5; pointer-events: none;
 }
-/* .vp-sym inherits KaTeX's own font-family and color from the copied innerHTML */
-#varpop .vp-sym { font-size: 24px; margin-bottom: 6px; line-height: 1.2; }
-#varpop .vp-desc { color: var(--muted); font-family: 'Poppins', sans-serif; font-size: 13px; }
+#varpop .vp-sym { font-size: 18px; margin-bottom: 4px; }
+#varpop .vp-desc { color: var(--muted); }
 .fs-num { font-size: 11px; font-weight: 500; color: var(--eq); margin-left: 6px; opacity: .8; }
 .fs-search-wrap { position: relative; margin-bottom: 12px; }
 #fs-search {
@@ -608,12 +604,12 @@ strong { font-weight: 600; }
 
   <!-- Ch 3 -->
   <div class="sb-group">
-    <a class="sb-item pending" onclick="toggleChapter('ch3'); showSection('ch3-notes')">
+    <a class="sb-item" onclick="toggleChapter('ch3'); showSection('ch3-lec1')">
       <span class="ch-arrow" id="ch3-arrow">▸</span>Ch 3: Bernoulli's Equation
     </a>
     <div class="sb-subs" id="ch3-subs">
-      <a class="sb-sub pending" onclick="showSection('ch3-notes','ch3-lec1')">3.1 Bernoulli's Equation I</a>
-      <a class="sb-sub pending" onclick="showSection('ch3-notes','ch3-lec2')">3.2 Bernoulli's Equation II</a>
+      <a class="sb-sub" onclick="showSection('ch3-lec1')">3.1 Bernoulli's Equation I</a>
+      <a class="sb-sub" onclick="showSection('ch3-lec2')">3.2 Bernoulli's Equation II</a>
       <a class="sb-sub prob-link pending" onclick="showSection('ch3-prob')">Recommended Problems</a>
     </div>
   </div>
@@ -1834,7 +1830,1126 @@ strong { font-weight: 600; }
 
 <!-- pending --><section id="ch2-prob" class="page-section"><div class="pending-placeholder"><i class="ti ti-math-function" aria-hidden="true"></i>Chapter 2 recommended problems — coming soon</div></section>
 
-<!-- pending --><section id="ch3-notes" class="page-section"><div class="pending-placeholder"><i class="ti ti-book" aria-hidden="true"></i>Chapter 3 notes — coming soon</div></section>
+<section id="ch3-lec1" class="page-section">
+  <h1 class="page-title" style="color:var(--ch3-title);">Ch 3 — Bernoulli&rsquo;s Equation</h1>
+  <p class="page-subtitle">Lecture 3.1 &middot; Bernoulli&rsquo;s Equation I &middot; Text Ch 3.5 &mdash; derivation, heads, EGL/HGL, stagnation pressure, limitations</p>
+
+  <p>The relation between <strong>pressure, velocity, and elevation</strong> of a flowing fluid was first stated verbally in Daniel Bernoulli&rsquo;s textbook in 1738. Leonhard Euler later gave the complete derivation in 1755. This single equation ties together the three things we have studied so far &mdash; pressure (Ch 1&ndash;2), and now motion &mdash; into one conservation statement that holds <em>along a streamline</em>. It is arguably the most-used equation in all of introductory fluid mechanics, so it is worth understanding exactly where it comes from and, just as importantly, when it is allowed.</p>
+
+  <h2 style="color:var(--ch3-title);">Deriving Bernoulli&rsquo;s Equation</h2>
+
+  <p>Bernoulli&rsquo;s equation is nothing more than Newton&rsquo;s second law applied to a small fluid element as it moves along a streamline. We follow one particle and add up the forces acting on it in the direction of motion (the <em>s</em>-direction, tangent to the streamline).</p>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Free body diagram of a fluid element moving along a streamline">
+      <!-- axes -->
+      <line x1="42" y1="320" x2="42" y2="44" stroke="var(--deriv)" stroke-width="1.5"/>
+      <polygon points="42,38 38,50 46,50" fill="var(--deriv)"/>
+      <text x="28" y="44" font-size="15" fill="var(--text)" font-style="italic">z</text>
+      <line x1="42" y1="320" x2="490" y2="320" stroke="var(--deriv)" stroke-width="1.5"/>
+      <polygon points="496,320 484,316 484,324" fill="var(--deriv)"/>
+      <text x="498" y="325" font-size="15" fill="var(--text)" font-style="italic">x</text>
+      <!-- gravity -->
+      <line x1="78" y1="58" x2="78" y2="96" stroke="var(--example)" stroke-width="2"/>
+      <polygon points="78,102 73,90 83,90" fill="var(--example)"/>
+      <text x="60" y="80" font-size="14" fill="var(--example)" font-style="italic">g</text>
+      <!-- streamline -->
+      <path d="M 95 300 Q 280 250 475 120" fill="none" stroke="var(--def)" stroke-width="2"/>
+      <polygon points="475,120 466,128 472,131" fill="var(--def)"/>
+      <text x="360" y="135" font-size="13" fill="var(--def)">streamline</text>
+      <!-- fluid element: tilted rectangle centred near (265,222) -->
+      <polygon points="232,238 286,210 300,236 246,264" fill="rgba(255,107,53,.16)" stroke="var(--eq)" stroke-width="1.6"/>
+      <!-- P dA arrow into the lower (upstream) face, pointing up-right along s -->
+      <line x1="196" y1="276" x2="236" y2="255" stroke="var(--eq)" stroke-width="2.2"/>
+      <polygon points="240,253 228,253 234,263" fill="var(--eq)"/>
+      <text x="150" y="285" font-size="13" fill="var(--eq)">P&middot;dA</text>
+      <!-- (P+dP) dA arrow on the upper (downstream) face, pointing back down-left -->
+      <line x1="332" y1="196" x2="296" y2="216" stroke="var(--eq)" stroke-width="2.2"/>
+      <polygon points="292,218 304,218 298,208" fill="var(--eq)"/>
+      <text x="330" y="190" font-size="13" fill="var(--eq)">(P+dP)&middot;dA</text>
+      <!-- weight W straight down from element centre -->
+      <line x1="266" y1="237" x2="266" y2="292" stroke="var(--example)" stroke-width="2.2"/>
+      <polygon points="266,298 261,286 271,286" fill="var(--example)"/>
+      <text x="272" y="288" font-size="13" fill="var(--example)" font-style="italic">W = &rho;g&middot;dA&middot;ds</text>
+      <!-- geometry triangle, lower-right open area -->
+      <line x1="350" y1="300" x2="440" y2="300" stroke="var(--muted)" stroke-width="1.4"/>
+      <line x1="440" y1="300" x2="440" y2="246" stroke="var(--muted)" stroke-width="1.4"/>
+      <line x1="350" y1="300" x2="440" y2="246" stroke="var(--deriv)" stroke-width="1.8"/>
+      <path d="M 378 300 A 28 28 0 0 0 372 288" fill="none" stroke="var(--muted)" stroke-width="1.2"/>
+      <text x="358" y="294" font-size="14" fill="var(--text)" font-style="italic">&theta;</text>
+      <text x="386" y="266" font-size="14" fill="var(--text)" font-style="italic">ds</text>
+      <text x="448" y="277" font-size="14" fill="var(--text)" font-style="italic">dz</text>
+      <text x="386" y="316" font-size="14" fill="var(--text)" font-style="italic">dx</text>
+    </svg>
+    <div class="figure-caption">The forces acting on a fluid element of cross-section dA and length ds along a streamline. Pressure pushes on the two end faces; gravity pulls straight down. From the geometry, ds&nbsp;sin&theta;&nbsp;=&nbsp;dz.</div>
+  </div>
+
+  <div class="card-bracket drv-card">
+    <div class="card-title">Derivation &mdash; Newton&rsquo;s 2nd law along a streamline</div>
+
+    <p><strong>Step 1 &mdash; acceleration along the streamline.</strong> For steady flow the velocity of the particle depends on position <em>s</em> only, so the convective acceleration is</p>
+    \[ a_s = \frac{dV}{dt} = \frac{\partial V}{\partial s}\frac{ds}{dt} = V\frac{dV}{ds} \]
+    <p>and the mass of the element is its density times its volume, \( m = \rho\,dA\,ds \). Newton&rsquo;s second law in the <em>s</em>-direction gives</p>
+    \[ \textstyle\sum F_s = m\,a_s = (\rho\,dA\,ds)\,V\frac{dV}{ds} \qquad (1) \]
+
+    <p><strong>Step 2 &mdash; add up the forces.</strong> Two kinds of force act along <em>s</em>: the pressure difference across the two end faces, and the component of the weight. Summing them,</p>
+    \[ \textstyle\sum F_s = P\,dA - \left(P + \tfrac{dP}{ds}ds\right)dA - \rho g\,dA\,ds\,\sin\theta \]
+    \[ \textstyle\sum F_s = -dP\,dA - \rho g\,dA\,ds\,\sin\theta \qquad (2) \]
+
+    <p><strong>Step 3 &mdash; equate (1) and (2)</strong> and divide through by the cross-sectional area dA:</p>
+    \[ -dP\,dA - \rho g\,dA\,ds\,\sin\theta = (\rho\,dA\,ds)\,V\frac{dV}{ds} \]
+    \[ -dP - \rho g\,ds\,\sin\theta = \rho\,V\,dV \]
+
+    <p><strong>Step 4 &mdash; use the geometry</strong> ds&nbsp;sin&theta;&nbsp;=&nbsp;dz (rise over the slope length), which turns the weight term into an elevation change:</p>
+    \[ -dP - \rho g\,dz = \rho\,V\,dV \]
+
+    <p><strong>Step 5 &mdash; rearrange.</strong> Collecting all terms on one side gives the <strong>steady-flow Euler equation</strong> along a streamline:</p>
+    \[ dP + \rho\,V\,dV + \rho g\,dz = 0 \qquad (3) \]
+
+    <p><strong>Step 6 &mdash; integrate for incompressible flow.</strong> With &rho; constant, integrate each term along the streamline:</p>
+    \[ \int dP + \int \rho\,V\,dV + \int \rho g\,dz = 0 \;\Rightarrow\; P + \tfrac{1}{2}\rho V^2 + \rho g z = \text{constant} \]
+    <p>Dividing by &rho; gives the most common form. That is Bernoulli&rsquo;s equation.</p>
+  </div>
+
+  <div class="card-bracket eq-card">
+    <div class="card-title">Bernoulli&rsquo;s Equation (along a streamline)</div>
+    \[ \frac{P}{\rho} + \frac{V^2}{2} + gz = \text{constant} \]
+    <p>Equivalently, between any two points 1 and 2 on the <strong>same streamline</strong>:</p>
+    \[ \frac{P_1}{\rho} + \frac{V_1^2}{2} + gz_1 = \frac{P_2}{\rho} + \frac{V_2^2}{2} + gz_2 \]
+    <div class="var-row">
+      <span class="pill">P — static pressure (Pa)</span>
+      <span class="pill">V — flow speed (m/s)</span>
+      <span class="pill">z — elevation above datum (m)</span>
+      <span class="pill">&rho; — density (kg/m&sup3;)</span>
+      <span class="pill">g — gravity (9.81 m/s&sup2;)</span>
+    </div>
+  </div>
+
+  <div class="callout callout-warning">
+    <div class="callout-icon">&#9888;</div>
+    <div class="callout-body">
+      <div class="callout-title">Same streamline only</div>
+      <div class="callout-text">The constant is only guaranteed equal between two points if they lie on the <strong>same streamline</strong>. (It happens to be the same constant everywhere for irrotational flow, but that is a special case &mdash; do not assume it.)</div>
+    </div>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Three ways to read the equation</h2>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">As energy per unit mass</div>
+    <p>Bernoulli&rsquo;s equation says the sum of three energies of a fluid particle is constant along a streamline during steady flow. Each term is an energy <strong>per unit mass</strong> (J/kg = m&sup2;/s&sup2;):</p>
+    <ul>
+      <li>\( P/\rho \) &mdash; <strong>flow energy</strong> (the work done by pressure to push the fluid along)</li>
+      <li>\( V^2/2 \) &mdash; <strong>kinetic energy</strong></li>
+      <li>\( gz \) &mdash; <strong>potential energy</strong></li>
+    </ul>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">As heads (height)</div>
+    <p>Divide every term by g. Now each term has units of <strong>length</strong>, because energy per unit weight is \( [\text{N}\!\cdot\!\text{m}/\text{N}] = [\text{m}] \). These heights are called <strong>heads</strong>:</p>
+    \[ \frac{P}{\rho g} + \frac{V^2}{2g} + z = H = \text{constant} \]
+    <div class="var-row">
+      <span class="pill">P/&rho;g — pressure head (m)</span>
+      <span class="pill">V&sup2;/2g — velocity head (m)</span>
+      <span class="pill">z — elevation head (m)</span>
+      <span class="pill">H — total head (m)</span>
+    </div>
+    <ul>
+      <li><strong>Pressure head</strong> \(P/\rho g\): the height of a fluid column that would produce the static pressure P.</li>
+      <li><strong>Velocity head</strong> \(V^2/2g\): the height a fluid would need to fall (frictionless) to reach speed V.</li>
+      <li><strong>Elevation head</strong> \(z\): the actual height above the datum &mdash; potential energy.</li>
+    </ul>
+  </div>
+
+  <div class="card-bracket eq-card">
+    <div class="card-title">Bernoulli&rsquo;s Equation (head form)</div>
+    \[ \frac{P_1}{\rho g} + \frac{V_1^2}{2g} + z_1 = \frac{P_2}{\rho g} + \frac{V_2^2}{2g} + z_2 = H \]
+    <p>This is the form to reach for when a problem is described in terms of column heights, water levels, or manometer readings. Note \( \rho g = \gamma \), the specific weight from Ch 1.</p>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Energy Grade Line (EGL) &amp; Hydraulic Grade Line (HGL)</h2>
+
+  <p>The head form has a useful graphical picture. Plot the total head and the pressure-plus-elevation head against position along the pipe:</p>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 560 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Energy grade line and hydraulic grade line above a rising pipe">
+      <!-- datum -->
+      <line x1="34" y1="330" x2="540" y2="330" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="5 4"/>
+      <text x="426" y="348" font-size="12" fill="var(--muted)" font-style="italic">arbitrary datum (z = 0)</text>
+      <!-- pipe (rising), two walls -->
+      <line x1="92" y1="262" x2="470" y2="222" stroke="var(--deriv)" stroke-width="2"/>
+      <line x1="92" y1="238" x2="470" y2="198" stroke="var(--deriv)" stroke-width="2"/>
+      <text x="250" y="234" font-size="12" fill="var(--def)">Flow &rarr;</text>
+      <!-- EGL (total head, constant => horizontal) -->
+      <line x1="92" y1="112" x2="470" y2="112" stroke="var(--tip)" stroke-width="2.4"/>
+      <text x="300" y="104" font-size="13" fill="var(--tip)" font-weight="600">EGL &mdash; total head H</text>
+      <!-- HGL (pressure+elevation head; V const => parallel, lower) -->
+      <line x1="92" y1="152" x2="470" y2="152" stroke="var(--def)" stroke-width="2.2"/>
+      <text x="104" y="170" font-size="13" fill="var(--def)" font-weight="600">HGL</text>
+      <!-- Station 1 at x=150 -->
+      <line x1="150" y1="250" x2="150" y2="112" stroke="var(--muted)" stroke-width="1" stroke-dasharray="3 3"/>
+      <circle cx="150" cy="250" r="3" fill="var(--eq)"/>
+      <text x="138" y="266" font-size="12" fill="var(--text)">1</text>
+      <text x="84" y="138" font-size="12" fill="var(--tip)">V&sup2;/2g</text>
+      <text x="92" y="206" font-size="12" fill="var(--def)">P&#8321;/&rho;g</text>
+      <text x="120" y="300" font-size="12" fill="var(--muted)">z&#8321;</text>
+      <!-- Station 2 at x=410 -->
+      <line x1="410" y1="210" x2="410" y2="112" stroke="var(--muted)" stroke-width="1" stroke-dasharray="3 3"/>
+      <circle cx="410" cy="210" r="3" fill="var(--eq)"/>
+      <text x="416" y="226" font-size="12" fill="var(--text)">2</text>
+      <text x="416" y="138" font-size="12" fill="var(--tip)">V&sup2;/2g</text>
+      <text x="416" y="184" font-size="12" fill="var(--def)">P&#8322;/&rho;g</text>
+      <text x="416" y="290" font-size="12" fill="var(--muted)">z&#8322;</text>
+    </svg>
+    <div class="figure-caption">EGL shows the height corresponding to <em>all</em> heads (total head H). HGL shows only the elevation + pressure heads &mdash; it sits one velocity head below the EGL. For ideal (loss-free) flow the EGL is horizontal. Here the pipe rises at constant diameter, so elevation head grows, pressure head shrinks, and the velocity head stays the same.</div>
+  </div>
+
+  <div class="callout callout-tip">
+    <div class="callout-icon">&#9733;</div>
+    <div class="callout-body">
+      <div class="callout-title">★ Reading the lines</div>
+      <div class="callout-text">EGL &minus; HGL = velocity head \(V^2/2g\). If the diameter is constant, V is constant, so the two lines are parallel. Where the pipe narrows, V rises, the gap widens, and the HGL dips. The EGL only drops if there are friction losses (Ch 6).</div>
+    </div>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Worked Example 1 &mdash; pressure between two points</h2>
+
+  <div class="card-bracket ex-card">
+    <div class="card-title">Example 1 &mdash; estimate the pressure at Point 2</div>
+    <p>Water at 20&deg;C flows along the streamlines shown. At <strong>Point 1</strong> the gauge pressure, velocity, and elevation are 15.0 kPa, 1.0 m/s, and 5.02 m. At <strong>Point 2</strong> the velocity and elevation are 0.5 m/s and 5.21 m. Estimate the pressure at Point 2.</p>
+
+    <div class="figure-box">
+      <svg viewBox="0 0 420 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two points on diverging streamlines">
+        <path d="M 40 200 Q 200 150 380 70" fill="none" stroke="var(--def)" stroke-width="1.8"/>
+        <polygon points="380,70 371,77 377,80" fill="var(--def)"/>
+        <path d="M 40 165 Q 200 120 380 45" fill="none" stroke="var(--def)" stroke-width="1.8"/>
+        <polygon points="380,45 371,52 377,55" fill="var(--def)"/>
+        <path d="M 40 120 Q 200 95 380 28" fill="none" stroke="var(--def)" stroke-width="1.4" opacity=".5"/>
+        <circle cx="150" cy="146" r="4" fill="var(--eq)"/>
+        <text x="138" y="166" font-size="13" fill="var(--text)">1</text>
+        <circle cx="300" cy="92" r="4" fill="var(--eq)"/>
+        <text x="306" y="88" font-size="13" fill="var(--text)">2</text>
+        <text x="70" y="118" font-size="12" fill="var(--def)">streamlines</text>
+      </svg>
+      <div class="figure-caption">Points 1 and 2 lie on the same streamline; the flow rises slightly and slows down from 1 to 2.</div>
+    </div>
+
+    <div class="thought-block">
+      <div class="thought-header">&#129504; Thought process</div>
+      <div class="thought-body">
+        <p>Two points on one streamline, asking for a pressure given the other point&rsquo;s state &mdash; this is the textbook Bernoulli setup. Water is incompressible and the rise is small with no pump/turbine between the points, so Bernoulli applies directly.</p>
+        <p>Approach: write Bernoulli in head form, solve for \(P_2\). I expect \(P_2\) to be a little <em>lower</em> than \(P_1\): the fluid rose (costs elevation head) but slowed down (returns a little velocity head), and the elevation change dominates here.</p>
+      </div>
+    </div>
+
+    <div class="collapse-toggle"><span class="arrow">&#9656;</span> Show full solution</div>
+    <div class="collapse-body">
+      <p><strong>Given:</strong> \(P_1 = 15.0\) kPa, \(V_1 = 1.0\) m/s, \(z_1 = 5.02\) m; \(V_2 = 0.5\) m/s, \(z_2 = 5.21\) m. Water at 20&deg;C: \(\rho = 998.2\) kg/m&sup3;.</p>
+
+      <div class="formulas-needed">
+        <h4>&#128203; Formulas Needed</h4>
+        <ol>
+          <li><strong>Specific weight</strong> &mdash; \(\gamma = \rho g\) <a href="#formulas">&rarr; sheet #2</a></li>
+          <li><strong>Bernoulli (head form)</strong> &mdash; \(\frac{P_1}{\gamma} + \frac{V_1^2}{2g} + z_1 = \frac{P_2}{\gamma} + \frac{V_2^2}{2g} + z_2\) <a href="#formulas">&rarr; sheet #15</a></li>
+        </ol>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(42,107,124,.18);color:var(--def);">1</div>
+        <div class="step-body">
+          <div class="step-title">Specific weight of water</div>
+          <div class="step-work">\[ \gamma = \rho g = (998.2)(9.807) = 9789\ \text{N/m}^3 = 9.789\ \text{kN/m}^3 \]</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(255,107,53,.18);color:var(--eq);">2</div>
+        <div class="step-body">
+          <div class="step-title">Write Bernoulli and isolate P&#8322;</div>
+          <div class="step-work">
+            \[ \frac{15.0}{9.789} + \frac{(1.0)^2}{2(9.807)} + 5.02 = \frac{P_2}{9.789} + \frac{(0.5)^2}{2(9.807)} + 5.21 \]
+            <p>Left side: \(1.5323 + 0.0510 + 5.02 = 6.6033\) m. Right-side known terms: \(0.0127 + 5.21 = 5.2227\) m.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(255,107,53,.18);color:var(--eq);">3</div>
+        <div class="step-body">
+          <div class="step-title">Solve for the pressure head, then P&#8322;</div>
+          <div class="step-work">
+            \[ \frac{P_2}{9.789} = 6.6033 - 5.2227 = 1.3806\ \text{m} \]
+            \[ P_2 = (1.3806)(9.789) = 13.5\ \text{kPa} \]
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(244,162,97,.22);color:var(--example);">&#10003;</div>
+        <div class="step-body">
+          <div class="step-title">Answer</div>
+          <div class="step-work"><strong>\(P_2 \approx 13.5\) kPa (gauge).</strong> As predicted, slightly below \(P_1\): the 0.19 m rise costs more head than the modest slow-down returns.</div>
+        </div>
+      </div>
+
+      <div class="callout callout-tip">
+        <div class="callout-icon">&#9733;</div>
+        <div class="callout-body">
+          <div class="callout-title">★ Tips</div>
+          <div class="callout-text">Keep pressures in kPa and divide by &gamma; in kN/m&sup3; so the units cancel to metres. Both pressures are gauge here &mdash; that is fine because Bernoulli only ever cares about pressure <em>differences</em>, so a common reference cancels.</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--muted);"><strong>Concept bridge:</strong> used specific weight (sheet #2) and Bernoulli head form (sheet #15).</p>
+    </div>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">When Bernoulli is &mdash; and is not &mdash; allowed</h2>
+
+  <p>Every term we dropped during the derivation is an assumption. Use Bernoulli only when all of these hold:</p>
+
+  <div class="card-bracket tip-card">
+    <div class="card-title">★ Limitations &mdash; the six conditions</div>
+    <ul>
+      <li><strong>Steady flow</strong> &mdash; properties at a point do not change with time.</li>
+      <li><strong>Frictionless (inviscid) flow</strong> &mdash; we never included a viscous shear term.</li>
+      <li><strong>No shaft work</strong> &mdash; no pump, turbine, fan, or impeller between the two points (those add or remove energy).</li>
+      <li><strong>Incompressible</strong> &mdash; &rho; was taken constant to do the integral. Liquids always; gases only at low speed.</li>
+      <li><strong>No heat transfer</strong> &mdash; no significant heating or temperature change.</li>
+      <li><strong>Along a single streamline</strong> &mdash; the derivation followed one particle.</li>
+    </ul>
+  </div>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 540 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Examples where Bernoulli is invalid">
+      <!-- sudden expansion -->
+      <rect x="20" y="60" width="40" height="20" fill="none" stroke="var(--eq)" stroke-width="1.6"/>
+      <rect x="60" y="44" width="56" height="52" fill="none" stroke="var(--eq)" stroke-width="1.6"/>
+      <path d="M 66 54 q 14 6 0 12 M 66 86 q 14 -6 0 -12" fill="none" stroke="var(--def)" stroke-width="1.2"/>
+      <text x="20" y="118" font-size="11" fill="var(--text)">sudden expansion</text>
+      <!-- valve -->
+      <line x1="170" y1="70" x2="250" y2="70" stroke="var(--eq)" stroke-width="1.6"/>
+      <polygon points="200,70 196,56 204,56" fill="var(--example)"/>
+      <polygon points="200,70 196,84 204,84" fill="var(--example)"/>
+      <text x="196" y="118" font-size="11" fill="var(--text)">valve</text>
+      <!-- fan -->
+      <line x1="300" y1="50" x2="300" y2="92" stroke="var(--example)" stroke-width="2"/>
+      <ellipse cx="300" cy="71" rx="6" ry="20" fill="rgba(244,162,97,.3)" stroke="var(--example)" stroke-width="1.4"/>
+      <text x="286" y="118" font-size="11" fill="var(--text)">fan/pump</text>
+      <!-- heating -->
+      <rect x="380" y="52" width="120" height="40" fill="none" stroke="var(--eq)" stroke-width="1.6"/>
+      <path d="M 410 72 l 8 -8 l 8 16 l 8 -16 l 8 16 l 8 -8" fill="none" stroke="#C0392B" stroke-width="1.6"/>
+      <text x="402" y="118" font-size="11" fill="var(--text)">heating section</text>
+    </svg>
+    <div class="figure-caption">Friction, heat transfer, and components that disturb the streamlined structure of the flow all break Bernoulli. Near solid walls (boundary layers) and downstream of bodies (wakes) friction always matters &mdash; Bernoulli is reliable only <em>outside</em> those regions.</div>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Static, dynamic, and stagnation pressure</h2>
+
+  <p>Multiply the speed term back up so every term is a pressure: \( P + \tfrac{1}{2}\rho V^2 + \rho g z = \text{constant} \). At a fixed elevation the three pressure ideas are:</p>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">The three pressures</div>
+    <ul>
+      <li><strong>Static pressure</strong> \(P\) &mdash; the actual thermodynamic pressure (normal stress) in the moving fluid.</li>
+      <li><strong>Dynamic pressure</strong> \(\tfrac{1}{2}\rho V^2\) &mdash; the pressure associated with the fluid&rsquo;s motion.</li>
+      <li><strong>Stagnation pressure</strong> \(P_0\) &mdash; the static pressure at a point where the flow has been brought completely to rest (\(V=0\)).</li>
+    </ul>
+    <p>At the same elevation, setting \(V_2 = 0\) at the stagnation point gives</p>
+    \[ P_0 = P + \tfrac{1}{2}\rho V^2 \]
+    <p>so <strong>stagnation pressure = static pressure + dynamic pressure</strong>. This is the key to flow-rate measurement in Lecture 3.2.</p>
+    <div class="var-row">
+      <span class="pill">P&#8320; — stagnation pressure (Pa)</span>
+      <span class="pill">P — static pressure (Pa)</span>
+      <span class="pill">&frac12;&rho;V&sup2; — dynamic pressure (Pa)</span>
+    </div>
+  </div>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 420 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stagnation point at the leading edge of an airfoil">
+      <!-- airfoil -->
+      <path d="M 130 90 C 170 60, 320 64, 380 88 C 320 100, 200 104, 130 90 Z" fill="rgba(9,60,93,.12)" stroke="var(--deriv)" stroke-width="1.8"/>
+      <!-- oncoming streamlines -->
+      <line x1="20" y1="60" x2="120" y2="74" stroke="var(--def)" stroke-width="1.4"/><polygon points="120,74 111,72 113,79" fill="var(--def)"/>
+      <line x1="20" y1="90" x2="118" y2="90" stroke="var(--def)" stroke-width="1.4"/><polygon points="124,90 113,86 113,94" fill="var(--def)"/>
+      <line x1="20" y1="120" x2="120" y2="106" stroke="var(--def)" stroke-width="1.4"/><polygon points="120,106 113,109 111,102" fill="var(--def)"/>
+      <!-- stagnation point -->
+      <circle cx="130" cy="90" r="4.5" fill="var(--eq)"/>
+      <line x1="84" y1="36" x2="126" y2="84" stroke="var(--eq)" stroke-width="1.2"/>
+      <text x="40" y="30" font-size="12" fill="var(--eq)">leading-edge stagnation point (V = 0)</text>
+    </svg>
+    <div class="figure-caption">At the leading edge of an airfoil the oncoming flow is brought to rest &mdash; the pressure there is the stagnation pressure \(P_0\).</div>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Simplifying assumptions for tanks &amp; reservoirs</h2>
+
+  <div class="card-bracket tip-card">
+    <div class="card-title">★ Two cancellations that make problems easy</div>
+    <ul>
+      <li>A point <strong>exposed to the atmosphere</strong> has gauge pressure \(P = 0\), so its \(P/\rho g\) term drops out.</li>
+      <li>The <strong>free surface of a large tank/reservoir</strong> falls so slowly that \(V \approx 0\), so its velocity head drops out.</li>
+    </ul>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Worked Example 2 &mdash; draining tank (Torricelli)</h2>
+
+  <div class="card-bracket ex-card">
+    <div class="card-title">Example 2 &mdash; maximum outlet velocity</div>
+    <p>A large tank open to the atmosphere is filled with water to a height of 5 m above a smooth, rounded outlet tap near the bottom. The tap is opened. Determine the maximum velocity of the water at the outlet.</p>
+
+    <div class="figure-box">
+      <svg viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Open tank draining through a bottom outlet">
+        <!-- tank -->
+        <rect x="70" y="40" width="160" height="170" fill="rgba(42,107,124,.12)" stroke="var(--deriv)" stroke-width="2"/>
+        <line x1="70" y1="58" x2="230" y2="58" stroke="var(--def)" stroke-width="1.2"/>
+        <text x="150" y="120" font-size="12" fill="var(--def)" text-anchor="middle">water</text>
+        <!-- point 1 free surface -->
+        <circle cx="150" cy="58" r="3.5" fill="var(--eq)"/>
+        <text x="156" y="54" font-size="11" fill="var(--text)">1 (free surface, V&#8321;&asymp;0)</text>
+        <!-- height bracket -->
+        <line x1="50" y1="58" x2="50" y2="200" stroke="var(--muted)" stroke-width="1.2"/>
+        <line x1="46" y1="58" x2="54" y2="58" stroke="var(--muted)" stroke-width="1.2"/>
+        <line x1="46" y1="200" x2="54" y2="200" stroke="var(--muted)" stroke-width="1.2"/>
+        <text x="20" y="132" font-size="13" fill="var(--text)">5 m</text>
+        <!-- outlet point 2 -->
+        <rect x="230" y="190" width="20" height="16" fill="none" stroke="var(--deriv)" stroke-width="1.6"/>
+        <line x1="250" y1="198" x2="300" y2="198" stroke="var(--def)" stroke-width="2"/>
+        <polygon points="306,198 295,194 295,202" fill="var(--def)"/>
+        <circle cx="240" cy="198" r="3.5" fill="var(--eq)"/>
+        <text x="244" y="224" font-size="11" fill="var(--text)">2 (outlet, z&#8322;=0)</text>
+        <text x="280" y="188" font-size="13" fill="var(--def)" font-style="italic">V&#8322;</text>
+      </svg>
+      <div class="figure-caption">Point 1 at the free surface; Point 2 at the outlet. Both are exposed to atmosphere, so both pressures cancel.</div>
+    </div>
+
+    <div class="thought-block">
+      <div class="thought-header">&#129504; Thought process</div>
+      <div class="thought-body">
+        <p>&ldquo;Maximum&rdquo; velocity signals the ideal, frictionless case &mdash; exactly Bernoulli. Choose Point 1 at the surface and Point 2 at the outlet, on one streamline.</p>
+        <p>Both points touch the atmosphere, so \(P_1 = P_2 = P_{atm}\) and the pressure terms cancel. The surface barely moves (\(V_1\approx 0\)). Put the datum at the outlet (\(z_2 = 0\)). Almost everything drops out, leaving elevation head = velocity head.</p>
+      </div>
+    </div>
+
+    <div class="collapse-toggle"><span class="arrow">&#9656;</span> Show full solution</div>
+    <div class="collapse-body">
+      <p><strong>Assumptions:</strong> incompressible flow; the tank drains slowly enough to be quasi-steady; irreversible losses in the smooth, rounded tap are neglected.</p>
+      <p><strong>Point 1</strong> (free surface): \(P_1 = P_{atm}\), \(V_1 = 0\), \(z_1 = 5\) m. <strong>Point 2</strong> (outlet): \(P_2 = P_{atm}\), \(z_2 = 0\).</p>
+
+      <div class="formulas-needed">
+        <h4>&#128203; Formulas Needed</h4>
+        <ol>
+          <li><strong>Bernoulli (head form)</strong> &mdash; \(\frac{P_1}{\gamma}+\frac{V_1^2}{2g}+z_1=\frac{P_2}{\gamma}+\frac{V_2^2}{2g}+z_2\) <a href="#formulas">&rarr; sheet #15</a></li>
+        </ol>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(42,107,124,.18);color:var(--def);">1</div>
+        <div class="step-body">
+          <div class="step-title">Cancel the dropped terms</div>
+          <div class="step-work">
+            <p>\(P_1=P_2\) cancel; \(V_1=0\); \(z_2=0\). Bernoulli collapses to</p>
+            \[ z_1 = \frac{V_2^2}{2g} \]
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(255,107,53,.18);color:var(--eq);">2</div>
+        <div class="step-body">
+          <div class="step-title">Solve for the outlet velocity</div>
+          <div class="step-work">
+            \[ V_2 = \sqrt{2 g z_1} = \sqrt{2(9.81)(5)} \]
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(244,162,97,.22);color:var(--example);">&#10003;</div>
+        <div class="step-body">
+          <div class="step-title">Answer</div>
+          <div class="step-work"><strong>\(V_2 = 9.9\) m/s.</strong> This is <strong>Torricelli&rsquo;s result</strong>: the jet leaves as fast as if the water had free-fallen the full 5 m.</div>
+        </div>
+      </div>
+
+      <div class="callout callout-warning">
+        <div class="callout-icon">&#9888;</div>
+        <div class="callout-body">
+          <div class="callout-title">Common trap</div>
+          <div class="callout-text">The result is independent of fluid density and of the tank&rsquo;s cross-section &mdash; only the height matters. It is the <em>maximum</em> velocity because friction in a real tap would make the actual value a little lower.</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--muted);"><strong>Concept bridge:</strong> used Bernoulli head form (sheet #15) with three terms cancelled.</p>
+    </div>
+  </div>
+
+  <div class="callout callout-exam">
+    <div class="callout-icon">&#9873;</div>
+    <div class="callout-body">
+      <div class="callout-title">Lecture 3.1 in one line</div>
+      <div class="callout-text">Bernoulli = Newton&rsquo;s 2nd law integrated along a streamline for steady, frictionless, incompressible flow with no shaft work or heat transfer: \( \frac{P}{\rho}+\frac{V^2}{2}+gz \) is constant. Read it as energy, as heads (EGL/HGL), or as pressures (static + dynamic = stagnation). Lecture 3.2 turns the stagnation idea into flow-measurement devices.</div>
+    </div>
+  </div>
+</section>
+
+<section id="ch3-lec2" class="page-section">
+  <h1 class="page-title" style="color:var(--ch3-title);">Ch 3 — Bernoulli&rsquo;s Equation</h1>
+  <p class="page-subtitle">Lecture 3.2 &middot; Bernoulli&rsquo;s Equation II &middot; Text Ch 3.5 &mdash; flow-rate measurement</p>
+
+  <p>Lecture 3.1 ended on a single, powerful idea: bring a moving fluid to rest and its pressure climbs to the <strong>stagnation pressure</strong> \(P_0 = P + \tfrac12\rho V^2\). That one relationship is the engine behind almost every practical way of measuring how fast a fluid moves or how much of it flows through a pipe. This lecture applies Bernoulli to four classic flow-measurement devices &mdash; the <strong>Pitot tube</strong>, the <strong>Pitot-static tube</strong>, the <strong>Venturi meter</strong>, the <strong>orifice meter</strong>, and the <strong>bell-mouth inlet</strong> &mdash; and shows how a measured pressure difference becomes a velocity or a volumetric flow rate \(Q\).</p>
+
+  <h2 style="color:var(--ch3-title);">Stagnation pressure, revisited</h2>
+
+  <p>Take Bernoulli between a point (1) in the free stream and a point (2) where the flow is brought completely to rest. If the two points are at the same elevation (\(z_1 = z_2\)) and \(V_2 = 0\):</p>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 460 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Oncoming flow brought to rest at a stagnation point on a blunt body">
+      <!-- blunt body (bullet/leading edge) on the right -->
+      <path d="M 250 40 C 300 40, 430 50, 440 85 C 430 120, 300 130, 250 130 C 232 110, 232 60, 250 40 Z" fill="rgba(9,60,93,.12)" stroke="var(--deriv)" stroke-width="1.8"/>
+      <!-- oncoming streamlines -->
+      <line x1="24" y1="55" x2="150" y2="68" stroke="var(--def)" stroke-width="1.5"/><polygon points="156,69 145,64 146,72" fill="var(--def)"/>
+      <line x1="24" y1="85" x2="150" y2="85" stroke="var(--def)" stroke-width="1.5"/><polygon points="156,85 145,81 145,89" fill="var(--def)"/>
+      <line x1="24" y1="115" x2="150" y2="102" stroke="var(--def)" stroke-width="1.5"/><polygon points="156,101 146,98 145,106" fill="var(--def)"/>
+      <!-- streamline curving over the top to show diversion -->
+      <path d="M 156 69 Q 220 58 248 44" fill="none" stroke="var(--def)" stroke-width="1.2" opacity=".7"/>
+      <path d="M 156 101 Q 220 112 248 126" fill="none" stroke="var(--def)" stroke-width="1.2" opacity=".7"/>
+      <!-- free-stream label -->
+      <text x="40" y="46" font-size="12" fill="var(--def)">V&#8321;, P&#8321;</text>
+      <!-- stagnation point -->
+      <circle cx="234" cy="85" r="4.5" fill="var(--eq)"/>
+      <line x1="150" y1="150" x2="230" y2="92" stroke="var(--eq)" stroke-width="1.1"/>
+      <text x="44" y="158" font-size="12" fill="var(--eq)">stagnation point: V = 0, P = P&#8320;</text>
+    </svg>
+    <div class="figure-caption">A streamline that ends on the nose of a body is decelerated to rest. The pressure recovered there is the stagnation pressure \(P_0\) &mdash; the sum of the static and dynamic pressures of the free stream.</div>
+  </div>
+
+  <div class="card-bracket drv-card">
+    <div class="card-title">Derivation &mdash; stagnation pressure from Bernoulli</div>
+    <p>Starting from the pressure form along the streamline 1&rarr;2:</p>
+    \[ P_1 + \tfrac12\rho V_1^2 + \rho g z_1 = P_2 + \tfrac12\rho V_2^2 + \rho g z_2 \]
+    <p>Apply \(z_1 = z_2\) (same elevation) and \(V_2 = 0\) (brought to rest). Writing \(V_1 = V\) and \(P_1 = P\) for the free stream, and recognising \(P_2 = P_0\):</p>
+    \[ P + \tfrac12\rho V^2 = P_0 \;\;\Rightarrow\;\; P_0 = P + \tfrac12\rho V^2 \]
+    <p>So the <strong>stagnation pressure</strong> is the <strong>static</strong> pressure plus the <strong>dynamic</strong> pressure \(\tfrac12\rho V^2\). Rearranged, it gives the velocity directly from a pressure difference &mdash; which is exactly what the next devices measure.</p>
+    \[ V = \sqrt{\frac{2\,(P_0 - P)}{\rho}} \]
+  </div>
+
+  <div class="callout callout-tip">
+    <div class="callout-icon">&#9733;</div>
+    <div class="callout-body">
+      <div class="callout-title">★ Four devices, one idea</div>
+      <div class="callout-text">Each meter measures a <strong>pressure difference</strong> and converts it to flow using Bernoulli. <strong>Pitot / Pitot-static</strong> &rarr; local velocity from stagnation &minus; static. <strong>Venturi &amp; orifice</strong> &rarr; flow rate from the pressure drop across an area change, via Bernoulli + continuity. <strong>Bell-mouth inlet</strong> &rarr; a smooth intake that doubles as its own flow meter.</div>
+    </div>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Pitot tube</h2>
+
+  <p>A Pitot tube is a small right-angled (90&deg; bend) tube with its open mouth pointed directly into the flow, so the fluid is brought to rest at the opening. It therefore senses the <strong>stagnation pressure</strong>, and paired with a separate measurement of static pressure it gives one of the most accurate point-velocity measurements available.</p>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 480 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pitot tube and piezometer tapped into a horizontal pipe">
+      <!-- pipe walls -->
+      <line x1="40" y1="170" x2="450" y2="170" stroke="var(--deriv)" stroke-width="2.4"/>
+      <line x1="40" y1="232" x2="450" y2="232" stroke="var(--deriv)" stroke-width="2.4"/>
+      <rect x="40" y="170" width="410" height="62" fill="rgba(42,107,124,.10)"/>
+      <!-- flow arrow -->
+      <line x1="70" y1="201" x2="150" y2="201" stroke="var(--def)" stroke-width="2.4"/><polygon points="156,201 144,196 144,206" fill="var(--def)"/>
+      <text x="78" y="220" font-size="13" fill="var(--def)" font-style="italic">V</text>
+      <!-- piezometer (static) vertical tube -->
+      <line x1="210" y1="170" x2="210" y2="70" stroke="var(--deriv)" stroke-width="1.6"/>
+      <line x1="226" y1="170" x2="226" y2="70" stroke="var(--deriv)" stroke-width="1.6"/>
+      <rect x="210" y="120" width="16" height="50" fill="rgba(42,107,124,.30)"/>
+      <text x="150" y="92" font-size="12" fill="var(--text)">piezometer</text>
+      <text x="150" y="107" font-size="11" fill="var(--muted)">(static)</text>
+      <!-- static point 1 -->
+      <circle cx="218" cy="201" r="3.5" fill="var(--eq)"/>
+      <text x="196" y="223" font-size="12" fill="var(--text)">1</text>
+      <!-- pitot tube: vertical riser + bend into flow -->
+      <line x1="320" y1="170" x2="320" y2="56" stroke="var(--deriv)" stroke-width="1.6"/>
+      <line x1="336" y1="170" x2="336" y2="56" stroke="var(--deriv)" stroke-width="1.6"/>
+      <path d="M 320 170 Q 320 201 300 201" fill="none" stroke="var(--deriv)" stroke-width="1.6"/>
+      <path d="M 336 170 Q 336 214 296 214" fill="none" stroke="var(--deriv)" stroke-width="1.6"/>
+      <rect x="320" y="86" width="16" height="84" fill="rgba(42,107,124,.30)"/>
+      <text x="344" y="74" font-size="12" fill="var(--text)">Pitot (stagnation)</text>
+      <!-- stagnation point 2 -->
+      <circle cx="300" cy="207" r="3.5" fill="var(--eq)"/>
+      <text x="276" y="201" font-size="12" fill="var(--text)">2</text>
+      <text x="246" y="252" font-size="11" fill="var(--eq)">stagnation point</text>
+      <!-- difference bracket between the two column tops -->
+      <line x1="372" y1="120" x2="372" y2="86" stroke="var(--muted)" stroke-width="1.2"/>
+      <line x1="368" y1="120" x2="376" y2="120" stroke="var(--muted)" stroke-width="1.2"/>
+      <line x1="368" y1="86" x2="376" y2="86" stroke="var(--muted)" stroke-width="1.2"/>
+      <text x="380" y="108" font-size="12" fill="var(--text)">V&sup2;/2g</text>
+      <!-- column-height labels -->
+      <text x="170" y="150" font-size="11" fill="var(--def)">P&#8321;/&rho;g</text>
+      <text x="344" y="150" font-size="11" fill="var(--def)">P&#8320;/&rho;g</text>
+    </svg>
+    <div class="figure-caption">The piezometer reads the static pressure head \(P_1/\rho g\); the Pitot tube reads the stagnation head \(P_0/\rho g\). Their difference is exactly the velocity head \(V^2/2g\).</div>
+  </div>
+
+  <div class="card-bracket drv-card">
+    <div class="card-title">Derivation &mdash; Pitot velocity</div>
+    <p>Bernoulli from the free stream (1) to the Pitot mouth (2), with \(z_1 = z_2\) and \(V_2 = 0\):</p>
+    \[ P_1 + \tfrac12\rho V_1^2 = P_2 \quad\Rightarrow\quad \frac{V_1^2}{2} = \frac{P_2 - P_1}{\rho} \]
+    <p>Since the mouth is a stagnation point, \(P_2 = P_0\), so</p>
+    \[ V_1 = \sqrt{\frac{2\,(P_0 - P_1)}{\rho}} \]
+    <p>Everything on the right is measured: \(P_0\) by the Pitot tube, \(P_1\) by the piezometer.</p>
+  </div>
+
+  <div class="card-bracket eq-card">
+    <div class="card-title">Pitot velocity</div>
+    \[ V_1 = \sqrt{\frac{2\,(P_0 - P_1)}{\rho}} \]
+    <div class="var-row">
+      <span class="pill">V&#8321; — local flow speed (m/s)</span>
+      <span class="pill">P&#8320; — stagnation pressure (Pa)</span>
+      <span class="pill">P&#8321; — static pressure (Pa)</span>
+      <span class="pill">&rho; — fluid density (kg/m&sup3;)</span>
+    </div>
+    <p>When the two pressures are read as column heights, \(P_0 - P_1 = \rho g\,\Delta h\), and the formula reduces to the tidy \(V_1 = \sqrt{2 g\,\Delta h}\).</p>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Pitot-static tube</h2>
+
+  <p>A Pitot-static probe combines both measurements in a single instrument: a hole at the nose senses the <strong>stagnation</strong> pressure, while several small holes around the circumference sense the <strong>static</strong> pressure. The velocity calculation is <em>identical</em> to the Pitot tube &mdash; only the way the two pressures are picked off differs.</p>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 440 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pitot-static probe with a nose stagnation tap and side static taps">
+      <!-- oncoming flow -->
+      <line x1="20" y1="70" x2="92" y2="70" stroke="var(--def)" stroke-width="1.5"/><polygon points="98,70 87,66 87,74" fill="var(--def)"/>
+      <line x1="20" y1="95" x2="92" y2="95" stroke="var(--def)" stroke-width="1.5"/><polygon points="98,95 87,91 87,99" fill="var(--def)"/>
+      <text x="24" y="58" font-size="12" fill="var(--def)" font-style="italic">V</text>
+      <!-- probe body: rounded nose + barrel, then bend down -->
+      <path d="M 110 72 q -14 11 0 22 L 300 94 L 300 72 Z" fill="rgba(42,107,124,.12)" stroke="var(--deriv)" stroke-width="1.8"/>
+      <line x1="300" y1="72" x2="300" y2="150" stroke="var(--deriv)" stroke-width="1.8"/>
+      <line x1="318" y1="94" x2="318" y2="150" stroke="var(--deriv)" stroke-width="1.8"/>
+      <path d="M 300 72 q 9 0 18 12 L 318 94" fill="rgba(42,107,124,.12)" stroke="var(--deriv)" stroke-width="1.8"/>
+      <!-- nose stagnation tap -->
+      <circle cx="111" cy="83" r="3" fill="var(--eq)"/>
+      <line x1="111" y1="83" x2="150" y2="40" stroke="var(--eq)" stroke-width="1"/>
+      <text x="120" y="34" font-size="11" fill="var(--eq)">stagnation (nose) tap &rarr; P&#8320;</text>
+      <!-- side static taps -->
+      <circle cx="220" cy="83" r="2.6" fill="var(--def)"/>
+      <circle cx="240" cy="83" r="2.6" fill="var(--def)"/>
+      <line x1="230" y1="83" x2="270" y2="126" stroke="var(--def)" stroke-width="1"/>
+      <text x="206" y="146" font-size="11" fill="var(--def)">static (side) taps &rarr; P&#8321;</text>
+      <text x="328" y="120" font-size="11" fill="var(--muted)">to meters</text>
+    </svg>
+    <div class="figure-caption">One probe, two pressures: the nose hole gives \(P_0\) and the circumferential holes give \(P_1\). Substitute into the same \(V_1 = \sqrt{2(P_0 - P_1)/\rho}\).</div>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Worked Example 3 &mdash; velocity from a Pitot tube</h2>
+
+  <div class="card-bracket ex-card">
+    <div class="card-title">Example 3 &mdash; velocity at the centre of a pipe</div>
+    <p>A piezometer and a Pitot tube are tapped into a horizontal water pipe to read the static and stagnation pressures. The water columns rise to the heights shown: \(h_1 = 3\) cm, \(h_2 = 7\) cm, and the extra rise in the Pitot tube is \(h_3 = 12\) cm. Determine the velocity at the centre of the pipe.</p>
+
+    <div class="figure-box">
+      <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Piezometer and Pitot tube column heights h1 h2 h3 on a water pipe">
+        <!-- pipe -->
+        <line x1="30" y1="220" x2="380" y2="220" stroke="var(--deriv)" stroke-width="2.4"/>
+        <line x1="30" y1="262" x2="380" y2="262" stroke="var(--deriv)" stroke-width="2.4"/>
+        <rect x="30" y="220" width="350" height="42" fill="rgba(42,107,124,.10)"/>
+        <line x1="300" y1="241" x2="360" y2="241" stroke="var(--def)" stroke-width="2"/><polygon points="366,241 354,236 354,246" fill="var(--def)"/>
+        <text x="330" y="234" font-size="12" fill="var(--def)" font-style="italic">V&#8321;</text>
+        <!-- piezometer (left, static) -->
+        <line x1="120" y1="220" x2="120" y2="120" stroke="var(--deriv)" stroke-width="1.5"/>
+        <line x1="134" y1="220" x2="134" y2="120" stroke="var(--deriv)" stroke-width="1.5"/>
+        <rect x="120" y="150" width="14" height="70" fill="rgba(42,107,124,.30)"/>
+        <circle cx="127" cy="241" r="3.2" fill="var(--eq)"/>
+        <text x="108" y="282" font-size="11" fill="var(--text)">1</text>
+        <!-- pitot (right, stagnation) -->
+        <line x1="210" y1="220" x2="210" y2="92" stroke="var(--deriv)" stroke-width="1.5"/>
+        <line x1="224" y1="220" x2="224" y2="92" stroke="var(--deriv)" stroke-width="1.5"/>
+        <path d="M 210 220 Q 210 241 192 241" fill="none" stroke="var(--deriv)" stroke-width="1.5"/>
+        <path d="M 224 220 Q 224 252 188 252" fill="none" stroke="var(--deriv)" stroke-width="1.5"/>
+        <rect x="210" y="120" width="14" height="100" fill="rgba(42,107,124,.30)"/>
+        <circle cx="192" cy="247" r="3.2" fill="var(--eq)"/>
+        <text x="170" y="241" font-size="11" fill="var(--text)">2</text>
+        <!-- h3: difference between the two column tops -->
+        <line x1="270" y1="150" x2="270" y2="120" stroke="var(--muted)" stroke-width="1.2"/>
+        <line x1="266" y1="150" x2="274" y2="150" stroke="var(--muted)" stroke-width="1.2"/>
+        <line x1="266" y1="120" x2="274" y2="120" stroke="var(--muted)" stroke-width="1.2"/>
+        <text x="278" y="139" font-size="12" fill="var(--text)">h&#8323; = 12 cm</text>
+        <!-- h2: piezometer column top down to pipe-ish -->
+        <line x1="100" y1="150" x2="100" y2="200" stroke="var(--muted)" stroke-width="1.2"/>
+        <line x1="96" y1="150" x2="104" y2="150" stroke="var(--muted)" stroke-width="1.2"/>
+        <line x1="96" y1="200" x2="104" y2="200" stroke="var(--muted)" stroke-width="1.2"/>
+        <text x="40" y="178" font-size="12" fill="var(--text)">h&#8322; = 7 cm</text>
+        <!-- h1: small near pipe -->
+        <line x1="100" y1="200" x2="100" y2="220" stroke="var(--muted)" stroke-width="1.2"/>
+        <line x1="96" y1="200" x2="104" y2="200" stroke="var(--muted)" stroke-width="1.2"/>
+        <line x1="96" y1="220" x2="104" y2="220" stroke="var(--muted)" stroke-width="1.2"/>
+        <text x="40" y="215" font-size="12" fill="var(--text)">h&#8321; = 3 cm</text>
+      </svg>
+      <div class="figure-caption">Static head reaches \(h_1 + h_2\); the stagnation column climbs an extra \(h_3\) higher. That extra height is the velocity head.</div>
+    </div>
+
+    <div class="thought-block">
+      <div class="thought-header">&#129504; Thought process</div>
+      <div class="thought-body">
+        <p>A piezometer reads static pressure and a Pitot reads stagnation pressure, on one horizontal streamline &mdash; the textbook Pitot setup. The pipe is horizontal so \(z_1 = z_2\), and the Pitot mouth is a stagnation point so \(V_2 = 0\).</p>
+        <p>Each column height converts to a pressure by \(P = \rho g h\). The static column stands at \(h_1 + h_2\); the stagnation column stands at \(h_1 + h_2 + h_3\). When I subtract, everything cancels except \(h_3\), so the velocity should depend on \(h_3\) alone.</p>
+      </div>
+    </div>
+
+    <div class="collapse-toggle"><span class="arrow">&#9656;</span> Show full solution</div>
+    <div class="collapse-body">
+      <p><strong>Assumptions:</strong> steady, incompressible flow; points 1 and 2 are close enough that irreversible losses between them are negligible.</p>
+      <p><strong>Point 1</strong> (directly under the piezometer): \(P_1 = \rho g(h_1 + h_2)\). <strong>Point 2</strong> (Pitot mouth, stagnation): \(P_2 = P_0 = \rho g(h_1 + h_2 + h_3)\).</p>
+
+      <div class="formulas-needed">
+        <h4>&#128203; Formulas Needed</h4>
+        <ol>
+          <li><strong>Stagnation pressure</strong> &mdash; \(P_0 = P + \tfrac12\rho V^2\) <a href="#formulas">&rarr; sheet #17</a></li>
+          <li><strong>Pitot velocity</strong> &mdash; \(V_1 = \sqrt{2(P_0 - P_1)/\rho}\) <a href="#formulas">&rarr; sheet #19</a></li>
+          <li><strong>Hydrostatic head</strong> &mdash; \(P = \rho g h\) <a href="#formulas">&rarr; sheet #10</a></li>
+        </ol>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(42,107,124,.18);color:var(--def);">1</div>
+        <div class="step-body">
+          <div class="step-title">Write each pressure as a column height</div>
+          <div class="step-work">
+            \[ P_1 = \rho g(h_1 + h_2), \qquad P_2 = P_0 = \rho g(h_1 + h_2 + h_3) \]
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(255,107,53,.18);color:var(--eq);">2</div>
+        <div class="step-body">
+          <div class="step-title">Subtract &mdash; only h&#8323; survives</div>
+          <div class="step-work">
+            \[ V_1 = \sqrt{\frac{2\,[\rho g(h_1+h_2+h_3) - \rho g(h_1+h_2)]}{\rho}} = \sqrt{2 g\,h_3} \]
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(255,107,53,.18);color:var(--eq);">3</div>
+        <div class="step-body">
+          <div class="step-title">Substitute numbers</div>
+          <div class="step-work">
+            \[ V_1 = \sqrt{2(9.81)(0.12)} = \sqrt{2.354} \]
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(244,162,97,.22);color:var(--example);">&#10003;</div>
+        <div class="step-body">
+          <div class="step-title">Answer</div>
+          <div class="step-work"><strong>\(V_1 = 1.53\) m/s.</strong> The static heads \(h_1\) and \(h_2\) drop out entirely &mdash; only the Pitot&rsquo;s extra rise \(h_3\) sets the velocity.</div>
+        </div>
+      </div>
+
+      <div class="callout callout-warning">
+        <div class="callout-icon">&#9888;</div>
+        <div class="callout-body">
+          <div class="callout-title">Common trap</div>
+          <div class="callout-text">Use only the <em>difference</em> in the columns, \(h_3\). It is tempting to plug in the full \(h_1+h_2+h_3\); but the static head common to both taps always cancels. Convert cm to m before substituting.</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--muted);"><strong>Concept bridge:</strong> stagnation pressure (sheet #17) + Pitot velocity (sheet #19), with each head from \(P=\rho g h\) (sheet #10).</p>
+    </div>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Venturi meter</h2>
+
+  <p>A Venturi meter is a smooth <strong>convergent&ndash;divergent</strong> section of pipe. The flow speeds up through the throat, so by Bernoulli the pressure there drops; measuring that pressure drop gives the flow rate. It is the <strong>most efficient</strong> flow-measurement device (very little permanent pressure loss) but it is <strong>expensive</strong> to build.</p>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 480 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Venturi meter with convergent-divergent duct and a U-tube manometer">
+      <!-- duct: top and bottom walls converging to a throat then diverging -->
+      <path d="M 40 70 L 170 70 L 230 104 L 310 104 L 380 70 L 450 70" fill="none" stroke="var(--deriv)" stroke-width="2.2"/>
+      <path d="M 40 150 L 170 150 L 230 116 L 310 116 L 380 150 L 450 150" fill="none" stroke="var(--deriv)" stroke-width="2.2"/>
+      <path d="M 40 70 L 170 70 L 230 104 L 310 104 L 380 70 L 450 70 L 450 150 L 380 150 L 310 116 L 230 116 L 170 150 L 40 150 Z" fill="rgba(42,107,124,.10)" stroke="none"/>
+      <!-- flow arrows -->
+      <line x1="60" y1="110" x2="130" y2="110" stroke="var(--def)" stroke-width="2"/><polygon points="136,110 124,105 124,115" fill="var(--def)"/>
+      <text x="84" y="100" font-size="12" fill="var(--def)" font-style="italic">V&#8321;</text>
+      <line x1="250" y1="110" x2="300" y2="110" stroke="var(--def)" stroke-width="2"/><polygon points="306,110 294,105 294,115" fill="var(--def)"/>
+      <text x="262" y="100" font-size="12" fill="var(--def)" font-style="italic">V&#8322;</text>
+      <!-- section markers -->
+      <line x1="150" y1="60" x2="150" y2="160" stroke="var(--muted)" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="138" y="54" font-size="12" fill="var(--text)">A&#8321;</text>
+      <text x="116" y="146" font-size="11" fill="var(--eq)">P&#8321;</text>
+      <line x1="270" y1="96" x2="270" y2="170" stroke="var(--muted)" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="258" y="90" font-size="12" fill="var(--text)">A&#8322;</text>
+      <text x="276" y="112" font-size="11" fill="var(--eq)">P&#8322;</text>
+      <!-- U-tube manometer below the two taps -->
+      <line x1="150" y1="150" x2="150" y2="196" stroke="var(--deriv)" stroke-width="1.4"/>
+      <line x1="270" y1="116" x2="270" y2="196" stroke="var(--deriv)" stroke-width="1.4"/>
+      <path d="M 150 196 Q 150 222 178 222 L 242 222 Q 270 222 270 196" fill="none" stroke="var(--deriv)" stroke-width="1.4"/>
+      <rect x="150" y="206" width="120" height="16" fill="rgba(124,143,166,.35)"/>
+      <line x1="150" y1="196" x2="150" y2="206" stroke="var(--muted)" stroke-width="1"/>
+      <line x1="270" y1="186" x2="270" y2="196" stroke="var(--muted)" stroke-width="1"/>
+      <text x="286" y="196" font-size="12" fill="var(--text)" font-style="italic">h</text>
+      <line x1="252" y1="186" x2="252" y2="206" stroke="var(--muted)" stroke-width="1.1"/>
+      <line x1="248" y1="186" x2="256" y2="186" stroke="var(--muted)" stroke-width="1.1"/>
+      <line x1="248" y1="206" x2="256" y2="206" stroke="var(--muted)" stroke-width="1.1"/>
+    </svg>
+    <div class="figure-caption">The throat (section 2) is narrower, so \(V_2\) &gt; \(V_1\) and \(P_2\) &lt; \(P_1\). The manometer deflection \(h\) measures the pressure drop \(P_1 - P_2\).</div>
+  </div>
+
+  <div class="card-bracket drv-card">
+    <div class="card-title">Derivation &mdash; flow rate from a Venturi</div>
+    <p><strong>Step 1 &mdash; Bernoulli</strong> between sections 1 and 2 with \(z_1 = z_2\):</p>
+    \[ P_1 + \tfrac12\rho V_1^2 = P_2 + \tfrac12\rho V_2^2 \;\Rightarrow\; P_1 - P_2 = \tfrac12\rho\,(V_2^2 - V_1^2) \]
+    <p><strong>Step 2 &mdash; continuity</strong> for incompressible flow ties the two velocities together:</p>
+    \[ Q = A_1 V_1 = A_2 V_2 \;\Rightarrow\; V_1 = \frac{A_2}{A_1}V_2 \]
+    <p><strong>Step 3 &mdash; eliminate \(V_1\)</strong> and solve for the throat velocity:</p>
+    \[ V_2 = \sqrt{\frac{2\,(P_1 - P_2)/\rho}{1 - (A_2/A_1)^2}} \]
+    <p><strong>Step 4 &mdash; multiply by the throat area</strong> to get the <em>ideal</em> flow rate, then correct it. The real flow rate is a little lower because of small friction and non-uniformity, captured by the <strong>Venturi coefficient</strong> \(C_v = Q_{actual}/Q_{ideal}\):</p>
+    \[ Q = C_v A_2\sqrt{\frac{2\,(P_1 - P_2)/\rho}{1 - (A_2/A_1)^2}} \]
+  </div>
+
+  <div class="card-bracket eq-card">
+    <div class="card-title">Venturi flow rate</div>
+    \[ Q = C_v A_2\sqrt{\dfrac{2\,(P_1 - P_2)}{\rho\left(1 - (A_2/A_1)^2\right)}} \]
+    <div class="var-row">
+      <span class="pill">Q — volumetric flow rate (m&sup3;/s)</span>
+      <span class="pill">C&#7515; — Venturi coefficient (&minus;)</span>
+      <span class="pill">A&#8321; — inlet area (m&sup2;)</span>
+      <span class="pill">A&#8322; — throat area (m&sup2;)</span>
+      <span class="pill">P&#8321;&minus;P&#8322; — pressure drop (Pa)</span>
+      <span class="pill">&rho; — density (kg/m&sup3;)</span>
+    </div>
+    <p>Set \(C_v = 1\) for the ideal (frictionless) estimate. Areas come from diameters via \(A = \tfrac{\pi}{4}d^2\), so the area ratio can be written \((A_2/A_1)^2 = (d_2/d_1)^4\).</p>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Worked Example 4 &mdash; air flow through a Venturi</h2>
+
+  <div class="card-bracket ex-card">
+    <div class="card-title">Example 4 &mdash; flow rate of air (BG units)</div>
+    <p>Air flows through a Venturi meter that is 2.6 in in diameter at the inlet (section 1) and 1.8 in at the throat (section 2). The pressures are 12.2 psia at the inlet and 11.8 psia at the throat. Take the air density as 0.075 lbm/ft&sup3;. Determine the flow rate of air.</p>
+
+    <div class="figure-box">
+      <svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Venturi meter with two pressure gauges reading 12.2 and 11.8 psia">
+        <!-- duct -->
+        <path d="M 50 90 L 170 90 L 220 116 L 300 116 L 350 90 L 440 90" fill="none" stroke="var(--deriv)" stroke-width="2.2"/>
+        <path d="M 50 150 L 170 150 L 220 124 L 300 124 L 350 150 L 440 150" fill="none" stroke="var(--deriv)" stroke-width="2.2"/>
+        <path d="M 50 90 L 170 90 L 220 116 L 300 116 L 350 90 L 440 90 L 440 150 L 350 150 L 300 124 L 220 124 L 170 150 L 50 150 Z" fill="rgba(244,162,97,.10)" stroke="none"/>
+        <!-- air flow -->
+        <line x1="20" y1="120" x2="46" y2="120" stroke="var(--def)" stroke-width="2"/><polygon points="52,120 40,115 40,125" fill="var(--def)"/>
+        <text x="14" y="110" font-size="12" fill="var(--def)">Air</text>
+        <!-- gauge 1 -->
+        <line x1="120" y1="90" x2="120" y2="56" stroke="var(--deriv)" stroke-width="1.4"/>
+        <circle cx="120" cy="44" r="13" fill="rgba(244,162,97,.25)" stroke="var(--example)" stroke-width="1.6"/>
+        <text x="92" y="28" font-size="12" fill="var(--text)">12.2 psia</text>
+        <!-- gauge 2 -->
+        <line x1="260" y1="116" x2="260" y2="56" stroke="var(--deriv)" stroke-width="1.4"/>
+        <circle cx="260" cy="44" r="13" fill="rgba(244,162,97,.25)" stroke="var(--example)" stroke-width="1.6"/>
+        <text x="232" y="28" font-size="12" fill="var(--text)">11.8 psia</text>
+        <!-- diameter labels -->
+        <line x1="150" y1="92" x2="150" y2="148" stroke="var(--muted)" stroke-width="1.1"/>
+        <text x="120" y="176" font-size="12" fill="var(--text)">2.6 in</text>
+        <line x1="250" y1="118" x2="250" y2="122" stroke="var(--muted)" stroke-width="1.1"/>
+        <text x="284" y="120" font-size="12" fill="var(--text)">1.8 in</text>
+      </svg>
+      <div class="figure-caption">Inlet 2.6 in at 12.2 psia; throat 1.8 in at 11.8 psia. The small 0.4 psi drop sets the flow rate.</div>
+    </div>
+
+    <div class="thought-block">
+      <div class="thought-header">&#129504; Thought process</div>
+      <div class="thought-body">
+        <p>This is the Venturi flow-rate formula applied directly. Nothing about a Venturi coefficient is given, so treat the flow as ideal (\(C_v = 1\)).</p>
+        <p>The real work here is <strong>unit bookkeeping</strong> in the British Gravitational system. Diameters are in inches (&divide;12 to feet), pressures in psi (&times;144 to lbf/ft&sup2;), and density is in <em>lbm</em>, which must be reconciled with the force unit lbf using \(g_c = 32.2\) lbm&middot;ft/(lbf&middot;s&sup2;). I will write \((A_2/A_1)^2 = (d_2/d_1)^4\) so I only need the diameter ratio, not the absolute areas, inside the bracket.</p>
+      </div>
+    </div>
+
+    <div class="collapse-toggle"><span class="arrow">&#9656;</span> Show full solution</div>
+    <div class="collapse-body">
+      <p><strong>Given:</strong> \(d_1 = 2.6\) in, \(d_2 = 1.8\) in, \(P_1 = 12.2\) psia, \(P_2 = 11.8\) psia, \(\rho = 0.075\) lbm/ft&sup3;. Assume ideal flow, \(C_v = 1\).</p>
+
+      <div class="formulas-needed">
+        <h4>&#128203; Formulas Needed</h4>
+        <ol>
+          <li><strong>Continuity</strong> &mdash; \(Q = A_1 V_1 = A_2 V_2\) <a href="#formulas">&rarr; sheet #18</a></li>
+          <li><strong>Venturi flow rate</strong> &mdash; \(Q = C_v A_2\sqrt{2(P_1-P_2)/[\rho(1-(A_2/A_1)^2)]}\) <a href="#formulas">&rarr; sheet #20</a></li>
+        </ol>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(42,107,124,.18);color:var(--def);">1</div>
+        <div class="step-body">
+          <div class="step-title">Throat area from the diameter</div>
+          <div class="step-work">
+            \[ A_2 = \frac{\pi d_2^2}{4} = \frac{\pi (1.8/12)^2}{4}\ \text{ft}^2 \]
+            <p>and the area ratio simplifies to \((A_2/A_1)^2 = (d_2/d_1)^4 = (1.8/2.6)^4\).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(255,107,53,.18);color:var(--eq);">2</div>
+        <div class="step-body">
+          <div class="step-title">Assemble the flow-rate expression</div>
+          <div class="step-work">
+            \[ Q = \frac{\pi (1.8/12)^2}{4}\sqrt{\frac{2(12.2 - 11.8)}{(0.075)\,[\,1 - (1.8/2.6)^4\,]}}\left(\frac{144\ \text{lbf/ft}^2}{1\ \text{psi}}\right)\left(\frac{32.2\ \text{lbm}\!\cdot\!\text{ft/s}^2}{1\ \text{lbf}}\right) \]
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(255,107,53,.18);color:var(--eq);">3</div>
+        <div class="step-body">
+          <div class="step-title">Evaluate</div>
+          <div class="step-work">
+            <p>The two conversion factors turn psi and lbm into a consistent set, and the bracket \(1-(1.8/2.6)^4 = 0.770\) accounts for the area change. Carrying the arithmetic through:</p>
+            \[ Q \approx 4.48\ \text{ft}^3/\text{s} \]
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(244,162,97,.22);color:var(--example);">&#10003;</div>
+        <div class="step-body">
+          <div class="step-title">Answer</div>
+          <div class="step-work"><strong>\(Q = 4.48\) ft&sup3;/s.</strong></div>
+        </div>
+      </div>
+
+      <div class="callout callout-warning">
+        <div class="callout-icon">&#9888;</div>
+        <div class="callout-body">
+          <div class="callout-title">Common trap</div>
+          <div class="callout-text">In BG units the density is in <strong>lbm</strong> but the pressure force is in <strong>lbf</strong>. They differ by \(g_c = 32.2\) lbm&middot;ft/(lbf&middot;s&sup2;) &mdash; forget that factor and the answer is off by \(\sqrt{32.2}\). Also convert psi to lbf/ft&sup2; with the factor 144, and inches to feet before squaring.</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--muted);"><strong>Concept bridge:</strong> continuity (sheet #18) combined with the Venturi flow rate (sheet #20), all in BG units.</p>
+    </div>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Orifice meter</h2>
+
+  <p>An orifice meter is just a thin plate with a hole, clamped between two pipe flanges. It is far <strong>cheaper</strong> than a Venturi, but the sharp edge makes the jet separate and the device has a much <strong>higher permanent pressure loss</strong>.</p>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 480 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Orifice plate in a pipe with a vena contracta downstream">
+      <!-- pipe walls -->
+      <line x1="40" y1="60" x2="450" y2="60" stroke="var(--deriv)" stroke-width="2.2"/>
+      <line x1="40" y1="150" x2="450" y2="150" stroke="var(--deriv)" stroke-width="2.2"/>
+      <rect x="40" y="60" width="410" height="90" fill="rgba(42,107,124,.08)"/>
+      <!-- orifice plate with a central hole -->
+      <rect x="196" y="60" width="10" height="34" fill="rgba(124,143,166,.5)" stroke="var(--deriv)" stroke-width="1.4"/>
+      <rect x="196" y="116" width="10" height="34" fill="rgba(124,143,166,.5)" stroke="var(--deriv)" stroke-width="1.4"/>
+      <text x="150" y="40" font-size="11" fill="var(--text)">orifice plate</text>
+      <text x="150" y="116" font-size="11" fill="var(--def)">A&#8320;</text>
+      <line x1="190" y1="96" x2="190" y2="114" stroke="var(--def)" stroke-width="1.1"/>
+      <!-- jet through orifice contracting to vena contracta -->
+      <path d="M 206 96 Q 250 100 280 104 L 280 106 Q 250 110 206 114" fill="rgba(42,107,124,.18)" stroke="var(--def)" stroke-width="1.4"/>
+      <line x1="280" y1="104" x2="360" y2="104" stroke="var(--def)" stroke-width="1.6"/><polygon points="366,104 354,99 354,109" fill="var(--def)"/>
+      <text x="288" y="96" font-size="11" fill="var(--def)">A&#7515; (vena contracta)</text>
+      <!-- recirculation eddies -->
+      <path d="M 230 74 q 14 8 0 16" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+      <path d="M 230 136 q 14 -8 0 -16" fill="none" stroke="var(--muted)" stroke-width="1.1"/>
+      <!-- flow arrow upstream -->
+      <line x1="70" y1="105" x2="140" y2="105" stroke="var(--def)" stroke-width="2"/><polygon points="146,105 134,100 134,110" fill="var(--def)"/>
+      <text x="84" y="96" font-size="12" fill="var(--def)" font-style="italic">V&#8321;</text>
+      <!-- pressure taps to differential gauge -->
+      <line x1="150" y1="60" x2="150" y2="36" stroke="var(--eq)" stroke-width="1.3"/>
+      <line x1="300" y1="60" x2="300" y2="36" stroke="var(--eq)" stroke-width="1.3"/>
+      <line x1="150" y1="36" x2="300" y2="36" stroke="var(--eq)" stroke-width="1.3"/>
+      <circle cx="225" cy="26" r="11" fill="rgba(255,107,53,.18)" stroke="var(--eq)" stroke-width="1.4"/>
+      <text x="240" y="22" font-size="10" fill="var(--eq)">&Delta;P</text>
+    </svg>
+    <div class="figure-caption">The jet keeps contracting after the hole to a minimum area \(A_v\) (the vena contracta) before spreading out into recirculating eddies. The pressure drop is read across the plate.</div>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Contraction and discharge coefficients</div>
+    <p>Because the jet contracts, the effective flow area is not the hole area \(A_0\) but the smaller vena-contracta area \(A_v\). Their ratio is the <strong>coefficient of contraction</strong>:</p>
+    \[ C_c = \frac{A_v}{A_0} \approx 0.6, \qquad A_2 = C_c A_0 \]
+    <p>Substituting \(A_2 = C_c A_0\) into the Venturi result and folding the friction correction \(C_v\) and the contraction \(C_c\) into a single <strong>discharge coefficient</strong> \(C_D = C_c C_v\) gives the orifice flow rate. \(C_D\) is fixed by experiment or by ASME standards.</p>
+  </div>
+
+  <div class="card-bracket eq-card">
+    <div class="card-title">Orifice flow rate</div>
+    \[ Q = C_D A_0\sqrt{\dfrac{2\,(P_1 - P_2)}{\rho\left(1 - C_c^2 (A_0/A_1)^2\right)}} \]
+    <div class="var-row">
+      <span class="pill">Q — volumetric flow rate (m&sup3;/s)</span>
+      <span class="pill">C&#7488; — discharge coefficient = C&#7580;C&#7515; (&minus;)</span>
+      <span class="pill">C&#7580; — contraction coeff &asymp; 0.6 (&minus;)</span>
+      <span class="pill">A&#8320; — orifice area (m&sup2;)</span>
+      <span class="pill">A&#8321; — pipe area (m&sup2;)</span>
+      <span class="pill">P&#8321;&minus;P&#8322; — pressure drop (Pa)</span>
+    </div>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Bell-mouth inlet</h2>
+
+  <p>A bell-mouth inlet is a smooth, curved (trumpet-shaped) entrance that guides flow gently into a pipe or duct. Because the contraction is gradual there is essentially <strong>no jet contraction</strong> &mdash; the contraction coefficient is \(C_c = 1\) &mdash; and over the very short inlet length the flow is effectively one-dimensional and frictionless. That makes the inlet itself a flow-measurement device.</p>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 470 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bell-mouth inlet guiding flow into a pipe with a static tap">
+      <!-- curved bell inlet (top and bottom) feeding a straight pipe -->
+      <path d="M 60 40 Q 150 60 200 96 L 440 96" fill="none" stroke="var(--deriv)" stroke-width="2.2"/>
+      <path d="M 60 180 Q 150 160 200 124 L 440 124" fill="none" stroke="var(--deriv)" stroke-width="2.2"/>
+      <path d="M 200 96 L 440 96 L 440 124 L 200 124 Z" fill="rgba(42,107,124,.10)" stroke="none"/>
+      <!-- converging streamlines through the bell -->
+      <path d="M 30 70 Q 140 84 210 104" fill="none" stroke="var(--def)" stroke-width="1.3"/>
+      <path d="M 30 110 Q 150 110 210 110" fill="none" stroke="var(--def)" stroke-width="1.3"/>
+      <path d="M 30 150 Q 140 136 210 116" fill="none" stroke="var(--def)" stroke-width="1.3"/>
+      <polygon points="216,104 205,101 206,109" fill="var(--def)"/>
+      <polygon points="216,110 205,106 205,114" fill="var(--def)"/>
+      <polygon points="216,116 206,113 205,121" fill="var(--def)"/>
+      <!-- point A upstream -->
+      <circle cx="40" cy="110" r="4" fill="var(--eq)"/>
+      <text x="20" y="100" font-size="12" fill="var(--text)">A</text>
+      <text x="14" y="200" font-size="11" fill="var(--eq)">V&#8320; = 0, P&#8320; = P_atm</text>
+      <!-- point B inside the pipe + static tap -->
+      <circle cx="330" cy="110" r="4" fill="var(--eq)"/>
+      <text x="324" y="100" font-size="12" fill="var(--text)">B</text>
+      <line x1="330" y1="96" x2="330" y2="66" stroke="var(--eq)" stroke-width="1.3"/>
+      <text x="300" y="58" font-size="11" fill="var(--eq)">static tap &rarr; P_B</text>
+      <line x1="350" y1="110" x2="400" y2="110" stroke="var(--def)" stroke-width="2"/><polygon points="406,110 394,105 394,115" fill="var(--def)"/>
+      <text x="360" y="100" font-size="12" fill="var(--def)" font-style="italic">V_B</text>
+      <text x="120" y="40" font-size="11" fill="var(--muted)">curved inlet guides flow smoothly &mdash; C&#7580; = 1</text>
+    </svg>
+    <div class="figure-caption">Point A sits in the still air far upstream (\(V \approx 0\), \(P = P_{atm}\)); point B is just inside the pipe where the flow has reached speed \(V_B\). A static tap reads \(P_B\).</div>
+  </div>
+
+  <div class="card-bracket drv-card">
+    <div class="card-title">Derivation &mdash; bell-mouth velocity</div>
+    <p>Bernoulli along a streamline from the still upstream point (subscript 2 here, \(V_2 = 0\), \(P_2 = P_{atm}\)) to the pipe point (subscript 1), with \(z_1 = z_2\):</p>
+    \[ P_2 + \tfrac12\rho V_2^2 = P_1 + \tfrac12\rho V_1^2 \;\Rightarrow\; P_{atm} = P_1 + \tfrac12\rho V_1^2 \]
+    \[ V_1 = \sqrt{\frac{2\,(P_{atm} - P_1)}{\rho}} \]
+    <p>Identical in form to the Pitot result &mdash; the &ldquo;stagnation&rdquo; point here is simply the still atmosphere outside the inlet.</p>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Worked Example 5 &mdash; bell-mouth wind tunnel</h2>
+
+  <div class="card-bracket ex-card">
+    <div class="card-title">Example 5 &mdash; find the manometer deflection h</div>
+    <p>Air is drawn into a wind tunnel through a bell-mouth inlet for testing automobiles. The air speed in the tunnel is 60 mph. A water manometer, with a 1-inch column of oil (\(SG = 0.9\)) on the open leg, reads the pressure drop. Take \(\rho_{air} = 0.00238\) slug/ft&sup3; and \(\rho_{water} = 1.94\) slug/ft&sup3;. Determine the deflection \(h\).</p>
+
+    <div class="figure-box">
+      <svg viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wind tunnel bell-mouth inlet with a water-oil U-tube manometer">
+        <!-- tunnel duct with bell inlet at left -->
+        <path d="M 50 44 Q 120 60 160 84 L 450 84" fill="none" stroke="var(--deriv)" stroke-width="2"/>
+        <path d="M 50 150 Q 120 134 160 110 L 450 110" fill="none" stroke="var(--deriv)" stroke-width="2"/>
+        <path d="M 160 84 L 450 84 L 450 110 L 160 110 Z" fill="rgba(42,107,124,.08)" stroke="none"/>
+        <!-- 60 mph inflow -->
+        <line x1="20" y1="97" x2="60" y2="97" stroke="var(--def)" stroke-width="2.2"/><polygon points="66,97 54,92 54,102" fill="var(--def)"/>
+        <text x="74" y="74" font-size="12" fill="var(--def)">60 mph</text>
+        <!-- simplified car -->
+        <path d="M 320 110 l 14 -14 l 26 0 l 10 14 Z" fill="rgba(124,143,166,.4)" stroke="var(--muted)" stroke-width="1.2"/>
+        <circle cx="332" cy="112" r="4" fill="none" stroke="var(--muted)" stroke-width="1.2"/>
+        <circle cx="362" cy="112" r="4" fill="none" stroke="var(--muted)" stroke-width="1.2"/>
+        <!-- static tap down to manometer -->
+        <line x1="210" y1="110" x2="210" y2="170" stroke="var(--deriv)" stroke-width="1.4"/>
+        <!-- U-tube -->
+        <line x1="210" y1="170" x2="210" y2="232" stroke="var(--deriv)" stroke-width="1.4"/>
+        <line x1="270" y1="150" x2="270" y2="232" stroke="var(--deriv)" stroke-width="1.4"/>
+        <path d="M 210 232 Q 210 250 228 250 L 252 250 Q 270 250 270 232" fill="none" stroke="var(--deriv)" stroke-width="1.4"/>
+        <!-- water fill -->
+        <rect x="210" y="196" width="60" height="54" fill="rgba(42,107,124,.22)"/>
+        <text x="150" y="220" font-size="11" fill="var(--def)">water</text>
+        <!-- oil plug on the open leg -->
+        <rect x="270" y="150" width="14" height="22" fill="rgba(244,162,97,.55)" stroke="var(--example)" stroke-width="1"/>
+        <text x="290" y="156" font-size="10" fill="var(--example)">oil 1 in</text>
+        <text x="290" y="169" font-size="10" fill="var(--example)">(SG 0.9)</text>
+        <text x="276" y="144" font-size="10" fill="var(--muted)">open</text>
+        <!-- h deflection -->
+        <line x1="196" y1="196" x2="196" y2="250" stroke="var(--muted)" stroke-width="1.2"/>
+        <line x1="192" y1="196" x2="200" y2="196" stroke="var(--muted)" stroke-width="1.2"/>
+        <line x1="192" y1="250" x2="200" y2="250" stroke="var(--muted)" stroke-width="1.2"/>
+        <text x="176" y="226" font-size="12" fill="var(--text)" font-style="italic">h</text>
+      </svg>
+      <div class="figure-caption">The low static pressure inside the tunnel pulls the water up by \(h\) against atmospheric pressure and a 1-inch oil column on the open leg.</div>
+    </div>
+
+    <div class="thought-block">
+      <div class="thought-header">&#129504; Thought process</div>
+      <div class="thought-body">
+        <p>Two stages. First, Bernoulli from the still air (point 1, \(V = 0\), \(P = P_{atm}\)) to the tunnel interior (point 2, \(V_2 = 88\) ft/s) gives the pressure drop \(P_1 - P_2 = \tfrac12\rho_{air}V_2^2\). Second, a manometer balance converts that pressure drop into the column height \(h\).</p>
+        <p>Watch the units: speed must be in ft/s (60 mph = 88 ft/s) and densities in slug/ft&sup3; so that \(\tfrac12\rho V^2\) comes out in lbf/ft&sup2; directly &mdash; no \(g_c\) needed in the slug system. The oil column partly offsets the water column, so it is subtracted in the balance.</p>
+      </div>
+    </div>
+
+    <div class="collapse-toggle"><span class="arrow">&#9656;</span> Show full solution</div>
+    <div class="collapse-body">
+      <p><strong>Given:</strong> \(V_2 = 60\) mph \(= 88\) ft/s, \(\rho_{air} = 0.00238\) slug/ft&sup3;, \(\rho_{water} = 1.94\) slug/ft&sup3;, oil \(SG = 0.9\), oil column \(= 1\) in. \(z_1 = z_2\), \(V_1 = 0\).</p>
+
+      <div class="formulas-needed">
+        <h4>&#128203; Formulas Needed</h4>
+        <ol>
+          <li><strong>Bell-mouth / stagnation</strong> &mdash; \(P_1 - P_2 = \tfrac12\rho V_2^2\) <a href="#formulas">&rarr; sheet #17</a></li>
+          <li><strong>Manometer balance</strong> &mdash; \(\Delta P = \sum \gamma_i \Delta h_i\) <a href="#formulas">&rarr; sheet #11</a></li>
+        </ol>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(42,107,124,.18);color:var(--def);">1</div>
+        <div class="step-body">
+          <div class="step-title">Pressure drop from Bernoulli</div>
+          <div class="step-work">
+            \[ P_1 - P_2 = \tfrac12\rho_{air}V_2^2 = \tfrac12 (0.00238)(88)^2 \]
+            \[ P_1 - P_2 = 9.22\ \text{lbf/ft}^2 \]
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(255,107,53,.18);color:var(--eq);">2</div>
+        <div class="step-body">
+          <div class="step-title">Manometer balance</div>
+          <div class="step-work">
+            <p>Balancing the columns (water of height \(h\) minus the 1-inch oil column), with \(\gamma = \rho g\) and \(g = 32.2\) ft/s&sup2;:</p>
+            \[ 9.22 = \rho_{water}\,g\,h - \rho_{oil}\,g\,(1\ \text{in}) \]
+            <p>where \(\rho_{oil} = 0.9\,\rho_{water} = 1.746\) slug/ft&sup3; and 1 in \(= 0.0833\) ft.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(255,107,53,.18);color:var(--eq);">3</div>
+        <div class="step-body">
+          <div class="step-title">Solve for h</div>
+          <div class="step-work">
+            \[ (1.94)(32.2)\,h = 9.22 + (1.746)(32.2)(0.0833) \]
+            \[ 62.5\,h = 9.22 + 4.68 = 13.90 \;\Rightarrow\; h = 0.2226\ \text{ft} \]
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(244,162,97,.22);color:var(--example);">&#10003;</div>
+        <div class="step-body">
+          <div class="step-title">Answer</div>
+          <div class="step-work"><strong>\(h = 0.2226\) ft \(= 2.67\) in.</strong></div>
+        </div>
+      </div>
+
+      <div class="callout callout-warning">
+        <div class="callout-icon">&#9888;</div>
+        <div class="callout-body">
+          <div class="callout-title">Common trap</div>
+          <div class="callout-text">Keep everything in <strong>slugs and feet</strong>: in that system \(\tfrac12\rho V^2\) is already lbf/ft&sup2; with no \(g_c\). Convert 60 mph to 88 ft/s and the 1-inch oil column to feet, and remember the oil column <em>subtracts</em> from the water column in the balance.</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--muted);"><strong>Concept bridge:</strong> the bell-mouth/stagnation drop (sheet #17) feeds the manometer equation from Ch 1 (sheet #11).</p>
+    </div>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Choosing a meter</h2>
+
+  <div class="card-bracket tip-card">
+    <div class="card-title">★ Venturi vs orifice vs bell-mouth</div>
+    <ul>
+      <li><strong>Venturi</strong> &mdash; most accurate and most efficient (smooth contraction, very low permanent loss), but the bulkiest and most expensive to build. Uses \(C_v\) only.</li>
+      <li><strong>Orifice</strong> &mdash; cheapest and most compact, but the sharp edge causes a vena contracta and a large permanent pressure loss. Uses \(C_D = C_c C_v\) with \(C_c \approx 0.6\).</li>
+      <li><strong>Bell-mouth inlet</strong> &mdash; a smooth intake that doubles as a flow meter; no contraction (\(C_c = 1\)), so the velocity follows directly from \(P_{atm} - P_1\).</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-exam">
+    <div class="callout-icon">&#9873;</div>
+    <div class="callout-body">
+      <div class="callout-title">Lecture 3.2 in one line</div>
+      <div class="callout-text">Every flow meter is Bernoulli in disguise: bring the flow to rest (Pitot/Pitot-static) to get \(V = \sqrt{2(P_0-P_1)/\rho}\), or squeeze it through an area change (Venturi/orifice/bell-mouth) and pair Bernoulli with continuity to get \(Q\). Real devices need a coefficient &mdash; \(C_v\) for a Venturi, \(C_D = C_c C_v\) for an orifice, and \(C_c = 1\) for a smooth bell-mouth.</div>
+    </div>
+  </div>
+</section>
 
 <!-- pending --><section id="ch3-prob" class="page-section"><div class="pending-placeholder"><i class="ti ti-math-function" aria-hidden="true"></i>Chapter 3 recommended problems — coming soon</div></section>
 
@@ -1860,12 +2975,12 @@ strong { font-weight: 600; }
   </div>
 
   <div class="fs-legend">
-    <span><span class="fs-legend-dot" style="background:#d32f2f"></span>Forces / pressures</span>
-    <span><span class="fs-legend-dot" style="background:#1565c0"></span>Areas / depths</span>
-    <span><span class="fs-legend-dot" style="background:#2e7d32"></span>Fluid properties</span>
-    <span><span class="fs-legend-dot" style="background:#7b1fa2"></span>Angles</span>
-    <span><span class="fs-legend-dot" style="background:#e65100"></span>Dimensions / radii</span>
-    <span><span class="fs-legend-dot" style="background:#00838f"></span>Moments of area</span>
+    <span><span class="fs-legend-dot" style="background:#D32F2F"></span>Forces / pressures</span>
+    <span><span class="fs-legend-dot" style="background:#1565C0"></span>Areas / depths</span>
+    <span><span class="fs-legend-dot" style="background:#2E7D32"></span>Fluid properties</span>
+    <span><span class="fs-legend-dot" style="background:#7B1FA2"></span>Angles</span>
+    <span><span class="fs-legend-dot" style="background:#E65100"></span>Dimensions / radii</span>
+    <span><span class="fs-legend-dot" style="background:#00838F"></span>Moments of area</span>
   </div>
 
   <div class="fs-views">
@@ -1879,10 +2994,10 @@ strong { font-weight: 600; }
     <h2 style="color:var(--ch1-title);">Ch 1 — Fluid Properties & Pressure</h2>
     <div class="fs-chapter" data-ch="1">
 
-      <div class="fs-card" data-num="1" data-ch="1" data-name="Density" data-vars='{"#2e7d32|ρ": "ρ — density of the fluid (kg/m³ in SI, slugs/ft³ in BG)", "#e65100|m": "m — total mass of the fluid sample (kg)", "#e65100|V": "V — total volume occupied by the fluid (m³)"}'>
+      <div class="fs-card" data-num="1" data-ch="1" data-name="Density" data-vars='{"#2E7D32|ρ":"ρ — density (kg/m³)","#E65100|m":"m — mass (kg)","#E65100|V":"V — volume (m³)"}'>
         <div class="fs-top"><span class="fs-name">Density <span class="fs-num">#1</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#2e7d32}{\rho} = \frac{\textcolor{#e65100}{m}}{\textcolor{#e65100}{V}} \]</div>
+          <div class="fs-formula">\[ \textcolor{#2E7D32}{\rho} = \frac{\textcolor{#E65100}{m}}{\textcolor{#E65100}{V}} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">The <strong>mass</strong> of fluid per unit <strong>volume</strong> — the most fundamental intensive property.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>asked for mass per volume, need ρ for continuity / momentum / energy equations.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>weight per volume — that is γ = ρg. Do not confuse with SG (dimensionless).</div></div>
@@ -1891,10 +3006,10 @@ strong { font-weight: 600; }
         </div>
       </div>
 
-      <div class="fs-card" data-num="2" data-ch="1" data-name="Specific Weight" data-vars='{"#2e7d32|γ": "γ — specific weight: weight per unit volume of the fluid (N/m³)", "#2e7d32|ρ": "ρ — density of the fluid (kg/m³)", "#2e7d32|g": "g — local gravitational acceleration (9.81 m/s² at sea level)"}'>
+      <div class="fs-card" data-num="2" data-ch="1" data-name="Specific Weight" data-vars='{"#2E7D32|γ":"γ — specific weight (N/m³)","#2E7D32|ρ":"ρ — density (kg/m³)","#2E7D32|g":"g — gravitational acceleration (9.81 m/s²)"}'>
         <div class="fs-top"><span class="fs-name">Specific Weight <span class="fs-num">#2</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#2e7d32}{\gamma} = \textcolor{#2e7d32}{\rho} \, \textcolor{#2e7d32}{g} \]</div>
+          <div class="fs-formula">\[ \textcolor{#2E7D32}{\gamma} = \textcolor{#2E7D32}{\rho} \, \textcolor{#2E7D32}{g} \]</div>
           <div class="fs-detail">
             <p class="fs-explain"><strong>Weight</strong> of fluid per unit volume — density scaled by gravity.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>hydrostatic pressure (p = γh), buoyancy, manometers.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>interchangeable with density — γ includes gravity. γ_water = 9810 N/m³.</div></div>
@@ -1903,10 +3018,10 @@ strong { font-weight: 600; }
         </div>
       </div>
 
-      <div class="fs-card" data-num="3" data-ch="1" data-name="Specific Gravity" data-vars='{"#2e7d32|SG": "SG — specific gravity: dimensionless density ratio (no units)", "#2e7d32|ρ": "ρ — density of the fluid being compared", "#1565c0|ρ": "ρ_W — reference density of water at 4°C = 1000 kg/m³"}'>
+      <div class="fs-card" data-num="3" data-ch="1" data-name="Specific Gravity" data-vars='{"#2E7D32|SG":"SG — specific gravity (dimensionless)","#2E7D32|ρ":"ρ — density of fluid","#1565C0|ρ":"ρ_W — density of water at 4°C (1000 kg/m³)"}'>
         <div class="fs-top"><span class="fs-name">Specific Gravity <span class="fs-num">#3</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#2e7d32}{SG} = \frac{\textcolor{#2e7d32}{\rho}}{\textcolor{#1565c0}{\rho_W}} \]</div>
+          <div class="fs-formula">\[ \textcolor{#2E7D32}{SG} = \frac{\textcolor{#2E7D32}{\rho}}{\textcolor{#1565C0}{\rho_W}} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">Dimensionless ratio of a fluid's density to water's at 4°C.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>quick comparison with water, buoyancy (SG > 1 sinks), manometer multi-fluid problems.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>plugging directly into equations — convert: ρ = SG × ρ_W first.</div></div>
@@ -1915,10 +3030,10 @@ strong { font-weight: 600; }
         </div>
       </div>
 
-      <div class="fs-card" data-num="4" data-ch="1" data-name="Newton's Law of Viscosity" data-vars='{"#d32f2f|τ": "τ — shear stress acting on the fluid element (Pa = N/m²)", "#2e7d32|μ": "μ — dynamic (absolute) viscosity of the fluid (Pa·s)", "#e65100|u": "u — fluid velocity parallel to the surface (m/s)", "#1565c0|y": "y — perpendicular distance from the solid wall (m)"}'>
+      <div class="fs-card" data-num="4" data-ch="1" data-name="Newton's Law of Viscosity" data-vars='{"#D32F2F|τ":"τ — shear stress (Pa)","#2E7D32|μ":"μ — dynamic viscosity (Pa·s)","#E65100|u":"u — velocity (m/s)","#1565C0|y":"y — distance from wall (m)"}'>
         <div class="fs-top"><span class="fs-name">Newton's Law of Viscosity <span class="fs-num">#4</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#d32f2f}{\tau} = \textcolor{#2e7d32}{\mu} \frac{d\textcolor{#e65100}{u}}{d\textcolor{#1565c0}{y}} \]</div>
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{\tau} = \textcolor{#2E7D32}{\mu} \frac{d\textcolor{#E65100}{u}}{d\textcolor{#1565C0}{y}} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">Shear stress is proportional to velocity gradient. The constant μ is the <strong>dynamic viscosity</strong>.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>finding shear force on plates, determining viscosity from experiment, pipe flow wall shear.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>non-Newtonian fluids (variable μ). Not for turbulent flow.</div></div>
@@ -1927,10 +3042,10 @@ strong { font-weight: 600; }
         </div>
       </div>
 
-      <div class="fs-card" data-num="5" data-ch="1" data-name="Kinematic Viscosity" data-vars='{"#2e7d32|ν": "ν — kinematic viscosity: momentum diffusivity (m²/s)", "#2e7d32|μ": "μ — dynamic viscosity of the fluid (Pa·s)", "#2e7d32|ρ": "ρ — density of the fluid (kg/m³)"}'>
+      <div class="fs-card" data-num="5" data-ch="1" data-name="Kinematic Viscosity" data-vars='{"#2E7D32|ν":"ν — kinematic viscosity (m²/s)","#2E7D32|μ":"μ — dynamic viscosity (Pa·s)","#2E7D32|ρ":"ρ — density (kg/m³)"}'>
         <div class="fs-top"><span class="fs-name">Kinematic Viscosity <span class="fs-num">#5</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#2e7d32}{\nu} = \frac{\textcolor{#2e7d32}{\mu}}{\textcolor{#2e7d32}{\rho}} \]</div>
+          <div class="fs-formula">\[ \textcolor{#2E7D32}{\nu} = \frac{\textcolor{#2E7D32}{\mu}}{\textcolor{#2E7D32}{\rho}} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">Dynamic viscosity normalized by density. Has dimensions of <strong>diffusivity</strong> (m²/s).</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>Reynolds number: Re = VL/ν. Comparing fluids of different densities.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>finding shear stress — need μ for that (τ = μ du/dy).</div></div>
@@ -1939,10 +3054,10 @@ strong { font-weight: 600; }
         </div>
       </div>
 
-      <div class="fs-card" data-num="6" data-ch="1" data-name="Droplet / Bubble Pressure" data-vars='{"#d32f2f|Δ": "Δp — pressure excess inside the droplet or bubble (Pa)", "#2e7d32|Υ": "Υ — surface tension coefficient of the liquid (N/m)", "#e65100|R": "R — radius of the spherical droplet or bubble (m)"}'>
+      <div class="fs-card" data-num="6" data-ch="1" data-name="Droplet / Bubble Pressure" data-vars='{"#D32F2F|Δ":"Δp — pressure difference (Pa)","#2E7D32|Υ":"Υ — surface tension (N/m)","#E65100|R":"R — radius (m)"}'>
         <div class="fs-top"><span class="fs-name">Droplet / Bubble Pressure <span class="fs-num">#6</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#d32f2f}{\Delta p} = \frac{2\textcolor{#2e7d32}{\Upsilon}}{\textcolor{#e65100}{R}} \;\text{(droplet)} \qquad \frac{4\textcolor{#2e7d32}{\Upsilon}}{\textcolor{#e65100}{R}} \;\text{(bubble)} \]</div>
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{\Delta p} = \frac{2\textcolor{#2E7D32}{\Upsilon}}{\textcolor{#E65100}{R}} \;\text{(droplet)} \qquad \frac{4\textcolor{#2E7D32}{\Upsilon}}{\textcolor{#E65100}{R}} \;\text{(bubble)} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">Surface tension creates internal pressure. Bubbles have <strong>two</strong> surfaces → 2× droplet pressure.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>pressure inside droplets, bubbles, or curved menisci.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>non-spherical geometries. Gravity effects neglected.</div></div>
@@ -1951,10 +3066,10 @@ strong { font-weight: 600; }
         </div>
       </div>
 
-      <div class="fs-card" data-num="7" data-ch="1" data-name="Capillary Height" data-vars='{"#1565c0|h": "h — capillary rise height above the reservoir surface (m)", "#2e7d32|Υ": "Υ — surface tension coefficient of the liquid (N/m)", "#7b1fa2|cos": "cos θ — cosine of the contact angle between liquid and tube wall", "#2e7d32|γ": "γ — specific weight of the liquid (N/m³)", "#e65100|R": "R — inner radius of the capillary tube (m)"}'>
+      <div class="fs-card" data-num="7" data-ch="1" data-name="Capillary Height" data-vars='{"#1565C0|h":"h — capillary rise height (m)","#2E7D32|Υ":"Υ — surface tension (N/m)","#7B1FA2|cos":"cos θ — contact angle factor","#2E7D32|γ":"γ — specific weight (N/m³)","#E65100|R":"R — tube radius (m)"}'>
         <div class="fs-top"><span class="fs-name">Capillary Height <span class="fs-num">#7</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#1565c0}{h} = \frac{2\textcolor{#2e7d32}{\Upsilon} \textcolor{#7b1fa2}{\cos\theta}}{\textcolor{#2e7d32}{\gamma} \, \textcolor{#e65100}{R}} \]</div>
+          <div class="fs-formula">\[ \textcolor{#1565C0}{h} = \frac{2\textcolor{#2E7D32}{\Upsilon} \textcolor{#7B1FA2}{\cos\theta}}{\textcolor{#2E7D32}{\gamma} \, \textcolor{#E65100}{R}} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">Height a liquid rises or falls in a narrow tube. Positive for wetting (θ < 90°), negative for non-wetting.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>capillary tube problems, correcting manometer readings in small tubes.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>non-circular tubes. Requires known θ and Υ.</div></div>
@@ -1963,10 +3078,10 @@ strong { font-weight: 600; }
         </div>
       </div>
 
-      <div class="fs-card" data-num="8" data-ch="1" data-name="Ideal Gas Law" data-vars='{"#d32f2f|p": "p — absolute pressure of the gas (Pa) — must be absolute, never gauge", "#2e7d32|ρ": "ρ — density of the gas at this state (kg/m³)", "#e65100|R": "R — specific gas constant for this gas (J/(kg·K)) — not the universal R", "#e65100|T": "T — absolute temperature (K) — must be Kelvin, never °C"}'>
+      <div class="fs-card" data-num="8" data-ch="1" data-name="Ideal Gas Law" data-vars='{"#D32F2F|p":"p — absolute pressure (Pa)","#2E7D32|ρ":"ρ — density (kg/m³)","#E65100|R":"R — specific gas constant (J/(kg·K))","#E65100|T":"T — absolute temperature (K)"}'>
         <div class="fs-top"><span class="fs-name">Ideal Gas Law <span class="fs-num">#8</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#d32f2f}{p} = \textcolor{#2e7d32}{\rho} \, \textcolor{#e65100}{R} \, \textcolor{#e65100}{T} \]</div>
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{p} = \textcolor{#2E7D32}{\rho} \, \textcolor{#E65100}{R} \, \textcolor{#E65100}{T} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">Equation of state for ideal gases — relates absolute pressure, density, and absolute temperature.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>gas density at given conditions, compressible flow, atmosphere problems.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>very high p or low T (real gas). Must use absolute p and T — never gauge or °C.</div></div>
@@ -1975,10 +3090,10 @@ strong { font-weight: 600; }
         </div>
       </div>
 
-      <div class="fs-card" data-num="9" data-ch="1" data-name="Absolute / Gage Pressure" data-vars='{"#d32f2f|p": "p — pressure: p_abs = total from vacuum, p_gage = above atmospheric, p_atm ≈ 101.325 kPa"}'>
+      <div class="fs-card" data-num="9" data-ch="1" data-name="Absolute / Gage Pressure" data-vars='{"#D32F2F|p":"p — pressure (Pa)"}'>
         <div class="fs-top"><span class="fs-name">Absolute / Gage Pressure <span class="fs-num">#9</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#d32f2f}{p_{\text{abs}}} = \textcolor{#d32f2f}{p_{\text{gage}}} + \textcolor{#d32f2f}{p_{\text{atm}}} \]</div>
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{p_{\text{abs}}} = \textcolor{#D32F2F}{p_{\text{gage}}} + \textcolor{#D32F2F}{p_{\text{atm}}} \]</div>
           <div class="fs-detail">
             <p class="fs-explain"><strong>Absolute</strong> = total from vacuum. <strong>Gage</strong> = above atmospheric. <strong>Vacuum</strong> = below atmospheric.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>converting gage ↔ absolute, ideal gas law (needs absolute p).</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>p_gage can be negative (vacuum). p_abs is never negative.</div></div>
@@ -1987,10 +3102,10 @@ strong { font-weight: 600; }
         </div>
       </div>
 
-      <div class="fs-card" data-num="10" data-ch="1" data-name="Hydrostatic Pressure" data-vars='{"#d32f2f|p": "p — pressure at depth h below the free surface (Pa)", "#2e7d32|γ": "γ — specific weight of the static fluid (N/m³)", "#1565c0|h": "h — vertical depth below the free surface (m) — always positive downward"}'>
+      <div class="fs-card" data-num="10" data-ch="1" data-name="Hydrostatic Pressure" data-vars='{"#D32F2F|p":"p — pressure (Pa)","#2E7D32|γ":"γ — specific weight (N/m³)","#1565C0|h":"h — depth below free surface (m)"}'>
         <div class="fs-top"><span class="fs-name">Hydrostatic Pressure <span class="fs-num">#10</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#d32f2f}{p} = \textcolor{#d32f2f}{p_a} + \textcolor{#2e7d32}{\gamma} \, \textcolor{#1565c0}{h} \]</div>
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{p} = \textcolor{#D32F2F}{p_a} + \textcolor{#2E7D32}{\gamma} \, \textcolor{#1565C0}{h} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">Pressure increases linearly with depth in a static incompressible fluid.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>pressure at depth, manometer analysis, pressure on submerged surfaces.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>compressible fluids (γ varies). Not for moving fluids.</div></div>
@@ -1999,10 +3114,10 @@ strong { font-weight: 600; }
         </div>
       </div>
 
-      <div class="fs-card" data-num="11" data-ch="1" data-name="Manometer Equation" data-vars='{"#d32f2f|p": "p — pressure at the measurement point (Pa)", "#2e7d32|γ": "γ_i — specific weight of fluid i in the manometer leg (N/m³)", "#1565c0|Δ": "Δh_i — height change through fluid i: positive going down, negative going up (m)"}'>
+      <div class="fs-card" data-num="11" data-ch="1" data-name="Manometer Equation" data-vars='{"#D32F2F|p":"p — pressure (Pa)","#2E7D32|γ":"γ_i — specific weight of fluid i","#1565C0|Δ":"Δh_i — height change in fluid i (m)"}'>
         <div class="fs-top"><span class="fs-name">Manometer Equation <span class="fs-num">#11</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#d32f2f}{p_A} - \textcolor{#d32f2f}{p_B} = \sum \textcolor{#2e7d32}{\gamma_i} \, \textcolor{#1565c0}{\Delta h_i} \]</div>
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{p_A} - \textcolor{#D32F2F}{p_B} = \sum \textcolor{#2E7D32}{\gamma_i} \, \textcolor{#1565C0}{\Delta h_i} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">Walk A→B through manometer: <strong>go down</strong> → add γΔh, <strong>go up</strong> → subtract γΔh.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>pressure difference via U-tube or multi-fluid manometer.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>dynamic flows. Down adds pressure, up subtracts.</div></div>
@@ -2016,10 +3131,10 @@ strong { font-weight: 600; }
     <h2 style="color:var(--ch2-title);">Ch 2 — Hydrostatic Forces & Buoyancy</h2>
     <div class="fs-chapter" data-ch="2">
 
-      <div class="fs-card" data-num="12" data-ch="2" data-name="Resultant Hydrostatic Force" data-vars='{"#d32f2f|F": "F_R — total resultant hydrostatic force on the submerged plane surface (N)", "#2e7d32|γ": "γ — specific weight of the fluid pressing on the surface (N/m³)", "#1565c0|h": "h̄ — vertical depth from free surface to the centroid of the submerged area (m)", "#1565c0|A": "A — total area of the submerged plane surface (m²)"}'>
+      <div class="fs-card" data-num="12" data-ch="2" data-name="Resultant Hydrostatic Force" data-vars='{"#D32F2F|F":"F_R — resultant hydrostatic force (N)","#2E7D32|γ":"γ — specific weight (N/m³)","#1565C0|h":"h̄ — vertical depth to centroid (m)","#1565C0|A":"A — area of submerged surface (m²)"}'>
         <div class="fs-top"><span class="fs-name">Resultant Hydrostatic Force <span class="fs-num">#12</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#d32f2f}{F_R} = \textcolor{#2e7d32}{\gamma} \, \textcolor{#1565c0}{\bar{h}} \, \textcolor{#1565c0}{A} \]</div>
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{F_R} = \textcolor{#2E7D32}{\gamma} \, \textcolor{#1565C0}{\bar{h}} \, \textcolor{#1565C0}{A} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">Total force on a submerged plane surface = pressure at <strong>centroid</strong> × area.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>total force on a gate, dam, tank wall, or any flat submerged surface.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>curved surfaces (project onto planes). \(\bar{h}\) is vertical depth, not along surface.</div></div>
@@ -2028,15 +3143,116 @@ strong { font-weight: 600; }
         </div>
       </div>
 
-      <div class="fs-card" data-num="13" data-ch="2" data-name="Center of Pressure" data-vars='{"#1565c0|y": "y — distance measured along the inclined surface from the intersection with the free-surface line (m)", "#00838f|I": "I_xx — second moment of area of the surface shape about its centroidal axis (m⁴)", "#1565c0|A": "A — total area of the submerged plane surface (m²)"}'>
+      <div class="fs-card" data-num="13" data-ch="2" data-name="Center of Pressure" data-vars='{"#1565C0|y":"y — position along inclined surface","#00838F|I":"I_xx — second moment of area about centroid (m⁴)","#1565C0|A":"A — surface area (m²)"}'>
         <div class="fs-top"><span class="fs-name">Center of Pressure <span class="fs-num">#13</span></span></div>
         <div class="fs-body">
-          <div class="fs-formula">\[ \textcolor{#1565c0}{y_{cp}} = \textcolor{#1565c0}{\bar{y}} + \frac{\textcolor{#00838f}{I_{xx}}}{\textcolor{#1565c0}{\bar{y}} \, \textcolor{#1565c0}{A}} \]</div>
+          <div class="fs-formula">\[ \textcolor{#1565C0}{y_{cp}} = \textcolor{#1565C0}{\bar{y}} + \frac{\textcolor{#00838F}{I_{xx}}}{\textcolor{#1565C0}{\bar{y}} \, \textcolor{#1565C0}{A}} \]</div>
           <div class="fs-detail">
             <p class="fs-explain">Center of pressure is always <strong>below</strong> the centroid. Offset I_xx/(ȳA) is always positive.</p>
             <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>finding where F_R acts — needed for moment/equilibrium on gates, hinges.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>\(\bar{y}\) is along the incline from free-surface line, not vertical. Use centroidal I_xx.</div></div>
           </div>
           <div class="fs-quick"><p class="fs-explain">Center of pressure = centroid + offset. Always below centroid.</p></div>
+        </div>
+      </div>
+
+    </div>
+
+    <h2 style="color:var(--ch3-title);">Ch 3 &mdash; Bernoulli&rsquo;s Equation</h2>
+    <div class="fs-chapter" data-ch="3">
+
+      <div class="fs-card" data-num="14" data-ch="3" data-name="Bernoulli Equation (energy form)" data-vars='{"#D32F2F|P":"P — static pressure (Pa)","#2E7D32|ρ":"ρ — fluid density (kg/m³)","#2E7D32|g":"g — gravitational acceleration (9.81 m/s²)","#E65100|V":"V — flow speed along the streamline (m/s)","#1565C0|z":"z — elevation above datum (m)"}'>
+        <div class="fs-top"><span class="fs-name">Bernoulli Equation (energy form) <span class="fs-num">#14</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \frac{\textcolor{#D32F2F}{P}}{\textcolor{#2E7D32}{\rho}} + \frac{\textcolor{#E65100}{V}^2}{2} + \textcolor{#2E7D32}{g}\,\textcolor{#1565C0}{z} = \text{const} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">Mechanical energy per unit mass is conserved along a streamline for steady, incompressible, frictionless flow. Each term has units of J/kg.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>relating pressure, speed and height between two points on the <strong>same</strong> streamline — tanks, nozzles, ideal flow.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>viscous/frictional flow, pumps or turbines (shaft work), unsteady or compressible flow, or jumping across streamlines.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">P/ρ + V²/2 + gz is constant along a streamline (steady, inviscid, incompressible).</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="15" data-ch="3" data-name="Bernoulli Equation (head form)" data-vars='{"#D32F2F|P":"P — static pressure (Pa)","#2E7D32|ρ":"ρ — fluid density (kg/m³)","#2E7D32|g":"g — gravitational acceleration (9.81 m/s²)","#E65100|V":"V — flow speed (m/s)","#1565C0|z":"z — elevation head (m)","#1565C0|H":"H — total head, constant along the streamline (m)"}'>
+        <div class="fs-top"><span class="fs-name">Bernoulli Equation (head form) <span class="fs-num">#15</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \frac{\textcolor{#D32F2F}{P}}{\textcolor{#2E7D32}{\rho}\,\textcolor{#2E7D32}{g}} + \frac{\textcolor{#E65100}{V}^2}{2\textcolor{#2E7D32}{g}} + \textcolor{#1565C0}{z} = \textcolor{#1565C0}{H} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">The energy form divided by g — every term now has units of metres (head). P/(ρg) is the pressure head, V²/(2g) the velocity head, z the elevation head. Note ρg = γ, the specific weight.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>working with the EGL/HGL, pump or turbine head, or manometer heights where metres are the natural unit.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>same limits as the energy form — no friction, no shaft work, one streamline only.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">Pressure head + velocity head + elevation head = total head H (constant along a streamline).</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="16" data-ch="3" data-name="Steady-Flow Euler Equation" data-vars='{"#D32F2F|P":"P — static pressure (Pa)","#2E7D32|ρ":"ρ — fluid density (kg/m³)","#E65100|V":"V — flow speed along the streamline (m/s)","#2E7D32|g":"g — gravitational acceleration (9.81 m/s²)","#1565C0|z":"z — elevation above datum (m)"}'>
+        <div class="fs-top"><span class="fs-name">Steady-Flow Euler Equation <span class="fs-num">#16</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ d\textcolor{#D32F2F}{P} + \textcolor{#2E7D32}{\rho}\,\textcolor{#E65100}{V}\,d\textcolor{#E65100}{V} + \textcolor{#2E7D32}{\rho}\,\textcolor{#2E7D32}{g}\,d\textcolor{#1565C0}{z} = 0 \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">The differential form of Bernoulli before integration — Newton&rsquo;s second law along a streamline for an inviscid fluid. Integrating along the streamline yields the Bernoulli equation.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>deriving Bernoulli, or reasoning about the pressure gradient along a streamline.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>a plug-and-play formula — it is the starting differential relation, not an algebraic result.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">dP + ρV·dV + ρg·dz = 0 — integrate to recover Bernoulli.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="17" data-ch="3" data-name="Stagnation Pressure" data-vars='{"#D32F2F|P0":"P₀ — stagnation (total) pressure (Pa)","#D32F2F|P":"P — static pressure (Pa)","#2E7D32|ρ":"ρ — fluid density (kg/m³)","#E65100|V":"V — local flow speed (m/s)"}'>
+        <div class="fs-top"><span class="fs-name">Stagnation Pressure <span class="fs-num">#17</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{P_0} = \textcolor{#D32F2F}{P} + \tfrac{1}{2}\textcolor{#2E7D32}{\rho}\,\textcolor{#E65100}{V}^2 \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">Pressure at a point where the flow is brought isentropically to rest: static pressure P plus dynamic pressure ½ρV². This is the basis of Pitot-tube velocity measurement.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>relating total, static and dynamic pressure; finding speed from a Pitot or stagnation tube.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>high-speed compressible flow (needs a compressibility correction) — the dynamic term assumes incompressible flow.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">P₀ = P + ½ρV². Stagnation = static + dynamic pressure.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="18" data-ch="3" data-name="Continuity (incompressible)" data-vars='{"#E65100|Q":"Q — volumetric flow rate (m³/s)","#1565C0|A1":"A₁ — cross-sectional area at section 1 (m²)","#1565C0|A2":"A₂ — cross-sectional area at section 2 (m²)","#E65100|V":"V — average velocity at a section (m/s)"}'>
+        <div class="fs-top"><span class="fs-name">Continuity (incompressible) <span class="fs-num">#18</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#E65100}{Q} = \textcolor{#1565C0}{A_1}\,\textcolor{#E65100}{V_1} = \textcolor{#1565C0}{A_2}\,\textcolor{#E65100}{V_2} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">For steady incompressible flow the volume flow rate Q is constant, so a smaller area forces a faster velocity. Paired with Bernoulli for every flow-measurement device.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>relating velocities at two pipe sections, or computing Q from area and speed.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>compressible flow (use mass flow ρAV) or unsteady flow with storage.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">Q = A₁V₁ = A₂V₂. Area down → velocity up.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="19" data-ch="3" data-name="Pitot / Stagnation Tube Velocity" data-vars='{"#E65100|V":"V — local flow speed (m/s)","#D32F2F|P0":"P₀ — stagnation pressure at the probe nose (Pa)","#D32F2F|P1":"P₁ — static pressure of the stream (Pa)","#2E7D32|ρ":"ρ — fluid density (kg/m³)"}'>
+        <div class="fs-top"><span class="fs-name">Pitot / Stagnation Tube Velocity <span class="fs-num">#19</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#E65100}{V_1} = \sqrt{\dfrac{2\left(\textcolor{#D32F2F}{P_0} - \textcolor{#D32F2F}{P_1}\right)}{\textcolor{#2E7D32}{\rho}}} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">The stagnation relation rearranged for speed — from the difference between stagnation and static pressure. A Pitot-static tube senses both pressures at once.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>finding flow speed from a Pitot or Pitot-static probe reading.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>compressible flow without correction, or a misaligned (yawed) probe.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">V = √(2(P₀ − P₁)/ρ). Speed from stagnation minus static pressure.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="20" data-ch="3" data-name="Venturi Meter Flow Rate" data-vars='{"#E65100|Q":"Q — volumetric flow rate (m³/s)","#1565C0|A2":"A₂ — throat area (m²)","#1565C0|A1":"A₁ — upstream pipe area (m²)","#D32F2F|P1":"P₁ — upstream static pressure (Pa)","#D32F2F|P2":"P₂ — throat static pressure (Pa)","#2E7D32|ρ":"ρ — fluid density (kg/m³)"}'>
+        <div class="fs-top"><span class="fs-name">Venturi Meter Flow Rate <span class="fs-num">#20</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#E65100}{Q} = C_v\,\textcolor{#1565C0}{A_2}\sqrt{\dfrac{2\left(\textcolor{#D32F2F}{P_1} - \textcolor{#D32F2F}{P_2}\right)}{\textcolor{#2E7D32}{\rho}\left(1 - (\textcolor{#1565C0}{A_2}/\textcolor{#1565C0}{A_1})^2\right)}} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">Bernoulli plus continuity across a smooth contraction. The velocity coefficient C_v (≈ 0.98) corrects for small friction losses; the gentle shape gives nearly full pressure recovery.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>metering pipe flow with a Venturi; take C_v from calibration or charts.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>very low Reynolds number (C_v drops), or using the pipe area — A₂ is the throat.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">Q = C_v A₂ √(2(P₁−P₂) / [ρ(1−(A₂/A₁)²)]). C_v ≈ 0.98.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="21" data-ch="3" data-name="Orifice Meter Flow Rate" data-vars='{"#E65100|Q":"Q — volumetric flow rate (m³/s)","#1565C0|A0":"A₀ — orifice (hole) area (m²)","#1565C0|A1":"A₁ — upstream pipe area (m²)","#D32F2F|P1":"P₁ — upstream static pressure (Pa)","#D32F2F|P2":"P₂ — downstream static pressure (Pa)","#2E7D32|ρ":"ρ — fluid density (kg/m³)"}'>
+        <div class="fs-top"><span class="fs-name">Orifice Meter Flow Rate <span class="fs-num">#21</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#E65100}{Q} = C_D\,\textcolor{#1565C0}{A_0}\sqrt{\dfrac{2\left(\textcolor{#D32F2F}{P_1} - \textcolor{#D32F2F}{P_2}\right)}{\textcolor{#2E7D32}{\rho}\left(1 - C_c^2(\textcolor{#1565C0}{A_0}/\textcolor{#1565C0}{A_1})^2\right)}} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">Same principle as the Venturi but with a sharp-edged plate. The jet necks down to a vena contracta (C_c ≈ 0.6), and the discharge coefficient C_D = C_c·C_v bundles contraction and friction. Cheaper than a Venturi but with a larger permanent pressure loss; a bell-mouth inlet has C_c = 1.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>metering pipe flow with an orifice plate; take C_D from standards or calibration.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>cases needing low pressure loss (use a Venturi), or forgetting contraction — the area is the hole A₀, the jet is smaller.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">Q = C_D A₀ √(2(P₁−P₂) / [ρ(1−C_c²(A₀/A₁)²)]). C_c ≈ 0.6, C_D = C_c·C_v.</p></div>
         </div>
       </div>
 
@@ -2596,15 +3812,15 @@ strong { font-weight: 600; }
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:28px;">
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Reference items</div>
-      <div style="font-size:22px;font-weight:600;color:var(--eq);">13</div>
+      <div style="font-size:22px;font-weight:600;color:var(--eq);">21</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Chapters completed</div>
-      <div style="font-size:22px;font-weight:600;color:var(--def);">0 <span style="font-size:13px;color:var(--muted);font-weight:400;">/ 6</span></div>
+      <div style="font-size:22px;font-weight:600;color:var(--def);">1 <span style="font-size:13px;color:var(--muted);font-weight:400;">/ 6</span></div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Examples</div>
-      <div style="font-size:22px;font-weight:600;color:var(--deriv);">4</div>
+      <div style="font-size:22px;font-weight:600;color:var(--deriv);">9</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Assignments</div>
@@ -2647,6 +3863,20 @@ strong { font-weight: 600; }
       <div class="branch"><strong>Where does the force act?</strong> &rarr; Center of pressure: \(y_{cp} = \bar{y} + I_{xx}/(\bar{y}A)\)</div>
       <div class="branch"><strong>Curved surface?</strong> &rarr; Project onto horizontal &amp; vertical planes, combine components</div>
       <div class="branch"><strong>Equilibrium (hinge/stop/bolt forces)?</strong> &rarr; Draw FBD, sum moments about hinge using F_R at y_cp</div>
+    </div>
+  </div>
+
+  <div class="decision-tree card-bracket" style="border-left-color:var(--ch3-title);">
+    <h3 style="color:var(--ch3-title);margin-top:0;">Flow Measurement &amp; Bernoulli</h3>
+    <div class="tree">
+      <div class="branch"><strong>Relating P, V, z between two points on a streamline?</strong> &rarr; Bernoulli: \(P/\rho + V^2/2 + gz = \text{const}\)</div>
+      <div class="branch"><strong>Tank draining / free-jet exit speed?</strong> &rarr; Torricelli: \(V = \sqrt{2gz}\)</div>
+      <div class="branch"><strong>Speed from a Pitot / stagnation tube?</strong> &rarr; \(V = \sqrt{2(P_0 - P)/\rho}\)</div>
+      <div class="branch"><strong>Flow rate through a Venturi?</strong> &rarr; \(Q = C_v A_2\sqrt{\dfrac{2(P_1-P_2)}{\rho\,(1-(A_2/A_1)^2)}}\) &nbsp;(\(C_v \approx 0.98\))</div>
+      <div class="branch"><strong>Flow rate through an orifice plate?</strong> &rarr; \(Q = C_D A_0\sqrt{\dfrac{2(P_1-P_2)}{\rho\,(1-C_c^2(A_0/A_1)^2)}}\)
+        <div class="sub-branch" style="padding-left:20px;margin-top:4px;"><strong>Sharp orifice:</strong> \(C_c \approx 0.6\) &nbsp;|&nbsp; <strong>Bell-mouth inlet:</strong> \(C_c = 1\)</div>
+      </div>
+      <div class="branch"><strong>Relating velocities at two pipe sections?</strong> &rarr; Continuity: \(A_1 V_1 = A_2 V_2\)</div>
     </div>
   </div>
 
@@ -2721,10 +3951,42 @@ strong { font-weight: 600; }
     </ol>
   </div>
 
-  <!-- ═══ PENDING CHAPTERS ═══ -->
+  <!-- ═══ CH 3 CARD ═══ -->
   <h2 style="color:var(--ch3-title);">Ch 3 — Bernoulli&rsquo;s Equation</h2>
-  <p style="color:var(--muted);font-size:13px;">Pending &mdash; Text Ch 2.9, 3.5</p>
+  <div class="card-bracket" style="border-left:3.5px solid var(--ch3-title);">
+    <div class="eq-name" style="color:var(--ch3-title);">Ch 3 — Bernoulli&rsquo;s Equation</div>
 
+    <p><strong style="color:var(--ch3-title)">Key ideas:</strong></p>
+    <ul>
+      <li>&rarr; Bernoulli is the steady, incompressible, frictionless energy balance along a single streamline: \(P/\rho + V^2/2 + gz\) stays constant</li>
+      <li>&rarr; It is the steady-flow Euler equation integrated along a streamline &mdash; so every restriction on Euler carries over to Bernoulli</li>
+      <li>&rarr; In head form (&divide; g) the three terms are the pressure, velocity and elevation heads; their sum is the EGL, and the HGL sits one velocity head \(V^2/2g\) below it</li>
+      <li>&rarr; Stagnation pressure \(P_0 = P + \tfrac12\rho V^2\) (static + dynamic) is the basis of velocity measurement</li>
+      <li>&rarr; The four flow meters (Pitot, Venturi, orifice, bell-mouth) are all Bernoulli + continuity with a calibration coefficient</li>
+    </ul>
+
+    <p><strong style="color:var(--ch3-title)">When to use what:</strong></p>
+    <ul>
+      <li>&rarr; Pressure/speed/height on a streamline? &mdash; \(P/\rho + V^2/2 + gz = \text{const}\)</li>
+      <li>&rarr; Tank draining / free jet? &mdash; Torricelli: \(V = \sqrt{2gz}\)</li>
+      <li>&rarr; Speed from a Pitot tube? &mdash; \(V = \sqrt{2(P_0 - P)/\rho}\)</li>
+      <li>&rarr; Flow rate from a Venturi? &mdash; \(Q = C_v A_2\sqrt{2(P_1-P_2)/[\rho(1-(A_2/A_1)^2)]}\), \(C_v \approx 0.98\)</li>
+      <li>&rarr; Flow rate from an orifice? &mdash; \(Q = C_D A_0\sqrt{2(P_1-P_2)/[\rho(1-C_c^2(A_0/A_1)^2)]}\), \(C_D = C_c C_v\)</li>
+      <li>&rarr; Two pipe sections? &mdash; Continuity: \(A_1 V_1 = A_2 V_2\)</li>
+    </ul>
+
+    <p><strong style="color:var(--ch3-title)">&#9888; Traps:</strong></p>
+    <ol>
+      <li>Bernoulli holds <em>along one streamline</em> &mdash; only equate two points on the same streamline (or everywhere in irrotational flow)</li>
+      <li>No friction, no pump/turbine, steady &amp; incompressible &mdash; if any of these fails, use the steady-flow energy equation instead</li>
+      <li>The jet area at a sharp orifice is the vena contracta \(C_c A_0\), not the hole \(A_0\) &mdash; ignoring contraction overestimates the flow</li>
+      <li>Use the <em>throat</em> area for a Venturi (\(A_2\)), never the upstream pipe area</li>
+      <li>The dynamic term \(\tfrac12\rho V^2\) assumes incompressible flow &mdash; it needs a correction at high Mach number</li>
+      <li>Keep one datum for z; in BG units mind the \(g_c\) factor and convert psi to lbf/ft&sup2; (&times;144)</li>
+    </ol>
+  </div>
+
+  <!-- ═══ PENDING CHAPTERS ═══ -->
   <h2 style="color:var(--ch4-title);">Ch 4 — Introduction to Fluid Dynamics</h2>
   <p style="color:var(--muted);font-size:13px;">Pending &mdash; Text Ch 1.5, 3.1, 6.1&ndash;6.2, 1.9, 3.2</p>
 
@@ -2750,6 +4012,11 @@ strong { font-weight: 600; }
       <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Force on flat surface</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(F_R = \gamma \bar{h} A\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\bar{h}\) = depth to centroid</td></tr>
       <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Where does F<sub>R</sub> act?</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(y_{cp} = \bar{y} + I_{xx}/(\bar{y}A)\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Always below centroid</td></tr>
       <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Hinge/gate equilibrium</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">FBD + &Sigma;M about hinge = 0</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Use F<sub>R</sub> at y<sub>cp</sub></td></tr>
+      <tr style="border-left:3px solid var(--ch3-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Two points on a streamline</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(P/\rho + V^2/2 + gz = \text{const}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Steady, inviscid, 1 streamline</td></tr>
+      <tr style="border-left:3px solid var(--ch3-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Tank draining / free jet</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(V = \sqrt{2gz}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Torricelli; open surface at rest</td></tr>
+      <tr style="border-left:3px solid var(--ch3-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Velocity from Pitot tube</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(V = \sqrt{2(P_0-P)/\rho}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Stagnation &minus; static</td></tr>
+      <tr style="border-left:3px solid var(--ch3-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Flow rate &mdash; Venturi</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(Q = C_v A_2\sqrt{2\Delta P/[\rho(1-(A_2/A_1)^2)]}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(C_v \approx 0.98\); use throat A</td></tr>
+      <tr style="border-left:3px solid var(--ch3-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Flow rate &mdash; orifice</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(Q = C_D A_0\sqrt{2\Delta P/[\rho(1-C_c^2(A_0/A_1)^2)]}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(C_c \approx 0.6\), \(C_D = C_c C_v\)</td></tr>
     </tbody>
   </table>
 
@@ -2858,8 +4125,6 @@ function showSection(sectionId, anchorId) {
   document.querySelectorAll('.sb-item, .sb-sub').forEach(el => el.classList.remove('active'));
   const items = document.querySelectorAll(`[onclick*="'${sectionId}'"]`);
   items.forEach(el => el.classList.add('active'));
-  /* Re-wire popups when formulas section becomes visible (hidden elements may skip initial wiring) */
-  if (sectionId === 'formulas' && window._wireUpVarPopups) window._wireUpVarPopups();
 }
 
 /* ── Chapter Expand/Collapse ── */
@@ -2920,19 +4185,12 @@ function setFormulaView(view, btn) {
       var spans = card.querySelectorAll('.katex-html span');
       for (var s = 0; s < spans.length; s++) {
         var el = spans[s];
-        /* Try DOM property first, fall back to parsing the attribute (hidden elements) */
-        var col = el.style.color;
-        var hex;
-        if (col) {
-          hex = rgbToHex(col);
-        } else {
-          var raw = el.getAttribute('style') || '';
-          var cm = raw.match(/color:\s*(#[0-9a-fA-F]{6})/);
-          if (!cm) continue;
-          hex = cm[1].toLowerCase();
-        }
+        if (!el.style.color) continue;
+        var hex = rgbToHex(el.style.color);
         if (!lookup[hex]) continue;
+        /* Skip nested children of already-tagged spans */
         if (el.closest('.vp-click')) continue;
+        /* Skip structural elements */
         if (el.classList.contains('frac-line') || el.classList.contains('mrel') || el.classList.contains('mspace')) continue;
         var entries = lookup[hex];
         var txt = el.textContent || '';

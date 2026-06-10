@@ -6,15 +6,15 @@
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:28px;">
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Reference items</div>
-      <div style="font-size:22px;font-weight:600;color:var(--eq);">13</div>
+      <div style="font-size:22px;font-weight:600;color:var(--eq);">21</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Chapters completed</div>
-      <div style="font-size:22px;font-weight:600;color:var(--def);">0 <span style="font-size:13px;color:var(--muted);font-weight:400;">/ 6</span></div>
+      <div style="font-size:22px;font-weight:600;color:var(--def);">1 <span style="font-size:13px;color:var(--muted);font-weight:400;">/ 6</span></div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Examples</div>
-      <div style="font-size:22px;font-weight:600;color:var(--deriv);">4</div>
+      <div style="font-size:22px;font-weight:600;color:var(--deriv);">9</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Assignments</div>
@@ -57,6 +57,20 @@
       <div class="branch"><strong>Where does the force act?</strong> &rarr; Center of pressure: \(y_{cp} = \bar{y} + I_{xx}/(\bar{y}A)\)</div>
       <div class="branch"><strong>Curved surface?</strong> &rarr; Project onto horizontal &amp; vertical planes, combine components</div>
       <div class="branch"><strong>Equilibrium (hinge/stop/bolt forces)?</strong> &rarr; Draw FBD, sum moments about hinge using F_R at y_cp</div>
+    </div>
+  </div>
+
+  <div class="decision-tree card-bracket" style="border-left-color:var(--ch3-title);">
+    <h3 style="color:var(--ch3-title);margin-top:0;">Flow Measurement &amp; Bernoulli</h3>
+    <div class="tree">
+      <div class="branch"><strong>Relating P, V, z between two points on a streamline?</strong> &rarr; Bernoulli: \(P/\rho + V^2/2 + gz = \text{const}\)</div>
+      <div class="branch"><strong>Tank draining / free-jet exit speed?</strong> &rarr; Torricelli: \(V = \sqrt{2gz}\)</div>
+      <div class="branch"><strong>Speed from a Pitot / stagnation tube?</strong> &rarr; \(V = \sqrt{2(P_0 - P)/\rho}\)</div>
+      <div class="branch"><strong>Flow rate through a Venturi?</strong> &rarr; \(Q = C_v A_2\sqrt{\dfrac{2(P_1-P_2)}{\rho\,(1-(A_2/A_1)^2)}}\) &nbsp;(\(C_v \approx 0.98\))</div>
+      <div class="branch"><strong>Flow rate through an orifice plate?</strong> &rarr; \(Q = C_D A_0\sqrt{\dfrac{2(P_1-P_2)}{\rho\,(1-C_c^2(A_0/A_1)^2)}}\)
+        <div class="sub-branch" style="padding-left:20px;margin-top:4px;"><strong>Sharp orifice:</strong> \(C_c \approx 0.6\) &nbsp;|&nbsp; <strong>Bell-mouth inlet:</strong> \(C_c = 1\)</div>
+      </div>
+      <div class="branch"><strong>Relating velocities at two pipe sections?</strong> &rarr; Continuity: \(A_1 V_1 = A_2 V_2\)</div>
     </div>
   </div>
 
@@ -131,10 +145,42 @@
     </ol>
   </div>
 
-  <!-- ═══ PENDING CHAPTERS ═══ -->
+  <!-- ═══ CH 3 CARD ═══ -->
   <h2 style="color:var(--ch3-title);">Ch 3 — Bernoulli&rsquo;s Equation</h2>
-  <p style="color:var(--muted);font-size:13px;">Pending &mdash; Text Ch 2.9, 3.5</p>
+  <div class="card-bracket" style="border-left:3.5px solid var(--ch3-title);">
+    <div class="eq-name" style="color:var(--ch3-title);">Ch 3 — Bernoulli&rsquo;s Equation</div>
 
+    <p><strong style="color:var(--ch3-title)">Key ideas:</strong></p>
+    <ul>
+      <li>&rarr; Bernoulli is the steady, incompressible, frictionless energy balance along a single streamline: \(P/\rho + V^2/2 + gz\) stays constant</li>
+      <li>&rarr; It is the steady-flow Euler equation integrated along a streamline &mdash; so every restriction on Euler carries over to Bernoulli</li>
+      <li>&rarr; In head form (&divide; g) the three terms are the pressure, velocity and elevation heads; their sum is the EGL, and the HGL sits one velocity head \(V^2/2g\) below it</li>
+      <li>&rarr; Stagnation pressure \(P_0 = P + \tfrac12\rho V^2\) (static + dynamic) is the basis of velocity measurement</li>
+      <li>&rarr; The four flow meters (Pitot, Venturi, orifice, bell-mouth) are all Bernoulli + continuity with a calibration coefficient</li>
+    </ul>
+
+    <p><strong style="color:var(--ch3-title)">When to use what:</strong></p>
+    <ul>
+      <li>&rarr; Pressure/speed/height on a streamline? &mdash; \(P/\rho + V^2/2 + gz = \text{const}\)</li>
+      <li>&rarr; Tank draining / free jet? &mdash; Torricelli: \(V = \sqrt{2gz}\)</li>
+      <li>&rarr; Speed from a Pitot tube? &mdash; \(V = \sqrt{2(P_0 - P)/\rho}\)</li>
+      <li>&rarr; Flow rate from a Venturi? &mdash; \(Q = C_v A_2\sqrt{2(P_1-P_2)/[\rho(1-(A_2/A_1)^2)]}\), \(C_v \approx 0.98\)</li>
+      <li>&rarr; Flow rate from an orifice? &mdash; \(Q = C_D A_0\sqrt{2(P_1-P_2)/[\rho(1-C_c^2(A_0/A_1)^2)]}\), \(C_D = C_c C_v\)</li>
+      <li>&rarr; Two pipe sections? &mdash; Continuity: \(A_1 V_1 = A_2 V_2\)</li>
+    </ul>
+
+    <p><strong style="color:var(--ch3-title)">&#9888; Traps:</strong></p>
+    <ol>
+      <li>Bernoulli holds <em>along one streamline</em> &mdash; only equate two points on the same streamline (or everywhere in irrotational flow)</li>
+      <li>No friction, no pump/turbine, steady &amp; incompressible &mdash; if any of these fails, use the steady-flow energy equation instead</li>
+      <li>The jet area at a sharp orifice is the vena contracta \(C_c A_0\), not the hole \(A_0\) &mdash; ignoring contraction overestimates the flow</li>
+      <li>Use the <em>throat</em> area for a Venturi (\(A_2\)), never the upstream pipe area</li>
+      <li>The dynamic term \(\tfrac12\rho V^2\) assumes incompressible flow &mdash; it needs a correction at high Mach number</li>
+      <li>Keep one datum for z; in BG units mind the \(g_c\) factor and convert psi to lbf/ft&sup2; (&times;144)</li>
+    </ol>
+  </div>
+
+  <!-- ═══ PENDING CHAPTERS ═══ -->
   <h2 style="color:var(--ch4-title);">Ch 4 — Introduction to Fluid Dynamics</h2>
   <p style="color:var(--muted);font-size:13px;">Pending &mdash; Text Ch 1.5, 3.1, 6.1&ndash;6.2, 1.9, 3.2</p>
 
@@ -160,6 +206,11 @@
       <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Force on flat surface</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(F_R = \gamma \bar{h} A\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\bar{h}\) = depth to centroid</td></tr>
       <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Where does F<sub>R</sub> act?</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(y_{cp} = \bar{y} + I_{xx}/(\bar{y}A)\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Always below centroid</td></tr>
       <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Hinge/gate equilibrium</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">FBD + &Sigma;M about hinge = 0</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Use F<sub>R</sub> at y<sub>cp</sub></td></tr>
+      <tr style="border-left:3px solid var(--ch3-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Two points on a streamline</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(P/\rho + V^2/2 + gz = \text{const}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Steady, inviscid, 1 streamline</td></tr>
+      <tr style="border-left:3px solid var(--ch3-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Tank draining / free jet</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(V = \sqrt{2gz}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Torricelli; open surface at rest</td></tr>
+      <tr style="border-left:3px solid var(--ch3-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Velocity from Pitot tube</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(V = \sqrt{2(P_0-P)/\rho}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Stagnation &minus; static</td></tr>
+      <tr style="border-left:3px solid var(--ch3-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Flow rate &mdash; Venturi</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(Q = C_v A_2\sqrt{2\Delta P/[\rho(1-(A_2/A_1)^2)]}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(C_v \approx 0.98\); use throat A</td></tr>
+      <tr style="border-left:3px solid var(--ch3-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Flow rate &mdash; orifice</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(Q = C_D A_0\sqrt{2\Delta P/[\rho(1-C_c^2(A_0/A_1)^2)]}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(C_c \approx 0.6\), \(C_D = C_c C_v\)</td></tr>
     </tbody>
   </table>
 

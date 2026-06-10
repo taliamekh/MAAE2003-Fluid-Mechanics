@@ -1,0 +1,460 @@
+<section id="ch3-lec1" class="page-section">
+  <h1 class="page-title" style="color:var(--ch3-title);">Ch 3 — Bernoulli&rsquo;s Equation</h1>
+  <p class="page-subtitle">Lecture 3.1 &middot; Bernoulli&rsquo;s Equation I &middot; Text Ch 3.5 &mdash; derivation, heads, EGL/HGL, stagnation pressure, limitations</p>
+
+  <p>The relation between <strong>pressure, velocity, and elevation</strong> of a flowing fluid was first stated verbally in Daniel Bernoulli&rsquo;s textbook in 1738. Leonhard Euler later gave the complete derivation in 1755. This single equation ties together the three things we have studied so far &mdash; pressure (Ch 1&ndash;2), and now motion &mdash; into one conservation statement that holds <em>along a streamline</em>. It is arguably the most-used equation in all of introductory fluid mechanics, so it is worth understanding exactly where it comes from and, just as importantly, when it is allowed.</p>
+
+  <h2 style="color:var(--ch3-title);">Deriving Bernoulli&rsquo;s Equation</h2>
+
+  <p>Bernoulli&rsquo;s equation is nothing more than Newton&rsquo;s second law applied to a small fluid element as it moves along a streamline. We follow one particle and add up the forces acting on it in the direction of motion (the <em>s</em>-direction, tangent to the streamline).</p>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Free body diagram of a fluid element moving along a streamline">
+      <!-- axes -->
+      <line x1="42" y1="320" x2="42" y2="44" stroke="var(--deriv)" stroke-width="1.5"/>
+      <polygon points="42,38 38,50 46,50" fill="var(--deriv)"/>
+      <text x="28" y="44" font-size="15" fill="var(--text)" font-style="italic">z</text>
+      <line x1="42" y1="320" x2="490" y2="320" stroke="var(--deriv)" stroke-width="1.5"/>
+      <polygon points="496,320 484,316 484,324" fill="var(--deriv)"/>
+      <text x="498" y="325" font-size="15" fill="var(--text)" font-style="italic">x</text>
+      <!-- gravity -->
+      <line x1="78" y1="58" x2="78" y2="96" stroke="var(--example)" stroke-width="2"/>
+      <polygon points="78,102 73,90 83,90" fill="var(--example)"/>
+      <text x="60" y="80" font-size="14" fill="var(--example)" font-style="italic">g</text>
+      <!-- streamline -->
+      <path d="M 95 300 Q 280 250 475 120" fill="none" stroke="var(--def)" stroke-width="2"/>
+      <polygon points="475,120 466,128 472,131" fill="var(--def)"/>
+      <text x="360" y="135" font-size="13" fill="var(--def)">streamline</text>
+      <!-- fluid element: tilted rectangle centred near (265,222) -->
+      <polygon points="232,238 286,210 300,236 246,264" fill="rgba(255,107,53,.16)" stroke="var(--eq)" stroke-width="1.6"/>
+      <!-- P dA arrow into the lower (upstream) face, pointing up-right along s -->
+      <line x1="196" y1="276" x2="236" y2="255" stroke="var(--eq)" stroke-width="2.2"/>
+      <polygon points="240,253 228,253 234,263" fill="var(--eq)"/>
+      <text x="150" y="285" font-size="13" fill="var(--eq)">P&middot;dA</text>
+      <!-- (P+dP) dA arrow on the upper (downstream) face, pointing back down-left -->
+      <line x1="332" y1="196" x2="296" y2="216" stroke="var(--eq)" stroke-width="2.2"/>
+      <polygon points="292,218 304,218 298,208" fill="var(--eq)"/>
+      <text x="330" y="190" font-size="13" fill="var(--eq)">(P+dP)&middot;dA</text>
+      <!-- weight W straight down from element centre -->
+      <line x1="266" y1="237" x2="266" y2="292" stroke="var(--example)" stroke-width="2.2"/>
+      <polygon points="266,298 261,286 271,286" fill="var(--example)"/>
+      <text x="272" y="288" font-size="13" fill="var(--example)" font-style="italic">W = &rho;g&middot;dA&middot;ds</text>
+      <!-- geometry triangle, lower-right open area -->
+      <line x1="350" y1="300" x2="440" y2="300" stroke="var(--muted)" stroke-width="1.4"/>
+      <line x1="440" y1="300" x2="440" y2="246" stroke="var(--muted)" stroke-width="1.4"/>
+      <line x1="350" y1="300" x2="440" y2="246" stroke="var(--deriv)" stroke-width="1.8"/>
+      <path d="M 378 300 A 28 28 0 0 0 372 288" fill="none" stroke="var(--muted)" stroke-width="1.2"/>
+      <text x="358" y="294" font-size="14" fill="var(--text)" font-style="italic">&theta;</text>
+      <text x="386" y="266" font-size="14" fill="var(--text)" font-style="italic">ds</text>
+      <text x="448" y="277" font-size="14" fill="var(--text)" font-style="italic">dz</text>
+      <text x="386" y="316" font-size="14" fill="var(--text)" font-style="italic">dx</text>
+    </svg>
+    <div class="figure-caption">The forces acting on a fluid element of cross-section dA and length ds along a streamline. Pressure pushes on the two end faces; gravity pulls straight down. From the geometry, ds&nbsp;sin&theta;&nbsp;=&nbsp;dz.</div>
+  </div>
+
+  <div class="card-bracket drv-card">
+    <div class="card-title">Derivation &mdash; Newton&rsquo;s 2nd law along a streamline</div>
+
+    <p><strong>Step 1 &mdash; acceleration along the streamline.</strong> For steady flow the velocity of the particle depends on position <em>s</em> only, so the convective acceleration is</p>
+    \[ a_s = \frac{dV}{dt} = \frac{\partial V}{\partial s}\frac{ds}{dt} = V\frac{dV}{ds} \]
+    <p>and the mass of the element is its density times its volume, \( m = \rho\,dA\,ds \). Newton&rsquo;s second law in the <em>s</em>-direction gives</p>
+    \[ \textstyle\sum F_s = m\,a_s = (\rho\,dA\,ds)\,V\frac{dV}{ds} \qquad (1) \]
+
+    <p><strong>Step 2 &mdash; add up the forces.</strong> Two kinds of force act along <em>s</em>: the pressure difference across the two end faces, and the component of the weight. Summing them,</p>
+    \[ \textstyle\sum F_s = P\,dA - \left(P + \tfrac{dP}{ds}ds\right)dA - \rho g\,dA\,ds\,\sin\theta \]
+    \[ \textstyle\sum F_s = -dP\,dA - \rho g\,dA\,ds\,\sin\theta \qquad (2) \]
+
+    <p><strong>Step 3 &mdash; equate (1) and (2)</strong> and divide through by the cross-sectional area dA:</p>
+    \[ -dP\,dA - \rho g\,dA\,ds\,\sin\theta = (\rho\,dA\,ds)\,V\frac{dV}{ds} \]
+    \[ -dP - \rho g\,ds\,\sin\theta = \rho\,V\,dV \]
+
+    <p><strong>Step 4 &mdash; use the geometry</strong> ds&nbsp;sin&theta;&nbsp;=&nbsp;dz (rise over the slope length), which turns the weight term into an elevation change:</p>
+    \[ -dP - \rho g\,dz = \rho\,V\,dV \]
+
+    <p><strong>Step 5 &mdash; rearrange.</strong> Collecting all terms on one side gives the <strong>steady-flow Euler equation</strong> along a streamline:</p>
+    \[ dP + \rho\,V\,dV + \rho g\,dz = 0 \qquad (3) \]
+
+    <p><strong>Step 6 &mdash; integrate for incompressible flow.</strong> With &rho; constant, integrate each term along the streamline:</p>
+    \[ \int dP + \int \rho\,V\,dV + \int \rho g\,dz = 0 \;\Rightarrow\; P + \tfrac{1}{2}\rho V^2 + \rho g z = \text{constant} \]
+    <p>Dividing by &rho; gives the most common form. That is Bernoulli&rsquo;s equation.</p>
+  </div>
+
+  <div class="card-bracket eq-card">
+    <div class="card-title">Bernoulli&rsquo;s Equation (along a streamline)</div>
+    \[ \frac{P}{\rho} + \frac{V^2}{2} + gz = \text{constant} \]
+    <p>Equivalently, between any two points 1 and 2 on the <strong>same streamline</strong>:</p>
+    \[ \frac{P_1}{\rho} + \frac{V_1^2}{2} + gz_1 = \frac{P_2}{\rho} + \frac{V_2^2}{2} + gz_2 \]
+    <div class="var-row">
+      <span class="pill">P — static pressure (Pa)</span>
+      <span class="pill">V — flow speed (m/s)</span>
+      <span class="pill">z — elevation above datum (m)</span>
+      <span class="pill">&rho; — density (kg/m&sup3;)</span>
+      <span class="pill">g — gravity (9.81 m/s&sup2;)</span>
+    </div>
+  </div>
+
+  <div class="callout callout-warning">
+    <div class="callout-icon">&#9888;</div>
+    <div class="callout-body">
+      <div class="callout-title">Same streamline only</div>
+      <div class="callout-text">The constant is only guaranteed equal between two points if they lie on the <strong>same streamline</strong>. (It happens to be the same constant everywhere for irrotational flow, but that is a special case &mdash; do not assume it.)</div>
+    </div>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Three ways to read the equation</h2>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">As energy per unit mass</div>
+    <p>Bernoulli&rsquo;s equation says the sum of three energies of a fluid particle is constant along a streamline during steady flow. Each term is an energy <strong>per unit mass</strong> (J/kg = m&sup2;/s&sup2;):</p>
+    <ul>
+      <li>\( P/\rho \) &mdash; <strong>flow energy</strong> (the work done by pressure to push the fluid along)</li>
+      <li>\( V^2/2 \) &mdash; <strong>kinetic energy</strong></li>
+      <li>\( gz \) &mdash; <strong>potential energy</strong></li>
+    </ul>
+  </div>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">As heads (height)</div>
+    <p>Divide every term by g. Now each term has units of <strong>length</strong>, because energy per unit weight is \( [\text{N}\!\cdot\!\text{m}/\text{N}] = [\text{m}] \). These heights are called <strong>heads</strong>:</p>
+    \[ \frac{P}{\rho g} + \frac{V^2}{2g} + z = H = \text{constant} \]
+    <div class="var-row">
+      <span class="pill">P/&rho;g — pressure head (m)</span>
+      <span class="pill">V&sup2;/2g — velocity head (m)</span>
+      <span class="pill">z — elevation head (m)</span>
+      <span class="pill">H — total head (m)</span>
+    </div>
+    <ul>
+      <li><strong>Pressure head</strong> \(P/\rho g\): the height of a fluid column that would produce the static pressure P.</li>
+      <li><strong>Velocity head</strong> \(V^2/2g\): the height a fluid would need to fall (frictionless) to reach speed V.</li>
+      <li><strong>Elevation head</strong> \(z\): the actual height above the datum &mdash; potential energy.</li>
+    </ul>
+  </div>
+
+  <div class="card-bracket eq-card">
+    <div class="card-title">Bernoulli&rsquo;s Equation (head form)</div>
+    \[ \frac{P_1}{\rho g} + \frac{V_1^2}{2g} + z_1 = \frac{P_2}{\rho g} + \frac{V_2^2}{2g} + z_2 = H \]
+    <p>This is the form to reach for when a problem is described in terms of column heights, water levels, or manometer readings. Note \( \rho g = \gamma \), the specific weight from Ch 1.</p>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Energy Grade Line (EGL) &amp; Hydraulic Grade Line (HGL)</h2>
+
+  <p>The head form has a useful graphical picture. Plot the total head and the pressure-plus-elevation head against position along the pipe:</p>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 560 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Energy grade line and hydraulic grade line above a rising pipe">
+      <!-- datum -->
+      <line x1="34" y1="330" x2="540" y2="330" stroke="var(--muted)" stroke-width="1.4" stroke-dasharray="5 4"/>
+      <text x="426" y="348" font-size="12" fill="var(--muted)" font-style="italic">arbitrary datum (z = 0)</text>
+      <!-- pipe (rising), two walls -->
+      <line x1="92" y1="262" x2="470" y2="222" stroke="var(--deriv)" stroke-width="2"/>
+      <line x1="92" y1="238" x2="470" y2="198" stroke="var(--deriv)" stroke-width="2"/>
+      <text x="250" y="234" font-size="12" fill="var(--def)">Flow &rarr;</text>
+      <!-- EGL (total head, constant => horizontal) -->
+      <line x1="92" y1="112" x2="470" y2="112" stroke="var(--tip)" stroke-width="2.4"/>
+      <text x="300" y="104" font-size="13" fill="var(--tip)" font-weight="600">EGL &mdash; total head H</text>
+      <!-- HGL (pressure+elevation head; V const => parallel, lower) -->
+      <line x1="92" y1="152" x2="470" y2="152" stroke="var(--def)" stroke-width="2.2"/>
+      <text x="104" y="170" font-size="13" fill="var(--def)" font-weight="600">HGL</text>
+      <!-- Station 1 at x=150 -->
+      <line x1="150" y1="250" x2="150" y2="112" stroke="var(--muted)" stroke-width="1" stroke-dasharray="3 3"/>
+      <circle cx="150" cy="250" r="3" fill="var(--eq)"/>
+      <text x="138" y="266" font-size="12" fill="var(--text)">1</text>
+      <text x="84" y="138" font-size="12" fill="var(--tip)">V&sup2;/2g</text>
+      <text x="92" y="206" font-size="12" fill="var(--def)">P&#8321;/&rho;g</text>
+      <text x="120" y="300" font-size="12" fill="var(--muted)">z&#8321;</text>
+      <!-- Station 2 at x=410 -->
+      <line x1="410" y1="210" x2="410" y2="112" stroke="var(--muted)" stroke-width="1" stroke-dasharray="3 3"/>
+      <circle cx="410" cy="210" r="3" fill="var(--eq)"/>
+      <text x="416" y="226" font-size="12" fill="var(--text)">2</text>
+      <text x="416" y="138" font-size="12" fill="var(--tip)">V&sup2;/2g</text>
+      <text x="416" y="184" font-size="12" fill="var(--def)">P&#8322;/&rho;g</text>
+      <text x="416" y="290" font-size="12" fill="var(--muted)">z&#8322;</text>
+    </svg>
+    <div class="figure-caption">EGL shows the height corresponding to <em>all</em> heads (total head H). HGL shows only the elevation + pressure heads &mdash; it sits one velocity head below the EGL. For ideal (loss-free) flow the EGL is horizontal. Here the pipe rises at constant diameter, so elevation head grows, pressure head shrinks, and the velocity head stays the same.</div>
+  </div>
+
+  <div class="callout callout-tip">
+    <div class="callout-icon">&#9733;</div>
+    <div class="callout-body">
+      <div class="callout-title">★ Reading the lines</div>
+      <div class="callout-text">EGL &minus; HGL = velocity head \(V^2/2g\). If the diameter is constant, V is constant, so the two lines are parallel. Where the pipe narrows, V rises, the gap widens, and the HGL dips. The EGL only drops if there are friction losses (Ch 6).</div>
+    </div>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Worked Example 1 &mdash; pressure between two points</h2>
+
+  <div class="card-bracket ex-card">
+    <div class="card-title">Example 1 &mdash; estimate the pressure at Point 2</div>
+    <p>Water at 20&deg;C flows along the streamlines shown. At <strong>Point 1</strong> the gauge pressure, velocity, and elevation are 15.0 kPa, 1.0 m/s, and 5.02 m. At <strong>Point 2</strong> the velocity and elevation are 0.5 m/s and 5.21 m. Estimate the pressure at Point 2.</p>
+
+    <div class="figure-box">
+      <svg viewBox="0 0 420 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two points on diverging streamlines">
+        <path d="M 40 200 Q 200 150 380 70" fill="none" stroke="var(--def)" stroke-width="1.8"/>
+        <polygon points="380,70 371,77 377,80" fill="var(--def)"/>
+        <path d="M 40 165 Q 200 120 380 45" fill="none" stroke="var(--def)" stroke-width="1.8"/>
+        <polygon points="380,45 371,52 377,55" fill="var(--def)"/>
+        <path d="M 40 120 Q 200 95 380 28" fill="none" stroke="var(--def)" stroke-width="1.4" opacity=".5"/>
+        <circle cx="150" cy="146" r="4" fill="var(--eq)"/>
+        <text x="138" y="166" font-size="13" fill="var(--text)">1</text>
+        <circle cx="300" cy="92" r="4" fill="var(--eq)"/>
+        <text x="306" y="88" font-size="13" fill="var(--text)">2</text>
+        <text x="70" y="118" font-size="12" fill="var(--def)">streamlines</text>
+      </svg>
+      <div class="figure-caption">Points 1 and 2 lie on the same streamline; the flow rises slightly and slows down from 1 to 2.</div>
+    </div>
+
+    <div class="thought-block">
+      <div class="thought-header">&#129504; Thought process</div>
+      <div class="thought-body">
+        <p>Two points on one streamline, asking for a pressure given the other point&rsquo;s state &mdash; this is the textbook Bernoulli setup. Water is incompressible and the rise is small with no pump/turbine between the points, so Bernoulli applies directly.</p>
+        <p>Approach: write Bernoulli in head form, solve for \(P_2\). I expect \(P_2\) to be a little <em>lower</em> than \(P_1\): the fluid rose (costs elevation head) but slowed down (returns a little velocity head), and the elevation change dominates here.</p>
+      </div>
+    </div>
+
+    <div class="collapse-toggle"><span class="arrow">&#9656;</span> Show full solution</div>
+    <div class="collapse-body">
+      <p><strong>Given:</strong> \(P_1 = 15.0\) kPa, \(V_1 = 1.0\) m/s, \(z_1 = 5.02\) m; \(V_2 = 0.5\) m/s, \(z_2 = 5.21\) m. Water at 20&deg;C: \(\rho = 998.2\) kg/m&sup3;.</p>
+
+      <div class="formulas-needed">
+        <h4>&#128203; Formulas Needed</h4>
+        <ol>
+          <li><strong>Specific weight</strong> &mdash; \(\gamma = \rho g\) <a href="#formulas">&rarr; sheet #2</a></li>
+          <li><strong>Bernoulli (head form)</strong> &mdash; \(\frac{P_1}{\gamma} + \frac{V_1^2}{2g} + z_1 = \frac{P_2}{\gamma} + \frac{V_2^2}{2g} + z_2\) <a href="#formulas">&rarr; sheet #15</a></li>
+        </ol>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(42,107,124,.18);color:var(--def);">1</div>
+        <div class="step-body">
+          <div class="step-title">Specific weight of water</div>
+          <div class="step-work">\[ \gamma = \rho g = (998.2)(9.807) = 9789\ \text{N/m}^3 = 9.789\ \text{kN/m}^3 \]</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(255,107,53,.18);color:var(--eq);">2</div>
+        <div class="step-body">
+          <div class="step-title">Write Bernoulli and isolate P&#8322;</div>
+          <div class="step-work">
+            \[ \frac{15.0}{9.789} + \frac{(1.0)^2}{2(9.807)} + 5.02 = \frac{P_2}{9.789} + \frac{(0.5)^2}{2(9.807)} + 5.21 \]
+            <p>Left side: \(1.5323 + 0.0510 + 5.02 = 6.6033\) m. Right-side known terms: \(0.0127 + 5.21 = 5.2227\) m.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(255,107,53,.18);color:var(--eq);">3</div>
+        <div class="step-body">
+          <div class="step-title">Solve for the pressure head, then P&#8322;</div>
+          <div class="step-work">
+            \[ \frac{P_2}{9.789} = 6.6033 - 5.2227 = 1.3806\ \text{m} \]
+            \[ P_2 = (1.3806)(9.789) = 13.5\ \text{kPa} \]
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(244,162,97,.22);color:var(--example);">&#10003;</div>
+        <div class="step-body">
+          <div class="step-title">Answer</div>
+          <div class="step-work"><strong>\(P_2 \approx 13.5\) kPa (gauge).</strong> As predicted, slightly below \(P_1\): the 0.19 m rise costs more head than the modest slow-down returns.</div>
+        </div>
+      </div>
+
+      <div class="callout callout-tip">
+        <div class="callout-icon">&#9733;</div>
+        <div class="callout-body">
+          <div class="callout-title">★ Tips</div>
+          <div class="callout-text">Keep pressures in kPa and divide by &gamma; in kN/m&sup3; so the units cancel to metres. Both pressures are gauge here &mdash; that is fine because Bernoulli only ever cares about pressure <em>differences</em>, so a common reference cancels.</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--muted);"><strong>Concept bridge:</strong> used specific weight (sheet #2) and Bernoulli head form (sheet #15).</p>
+    </div>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">When Bernoulli is &mdash; and is not &mdash; allowed</h2>
+
+  <p>Every term we dropped during the derivation is an assumption. Use Bernoulli only when all of these hold:</p>
+
+  <div class="card-bracket tip-card">
+    <div class="card-title">★ Limitations &mdash; the six conditions</div>
+    <ul>
+      <li><strong>Steady flow</strong> &mdash; properties at a point do not change with time.</li>
+      <li><strong>Frictionless (inviscid) flow</strong> &mdash; we never included a viscous shear term.</li>
+      <li><strong>No shaft work</strong> &mdash; no pump, turbine, fan, or impeller between the two points (those add or remove energy).</li>
+      <li><strong>Incompressible</strong> &mdash; &rho; was taken constant to do the integral. Liquids always; gases only at low speed.</li>
+      <li><strong>No heat transfer</strong> &mdash; no significant heating or temperature change.</li>
+      <li><strong>Along a single streamline</strong> &mdash; the derivation followed one particle.</li>
+    </ul>
+  </div>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 540 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Examples where Bernoulli is invalid">
+      <!-- sudden expansion -->
+      <rect x="20" y="60" width="40" height="20" fill="none" stroke="var(--eq)" stroke-width="1.6"/>
+      <rect x="60" y="44" width="56" height="52" fill="none" stroke="var(--eq)" stroke-width="1.6"/>
+      <path d="M 66 54 q 14 6 0 12 M 66 86 q 14 -6 0 -12" fill="none" stroke="var(--def)" stroke-width="1.2"/>
+      <text x="20" y="118" font-size="11" fill="var(--text)">sudden expansion</text>
+      <!-- valve -->
+      <line x1="170" y1="70" x2="250" y2="70" stroke="var(--eq)" stroke-width="1.6"/>
+      <polygon points="200,70 196,56 204,56" fill="var(--example)"/>
+      <polygon points="200,70 196,84 204,84" fill="var(--example)"/>
+      <text x="196" y="118" font-size="11" fill="var(--text)">valve</text>
+      <!-- fan -->
+      <line x1="300" y1="50" x2="300" y2="92" stroke="var(--example)" stroke-width="2"/>
+      <ellipse cx="300" cy="71" rx="6" ry="20" fill="rgba(244,162,97,.3)" stroke="var(--example)" stroke-width="1.4"/>
+      <text x="286" y="118" font-size="11" fill="var(--text)">fan/pump</text>
+      <!-- heating -->
+      <rect x="380" y="52" width="120" height="40" fill="none" stroke="var(--eq)" stroke-width="1.6"/>
+      <path d="M 410 72 l 8 -8 l 8 16 l 8 -16 l 8 16 l 8 -8" fill="none" stroke="#C0392B" stroke-width="1.6"/>
+      <text x="402" y="118" font-size="11" fill="var(--text)">heating section</text>
+    </svg>
+    <div class="figure-caption">Friction, heat transfer, and components that disturb the streamlined structure of the flow all break Bernoulli. Near solid walls (boundary layers) and downstream of bodies (wakes) friction always matters &mdash; Bernoulli is reliable only <em>outside</em> those regions.</div>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Static, dynamic, and stagnation pressure</h2>
+
+  <p>Multiply the speed term back up so every term is a pressure: \( P + \tfrac{1}{2}\rho V^2 + \rho g z = \text{constant} \). At a fixed elevation the three pressure ideas are:</p>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">The three pressures</div>
+    <ul>
+      <li><strong>Static pressure</strong> \(P\) &mdash; the actual thermodynamic pressure (normal stress) in the moving fluid.</li>
+      <li><strong>Dynamic pressure</strong> \(\tfrac{1}{2}\rho V^2\) &mdash; the pressure associated with the fluid&rsquo;s motion.</li>
+      <li><strong>Stagnation pressure</strong> \(P_0\) &mdash; the static pressure at a point where the flow has been brought completely to rest (\(V=0\)).</li>
+    </ul>
+    <p>At the same elevation, setting \(V_2 = 0\) at the stagnation point gives</p>
+    \[ P_0 = P + \tfrac{1}{2}\rho V^2 \]
+    <p>so <strong>stagnation pressure = static pressure + dynamic pressure</strong>. This is the key to flow-rate measurement in Lecture 3.2.</p>
+    <div class="var-row">
+      <span class="pill">P&#8320; — stagnation pressure (Pa)</span>
+      <span class="pill">P — static pressure (Pa)</span>
+      <span class="pill">&frac12;&rho;V&sup2; — dynamic pressure (Pa)</span>
+    </div>
+  </div>
+
+  <div class="figure-box">
+    <svg viewBox="0 0 420 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stagnation point at the leading edge of an airfoil">
+      <!-- airfoil -->
+      <path d="M 130 90 C 170 60, 320 64, 380 88 C 320 100, 200 104, 130 90 Z" fill="rgba(9,60,93,.12)" stroke="var(--deriv)" stroke-width="1.8"/>
+      <!-- oncoming streamlines -->
+      <line x1="20" y1="60" x2="120" y2="74" stroke="var(--def)" stroke-width="1.4"/><polygon points="120,74 111,72 113,79" fill="var(--def)"/>
+      <line x1="20" y1="90" x2="118" y2="90" stroke="var(--def)" stroke-width="1.4"/><polygon points="124,90 113,86 113,94" fill="var(--def)"/>
+      <line x1="20" y1="120" x2="120" y2="106" stroke="var(--def)" stroke-width="1.4"/><polygon points="120,106 113,109 111,102" fill="var(--def)"/>
+      <!-- stagnation point -->
+      <circle cx="130" cy="90" r="4.5" fill="var(--eq)"/>
+      <line x1="84" y1="36" x2="126" y2="84" stroke="var(--eq)" stroke-width="1.2"/>
+      <text x="40" y="30" font-size="12" fill="var(--eq)">leading-edge stagnation point (V = 0)</text>
+    </svg>
+    <div class="figure-caption">At the leading edge of an airfoil the oncoming flow is brought to rest &mdash; the pressure there is the stagnation pressure \(P_0\).</div>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Simplifying assumptions for tanks &amp; reservoirs</h2>
+
+  <div class="card-bracket tip-card">
+    <div class="card-title">★ Two cancellations that make problems easy</div>
+    <ul>
+      <li>A point <strong>exposed to the atmosphere</strong> has gauge pressure \(P = 0\), so its \(P/\rho g\) term drops out.</li>
+      <li>The <strong>free surface of a large tank/reservoir</strong> falls so slowly that \(V \approx 0\), so its velocity head drops out.</li>
+    </ul>
+  </div>
+
+  <h2 style="color:var(--ch3-title);">Worked Example 2 &mdash; draining tank (Torricelli)</h2>
+
+  <div class="card-bracket ex-card">
+    <div class="card-title">Example 2 &mdash; maximum outlet velocity</div>
+    <p>A large tank open to the atmosphere is filled with water to a height of 5 m above a smooth, rounded outlet tap near the bottom. The tap is opened. Determine the maximum velocity of the water at the outlet.</p>
+
+    <div class="figure-box">
+      <svg viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Open tank draining through a bottom outlet">
+        <!-- tank -->
+        <rect x="70" y="40" width="160" height="170" fill="rgba(42,107,124,.12)" stroke="var(--deriv)" stroke-width="2"/>
+        <line x1="70" y1="58" x2="230" y2="58" stroke="var(--def)" stroke-width="1.2"/>
+        <text x="150" y="120" font-size="12" fill="var(--def)" text-anchor="middle">water</text>
+        <!-- point 1 free surface -->
+        <circle cx="150" cy="58" r="3.5" fill="var(--eq)"/>
+        <text x="156" y="54" font-size="11" fill="var(--text)">1 (free surface, V&#8321;&asymp;0)</text>
+        <!-- height bracket -->
+        <line x1="50" y1="58" x2="50" y2="200" stroke="var(--muted)" stroke-width="1.2"/>
+        <line x1="46" y1="58" x2="54" y2="58" stroke="var(--muted)" stroke-width="1.2"/>
+        <line x1="46" y1="200" x2="54" y2="200" stroke="var(--muted)" stroke-width="1.2"/>
+        <text x="20" y="132" font-size="13" fill="var(--text)">5 m</text>
+        <!-- outlet point 2 -->
+        <rect x="230" y="190" width="20" height="16" fill="none" stroke="var(--deriv)" stroke-width="1.6"/>
+        <line x1="250" y1="198" x2="300" y2="198" stroke="var(--def)" stroke-width="2"/>
+        <polygon points="306,198 295,194 295,202" fill="var(--def)"/>
+        <circle cx="240" cy="198" r="3.5" fill="var(--eq)"/>
+        <text x="244" y="224" font-size="11" fill="var(--text)">2 (outlet, z&#8322;=0)</text>
+        <text x="280" y="188" font-size="13" fill="var(--def)" font-style="italic">V&#8322;</text>
+      </svg>
+      <div class="figure-caption">Point 1 at the free surface; Point 2 at the outlet. Both are exposed to atmosphere, so both pressures cancel.</div>
+    </div>
+
+    <div class="thought-block">
+      <div class="thought-header">&#129504; Thought process</div>
+      <div class="thought-body">
+        <p>&ldquo;Maximum&rdquo; velocity signals the ideal, frictionless case &mdash; exactly Bernoulli. Choose Point 1 at the surface and Point 2 at the outlet, on one streamline.</p>
+        <p>Both points touch the atmosphere, so \(P_1 = P_2 = P_{atm}\) and the pressure terms cancel. The surface barely moves (\(V_1\approx 0\)). Put the datum at the outlet (\(z_2 = 0\)). Almost everything drops out, leaving elevation head = velocity head.</p>
+      </div>
+    </div>
+
+    <div class="collapse-toggle"><span class="arrow">&#9656;</span> Show full solution</div>
+    <div class="collapse-body">
+      <p><strong>Assumptions:</strong> incompressible flow; the tank drains slowly enough to be quasi-steady; irreversible losses in the smooth, rounded tap are neglected.</p>
+      <p><strong>Point 1</strong> (free surface): \(P_1 = P_{atm}\), \(V_1 = 0\), \(z_1 = 5\) m. <strong>Point 2</strong> (outlet): \(P_2 = P_{atm}\), \(z_2 = 0\).</p>
+
+      <div class="formulas-needed">
+        <h4>&#128203; Formulas Needed</h4>
+        <ol>
+          <li><strong>Bernoulli (head form)</strong> &mdash; \(\frac{P_1}{\gamma}+\frac{V_1^2}{2g}+z_1=\frac{P_2}{\gamma}+\frac{V_2^2}{2g}+z_2\) <a href="#formulas">&rarr; sheet #15</a></li>
+        </ol>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(42,107,124,.18);color:var(--def);">1</div>
+        <div class="step-body">
+          <div class="step-title">Cancel the dropped terms</div>
+          <div class="step-work">
+            <p>\(P_1=P_2\) cancel; \(V_1=0\); \(z_2=0\). Bernoulli collapses to</p>
+            \[ z_1 = \frac{V_2^2}{2g} \]
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(255,107,53,.18);color:var(--eq);">2</div>
+        <div class="step-body">
+          <div class="step-title">Solve for the outlet velocity</div>
+          <div class="step-work">
+            \[ V_2 = \sqrt{2 g z_1} = \sqrt{2(9.81)(5)} \]
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num" style="background:rgba(244,162,97,.22);color:var(--example);">&#10003;</div>
+        <div class="step-body">
+          <div class="step-title">Answer</div>
+          <div class="step-work"><strong>\(V_2 = 9.9\) m/s.</strong> This is <strong>Torricelli&rsquo;s result</strong>: the jet leaves as fast as if the water had free-fallen the full 5 m.</div>
+        </div>
+      </div>
+
+      <div class="callout callout-warning">
+        <div class="callout-icon">&#9888;</div>
+        <div class="callout-body">
+          <div class="callout-title">Common trap</div>
+          <div class="callout-text">The result is independent of fluid density and of the tank&rsquo;s cross-section &mdash; only the height matters. It is the <em>maximum</em> velocity because friction in a real tap would make the actual value a little lower.</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--muted);"><strong>Concept bridge:</strong> used Bernoulli head form (sheet #15) with three terms cancelled.</p>
+    </div>
+  </div>
+
+  <div class="callout callout-exam">
+    <div class="callout-icon">&#9873;</div>
+    <div class="callout-body">
+      <div class="callout-title">Lecture 3.1 in one line</div>
+      <div class="callout-text">Bernoulli = Newton&rsquo;s 2nd law integrated along a streamline for steady, frictionless, incompressible flow with no shaft work or heat transfer: \( \frac{P}{\rho}+\frac{V^2}{2}+gz \) is constant. Read it as energy, as heads (EGL/HGL), or as pressures (static + dynamic = stagnation). Lecture 3.2 turns the stagnation idea into flow-measurement devices.</div>
+    </div>
+  </div>
+</section>

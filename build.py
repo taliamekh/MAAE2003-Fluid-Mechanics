@@ -8,7 +8,7 @@ OUT = os.path.join(REPO, "MAAE2300-notes.html")
 CHAPTER_ORDER = [
     "ch1-lec1", "ch1-lec2", "ch1-lec3", "ch1-lec4", "ch1-prob",
     "ch2-lec1", "ch2-lec2", "ch2-lec3", "ch2-prob",
-    "ch3-notes", "ch3-prob",
+    "ch3-lec1", "ch3-lec2", "ch3-prob",
     "ch4-notes", "ch4-prob",
     "ch5-notes", "ch5-prob",
     "ch6-notes", "ch6-prob",
