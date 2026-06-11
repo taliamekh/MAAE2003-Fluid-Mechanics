@@ -583,6 +583,57 @@ p.concept-bridge { font-size: 13px !important; color: var(--muted) !important; }
 .fs-legend { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 14px; font-size: 12px; color: var(--muted); }
 .fs-legend span::before { content: ''; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; vertical-align: middle; background: var(--dot); }
 
+/* ── MIDTERM 2 PROVIDED EQUATION SHEET ── */
+#m2sheet .katex .frac-line,
+#m2sheet .katex .sqrt-sign,
+#m2sheet .katex .sqrt-line,
+#m2sheet .katex .overline-line,
+#m2sheet .katex .svg-align,
+#m2sheet .katex .hide-tail,
+#m2sheet .katex .rule { pointer-events: none; }
+#m2-search {
+  width: 100%; padding: 8px 14px; font-size: 13px; font-family: 'Poppins', sans-serif;
+  border: 1px solid var(--border); border-radius: 8px; background: var(--surface);
+  color: var(--text); outline: none;
+}
+#m2-search:focus { border-color: var(--eq); box-shadow: 0 0 0 2px rgba(255,107,53,.12); }
+#m2-results {
+  position: absolute; top: 100%; left: 0; right: 0; z-index: 100;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  list-style: none; padding: 4px 0; margin-top: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.1);
+}
+#m2-results li { padding: 6px 14px; font-size: 13px; cursor: pointer; color: var(--text); }
+#m2-results li:hover { background: rgba(0,0,0,.04); }
+.m2-note {
+  font-size: 13px; line-height: 1.6; color: var(--text);
+  background: rgba(42,107,124,.06); border: 1px solid var(--border);
+  border-left: 3px solid var(--def); border-radius: 8px; padding: 12px 14px; margin: 0 0 18px;
+}
+.m2-note strong { color: var(--def); }
+.m2-note a { color: var(--eq); cursor: pointer; text-decoration: underline; }
+.m2-rowgroup { margin: 18px 0; }
+.m2-rowlabel {
+  font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--muted); margin: 0 0 6px 2px;
+}
+.m2-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+.m2-trio { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; align-items: start; }
+@media (max-width: 680px) { .m2-pair, .m2-trio { grid-template-columns: 1fr; } }
+.m2-pair .fs-card, .m2-trio .fs-card, .m2-single .fs-card { margin: 0; }
+.m2-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.m2-pos {
+  font-size: 11px; font-weight: 700; color: #fff; background: var(--eq);
+  border-radius: 5px; padding: 1px 7px; flex: none;
+}
+.m2-chiptag {
+  font-size: 10.5px; font-weight: 600; border-radius: 5px; padding: 1px 7px;
+  background: rgba(0,0,0,.04); border: 1px solid var(--border);
+}
+.m2-card .fs-name { font-weight: 700; color: var(--text); }
+.m2-usedfor { font-size: 12.5px; line-height: 1.6; color: var(--text); margin: 8px 0 0; }
+.m2-usedfor strong { color: var(--eq); }
+
 /* ── SUMMARY CLUSTERS ── */
 .cluster { margin: 12px 0 16px; }
 .cluster-title {
@@ -738,9 +789,13 @@ p.concept-bridge { font-size: 13px !important; color: var(--muted) !important; }
   <div class="sb-sep"></div>
 
   <!-- Reference Sheet -->
-  <a class="sb-item pending" onclick="showSection('formulas')">
-    <i class="ti ti-variable" style="font-size:14px;margin-right:4px" aria-hidden="true"></i>Equation Sheet
+  <a class="sb-item" onclick="toggleChapter('fs'); showSection('formulas')">
+    <span class="ch-arrow" id="fs-arrow">▸</span><i class="ti ti-variable" style="font-size:14px;margin-right:4px" aria-hidden="true"></i>Equation Sheet
   </a>
+  <div class="sb-subs" id="fs-subs">
+    <a class="sb-sub prob-link" onclick="showSection('formulas')">Full Reference Sheet</a>
+    <a class="sb-sub prob-link" onclick="showSection('m2sheet')">Midterm 2 Sheet (provided)</a>
+  </div>
 
   <div class="sb-sep"></div>
 

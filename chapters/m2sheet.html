@@ -1,0 +1,287 @@
+<section id="m2sheet" class="page-section">
+  <h1 class="page-title" style="color:var(--eq)">Midterm 2 — Provided Equation Sheet</h1>
+  <p class="page-subtitle">An exact replica of the formula sheet handed out on the Midterm 2 exam — numbered top-to-bottom, left-to-right, in the same layout as the page</p>
+
+  <div class="m2-note">
+    This page reproduces the <strong>provided</strong> Midterm 2 equation sheet. Equations keep their position on the physical page (#1 is top-left, numbers run across each row then down). The sheet spans <strong>Ch 1–5</strong>; the examinable core for Midterm 2 is <strong>Ch 3–5</strong> — Ch 1–2 are background you are expected to already know. For the full derivation-by-derivation reference, see the <a onclick="showSection('formulas')">Full Reference Sheet</a>. Click any coloured variable for its meaning.
+  </div>
+
+  <div class="fs-search-wrap">
+    <input type="text" id="m2-search" placeholder="🔍  Jump to equation... (title or #number)" />
+    <ul id="m2-results" hidden></ul>
+  </div>
+
+  <div class="fs-legend">
+    <span><span class="fs-legend-dot" style="background:#D32F2F"></span>Forces / pressures / stress</span>
+    <span><span class="fs-legend-dot" style="background:#1565C0"></span>Velocity / flow / geometry</span>
+    <span><span class="fs-legend-dot" style="background:#2E7D32"></span>Fluid properties</span>
+    <span><span class="fs-legend-dot" style="background:#7B1FA2"></span>Angle</span>
+    <span><span class="fs-legend-dot" style="background:#E65100"></span>Temperature</span>
+    <span><span class="fs-legend-dot" style="background:#00838F"></span>System quantities / moments</span>
+  </div>
+
+  <!-- ROW 1 -->
+  <div class="m2-rowgroup">
+    <div class="m2-rowlabel">Row 1</div>
+    <div class="m2-pair">
+
+      <div class="fs-card m2-card" data-num="1" data-ch="1" data-name="Pressure" data-vars='{"#D32F2F|p":"p — pressure: normal force per unit area (Pa)","#D32F2F|F":"F — normal force acting on the surface (N)","#1565C0|A":"A — area the force acts over (m²)"}'>
+        <div class="fs-top m2-meta"><span class="m2-pos">#1</span><span class="m2-chiptag" style="color:var(--ch1-title)">Ch 1</span><span class="fs-name">Pressure</span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{p} = \frac{\textcolor{#D32F2F}{F}}{\textcolor{#1565C0}{A}} \]</div>
+          <p class="m2-usedfor"><strong>Used for:</strong> converting between a normal force and the pressure it produces on a surface. Foundation for all hydrostatics.</p>
+        </div>
+      </div>
+
+      <div class="fs-card m2-card" data-num="2" data-ch="1" data-name="Shear Stress" data-vars='{"#D32F2F|τ":"τ — shear stress: tangential force per unit area (Pa)","#D32F2F|F":"F — force acting parallel to the surface (N)","#1565C0|A":"A — area the force acts over (m²)"}'>
+        <div class="fs-top m2-meta"><span class="m2-pos">#2</span><span class="m2-chiptag" style="color:var(--ch1-title)">Ch 1</span><span class="fs-name">Shear Stress</span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{\tau} = \frac{\textcolor{#D32F2F}{F}}{\textcolor{#1565C0}{A}} \]</div>
+          <p class="m2-usedfor"><strong>Used for:</strong> the tangential (frictional) force a fluid exerts parallel to a surface. Pairs with Newton's law of viscosity (#7).</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ROW 2 -->
+  <div class="m2-rowgroup">
+    <div class="m2-rowlabel">Row 2</div>
+    <div class="m2-pair">
+
+      <div class="fs-card m2-card" data-num="3" data-ch="1" data-name="Specific Gravity (water reference)" data-vars='{"#2E7D32|SG":"SG — specific gravity, dimensionless","#2E7D32|ρ":"ρ — density of the fluid (kg/m³)","#1565C0|ρ":"ρ_w — density of water at 4°C = 1000 kg/m³"}'>
+        <div class="fs-top m2-meta"><span class="m2-pos">#3</span><span class="m2-chiptag" style="color:var(--ch1-title)">Ch 1</span><span class="fs-name">Specific Gravity (vs water)</span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#2E7D32}{SG} = \frac{\textcolor{#2E7D32}{\rho}}{\textcolor{#1565C0}{\rho_w}} \]</div>
+          <p class="m2-usedfor"><strong>Used for:</strong> density of a liquid relative to water. Recover density with ρ = SG × 1000. SG &gt; 1 sinks in water.</p>
+        </div>
+      </div>
+
+      <div class="fs-card m2-card" data-num="4" data-ch="1" data-name="Specific Gravity (air reference)" data-vars='{"#2E7D32|SG":"SG — specific gravity, dimensionless","#2E7D32|ρ":"ρ — density of the gas (kg/m³)","#1565C0|ρ":"ρ_a — density of air ≈ 1.20 kg/m³"}'>
+        <div class="fs-top m2-meta"><span class="m2-pos">#4</span><span class="m2-chiptag" style="color:var(--ch1-title)">Ch 1</span><span class="fs-name">Specific Gravity (vs air)</span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#2E7D32}{SG} = \frac{\textcolor{#2E7D32}{\rho}}{\textcolor{#1565C0}{\rho_a}} \]</div>
+          <p class="m2-usedfor"><strong>Used for:</strong> density of a gas relative to air. Recover gas density with ρ = SG × ρ_a.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ROW 3 -->
+  <div class="m2-rowgroup">
+    <div class="m2-rowlabel">Row 3</div>
+    <div class="m2-pair">
+
+      <div class="fs-card m2-card" data-num="5" data-ch="1" data-name="Kelvin Conversion" data-vars='{"#E65100|K":"K — absolute temperature in Kelvin","#E65100|C":"°C — temperature in degrees Celsius"}'>
+        <div class="fs-top m2-meta"><span class="m2-pos">#5</span><span class="m2-chiptag" style="color:var(--ch1-title)">Ch 1</span><span class="fs-name">Kelvin Conversion</span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#E65100}{K} = \textcolor{#E65100}{\text{°C}} + 273.16 \]</div>
+          <p class="m2-usedfor"><strong>Used for:</strong> converting Celsius to absolute temperature. Required before the ideal gas law or any ratio of temperatures.</p>
+        </div>
+      </div>
+
+      <div class="fs-card m2-card" data-num="6" data-ch="1" data-name="Rankine Conversion" data-vars='{"#E65100|R":"°R — absolute temperature in Rankine","#E65100|F":"°F — temperature in degrees Fahrenheit"}'>
+        <div class="fs-top m2-meta"><span class="m2-pos">#6</span><span class="m2-chiptag" style="color:var(--ch1-title)">Ch 1</span><span class="fs-name">Rankine Conversion</span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#E65100}{\text{°R}} = \textcolor{#E65100}{\text{°F}} + 459.69 \]</div>
+          <p class="m2-usedfor"><strong>Used for:</strong> absolute temperature in Imperial (BG) units — same role as Kelvin for gas relations.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ROW 4 -->
+  <div class="m2-rowgroup">
+    <div class="m2-rowlabel">Row 4</div>
+    <div class="m2-pair">
+
+      <div class="fs-card m2-card" data-num="7" data-ch="1" data-name="Newton's Law of Viscosity" data-vars='{"#D32F2F|τ":"τ — shear stress (Pa)","#2E7D32|μ":"μ — dynamic (absolute) viscosity (Pa·s)","#7B1FA2|θ":"θ — angular deformation of the fluid element (rad)","#1565C0|u":"u — fluid velocity parallel to the surface (m/s)","#1565C0|y":"y — distance measured normal to the surface (m)"}'>
+        <div class="fs-top m2-meta"><span class="m2-pos">#7</span><span class="m2-chiptag" style="color:var(--ch1-title)">Ch 1</span><span class="fs-name">Newton's Law of Viscosity</span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{\tau} = \textcolor{#2E7D32}{\mu}\,\frac{d\textcolor{#7B1FA2}{\theta}}{dt} = \textcolor{#2E7D32}{\mu}\,\frac{d\textcolor{#1565C0}{u}}{d\textcolor{#1565C0}{y}} \]</div>
+          <p class="m2-usedfor"><strong>Used for:</strong> relating shear stress to the velocity gradient (rate of angular deformation). Gives wall shear, viscous drag, and the velocity profile in a Newtonian fluid.</p>
+        </div>
+      </div>
+
+      <div class="fs-card m2-card" data-num="8" data-ch="1" data-name="Ideal Gas Law" data-vars='{"#D32F2F|p":"p — absolute pressure (Pa)","#2E7D32|ρ":"ρ — gas density (kg/m³)","#2E7D32|R":"R — specific gas constant (J/kg·K; air = 287)","#E65100|T":"T — absolute temperature (K)"}'>
+        <div class="fs-top m2-meta"><span class="m2-pos">#8</span><span class="m2-chiptag" style="color:var(--ch1-title)">Ch 1</span><span class="fs-name">Ideal Gas Law</span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{p} = \textcolor{#2E7D32}{\rho}\,\textcolor{#2E7D32}{R}\,\textcolor{#E65100}{T} \]</div>
+          <p class="m2-usedfor"><strong>Used for:</strong> finding gas density from pressure and temperature (compressible flow, buoyancy of gases). T must be absolute.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ROW 5 -->
+  <div class="m2-rowgroup">
+    <div class="m2-rowlabel">Row 5</div>
+    <div class="m2-trio">
+
+      <div class="fs-card m2-card" data-num="9" data-ch="1" data-name="Kinematic Viscosity" data-vars='{"#2E7D32|ν":"ν — kinematic viscosity (m²/s); printed as a script v on the sheet","#2E7D32|μ":"μ — dynamic viscosity (Pa·s)","#2E7D32|ρ":"ρ — density (kg/m³)"}'>
+        <div class="fs-top m2-meta"><span class="m2-pos">#9</span><span class="m2-chiptag" style="color:var(--ch1-title)">Ch 1</span><span class="fs-name">Kinematic Viscosity</span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#2E7D32}{\nu} = \frac{\textcolor{#2E7D32}{\mu}}{\textcolor{#2E7D32}{\rho}} \]</div>
+          <p class="m2-usedfor"><strong>Used for:</strong> momentum diffusivity. Appears in the Reynolds number. The sheet's script "v" is ν (nu), not velocity.</p>
+        </div>
+      </div>
+
+      <div class="fs-card m2-card" data-num="10" data-ch="1" data-name="Specific Weight" data-vars='{"#2E7D32|γ":"γ — specific weight (N/m³)","#2E7D32|ρ":"ρ — density (kg/m³)","#2E7D32|g":"g — gravitational acceleration (9.81 m/s²)"}'>
+        <div class="fs-top m2-meta"><span class="m2-pos">#10</span><span class="m2-chiptag" style="color:var(--ch1-title)">Ch 1</span><span class="fs-name">Specific Weight</span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#2E7D32}{\gamma} = \textcolor{#2E7D32}{\rho}\,\textcolor{#2E7D32}{g} \]</div>
+          <p class="m2-usedfor"><strong>Used for:</strong> weight per unit volume. Feeds directly into hydrostatic pressure, manometers, and hydrostatic force. γ_water = 9810 N/m³.</p>
+        </div>
+      </div>
+
+      <div class="fs-card m2-card" data-num="11" data-ch="1" data-name="Hydrostatic Pressure" data-vars='{"#D32F2F|P":"P — gauge pressure at depth h (Pa)","#2E7D32|γ":"γ — specific weight of the fluid (N/m³)","#1565C0|h":"h — vertical depth below the free surface (m)"}'>
+        <div class="fs-top m2-meta"><span class="m2-pos">#11</span><span class="m2-chiptag" style="color:var(--ch1-title)">Ch 1</span><span class="fs-name">Hydrostatic Pressure</span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{P} = \textcolor{#2E7D32}{\gamma}\,\textcolor{#1565C0}{h} \]</div>
+          <p class="m2-usedfor"><strong>Used for:</strong> gauge pressure increasing linearly with depth in a static fluid. Use to find pressure at a depth or set up manometer/force problems.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ROW 6 -->
+  <div class="m2-rowgroup">
+    <div class="m2-rowlabel">Row 6</div>
+    <div class="m2-single">
+
+      <div class="fs-card m2-card" data-num="12" data-ch="1" data-name="Manometer Equation" data-vars='{"#D32F2F|p":"p₁, p₂ — pressures at the two ends of the manometer path (Pa)","#2E7D32|γ":"γᵢ — specific weight of each fluid column (N/m³)","#1565C0|h":"hᵢ — vertical height of each fluid column (m)"}'>
+        <div class="fs-top m2-meta"><span class="m2-pos">#12</span><span class="m2-chiptag" style="color:var(--ch1-title)">Ch 1</span><span class="fs-name">Manometer Equation</span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{p_2} = \textcolor{#D32F2F}{p_1} + \sum_{\text{down}} \textcolor{#2E7D32}{\gamma_i}\,\textcolor{#1565C0}{h_i} - \sum_{\text{up}} \textcolor{#2E7D32}{\gamma_i}\,\textcolor{#1565C0}{h_i} \]</div>
+          <p class="m2-usedfor"><strong>Used for:</strong> stepping through connected fluid columns — <strong>add</strong> γh when moving down, <strong>subtract</strong> γh when moving up. Relates pressures across single- or multi-fluid manometers.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ROW 7 -->
+  <div class="m2-rowgroup">
+    <div class="m2-rowlabel">Row 7</div>
+    <div class="m2-single">
+
+      <div class="fs-card m2-card" data-num="13" data-ch="2" data-name="Resultant Hydrostatic Force (plane surface)" data-vars='{"#D32F2F|F":"F — resultant hydrostatic force on the plane surface (N)","#D32F2F|pa":"pₐ — pressure acting at the free surface (often atmospheric, Pa)","#D32F2F|pCG":"p_CG — pressure at the centroid of the surface (Pa)","#2E7D32|γ":"γ — specific weight of the fluid (N/m³)","#1565C0|h":"h_CG — vertical depth of the centroid below the surface (m)","#1565C0|A":"A — area of the plane surface (m²)"}'>
+        <div class="fs-top m2-meta"><span class="m2-pos">#13</span><span class="m2-chiptag" style="color:var(--ch2-title)">Ch 2</span><span class="fs-name">Resultant Hydrostatic Force (plane surface)</span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{F} = \left(\textcolor{#D32F2F}{p_a} + \textcolor{#2E7D32}{\gamma}\,\textcolor{#1565C0}{h_{CG}}\right)\textcolor{#1565C0}{A} = \textcolor{#D32F2F}{p_{CG}}\,\textcolor{#1565C0}{A} \]</div>
+          <p class="m2-usedfor"><strong>Used for:</strong> total pressure force on a submerged plane surface = pressure at the centroid × area. Sizes gates, walls, and submerged plates. The line of action sits below the centroid and is found separately (pressure prism / second moment).</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ROW 8 -->
+  <div class="m2-rowgroup">
+    <div class="m2-rowlabel">Row 8</div>
+    <div class="m2-pair">
+
+      <div class="fs-card m2-card" data-num="14" data-ch="4" data-name="Mass Flow Rate" data-vars='{"#D32F2F|m":"ṁ — mass flow rate through the area (kg/s)","#2E7D32|ρ":"ρ — fluid density (kg/m³)","#1565C0|v":"vₙ — velocity component normal to the area element (m/s)","#1565C0|A":"A — cross-sectional area (m²)"}'>
+        <div class="fs-top m2-meta"><span class="m2-pos">#14</span><span class="m2-chiptag" style="color:var(--ch4-title)">Ch 4</span><span class="fs-name">Mass Flow Rate</span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{\dot{m}} = \int_A \textcolor{#2E7D32}{\rho}\,\textcolor{#1565C0}{v_n}\,d\textcolor{#1565C0}{A} \]</div>
+          <p class="m2-usedfor"><strong>Used for:</strong> mass crossing a section per second. Reduces to ṁ = ρAV for uniform flow; the core term in continuity.</p>
+        </div>
+      </div>
+
+      <div class="fs-card m2-card" data-num="15" data-ch="4" data-name="Volume Flow Rate" data-vars='{"#1565C0|Q":"Q — volumetric flow rate / discharge (m³/s)","#1565C0|v":"v — average velocity normal to the area (m/s)","#1565C0|A":"A — cross-sectional area (m²)"}'>
+        <div class="fs-top m2-meta"><span class="m2-pos">#15</span><span class="m2-chiptag" style="color:var(--ch4-title)">Ch 4</span><span class="fs-name">Volume Flow Rate</span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#1565C0}{Q} = \textcolor{#1565C0}{\vec{v}}\,\textcolor{#1565C0}{A} \]</div>
+          <p class="m2-usedfor"><strong>Used for:</strong> discharge through a section. Q = const for incompressible flow (continuity); rearranges to give average velocity.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ROW 9 -->
+  <div class="m2-rowgroup">
+    <div class="m2-rowlabel">Row 9</div>
+    <div class="m2-single">
+
+      <div class="fs-card m2-card" data-num="16" data-ch="3" data-name="Bernoulli Equation (two-point form)" data-vars='{"#D32F2F|p":"p₁, p₂ — static pressure at points 1 and 2 (Pa)","#2E7D32|ρ":"ρ — fluid density, assumed constant (kg/m³)","#1565C0|v":"v₁, v₂ — flow velocity at points 1 and 2 (m/s)","#2E7D32|g":"g — gravitational acceleration (9.81 m/s²)","#1565C0|z":"z₁, z₂ — elevation of points 1 and 2 above a datum (m)"}'>
+        <div class="fs-top m2-meta"><span class="m2-pos">#16</span><span class="m2-chiptag" style="color:var(--ch3-title)">Ch 3</span><span class="fs-name">Bernoulli Equation (two-point form)</span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{p_1} + \tfrac{1}{2}\textcolor{#2E7D32}{\rho}\,\textcolor{#1565C0}{\vec{v}_1}^{\,2} + \textcolor{#2E7D32}{\rho}\,\textcolor{#2E7D32}{g}\,\textcolor{#1565C0}{z_1} = \textcolor{#D32F2F}{p_2} + \tfrac{1}{2}\textcolor{#2E7D32}{\rho}\,\textcolor{#1565C0}{\vec{v}_2}^{\,2} + \textcolor{#2E7D32}{\rho}\,\textcolor{#2E7D32}{g}\,\textcolor{#1565C0}{z_2} \]</div>
+          <p class="m2-usedfor"><strong>Used for:</strong> conservation of mechanical energy along a streamline for <strong>steady, incompressible, inviscid</strong> flow. Relates pressure, velocity, and elevation between two points. Verify the assumptions before applying.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ROW 10 -->
+  <div class="m2-rowgroup">
+    <div class="m2-rowlabel">Row 10</div>
+    <div class="m2-single">
+
+      <div class="fs-card m2-card" data-num="17" data-ch="5" data-name="Reynolds Transport Theorem (general)" data-vars='{"#00838F|B":"B_syst — any extensive property of the system (mass, momentum, energy…)","#00838F|β":"β — the matching intensive property, B per unit mass (β = dB/dm)","#2E7D32|ρ":"ρ — fluid density (kg/m³)","#1565C0|v":"vₙ — velocity normal to the control-surface element (m/s)","#1565C0|A":"A — control-surface area (m²)"}'>
+        <div class="fs-top m2-meta"><span class="m2-pos">#17</span><span class="m2-chiptag" style="color:var(--ch5-title)">Ch 5</span><span class="fs-name">Reynolds Transport Theorem (general)</span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \frac{d\textcolor{#00838F}{B_{syst}}}{dt} = \frac{d}{dt}\int_{CV} \textcolor{#00838F}{\beta}\,\textcolor{#2E7D32}{\rho}\,dV + \int_{CS} \textcolor{#00838F}{\beta}\,\textcolor{#2E7D32}{\rho}\,\textcolor{#1565C0}{v_n}\,d\textcolor{#1565C0}{A} \]</div>
+          <p class="m2-usedfor"><strong>Used for:</strong> the master bridge from a <strong>system</strong> (Lagrangian) to a <strong>control volume</strong> (Eulerian): rate of change = storage inside the CV + net flux through the control surface (CS). dV is a volume element of the CV. Specialise β to derive mass, momentum, and energy balances (#18–#20).</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ROW 11 -->
+  <div class="m2-rowgroup">
+    <div class="m2-rowlabel">Row 11</div>
+    <div class="m2-single">
+
+      <div class="fs-card m2-card" data-num="18" data-ch="5" data-name="Conservation of Mass (Continuity)" data-vars='{"#D32F2F|m":"m — mass of the system (kg); dm/dt = 0 means mass is conserved","#2E7D32|ρ":"ρ — fluid density (kg/m³)","#1565C0|v":"vₙ — velocity normal to the control surface (m/s)","#1565C0|A":"A — control-surface area (m²)"}'>
+        <div class="fs-top m2-meta"><span class="m2-pos">#18</span><span class="m2-chiptag" style="color:var(--ch5-title)">Ch 5</span><span class="fs-name">Conservation of Mass (Continuity)</span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \frac{d\textcolor{#D32F2F}{m}}{dt} = 0 = \frac{d}{dt}\int_{CV} \textcolor{#2E7D32}{\rho}\,dV + \int_{CS} \textcolor{#2E7D32}{\rho}\,\textcolor{#1565C0}{v_n}\,d\textcolor{#1565C0}{A} \]</div>
+          <p class="m2-usedfor"><strong>Used for:</strong> RTT with B = mass (β = 1). Rate of mass storage in the CV plus net mass flux through the CS is zero. For steady flow the storage term drops and ∫ρvₙ dA = 0 (mass in = mass out). Use for filling/emptying tanks and pipe networks.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ROW 12 -->
+  <div class="m2-rowgroup">
+    <div class="m2-rowlabel">Row 12</div>
+    <div class="m2-single">
+
+      <div class="fs-card m2-card" data-num="19" data-ch="5" data-name="Linear Momentum" data-vars='{"#D32F2F|m":"m — mass (kg)","#1565C0|v":"v — velocity: vector v⃗ for the momentum flux, vₙ for the normal component (m/s)","#D32F2F|F":"F — external forces on the control volume; ΣF is their vector sum (N)","#2E7D32|ρ":"ρ — fluid density (kg/m³)","#1565C0|A":"A — control-surface area (m²)"}'>
+        <div class="fs-top m2-meta"><span class="m2-pos">#19</span><span class="m2-chiptag" style="color:var(--ch5-title)">Ch 5</span><span class="fs-name">Linear Momentum</span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \frac{d(\textcolor{#D32F2F}{m}\,\textcolor{#1565C0}{\vec{v}})}{dt} = \sum \textcolor{#D32F2F}{F} = \frac{d}{dt}\int_{CV} \textcolor{#1565C0}{\vec{v}}\,\textcolor{#2E7D32}{\rho}\,dV + \int_{CS} \textcolor{#1565C0}{\vec{v}}\,\textcolor{#2E7D32}{\rho}\,\textcolor{#1565C0}{v_n}\,d\textcolor{#1565C0}{A} \]</div>
+          <p class="m2-usedfor"><strong>Used for:</strong> RTT with B = momentum (β = v⃗). Sum of external forces = momentum storage in the CV + net momentum flux out. Use for forces on bends, nozzles, vanes, and jets. Watch directions — it is a vector equation.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ROW 13 -->
+  <div class="m2-rowgroup">
+    <div class="m2-rowlabel">Row 13</div>
+    <div class="m2-single">
+
+      <div class="fs-card m2-card" data-num="20" data-ch="5" data-name="Angular Momentum" data-vars='{"#1565C0|r":"r — position vector from the moment axis to the fluid element (m)","#D32F2F|m":"m — mass (kg)","#1565C0|v":"v — velocity: vector v⃗ in the momentum term, vₙ for the normal component (m/s)","#00838F|M":"M — external moments (torques) about the axis; ΣM is their sum (N·m)","#2E7D32|ρ":"ρ — fluid density (kg/m³)","#1565C0|A":"A — control-surface area (m²)"}'>
+        <div class="fs-top m2-meta"><span class="m2-pos">#20</span><span class="m2-chiptag" style="color:var(--ch5-title)">Ch 5</span><span class="fs-name">Angular Momentum</span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \frac{d(\textcolor{#1565C0}{r}\times \textcolor{#D32F2F}{m}\,\textcolor{#1565C0}{\vec{v}})}{dt} = \sum \textcolor{#00838F}{M} = \frac{d}{dt}\int_{CV} (\textcolor{#1565C0}{r}\times\textcolor{#1565C0}{\vec{v}})\,\textcolor{#2E7D32}{\rho}\,dV + \int_{CS} (\textcolor{#1565C0}{r}\times\textcolor{#1565C0}{\vec{v}})\,\textcolor{#2E7D32}{\rho}\,\textcolor{#1565C0}{v_n}\,d\textcolor{#1565C0}{A} \]</div>
+          <p class="m2-usedfor"><strong>Used for:</strong> RTT with B = angular momentum (β = r×v⃗). Sum of external moments = rate of change of angular momentum in the CV + net flux. Use for torques on rotating machinery — pumps, turbines, and sprinklers.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>

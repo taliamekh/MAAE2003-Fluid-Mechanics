@@ -18,7 +18,7 @@ function showSection(sectionId, anchorId) {
   const items = document.querySelectorAll(`[onclick*="'${sectionId}'"]`);
   items.forEach(el => el.classList.add('active'));
   /* Re-wire popups when formulas section becomes visible (hidden elements may skip initial wiring) */
-  if (sectionId === 'formulas' && window._wireUpVarPopups) window._wireUpVarPopups();
+  if ((sectionId === 'formulas' || sectionId === 'm2sheet') && window._wireUpVarPopups) window._wireUpVarPopups();
 }
 
 /* ── Chapter Expand/Collapse ── */
@@ -61,7 +61,7 @@ function setFormulaView(view, btn) {
   }
 
   function wireUpVarPopups() {
-    var cards = document.querySelectorAll('#formulas .fs-card[data-vars]');
+    var cards = document.querySelectorAll('#formulas .fs-card[data-vars], #m2sheet .fs-card[data-vars]');
     var total = 0;
     for (var c = 0; c < cards.length; c++) {
       var card = cards[c];
@@ -133,7 +133,7 @@ function setFormulaView(view, btn) {
   var input = document.getElementById('fs-search');
   var results = document.getElementById('fs-results');
   if (!input || !results) return;
-  var cards = Array.from(document.querySelectorAll('.fs-card'));
+  var cards = Array.from(document.querySelectorAll('#formulas .fs-card'));
   input.addEventListener('input', function() {
     var q = input.value.toLowerCase().trim();
     results.innerHTML = '';
@@ -159,6 +159,40 @@ function setFormulaView(view, btn) {
   });
   document.addEventListener('click', function(e) {
     if (!e.target.closest('.fs-search-wrap')) results.hidden = true;
+  });
+})();
+
+/* ── Midterm 2 Sheet Search ── */
+(function() {
+  var input = document.getElementById('m2-search');
+  var results = document.getElementById('m2-results');
+  if (!input || !results) return;
+  var cards = Array.from(document.querySelectorAll('#m2sheet .fs-card'));
+  input.addEventListener('input', function() {
+    var q = input.value.toLowerCase().trim().replace(/^#/, '');
+    results.innerHTML = '';
+    if (!q) { results.hidden = true; return; }
+    cards
+      .filter(function(c) {
+        return ((c.dataset.name || '') + ' #' + (c.dataset.num || '') + ' ch' + (c.dataset.ch || '') + ' ' + c.textContent).toLowerCase().indexOf(q) !== -1;
+      })
+      .slice(0, 8)
+      .forEach(function(c) {
+        var li = document.createElement('li');
+        li.textContent = '#' + c.dataset.num + ' — ' + c.dataset.name + ' (Ch ' + c.dataset.ch + ')';
+        li.onclick = function() {
+          c.scrollIntoView({behavior: 'smooth', block: 'center'});
+          c.classList.add('fs-flash');
+          setTimeout(function() { c.classList.remove('fs-flash'); }, 1500);
+          results.hidden = true;
+          input.value = '';
+        };
+        results.appendChild(li);
+      });
+    results.hidden = results.children.length === 0;
+  });
+  document.addEventListener('click', function(e) {
+    if (!input.parentElement.contains(e.target)) results.hidden = true;
   });
 })();
 
