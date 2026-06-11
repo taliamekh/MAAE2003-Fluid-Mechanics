@@ -7698,8 +7698,16 @@ function setFormulaView(view, btn) {
 
 /* ── Formula Sheet Variable Popup ── */
 (function() {
-  var pop = document.getElementById('varpop');
-  if (!pop) return;
+  function getPop() {
+    var pop = document.getElementById('varpop');
+    if (!pop) {
+      pop = document.createElement('div');
+      pop.id = 'varpop';
+      pop.innerHTML = '<div class="vp-sym"></div><div class="vp-desc"></div>';
+      document.body.appendChild(pop);
+    }
+    return pop;
+  }
 
   function rgbToHex(c) {
     if (!c) return '';
@@ -7758,6 +7766,7 @@ function setFormulaView(view, btn) {
   }
 
   document.addEventListener('click', function(e) {
+    var pop = getPop();
     var el = e.target.closest('.vp-click');
     if (!el) { pop.style.display = 'none'; return; }
     pop.querySelector('.vp-sym').innerHTML = el.innerHTML;
