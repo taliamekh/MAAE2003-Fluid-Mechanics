@@ -225,6 +225,8 @@
 
   <p>Density and specific weight are easy to mix up. <strong>Density</strong> \(\rho\) is <em>mass</em> per unit volume, while <strong>specific weight</strong> \(\gamma\) is <em>weight</em> &mdash; the force of gravity &mdash; per unit volume; the two are linked by \(\gamma = \rho g\). Reach for \(\rho\) whenever you need mass (as in \(F = ma\) or momentum), and for \(\gamma\) whenever you need the gravitational force the fluid exerts (as in the hydrostatic pressure \(\gamma h\) of Ch 2).</p>
 
+  <p>Because \(\gamma\) carries the \(g\) in \(\rho g\), it depends on <em>where</em> you are: the same water has \(\gamma \approx 9.81\;\text{kN/m}^3\) on Earth but only about \(1.6\;\text{kN/m}^3\) on the Moon, even though its density \(\rho = 1000\;\text{kg/m}^3\) is unchanged. Density is a property of the fluid alone; specific weight is a property of the fluid <em>and</em> the local gravity.</p>
+
   <!-- ── SPECIFIC GRAVITY ── -->
   <h3>Specific Gravity</h3>
 
@@ -243,6 +245,8 @@
     <p>SG is <strong>dimensionless</strong> &mdash; the same number in SI and BG. \(SG > 1\) means the fluid is denser than water (it sinks); \(SG < 1\) means it floats. Mercury: \(SG \approx 13.6\); gasoline: \(SG \approx 0.68\).</p>
   </div>
 
+  <p>Why bother with a ratio instead of just quoting density? Because \(SG\) is a single number that stays the same in every unit system, it doubles as a shortcut for recovering the actual density (or specific weight) in whatever units you are working in: just multiply by water's value, \(\rho = SG \cdot \rho_{\text{water}}\) and \(\gamma = SG \cdot \gamma_{\text{water}}\). It also gives an instant float test &mdash; anything with \(SG < 1\) floats on water. (The reference is water at 4&deg;C because that is where water is densest, which makes it a fixed, repeatable benchmark.)</p>
+
   <!-- ── BULK MODULUS ── -->
   <h3>Bulk Modulus</h3>
 
@@ -259,6 +263,8 @@
   </div>
 
   <p><strong>Liquids</strong> have very high \(E_V\) &mdash; nearly incompressible. <strong>Gases</strong> have very low \(E_V\) &mdash; easily compressed. This is why we often treat liquids as incompressible (\(\rho = \text{const}\)) in this course.</p>
+
+  <p>Read the formula this way: \(E_V\) is the pressure rise needed to squeeze out a given <em>fractional</em> change in volume (the volumetric strain \(dV/V\) is simply that fractional change). A large \(E_V\) therefore means the fluid barely budges under pressure. For water \(E_V \approx 2.2\;\text{GPa}\), so compressing it by even 1% takes about \(22\;\text{MPa}\) &mdash; roughly 220 atmospheres &mdash; which is exactly why we can treat liquids as incompressible.</p>
 
   <!-- ── TEMPERATURE ── -->
   <h3>Temperature</h3>
@@ -353,6 +359,8 @@
     </div>
   </div>
 
+  <p>&ldquo;Empirical&rdquo; means these come from fitting curves to measured data, not from first-principles theory. In practice you measure \(\mu\) at two known temperatures, solve for that fluid's \(B\) and \(C\), and then use the formula to predict \(\mu\) at any other temperature. The forms also encode the physical trend from above: for a liquid the factor \(e^{C/T}\) shrinks as \(T\) rises (viscosity falls), while for a gas the \(T^{3/2}\) growth dominates (viscosity climbs).</p>
+
   <!-- ── KINEMATIC VISCOSITY ── -->
   <h3>Kinematic Viscosity</h3>
 
@@ -386,6 +394,8 @@
     <div class="card-title">Ideal Fluid</div>
     <p>A fluid that is both <strong>inviscid</strong> (\(\mu = 0\)) and <strong>incompressible</strong> (\(\rho = \text{const}\)). This is the simplest fluid model and underlies Bernoulli&rsquo;s equation (Ch 3).</p>
   </div>
+
+  <p>These are <em>modeling idealizations</em>, not real fluids &mdash; no ordinary fluid truly has \(\mu = 0\). Their value is that when viscosity is very small, ignoring it makes the equations far simpler and still gives accurate answers in the <strong>bulk</strong> of the flow, away from solid surfaces. The catch is that viscosity always matters in a thin layer right next to a wall (the boundary layer of Ch 4&ndash;6), so the inviscid picture is an excellent approximation everywhere <em>except</em> there.</p>
 
   <!-- ── WORKED EXAMPLE: VISCOSITY ── -->
   <h3>Worked Example: Determining Viscosity</h3>
@@ -427,6 +437,8 @@
     </div>
   </div>
 
+  <p>The two readings of \(\Upsilon\) &mdash; force per unit length and energy per unit area &mdash; describe the same thing, since \(\text{N/m}\) and \(\text{J/m}^2\) are identical units. Because the surface acts like a stretched skin that wants to shrink, a free blob of liquid pulls itself into the shape with the least surface area for its volume: a sphere. That is why raindrops and small droplets are round, and why \(\Upsilon \approx 0.073\;\text{N/m}\) for water is enough to hold up a floating paperclip or a water strider.</p>
+
   <h3>Pressure Inside a Liquid Droplet</h3>
 
   <div class="figure-box">
@@ -445,6 +457,8 @@
       <span class="pill">&Upsilon; = surface tension</span>
     </div>
   </div>
+
+  <p>Here is where that force balance comes from: imagine slicing the droplet in half. The internal pressure pushes the two halves apart across the flat circular cut, whose area is \(\pi R^2\), giving an outward force \(\pi R^2 \Delta p\); surface tension holds them together all around the rim, whose length is \(2\pi R\), giving an inward pull \(2\pi R\,\Upsilon\). Setting the two equal gives \(\Delta p = 2\Upsilon/R\). The striking consequence is \(\Delta p \propto 1/R\): the <em>smaller</em> the droplet, the <em>higher</em> its internal pressure &mdash; which is why very small bubbles are hard to inflate and tend to collapse into larger ones.</p>
 
   <!-- ── CAPILLARITY ── -->
   <h3>Capillarity</h3>
@@ -470,6 +484,8 @@
     </div>
   </div>
 
+  <p>The height formula is itself a force balance: surface tension pulls the liquid upward around the tube's rim with a vertical force \(2\pi R\,\Upsilon\cos\theta\), and this raises the column until its weight \(\gamma(\pi R^2 h)\) matches. Solving \(2\pi R\,\Upsilon\cos\theta = \gamma\,\pi R^2 h\) for \(h\) cancels the \(\pi R\) and leaves \(h = 2\Upsilon\cos\theta/(\gamma R)\). The takeaway is \(h \propto 1/R\): the narrower the tube, the higher the liquid climbs &mdash; which is why capillary rise is dramatic in fine tubes and has to be corrected for in thin pressure-measurement tubes.</p>
+
   <div class="card-bracket ex-card">
     <div class="card-title">Example &mdash; Capillary Rise</div>
     <p><strong>Water&ndash;air&ndash;glass</strong> (\(R = 1\) mm, \(\theta \approx 0°\), \(\Upsilon = 0.073\) N/m, \(\rho = 1000\) kg/m&sup3;):</p>
@@ -494,6 +510,8 @@
       <span class="pill">T = absolute temperature [K]</span>
     </div>
   </div>
+
+  <p>This is the same ideal gas law you met in chemistry as \(pV = nRT\), just rewritten for fluid mechanics. Dividing through by volume turns \(n/V\) into density, and the molar gas constant becomes a <strong>specific</strong> constant for each gas, \(R = R_u/M\) (the universal constant \(R_u = 8.314\) J/(mol&middot;K) divided by the molar mass \(M\)) &mdash; which is why \(R\) is different for every gas. Two cautions: \(T\) and \(p\) must be <strong>absolute</strong> (kelvin and absolute pressure, never &deg;C or gauge pressure), and the law works best for gases at ordinary temperatures and low-to-moderate pressures, far from condensing into a liquid.</p>
 
   <div class="card-bracket ex-card">
     <div class="card-title">Example &mdash; Ideal Gas Law</div>
