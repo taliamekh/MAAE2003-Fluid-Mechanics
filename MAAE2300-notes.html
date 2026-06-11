@@ -1609,6 +1609,8 @@ p.concept-bridge { font-size: 13px !important; color: var(--muted) !important; }
     </div>
   </div>
 
+  <p>Read this as the master rule of hydrostatics: pressure does not change as you move sideways, and changes only as you move up or down. The negative sign says pressure <em>drops</em> as you rise and <em>builds</em> as you descend, and the rate of change is exactly the specific weight \(\gamma\) &mdash; a heavier fluid stacks up pressure faster. Almost everything else in this lecture is just this one equation applied to a different situation.</p>
+
   <div class="card-bracket tip-card" style="--bracket-c:var(--tip)">
     <h4 style="color:var(--tip);border-bottom:1px solid var(--tip);padding-bottom:4px;">&#9733; Three Principles of Hydrostatics</h4>
     <p><strong>1.</strong> No pressure change in the horizontal direction.<br>
@@ -1629,6 +1631,8 @@ p.concept-bridge { font-size: 13px !important; color: var(--muted) !important; }
       <span class="pill">\(\gamma = \rho g\) [N/m&sup3;]</span>
     </div>
   </div>
+
+  <p>The first form just integrates that rule over a finite depth: the pressure difference between two points equals \(\gamma\) times the height between them, so going a depth \(d\) below a surface adds \(\gamma d\) of pressure. The second form rearranges it to say that the combination \(z + p/\gamma\) is the <em>same at every point</em> in a connected body of static fluid &mdash; this constant is called the <strong>piezometric head</strong>, and it is the idea every manometer is built on.</p>
 
   <p>Pressure varies only with vertical distance, independent of container shape. Pressure is equal at all points on a given horizontal plane in the <strong>same continuous fluid</strong>.</p>
   <div class="figure-box">
@@ -1656,6 +1660,8 @@ p.concept-bridge { font-size: 13px !important; color: var(--muted) !important; }
     </div>
   </div>
 
+  <p>These three are just different zero points for the same pressure. <strong>Absolute pressure</strong> is measured up from a perfect vacuum (true zero) &mdash; the honest value the gas laws need. <strong>Gage pressure</strong> is measured relative to the local atmosphere, so it is what most instruments (tire gauges, pressure sensors) actually read; it goes <em>negative</em> whenever a pressure sits below atmospheric. That below-atmospheric shortfall, written as a positive number, is the <strong>vacuum pressure</strong>.</p>
+
   <h2 style="color:var(--ch1-title)">Pressure Head</h2>
 
   <div class="card-bracket eq-card" style="--bracket-c:var(--eq)">
@@ -1666,6 +1672,8 @@ p.concept-bridge { font-size: 13px !important; color: var(--muted) !important; }
       <span class="pill">\(\gamma\) = specific weight [N/m&sup3;]</span>
     </div>
   </div>
+
+  <p>Pressure head is simply a pressure re-expressed as a <em>height of fluid</em>: it answers &ldquo;how tall a column of this liquid would it take to produce this pressure at its base?&rdquo; Dividing the pressure by \(\gamma\) converts pascals into metres of liquid, which is often more intuitive &mdash; and is exactly how a manometer reports its reading. The taller the equivalent column, the higher the pressure; a denser fluid needs a shorter column for the same pressure, as the comparison below shows.</p>
 
   <div class="card-bracket ex-card" style="--bracket-c:var(--example)">
     <h4 style="color:var(--example);border-bottom:1px solid var(--example);padding-bottom:4px;">Pressure Head Comparison</h4>
@@ -1708,6 +1716,8 @@ p.concept-bridge { font-size: 13px !important; color: var(--muted) !important; }
     \[\frac{dp}{p} = -\frac{g}{RT}\,dz\]
   </div>
 
+  <p>Here is the key difference from a liquid: for a gas the specific weight \(\gamma\) depends on the pressure itself (through the ideal gas law), so pressure no longer falls off in a straight line with height. Substituting \(\gamma = pg/(RT)\) leaves \(p\) on both sides, giving the differential equation above that we have to integrate. How it integrates depends on how the temperature \(T\) behaves with altitude &mdash; which is why there are two models below.</p>
+
   <div class="card-bracket eq-card" style="--bracket-c:var(--eq)">
     <h4 style="color:var(--eq);border-bottom:1px solid var(--eq);padding-bottom:4px;">Troposphere (0 &le; z &lt; 11 km)</h4>
     \[p = p_0\!\left(1 - \frac{Bz}{T_0}\right)^{g/(RB)}\]
@@ -1719,6 +1729,8 @@ p.concept-bridge { font-size: 13px !important; color: var(--muted) !important; }
     \[p = p_0\,e^{-gz/(RT)}\]
     <p>Exact for stratosphere (11&ndash;20 km). ~4% error in troposphere.</p>
   </div>
+
+  <p>The two models differ only in their temperature assumption. The <strong>troposphere</strong> model assumes temperature falls steadily with height at the lapse rate \(B\) (realistic up to ~11 km), while the <strong>isothermal</strong> model assumes temperature stays constant, giving a clean exponential decay (a good fit in the stratosphere). The worked example below shows the two agree to within a few percent even at 5000 m.</p>
 
   <div class="card-bracket ex-card" style="--bracket-c:var(--example)">
     <h4 style="color:var(--example);border-bottom:1px solid var(--example);padding-bottom:4px;">Example 2.2 &mdash; Pressure at 5000 m</h4>
@@ -1766,6 +1778,8 @@ p.concept-bridge { font-size: 13px !important; color: var(--muted) !important; }
     \[\frac{F_1}{A_1} = \frac{F_2}{A_2} \implies F_2 = F_1\frac{A_2}{A_1} \qquad \text{Mech. adv.} = \frac{A_2}{A_1}\]
   </div>
 
+  <p>This is Pascal's law put to work. Because the confined fluid carries the same pressure to both pistons, a small force on the small piston produces a much larger force on the large piston &mdash; the area ratio \(A_2/A_1\) is the mechanical advantage, which is how a hydraulic jack or a car's brakes turn a gentle push into a powerful one. Nothing comes for free, though: the large piston moves proportionally less, so the work put in equals the work taken out.</p>
+
   <h2 style="color:var(--ch1-title)">Manometry</h2>
 
   <p>A <strong>manometer</strong> uses liquid columns to measure pressure. Since \(dp/dz = -\gamma\), column height directly gives pressure difference.</p>
@@ -1780,6 +1794,8 @@ p.concept-bridge { font-size: 13px !important; color: var(--muted) !important; }
     <h4 style="color:var(--eq);border-bottom:1px solid var(--eq);padding-bottom:4px;">Barometer</h4>
     \[p_{\text{atm}} = \gamma_{\text{liquid}}\,h \quad (\text{when } p_{\text{vap}} \approx 0)\]
   </div>
+
+  <p>A barometer measures atmospheric pressure directly. Invert a tube full of liquid into an open dish: the liquid drops until the weight of the column balances the atmosphere pressing down on the dish, leaving near-vacuum above it (so \(p_{\text{vap}} \approx 0\)). The atmosphere alone is holding the column up, so its height gives \(p_{\text{atm}} = \gamma h\) &mdash; mercury is the usual choice because its large \(\gamma\) keeps the column a manageable ~760 mm instead of the ~10 m a water barometer would need.</p>
 
   <h3 style="color:var(--ch1-title)">Multi-Fluid Manometer</h3>
   <div class="figure-box">
@@ -1796,6 +1812,8 @@ p.concept-bridge { font-size: 13px !important; color: var(--muted) !important; }
       <span class="pill">Jump across at same level in same fluid</span>
     </div>
   </div>
+
+  <p>The rule is just the hydrostatic gradient applied step by step as you &ldquo;walk&rdquo; along the tube from a known pressure toward the unknown one. Each time you go <em>down</em> through a fluid you add \(\gamma h\) (pressure rises with depth); each time you go <em>up</em> you subtract it; and across a horizontal stretch of the same connected fluid the pressure is unchanged, so you can jump straight across. Tally all the steps and you land on the unknown pressure.</p>
 
   <h3 style="color:var(--ch1-title)">U-Tube and Inclined Manometers</h3>
   <div class="figure-box">
@@ -1819,6 +1837,8 @@ p.concept-bridge { font-size: 13px !important; color: var(--muted) !important; }
       <span class="pill">\(h\) = gauge fluid height difference [m]</span>
     </div>
   </div>
+
+  <p>A differential manometer reads the pressure <em>difference</em> between two points directly, without needing the absolute pressure at either one. The gauge fluid (often mercury) sits in a U between the two points, and the height offset \(h\) it develops is proportional to that pressure difference. The \((\rho_2 - \rho_1)\) shows up because the heavy gauge fluid has to push aside the lighter working fluid it displaces &mdash; dropping that \(\rho_1\) term is the classic mistake flagged just below.</p>
 
   <div class="card-bracket tip-card" style="--bracket-c:var(--tip)">
     <h4 style="color:var(--tip);border-bottom:1px solid var(--tip);padding-bottom:4px;">&#9733; Common Error</h4>
