@@ -794,6 +794,8 @@ p.concept-bridge { font-size: 13px !important; color: var(--muted) !important; }
 
   <p>Fluid mechanics studies how fluids (liquids and gases) behave at rest and in motion. It is one of the most broadly applicable areas in engineering — spanning aerodynamics, marine propulsion, biomedical devices, renewable energy, sports engineering, and environmental science. In this course, we develop governing equations using the <strong>control volume approach</strong> and apply them to practical engineering problems.</p>
 
+  <p>Don't worry if the term <em>control volume</em> is unfamiliar yet — it simply means a fixed region of space that we watch fluid flow through, like an imaginary box held still inside a pipe while water streams in one side and out the other. We build the idea up properly in Ch 3.</p>
+
   <h3>Applications of Fluid Mechanics</h3>
 
   <p>The reach of fluid mechanics is enormous. Some representative domains:</p>
@@ -812,6 +814,13 @@ p.concept-bridge { font-size: 13px !important; color: var(--muted) !important; }
   <h3>The Concept of a Fluid: Classification of Matter</h3>
 
   <p>Matter exists in four states — solid, liquid, gas, and plasma. In this course, we focus on liquids and gases, which are collectively called <strong>fluids</strong>. The critical distinction between solids and fluids comes down to how they respond to shear stress.</p>
+
+  <p>Because that distinction hinges on <strong>shear stress</strong>, it's worth pinning down what that actually is before we go further.</p>
+
+  <div class="card-bracket def-card">
+    <div class="card-title">Normal Stress vs Shear Stress</div>
+    <p>A <strong>stress</strong> is just a force spread over the area it acts on — a force per unit area. What separates the two kinds is the <em>direction</em> of that force relative to the surface. A <strong>normal stress</strong> acts <em>perpendicular</em> to a surface: it pushes straight in or pulls straight out, the way pressure squeezes a balloon. A <strong>shear stress</strong> (symbol \(\tau\)) acts <em>parallel</em> to the surface, trying to slide one layer across the next — think of sliding your flat palm across a tabletop, or pushing the top of a deck of cards sideways so they fan over. The defining question for any material is what it does when a shear stress is applied: does it settle into a fixed deformed shape, or does it keep deforming for as long as the stress lasts?</p>
+  </div>
 
   <!-- SVG: Classification of matter tree -->
   <div class="figure-box">
@@ -896,6 +905,8 @@ p.concept-bridge { font-size: 13px !important; color: var(--muted) !important; }
     <p style="font-size:13px;"><strong>When NOT to use:</strong> Rarefied gas flows (high altitude, vacuum systems) where the mean free path approaches the characteristic length of the problem. In those cases, molecular dynamics or kinetic theory is needed instead.</p>
   </div>
 
+  <p>Notice the limit runs to \(\delta V^*\) — <em>not</em> to zero. In ordinary calculus we would shrink the volume down to a single point, but doing that here drops us straight back into Case 1, where molecular noise takes over and \(\rho\) no longer has one clear value. So \(\delta V^*\) is the sweet spot: small enough to act as a single <em>point</em> for any engineering calculation, yet large enough that the comings and goings of individual molecules average out.</p>
+
   <!-- SVG: Density vs δV conceptual plot -->
   <div class="figure-box">
     <svg viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;font-family:'Poppins',sans-serif;">
@@ -939,6 +950,8 @@ p.concept-bridge { font-size: 13px !important; color: var(--muted) !important; }
   <h3>Branches of Fluid Mechanics</h3>
 
   <p>The field is divided into three branches, each of which we study in this course:</p>
+
+  <p>One connection worth carrying forward: since a fluid cannot sustain shear stress, a fluid that is truly at rest has <em>no</em> shear acting anywhere inside it — the only stress left is pressure, which always acts perpendicular to a surface. That is exactly why hydrostatics (Ch 1–2) is the most approachable branch: with no motion, there is nothing to track but pressure.</p>
 
   <!-- SVG: Branches tree -->
   <div class="figure-box">
