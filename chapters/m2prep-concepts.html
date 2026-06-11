@@ -457,6 +457,103 @@
 
 <div class="m2c-modenote relearn"><strong>Relearn mode</strong> — the from-scratch version. Same structure and the same question-type guides as Review, but each idea is built up slowly, with diagrams, and <strong>every symbol in every equation is named</strong>. Use this when a concept hasn't stuck yet; switch back to <strong>Review</strong> (top-right) once it has.</div>
 
+<!-- ─────────── ASSUMED KNOWLEDGE (relearn) ─────────── -->
+<h2 style="color:var(--unit);border-bottom:2px solid var(--unit);padding-bottom:4px;">📌 Assumed knowledge — the toolkit you bring in</h2>
+<p style="font-size:14px;margin:12px 0 16px;">None of this is taught <em>inside</em> Ch 3–5 — it carries over from Ch 1–2 and your math prerequisites — yet it appears in almost every Midterm-2 problem, usually as the first or last step. Here it's rebuilt from the ground up so a forgotten piece can't quietly cost you a whole question.</p>
+
+<div class="card-bracket" style="--bracket-c:var(--unit);">
+  <div class="card-title" style="color:var(--unit);border-color:var(--unit);">Fluid properties &amp; the numbers worth memorising</div>
+  <p style="margin:6px 0;font-size:14px;">Three properties describe "how heavy" a fluid is, and they're easy to mix up:</p>
+  <ul style="font-size:14px;padding-left:18px;margin:6px 0;line-height:1.9;">
+    <li><strong>Density</strong> \(\rho\) — mass per unit volume (kg/m³). The basic "how much stuff per litre."</li>
+    <li><strong>Specific weight</strong> \(\gamma=\rho g\) — <em>weight</em> per unit volume (N/m³). It's just density scaled by gravity, and it's what turns a depth into a pressure.</li>
+    <li><strong>Specific gravity</strong> \(SG=\rho/\rho_{water}\) — a unitless ratio against water. If a problem gives \(SG=0.85\), recover the density as \(\rho=SG\cdot\rho_{water}=850\ \text{kg/m}^3\).</li>
+  </ul>
+  <div class="var-row">
+    <span class="pill">ρ — density (kg/m³)</span>
+    <span class="pill">γ — specific weight = ρg (N/m³)</span>
+    <span class="pill">g — gravity, 9.81 m/s²</span>
+    <span class="pill">SG — specific gravity (unitless)</span>
+    <span class="pill">ρ_water — 1000 kg/m³ (reference)</span>
+  </div>
+  <p style="margin:10px 0 4px;font-size:13.5px;color:var(--muted);">Values to know cold (you'll rarely be handed them):</p>
+  <table style="width:100%;font-size:13px;border-collapse:collapse;">
+    <tr style="border-bottom:1px solid var(--border);"><td style="padding:5px 8px;color:var(--muted);width:230px;">Water density</td><td style="padding:5px 8px;">\(\rho_w\approx1000\ \text{kg/m}^3\) &nbsp;(\(1.94\ \text{slug/ft}^3\))</td></tr>
+    <tr style="border-bottom:1px solid var(--border);"><td style="padding:5px 8px;color:var(--muted);">Water specific weight</td><td style="padding:5px 8px;">\(\gamma_w\approx9.81\ \text{kN/m}^3\) &nbsp;(\(62.4\ \text{lbf/ft}^3\))</td></tr>
+    <tr style="border-bottom:1px solid var(--border);"><td style="padding:5px 8px;color:var(--muted);">Air density (room conditions)</td><td style="padding:5px 8px;">\(\rho_{air}\approx1.2\ \text{kg/m}^3\) &nbsp;(\(0.00238\ \text{slug/ft}^3\))</td></tr>
+    <tr><td style="padding:5px 8px;color:var(--muted);">Gravity</td><td style="padding:5px 8px;">\(g=9.81\ \text{m/s}^2\) &nbsp;(\(32.2\ \text{ft/s}^2\))</td></tr>
+  </table>
+  <p style="margin:8px 0 0;font-size:13px;color:var(--muted);">Water is ~830× denser than air — that single fact is why "equal volume flow" never means "equal mass flow" when the two mix.</p>
+</div>
+
+<div class="card-bracket" style="--bracket-c:var(--unit);">
+  <div class="card-title" style="color:var(--unit);border-color:var(--unit);">Pressure, depth &amp; reading a manometer</div>
+  <p style="margin:6px 0;font-size:14px;">Pressure in a still fluid comes from the <strong>weight of the fluid stacked above</strong>. Go down a depth \(h\) and you add the weight of that column:</p>
+  <div style="text-align:center;margin:8px 0;">\[ p=p_{atm}+\rho g h=p_{atm}+\gamma h \]</div>
+  <div class="var-row">
+    <span class="pill">p — absolute pressure at depth h (Pa)</span>
+    <span class="pill">p_atm — atmospheric pressure at the surface (Pa)</span>
+    <span class="pill">ρ — fluid density (kg/m³)</span>
+    <span class="pill">g — gravity, 9.81 m/s²</span>
+    <span class="pill">h — depth below the free surface (m)</span>
+  </div>
+  <ul style="font-size:14px;padding-left:18px;margin:10px 0 0;line-height:1.9;">
+    <li><strong>Gage vs absolute:</strong> <em>gage</em> pressure measures relative to the atmosphere (so \(p_{atm}=0\)); <em>absolute</em> adds the ~101 kPa of atmosphere back in. Midterm-2 problems are gage unless they say otherwise — set \(p_{atm}=0\) and life gets simpler.</li>
+    <li><strong>The manometer walk-rule</strong> (to get a pressure difference): start at one open end, then move toward the other — <em>add</em> \(\rho g h\) every time you go <strong>down</strong>, <em>subtract</em> \(\rho g h\) every time you go <strong>up</strong>, and switch to the new \(\rho\) whenever you cross a fluid interface. Set the running total equal to the pressure at the far end.</li>
+    <li><strong>Same height, same fluid ⇒ same pressure.</strong> Any two points at the same level in one connected fluid are at equal pressure — that's what lets you "jump across" a U-tube.</li>
+  </ul>
+</div>
+
+<div class="card-bracket" style="--bracket-c:var(--unit);">
+  <div class="card-title" style="color:var(--unit);border-color:var(--unit);">Hydrostatic force on a submerged surface</div>
+  <p style="margin:6px 0;font-size:14px;">In a sluice-gate or tank-wall problem, the pressure pushing on a flat surface is a <em>known</em> quantity you compute before any flow analysis. Because pressure grows with depth, the force is the pressure at the surface's <strong>centroid</strong> times its area:</p>
+  <div style="text-align:center;margin:8px 0;">\[ F=\gamma\,\bar h\,A \]</div>
+  <div class="var-row">
+    <span class="pill">F — resultant hydrostatic force (N)</span>
+    <span class="pill">γ — specific weight of the fluid (N/m³)</span>
+    <span class="pill">h̄ — depth of the surface's centroid (m)</span>
+    <span class="pill">A — area of the submerged surface (m²)</span>
+  </div>
+  <p style="margin:10px 0 6px;font-size:14px;">For the case you'll meet most — a <strong>vertical rectangle of width \(w\) running from the free surface down to depth \(h\)</strong> — the centroid is at \(h/2\), so the formula collapses to a clean result, and the force acts one-third of the way up from the bottom:</p>
+  <div style="text-align:center;margin:6px 0;">\[ F=\gamma\,\tfrac{h}{2}\,(h\,w)=\tfrac12\gamma h^2 w,\qquad\text{acting at }\tfrac{h}{3}\text{ above the base} \]</div>
+
+  <div class="figure-box" style="text-align:center;">
+  <svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;font-family:'Poppins',sans-serif;">
+    <defs>
+      <marker id="hp-frc" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9 Z" style="fill:var(--eq);"></path></marker>
+    </defs>
+    <!-- free surface -->
+    <line x1="60" y1="70" x2="420" y2="70" style="stroke:var(--def);stroke-width:2;"></line>
+    <text x="110" y="50" text-anchor="start" style="font-size:12px;fill:var(--muted);">free surface (p = 0)</text>
+    <!-- pressure prism -->
+    <polygon points="180,70 180,255 70,255" style="fill:rgba(255,107,53,.13);stroke:none;"></polygon>
+    <line x1="180" y1="70" x2="70" y2="255" style="stroke:var(--eq);stroke-width:2;"></line>
+    <!-- gate -->
+    <line x1="180" y1="70" x2="180" y2="255" style="stroke:var(--text);stroke-width:4;"></line>
+    <text x="188" y="110" text-anchor="start" style="font-size:12px;fill:var(--muted);">submerged gate</text>
+    <!-- resultant -->
+    <line x1="88" y1="193" x2="178" y2="193" style="stroke:var(--eq);stroke-width:3.5;" marker-end="url(#hp-frc)"></line>
+    <text x="133" y="210" text-anchor="middle" style="font-size:13px;font-weight:700;fill:var(--eq);">F = ½γh²w</text>
+    <text x="96" y="234" text-anchor="start" style="font-size:12px;fill:var(--eq);">pressure prism: p = γh</text>
+    <!-- depth dimension -->
+    <line x1="205" y1="70" x2="205" y2="255" style="stroke:var(--muted);stroke-width:1;stroke-dasharray:4 4;"></line>
+    <text x="212" y="166" text-anchor="start" style="font-size:13px;font-weight:600;fill:var(--muted);">h</text>
+  </svg>
+  <div class="figure-caption">Pressure on a vertical surface grows linearly with depth (the "pressure prism"). The resultant \(F\) acts through the prism's centroid — at depth \(2h/3\), i.e. \(h/3\) above the base. This is the pre-known face force \(F_1, F_2\) in sluice-gate momentum balances.</div>
+  </div>
+</div>
+
+<div class="card-bracket" style="--bracket-c:var(--unit);">
+  <div class="card-title" style="color:var(--unit);border-color:var(--unit);">Math toolkit — geometry, trig, vectors, calculus</div>
+  <ul style="font-size:14px;padding-left:18px;margin:6px 0;line-height:1.95;">
+    <li><strong>Areas you'll need constantly:</strong> circle \(A=\pi D^2/4=\pi R^2\); rectangle \(A=b\,h\). Pipe problems live and die on \(A=\pi D^2/4\).</li>
+    <li><strong>Resolving a vector:</strong> a velocity \(V\) at angle \(\theta\) splits into \(V_x=V\cos\theta\) and \(V_y=V\sin\theta\). <em>Choose your \(+x\) and \(+y\) directions before you start</em> and keep them for the whole problem.</li>
+    <li><strong>Cross product for moments:</strong> \(\vec r\times\vec V\) — in 2-D its magnitude is (perpendicular moment arm) × (velocity), and its direction follows the right-hand rule (counter-clockwise positive). It's just "force × lever arm," reused for momentum.</li>
+    <li><strong>Area integrals (for flow rate from a profile):</strong> a round pipe slices into thin rings, \(dA=2\pi r\,dr\); the gap between two flat plates slices into strips, \(dA=w\,dy\). Picking the right element is the whole trick of those problems.</li>
+    <li><strong>Unit discipline:</strong> stay in <em>one</em> system the entire problem. \(\gamma,\rho,g\) must all be SI or all BG. Handy conversions: \(1\ \text{slug}=14.59\ \text{kg}\); inches→feet ÷12; gpm→ft³/s ÷7.48 then ÷60.</li>
+  </ul>
+</div>
+
 <!-- ─────────── PART A ─────────── -->
 <h2 style="color:var(--deriv);border-bottom:2px solid var(--deriv);padding-bottom:4px;">A · Flow Fundamentals <span style="font-size:13px;color:var(--muted);font-weight:400;">(Ch 4 — Kinematics)</span></h2>
 <p style="font-size:14px;margin:12px 0 16px;">Statics asked "what is the pressure in a fluid sitting still?" Kinematics is the first step into <em>moving</em> fluid: how do we even describe a flow before we apply any physics to it? Everything in Ch 3 and Ch 5 is built on this vocabulary, so it's worth getting solid.</p>
@@ -865,6 +962,131 @@
   <div class="step-block"><div class="step-num">4</div><div class="step-content"><h4>Draw the FBD of the CV</h4><p>Add pressure forces on each cut face (\(F=pA\), gauge), weight if relevant, and the unknown reaction \(R\).</p></div></div>
   <div class="step-block"><div class="step-num">5</div><div class="step-content"><h4>Write momentum in x, then y</h4><p>\(\sum F_x=\sum\dot m V_x|_{out}-\sum\dot m V_x|_{in}\), and the same in \(y\). Mind every component sign.</p></div></div>
   <div class="step-block"><div class="step-num">6</div><div class="step-content"><h4>Solve for the reaction</h4><p>Two equations, the unknowns are \(R_x\) and \(R_y\). Combine for magnitude \(R=\sqrt{R_x^2+R_y^2}\) and direction if asked.</p></div></div>
+</div>
+
+<!-- ─────────── QUESTION TYPES (relearn, thorough) ─────────── -->
+<h2 style="color:var(--eq);border-bottom:2px solid var(--eq);padding-bottom:4px;margin-top:38px;">🧩 Question types &amp; quick-solve guides — the thorough version</h2>
+<p style="font-size:14px;margin:12px 0 18px;">The same eight archetypes as Review, but here each one is unpacked: every <strong>recognition cue</strong>, <em>why</em> the tool fits, a step-by-step where each line explains its own reasoning, the <strong>trap</strong> and how to dodge it, and — for the four you'll see most — a fully worked mini-example with real numbers. Colours match the triage lanes.</p>
+
+<!-- Type 1 -->
+<div class="card-bracket def-card" style="margin-bottom:16px;">
+  <div class="card-title">1 · Bernoulli between two points (including a draining tank)</div>
+  <p class="qt-line"><span class="lbl" style="color:var(--def);">Recognise it by:</span> two labelled points joined by a streamline; a height drop or a pressure difference; "how fast does the jet leave," "how high does it rise," a nozzle, or a tank with a hole.</p>
+  <p class="qt-line"><span class="lbl" style="color:var(--muted);">Why Bernoulli:</span> <span style="color:var(--muted);">along a streamline the total head is constant, so pressure, speed and height simply trade against one another — exactly what these questions ask about.</span></p>
+  <div class="step-block"><div class="step-num">1</div><div class="step-content"><h4>Choose the two points to kill terms</h4><p>Put a point on a free surface or anywhere open to the atmosphere — its gage pressure is 0 and (for a wide tank) its velocity is ≈0. Fewer surviving terms = less algebra.</p></div></div>
+  <div class="step-block"><div class="step-num">2</div><div class="step-content"><h4>Fix the datum</h4><p>Set \(z=0\) at the lower point so one elevation head disappears and the other is just the height difference.</p></div></div>
+  <div class="step-block"><div class="step-num">3</div><div class="step-content"><h4>Write the head form between 1 and 2</h4><p>\(\frac{p_1}{\gamma}+\frac{V_1^2}{2g}+z_1=\frac{p_2}{\gamma}+\frac{V_2^2}{2g}+z_2\).</p></div></div>
+  <div class="step-block"><div class="step-num">4</div><div class="step-content"><h4>Cross off the zeros</h4><p>Wide tank ⇒ \(V_1\approx0\); open to air at both ends ⇒ \(p_1=p_2=0\) (gage). Whatever's left is the equation to solve.</p></div></div>
+  <div class="step-block"><div class="step-num">5</div><div class="step-content"><h4>If both velocities survive, add continuity</h4><p>\(A_1V_1=A_2V_2\) relates them, turning two unknowns into one.</p></div></div>
+  <div class="step-block"><div class="step-num">6</div><div class="step-content"><h4>Solve and unit-check</h4><p>Isolate the remaining unknown; confirm the units come out to m/s, Pa, or m as expected.</p></div></div>
+  <div style="background:rgba(9,60,93,.04);border:1px solid rgba(9,60,93,.14);border-radius:8px;padding:11px 14px;margin:12px 0 2px;font-size:13px;line-height:1.65;">
+    <div style="font-weight:600;color:var(--deriv);margin-bottom:5px;">▸ Worked mini-example</div>
+    <p style="margin:0;">A wide tank, open to air, drains through a hole \(3\text{ m}\) below the surface. Points: 1 = surface (\(V_1\approx0,\ p_1=0\)), 2 = jet (\(p_2=0\)). Head form collapses to \(z_1=\frac{V_2^2}{2g}\), so \(V_2=\sqrt{2g\,z}=\sqrt{2(9.81)(3)}=\mathbf{7.67\ \text{m/s}}\) — Torricelli's result. Notice: it's the speed a ball would reach falling 3 m.</p>
+  </div>
+  <p class="qt-line qt-trap" style="margin-top:10px;"><span class="lbl" style="color:var(--eq);">⚠ Trap &amp; fix:</span> mixing absolute and gage pressure (pick one), forgetting "wide tank ⇒ \(V_1=0\)", or a sign slip in the datum. Always label which point is 1 and which is 2 before writing anything.</p>
+</div>
+
+<!-- Type 2 -->
+<div class="card-bracket def-card" style="margin-bottom:16px;">
+  <div class="card-title">2 · Flow-measurement device (Pitot / Venturi / orifice / bell-mouth)</div>
+  <p class="qt-line"><span class="lbl" style="color:var(--def);">Recognise it by:</span> a named meter, or a manometer reading taken across a contraction; "find \(Q\)" or "find \(V\) from the reading."</p>
+  <p class="qt-line"><span class="lbl" style="color:var(--muted);">Why the device formula:</span> <span style="color:var(--muted);">each meter is just Bernoulli + continuity pre-solved into one expression — you only have to supply the pressure difference and the geometry.</span></p>
+  <div class="step-block"><div class="step-num">1</div><div class="step-content"><h4>Identify the device, pick its formula</h4><p>Pitot is the shortcut \(V=\sqrt{2(p_0-p)/\rho}\); Venturi/orifice use the contraction formula with \(A_1,A_2\).</p></div></div>
+  <div class="step-block"><div class="step-num">2</div><div class="step-content"><h4>Trace the manometer for the pressure difference</h4><p>Apply the walk-rule (down +, up −, switch \(\rho\) at interfaces) to get \(p_1-p_2\) or \(p_0-p\).</p></div></div>
+  <div class="step-block"><div class="step-num">3</div><div class="step-content"><h4>Insert geometry and the right density</h4><p>Areas from \(A=\pi D^2/4\); use the <em>flowing</em> fluid's \(\rho\) in the dynamic term.</p></div></div>
+  <div class="step-block"><div class="step-num">4</div><div class="step-content"><h4>Apply the coefficient</h4><p>Multiply by \(C_v\) (Venturi ≈0.98) or \(C_D\) (orifice) if the problem provides one.</p></div></div>
+  <p class="qt-line qt-trap"><span class="lbl" style="color:var(--eq);">⚠ Trap &amp; fix:</span> using the <em>manometer</em> fluid's density in the dynamic term. The manometer fluid only sets \(p_1-p_2\); the device formula always uses the <em>flowing</em> fluid's \(\rho\).</p>
+</div>
+
+<!-- Type 3 -->
+<div class="card-bracket" style="--bracket-c:var(--deriv);margin-bottom:16px;">
+  <div class="card-title" style="color:var(--deriv);border-color:var(--deriv);">3 · Kinematics — velocity field / stagnation / classify</div>
+  <p class="qt-line"><span class="lbl" style="color:var(--deriv);">Recognise it by:</span> a velocity field \(\vec V=(u,v)\) handed to you; "find the stagnation point," "is the flow steady / uniform," "sketch a streamline."</p>
+  <p class="qt-line"><span class="lbl" style="color:var(--muted);">Why definitions only:</span> <span style="color:var(--muted);">no conservation law is involved — these are pure algebra and the definitions of the flow terms.</span></p>
+  <div class="step-block"><div class="step-num">1</div><div class="step-content"><h4>Stagnation point</h4><p>Set <em>both</em> components to zero, \(u=0\) and \(v=0\), and solve the pair simultaneously for \((x,y)\).</p></div></div>
+  <div class="step-block"><div class="step-num">2</div><div class="step-content"><h4>Steady? — a question about time</h4><p>Scan for any explicit \(t\). No \(t\)-dependence anywhere ⇒ steady.</p></div></div>
+  <div class="step-block"><div class="step-num">3</div><div class="step-content"><h4>Uniform? — a question about space</h4><p>Scan for change along the flow direction \(s\). No \(s\)-dependence ⇒ uniform. (Independent of step 2.)</p></div></div>
+  <div class="step-block"><div class="step-num">4</div><div class="step-content"><h4>Streamline sketch</h4><p>At sample points draw a short arrow in the direction \((u,v)\); a streamline is the curve tangent to those arrows.</p></div></div>
+  <p class="qt-line qt-trap"><span class="lbl" style="color:var(--eq);">⚠ Trap &amp; fix:</span> calling a flow "uniform" just because it's steady (or vice-versa). They're separate yes/no questions — answer each on its own.</p>
+</div>
+
+<!-- Type 4 -->
+<div class="card-bracket" style="--bracket-c:var(--deriv);margin-bottom:16px;">
+  <div class="card-title" style="color:var(--deriv);border-color:var(--deriv);">4 · Flow rate from a velocity profile (integrate)</div>
+  <p class="qt-line"><span class="lbl" style="color:var(--deriv);">Recognise it by:</span> a profile such as \(u(r)=V_{max}(1-r^2/R^2)\) or a linear \(u(y)\); "find \(Q\), \(\bar V\), or \(\dot m\)."</p>
+  <p class="qt-line"><span class="lbl" style="color:var(--muted);">Why integrate:</span> <span style="color:var(--muted);">the velocity varies across the area, so the flow rate is the sum of every little patch's contribution — an area integral.</span></p>
+  <div class="step-block"><div class="step-num">1</div><div class="step-content"><h4>Choose the area element</h4><p>Round pipe ⇒ thin ring \(dA=2\pi r\,dr\). Between flat plates ⇒ strip \(dA=w\,dy\). This choice is the whole problem.</p></div></div>
+  <div class="step-block"><div class="step-num">2</div><div class="step-content"><h4>Set up the integral</h4><p>\(Q=\int_A u\,dA\), with limits matching the geometry (\(0\to R\) for a pipe).</p></div></div>
+  <div class="step-block"><div class="step-num">3</div><div class="step-content"><h4>Integrate carefully</h4><p>Expand the product first, then integrate term by term.</p></div></div>
+  <div class="step-block"><div class="step-num">4</div><div class="step-content"><h4>Average velocity</h4><p>\(\bar V=Q/A\).</p></div></div>
+  <div class="step-block"><div class="step-num">5</div><div class="step-content"><h4>Mass flow rate</h4><p>\(\dot m=\rho Q\). If the profile is parabolic or linear, \(\bar V=V_{max}/2\) lets you skip the integral entirely.</p></div></div>
+  <div style="background:rgba(9,60,93,.04);border:1px solid rgba(9,60,93,.14);border-radius:8px;padding:11px 14px;margin:12px 0 2px;font-size:13px;line-height:1.65;">
+    <div style="font-weight:600;color:var(--deriv);margin-bottom:5px;">▸ Worked mini-example</div>
+    <p style="margin:0;">Parabolic pipe profile \(u(r)=V_{max}\!\left(1-\frac{r^2}{R^2}\right)\). With \(dA=2\pi r\,dr\):
+    \(Q=\int_0^R V_{max}\!\left(1-\frac{r^2}{R^2}\right)2\pi r\,dr =2\pi V_{max}\!\left[\frac{r^2}{2}-\frac{r^4}{4R^2}\right]_0^R =2\pi V_{max}\!\left(\frac{R^2}{2}-\frac{R^2}{4}\right)=\frac{\pi V_{max}R^2}{2}.\)
+    Then \(\bar V=\dfrac{Q}{\pi R^2}=\mathbf{\dfrac{V_{max}}{2}}\) — confirming the shortcut.</p>
+  </div>
+  <p class="qt-line qt-trap" style="margin-top:10px;"><span class="lbl" style="color:var(--eq);">⚠ Trap &amp; fix:</span> dropping the \(2\pi r\) and integrating \(u\,dr\) alone. Each ring's area grows with radius, so the \(2\pi r\) factor is essential — write \(dA\) explicitly every time.</p>
+</div>
+
+<!-- Type 5 -->
+<div class="card-bracket" style="--bracket-c:var(--tip);margin-bottom:16px;">
+  <div class="card-title" style="color:var(--tip);border-color:var(--tip);">5 · Continuity — many ports / mass vs volume / unsteady</div>
+  <p class="qt-line"><span class="lbl" style="color:var(--tip);">Recognise it by:</span> a duct that branches; a tank filling or emptying; "air and water" with different densities; "find the velocity in the other branch."</p>
+  <p class="qt-line"><span class="lbl" style="color:var(--muted);">Why continuity:</span> <span style="color:var(--muted);">mass can't be created or destroyed, so the mass streams through the control volume must balance.</span></p>
+  <div class="step-block"><div class="step-num">1</div><div class="step-content"><h4>Draw the CV and mark every port</h4><p>Label each inlet/outlet, and tag its flux sign (outlet +, inlet −) from the outward normal.</p></div></div>
+  <div class="step-block"><div class="step-num">2</div><div class="step-content"><h4>Steady &amp; incompressible</h4><p>Storage drops, density cancels: \(\sum Q_{in}=\sum Q_{out}\). For one pipe, \(A_1V_1=A_2V_2\).</p></div></div>
+  <div class="step-block"><div class="step-num">3</div><div class="step-content"><h4>Different fluids ⇒ balance mass</h4><p>If densities differ, use \(\dot m=\rho Q\); volume is <em>not</em> conserved across the interface.</p></div></div>
+  <div class="step-block"><div class="step-num">4</div><div class="step-content"><h4>Filling or draining ⇒ keep the storage term</h4><p>\(\frac{d}{dt}\!\int_{CV}\rho\,d\forall=\sum\dot m_{in}-\sum\dot m_{out}\); relate the storage rate to \(dh/dt\) through the tank's surface area.</p></div></div>
+  <p class="qt-line qt-trap"><span class="lbl" style="color:var(--eq);">⚠ Trap &amp; fix:</span> setting volume flows equal across an air/water boundary. When \(\rho\) changes, only the <em>mass</em> flows balance — convert with \(\dot m=\rho Q\).</p>
+</div>
+
+<!-- Type 6 -->
+<div class="card-bracket eq-card" style="margin-bottom:16px;">
+  <div class="card-title">6 · Force on a surface / vane / nozzle (including a moving CV)</div>
+  <p class="qt-line"><span class="lbl" style="color:var(--eq);">Recognise it by:</span> a jet striking or turning on a plate/vane; nozzle thrust; "anchoring force"; "force needed to hold it in place."</p>
+  <p class="qt-line"><span class="lbl" style="color:var(--muted);">Why momentum:</span> <span style="color:var(--muted);">a force is whatever changes the fluid's momentum, and the momentum equation reads that change straight off the inlet/outlet fluxes.</span></p>
+  <div class="step-block"><div class="step-num">1</div><div class="step-content"><h4>Sketch the CV, choose +x/+y</h4><p>Cut the CV around the fluid touching the surface and fix your axes before any algebra.</p></div></div>
+  <div class="step-block"><div class="step-num">2</div><div class="step-content"><h4>Get every port velocity</h4><p>Continuity for an area change; Bernoulli for a free jet (open to air at both ends ⇒ pressure cancels ⇒ speed is unchanged, only direction turns).</p></div></div>
+  <div class="step-block"><div class="step-num">3</div><div class="step-content"><h4>Mass flow rate</h4><p>\(\dot m=\rho A V\) at each port.</p></div></div>
+  <div class="step-block"><div class="step-num">4</div><div class="step-content"><h4>Momentum, one component at a time</h4><p>\(\sum F_x=\sum\dot m V_x\big|_{out}-\sum\dot m V_x\big|_{in}\); repeat for \(y\). A velocity pointing in \(-x\) carries a minus sign.</p></div></div>
+  <div class="step-block"><div class="step-num">5</div><div class="step-content"><h4>Solve for the reaction on the fluid</h4><p>The CS pressure forces and the unknown reaction \(R\) sit on the left; solve for \(R\).</p></div></div>
+  <div class="step-block"><div class="step-num">6</div><div class="step-content"><h4>Flip to the force on the body</h4><p>The force <em>on the vane/plate</em> is equal and opposite to the reaction on the fluid (Newton's 3rd law).</p></div></div>
+  <p class="qt-line"><span class="lbl" style="color:var(--eq);">Moving CV:</span> if the surface moves at constant speed, replace every \(V\) with the relative velocity \(\vec V_{f/b}=\vec V_{flow}-\vec V_{body}\) — in <em>both</em> \(\dot m\) and the momentum term.</p>
+  <div style="background:rgba(9,60,93,.04);border:1px solid rgba(9,60,93,.14);border-radius:8px;padding:11px 14px;margin:12px 0 2px;font-size:13px;line-height:1.65;">
+    <div style="font-weight:600;color:var(--deriv);margin-bottom:5px;">▸ Worked mini-example</div>
+    <p style="margin:0;">A water jet (\(V=20\ \text{m/s}\), area \(A=0.001\ \text{m}^2\)) hits a fixed flat plate head-on and spreads sideways, so the outgoing \(x\)-velocity is 0. Mass flow \(\dot m=\rho AV=1000(0.001)(20)=20\ \text{kg/s}\). In \(x\): \(-R = \dot m(0)-\dot m(20)\Rightarrow R=\dot m V=20(20)=\mathbf{400\ \text{N}}\), pushing the plate downstream.</p>
+  </div>
+  <p class="qt-line qt-trap" style="margin-top:10px;"><span class="lbl" style="color:var(--eq);">⚠ Trap &amp; fix:</span> the inlet flux sign (\(\vec V\cdot\hat n<0\)), and confusing "force on the fluid" with "force on the body." Solve for the reaction on the fluid, then negate.</p>
+</div>
+
+<!-- Type 7 -->
+<div class="card-bracket eq-card" style="margin-bottom:16px;">
+  <div class="card-title">7 · Sluice gate / open-channel force</div>
+  <p class="qt-line"><span class="lbl" style="color:var(--eq);">Recognise it by:</span> water flowing under a gate, with an upstream depth \(h_1\) and a smaller downstream depth \(h_2\); "find the force on the gate."</p>
+  <p class="qt-line"><span class="lbl" style="color:var(--muted);">Why a combination:</span> <span style="color:var(--muted);">you need velocities (Bernoulli + continuity) AND the hydrostatic pressure on each face, then a momentum balance ties them together.</span></p>
+  <div class="step-block"><div class="step-num">1</div><div class="step-content"><h4>Bernoulli between the two free surfaces</h4><p>Both surfaces are open to air (\(p=0\)): \(\frac{V_1^2}{2g}+h_1=\frac{V_2^2}{2g}+h_2\), relating \(V_1\) and \(V_2\).</p></div></div>
+  <div class="step-block"><div class="step-num">2</div><div class="step-content"><h4>Continuity (per unit width)</h4><p>\(h_1V_1=h_2V_2\). Two equations, two velocities — solve them.</p></div></div>
+  <div class="step-block"><div class="step-num">3</div><div class="step-content"><h4>Hydrostatic force on each face</h4><p>\(F=\tfrac12\gamma h^2\) per unit width on the upstream and downstream faces — the pre-known part (see Assumed Knowledge).</p></div></div>
+  <div class="step-block"><div class="step-num">4</div><div class="step-content"><h4>Momentum balance (per unit width)</h4><p>\(F_1-F_{gate}-F_2=\dot m\,(V_2-V_1)\), with \(\dot m=\rho\,q\) and \(q=h_1V_1\).</p></div></div>
+  <div class="step-block"><div class="step-num">5</div><div class="step-content"><h4>Solve for \(F_{gate}\)</h4><p>Every other term is now a number; isolate the gate force.</p></div></div>
+  <div style="background:rgba(9,60,93,.04);border:1px solid rgba(9,60,93,.14);border-radius:8px;padding:11px 14px;margin:12px 0 2px;font-size:13px;line-height:1.65;">
+    <div style="font-weight:600;color:var(--deriv);margin-bottom:5px;">▸ Worked mini-example (per metre of width)</div>
+    <p style="margin:0;">\(h_1=2\ \text{m},\ h_2=0.5\ \text{m}\). Bernoulli + continuity (\(V_2=4V_1\)) give \(15V_1^2=2g(1.5)=29.4\Rightarrow V_1=1.40,\ V_2=5.61\ \text{m/s}\). Face forces \(F_1=\tfrac12(9810)(2)^2=19\,620\), \(F_2=\tfrac12(9810)(0.5)^2=1\,226\ \text{N/m}\); \(\dot m=1000(2)(1.40)=2800\ \text{kg/s per m}\). Momentum: \(F_{gate}=F_1-F_2-\dot m(V_2-V_1)=19\,620-1\,226-2800(4.21)\approx\mathbf{6.6\ \text{kN per metre}}\).</p>
+  </div>
+  <p class="qt-line qt-trap" style="margin-top:10px;"><span class="lbl" style="color:var(--eq);">⚠ Trap &amp; fix:</span> leaving out the hydrostatic forces on the faces — they're the biggest terms in the balance. Always add \(F_1\) and \(F_2\) before solving.</p>
+</div>
+
+<!-- Type 8 -->
+<div class="card-bracket eq-card" style="margin-bottom:24px;">
+  <div class="card-title">8 · Moment / torque (elbow, sprinkler, tipping)</div>
+  <p class="qt-line"><span class="lbl" style="color:var(--eq);">Recognise it by:</span> "moment / torque about a point," "torque required to hold," "will it tip about this edge?"; sprinklers, hinged pipe bends, fans.</p>
+  <p class="qt-line"><span class="lbl" style="color:var(--muted);">Why angular momentum:</span> <span style="color:var(--muted);">a turning effect is governed by the moment form of the momentum law — linear momentum, but every term carries a lever arm.</span></p>
+  <div class="step-block"><div class="step-num">1</div><div class="step-content"><h4>Pick the pivot \(O\) cleverly</h4><p>Place it on a hinge or support so an unknown reaction passes through it and contributes zero moment.</p></div></div>
+  <div class="step-block"><div class="step-num">2</div><div class="step-content"><h4>Find port velocities and ṁ</h4><p>Continuity / Bernoulli for the speeds, then \(\dot m=\rho A V\) at each port.</p></div></div>
+  <div class="step-block"><div class="step-num">3</div><div class="step-content"><h4>Sum moments about \(O\)</h4><p>\(\sum M_O=\sum(\text{arm}\times V)\,\dot m\big|_{out}-\big|_{in}\), and add the moments of any pressure and weight forces.</p></div></div>
+  <div class="step-block"><div class="step-num">4</div><div class="step-content"><h4>Solve, or set the tipping threshold</h4><p>Solve for the required moment, or for a tipping problem set "righting moment = overturning moment."</p></div></div>
+  <p class="qt-line qt-trap"><span class="lbl" style="color:var(--eq);">⚠ Trap &amp; fix:</span> a wrong moment arm (use the <em>perpendicular</em> distance to the line of action) or forgetting the moment of the pressure forces. Draw each force's line of action and drop a perpendicular to \(O\).</p>
 </div>
 
 </div><!-- /m2c-relearn-content -->
