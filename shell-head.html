@@ -180,14 +180,18 @@ body.sb-closed .sidebar-open-btn { display: block; }
 /* ── BACKDROP — not used in flex layout, kept for future mobile overlay ── */
 .sidebar-backdrop { display: none; }
 
-/* ── CONTENT AREA — flex child, fills remaining space ── */
+/* ── CONTENT AREA — flex child, fills ALL remaining space ── */
 .content-area {
   flex: 1;
   min-width: 0;
+  width: 100%;
   padding: 30px 40px 60px;
-  max-width: 1060px;
 }
 body.sb-closed .content-area { padding-left: 52px; }
+/* Centre each page's reading column within the space beside the sidebar.
+   Centring lives on the SECTION (a normal block), not on the flex item —
+   margin:auto on a flex child does not centre, which is why it hugged left. */
+.content-area > section { max-width: 1060px; margin-left: auto; margin-right: auto; }
 
 /* ── SECTIONS — one at a time ── */
 .page-section { display: none; }
