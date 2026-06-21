@@ -6,7 +6,7 @@
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:28px;">
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Reference items</div>
-      <div style="font-size:22px;font-weight:600;color:var(--eq);">31</div>
+      <div style="font-size:22px;font-weight:600;color:var(--eq);">37</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Chapters completed</div>
@@ -14,7 +14,7 @@
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Examples</div>
-      <div style="font-size:22px;font-weight:600;color:var(--deriv);">19</div>
+      <div style="font-size:22px;font-weight:600;color:var(--deriv);">21</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Assignments</div>
@@ -151,6 +151,10 @@
       <li>&rarr; Lateral offset? &mdash; \(x_{cp} = \bar{x} + I_{xy}/(\bar{y}A)\) (for asymmetric shapes)</li>
       <li>&rarr; Moment about a hinge? &mdash; Draw FBD, use F<sub>R</sub> at y<sub>cp</sub>, sum moments</li>
       <li>&rarr; Gage pressure simplification? &mdash; Set p<sub>a</sub> = 0, then \(\bar{h}\) is depth below liquid surface</li>
+      <li>&rarr; <strong>Curved</strong> surface, horizontal force? &mdash; Flat-plate force on the vertical projection: \(F_H = (\gamma h_{CG} + p_a)A_{\text{proj}}\)</li>
+      <li>&rarr; Curved surface, vertical force? &mdash; Weight of fluid above (real or imaginary): \(F_V = \gamma\forall_{\text{above}}\) (+ \(p_aA\))</li>
+      <li>&rarr; Curved surface, resultant &amp; angle? &mdash; \(F = \sqrt{F_H^2 + F_V^2}\), \(\theta = \tan^{-1}(F_V/F_H)\)</li>
+      <li>&rarr; Where do they act? &mdash; \(x_{CP} = \sum W_ix_i/F_V\) (for \(F_V\)); \(z_{CP} = h_{CG} + I_{xx}/(h_{CG}A)\) (for \(F_H\))</li>
     </ul>
 
     <p><strong style="color:var(--ch2-title)">&#9888; Traps:</strong></p>
@@ -158,6 +162,9 @@
       <li>\(\bar{y}\) is measured along the inclined surface from the free-surface line, not vertically &mdash; vertical depth is \(\bar{h}\) = \(\bar{y}\) sin&theta;</li>
       <li>I<sub>xx</sub> must be about the centroidal axis of the shape &mdash; don&rsquo;t use the parallel axis value</li>
       <li>Center of pressure approaches centroid as depth increases (offset &prop; 1/\(\bar{y}\)) &mdash; deep surfaces have negligible offset</li>
+      <li>On a curved surface, \(F_H\) uses the <strong>projected</strong> area and \(F_V\) uses a <strong>volume</strong> (weight of fluid) &mdash; never multiply a pressure by the curved area</li>
+      <li>Get the <strong>direction of \(F_V\)</strong> right: fluid physically above pushes down; fluid below pushes up (imaginary column / buoyancy)</li>
+      <li>In a pressurised chamber, keep \(p_a\) in \(F_H\); for \(F_V\) on a symmetric surface (e.g. hemisphere) uniform \(p_a\) cancels vertically</li>
     </ol>
   </div>
 
@@ -291,6 +298,9 @@
       <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Force on flat surface</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(F_R = \gamma \bar{h} A\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\bar{h}\) = depth to centroid</td></tr>
       <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Where does F<sub>R</sub> act?</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(y_{cp} = \bar{y} + I_{xx}/(\bar{y}A)\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Always below centroid</td></tr>
       <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Hinge/gate equilibrium</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">FBD + &Sigma;M about hinge = 0</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Use F<sub>R</sub> at y<sub>cp</sub></td></tr>
+      <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Curved surface &mdash; horizontal</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(F_H = (\gamma h_{CG}+p_a)A_{\text{proj}}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Flat plate on vertical projection</td></tr>
+      <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Curved surface &mdash; vertical</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(F_V = \gamma\forall_{\text{above}}\) (+ \(p_aA\))</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Weight of fluid above (real/imaginary)</td></tr>
+      <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Curved surface &mdash; resultant</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(F = \sqrt{F_H^2+F_V^2}\), \(\theta = \tan^{-1}(F_V/F_H)\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Circular arc &rarr; line hits centre</td></tr>
       <tr style="border-left:3px solid var(--ch3-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Two points on a streamline</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(P/\rho + V^2/2 + gz = \text{const}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Steady, inviscid, 1 streamline</td></tr>
       <tr style="border-left:3px solid var(--ch3-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Tank draining / free jet</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(V = \sqrt{2gz}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Torricelli; open surface at rest</td></tr>
       <tr style="border-left:3px solid var(--ch3-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Velocity from Pitot tube</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(V = \sqrt{2(P_0-P)/\rho}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Stagnation &minus; static</td></tr>

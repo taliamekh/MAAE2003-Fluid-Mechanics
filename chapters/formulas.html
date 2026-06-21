@@ -188,6 +188,78 @@
         </div>
       </div>
 
+      <div class="fs-card" data-num="32" data-ch="2" data-name="Resultant Force on Curved Surface" data-vars='{"#D32F2F|FH":"F_H — horizontal force component (N)","#D32F2F|FV":"F_V — vertical force component (N)","#D32F2F|F":"F — resultant hydrostatic force (N)"}'>
+        <div class="fs-top"><span class="fs-name">Resultant Force on Curved Surface <span class="fs-num">#32</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{F} = \sqrt{\textcolor{#D32F2F}{F_H}^{\,2} + \textcolor{#D32F2F}{F_V}^{\,2}} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">On a curved surface the load is resolved into a <strong>horizontal</strong> and a <strong>vertical</strong> component; the resultant is their vector sum. Since the two components are perpendicular, they combine as the legs of a right triangle.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>both F_H and F_V are known and you need the magnitude of the single equivalent force on a curved gate, dam, tank end, or pipe wall.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>adding the components arithmetically — \(F \neq F_H + F_V\). They act in different directions.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">Resultant = √(F_H² + F_V²). Perpendicular components, Pythagorean sum.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="33" data-ch="2" data-name="Line of Action Angle (Curved Surface)" data-vars='{"#7B1FA2|θ":"θ — angle of resultant below the horizontal","#D32F2F|FV":"F_V — vertical force component (N)","#D32F2F|FH":"F_H — horizontal force component (N)"}'>
+        <div class="fs-top"><span class="fs-name">Line of Action Angle (Curved Surface) <span class="fs-num">#33</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#7B1FA2}{\theta} = \tan^{-1}\!\left(\frac{\textcolor{#D32F2F}{F_V}}{\textcolor{#D32F2F}{F_H}}\right) \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">The direction of the resultant force, measured below the horizontal. The line of action passes through the centre-of-pressure point located by \(x_{CP}\) and \(z_{CP}\).</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>reporting the orientation of the resultant on a curved surface.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>locating the force by itself — pair with x_CP (#36) and z_CP (#37) for the point it passes through.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">θ = tan⁻¹(F_V/F_H). For a circular arc the line passes through the centre.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="34" data-ch="2" data-name="Horizontal Component (Curved Surface)" data-vars='{"#D32F2F|FH":"F_H — horizontal force on the curved surface (N)","#D32F2F|pCG":"p_CG — pressure at the centroid of the projection (Pa)","#D32F2F|pa":"p_a — surface / chamber gauge pressure (Pa)","#1565C0|Aac":"A_ac — area of the vertical projection (m²)","#1565C0|hCG":"h_CG — depth of the projection centroid below the free surface (m)","#2E7D32|γ":"γ — specific weight of the fluid (N/m³)"}'>
+        <div class="fs-top"><span class="fs-name">Horizontal Component (Curved Surface) <span class="fs-num">#34</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{F_H} = \textcolor{#D32F2F}{p_{CG}} \, \textcolor{#1565C0}{A_{ac}} = (\textcolor{#2E7D32}{\gamma} \, \textcolor{#1565C0}{h_{CG}} + \textcolor{#D32F2F}{p_a}) \, \textcolor{#1565C0}{A_{ac}} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">The horizontal force on a curved surface equals the flat-plate force on its <strong>vertical projection</strong>. Project the surface onto a vertical plane, find the centroid depth of that projection, and apply the plane-surface result.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>the sideways force on any curved surface; keep the p_a term for a pressurised chamber.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>A_ac is the projected (flat) area, never the curved surface area. Open tank ⇒ p_a = 0 (gauge).</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">F_H = (γh_CG + p_a)A_proj. Flat-plate force on the vertical projection.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="35" data-ch="2" data-name="Vertical Component (Curved Surface)" data-vars='{"#D32F2F|FV":"F_V — vertical force on the curved surface (N)","#D32F2F|pa":"p_a — surface gauge pressure (Pa)","#2E7D32|γ":"γ — specific weight of the fluid (N/m³)","#E65100|∀":"∀ — volume of fluid above the surface, up to the free surface (m³)","#1565C0|A":"A — horizontal projected area under the surface load (m²)"}'>
+        <div class="fs-top"><span class="fs-name">Vertical Component (Curved Surface) <span class="fs-num">#35</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{F_V} = \textcolor{#2E7D32}{\gamma} \, \textcolor{#E65100}{\forall}_{\text{above}} + \textcolor{#D32F2F}{p_a}\,\textcolor{#1565C0}{A} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">The vertical force equals the <strong>weight of fluid above the surface</strong> (up to the free surface), plus any surface-pressure load. Split the column into simple sub-volumes and add their weights.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>the vertical force on any curved surface. Fluid above ⇒ acts down; fluid below ⇒ use the imaginary column, acts up (buoyancy).</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>pressure × curved area — F_V is a weight of fluid, i.e. γ × volume. Open tank ⇒ drop p_a A.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">F_V = γ∀_above (+ p_a A). Weight of fluid above, real or imaginary.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="36" data-ch="2" data-name="Horizontal CP of Vertical Force (x_CP)" data-vars='{"#1565C0|xCP":"x_CP — horizontal position of F_V&apos;s line of action (m)","#D32F2F|Wair":"W_air — weight from the surface-pressure load (N)","#D32F2F|W1":"W_1 — weight of sub-volume 1 (N)","#D32F2F|W2":"W_2 — weight of sub-volume 2 (N)","#D32F2F|FV":"F_V — total vertical force (N)","#E65100|xair":"x_air — centroid arm of the surface-load area (m)","#E65100|x1":"x_1 — centroid arm of sub-volume 1 (m)","#E65100|x2":"x_2 — centroid arm of sub-volume 2 (m)"}'>
+        <div class="fs-top"><span class="fs-name">Horizontal CP of Vertical Force (x_CP) <span class="fs-num">#36</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#1565C0}{x_{CP}} = \frac{\textcolor{#D32F2F}{W_1}\textcolor{#E65100}{x_1} + \textcolor{#D32F2F}{W_2}\textcolor{#E65100}{x_2} + \textcolor{#D32F2F}{W_{air}}\textcolor{#E65100}{x_{air}}}{\textcolor{#D32F2F}{F_V}} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">Locates the line of the vertical force by a moment balance about a convenient axis (\(\sum M_o = 0\)). It is the weight-weighted average of the sub-volume centroids; the horizontal forces produce no moment and drop out.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>finding where F_V acts on a curved surface. Centroid of a quarter-circle radius r is 4r/3π from each straight edge.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>locating the horizontal force — that is z_CP (#37). Drop the W_air term for an open tank.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">x_CP = Σ(W_i x_i)/F_V. Weighted average of sub-volume centroids.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="37" data-ch="2" data-name="Vertical CP of Horizontal Force (z_CP)" data-vars='{"#1565C0|zCP":"z_CP — depth of F_H&apos;s line of action below the free surface (m)","#1565C0|hCG":"h_CG — centroid depth of the projection (m)","#1565C0|Aac":"A_ac — projected area (m²)","#00838F|Ixx":"I_xx — 2nd moment of area of the projection about its own centroid (m⁴)"}'>
+        <div class="fs-top"><span class="fs-name">Vertical CP of Horizontal Force (z_CP) <span class="fs-num">#37</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#1565C0}{z_{CP}} = \textcolor{#1565C0}{h_{CG}} + \frac{\textcolor{#00838F}{I_{xx}}}{\textcolor{#1565C0}{h_{CG}} \, \textcolor{#1565C0}{A_{ac}}} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">Locates the depth at which the horizontal force acts. Identical to the plane-surface centre of pressure (#13) applied to the <strong>projection</strong>: \(z_{CP} = z_{CG} + y_{CP}\) with \(y_{CP} = -I_{xx}/(h_{CG}A)\).</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>finding where F_H acts on a curved surface.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>I_xx and the centroid belong to the projection, not the curved surface. Locating F_V is x_CP (#36).</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">z_CP = h_CG + I_xx/(h_CG A_proj). Centre of pressure of the projection.</p></div>
+        </div>
+      </div>
+
     </div>
 
     <h2 style="color:var(--ch3-title);">Ch 3 &mdash; Bernoulli&rsquo;s Equation</h2>
