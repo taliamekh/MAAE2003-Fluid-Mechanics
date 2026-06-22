@@ -676,5 +676,53 @@
         </div>
       </div>
 
+      <div class="fs-card" data-num="53" data-ch="6" data-name="Dimensionless Head Loss (Type 2)" data-vars='{"#00838F|ζ":"ζ — dimensionless head-loss group (dimensionless)","#2E7D32|g":"g — gravitational acceleration (9.81 m/s²)","#1565C0|d":"d — pipe diameter (m)","#1565C0|h":"h_f — friction head loss (m)","#1565C0|L":"L — pipe length (m)","#2E7D32|ν":"ν — kinematic viscosity (m²/s)"}'>
+        <div class="fs-top"><span class="fs-name">Dimensionless Head Loss \(\zeta\) (Type 2) <span class="fs-num">#53</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#00838F}{\zeta} = \frac{\textcolor{#2E7D32}{g}\,\textcolor{#1565C0}{d}^3\,\textcolor{#1565C0}{h_f}}{\textcolor{#1565C0}{L}\,\textcolor{#2E7D32}{\nu}^2} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">Bundles every known of a <strong>Type 2</strong> problem into one dimensionless group with <strong>no velocity</strong> in it. Equal to \(\tfrac12 f\,\mathrm{Re}_d^2\), it is the key that makes the Reynolds number solvable explicitly.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>starting a Type 2 problem (given \(d\) and \(h_f\), find \(Q\)) &mdash; compute \(\zeta\) first.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>Type 1 or Type 3 problems; it assumes \(h_f\) and \(d\) are both already known.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">ζ = g d³ h_f/(L ν²) = ½ f Re_d². Type 2 starting point; no velocity inside.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="54" data-ch="6" data-name="Reynolds Number Explicit (Type 2)" data-vars='{"#00838F|Re":"Re_d — Reynolds number (dimensionless)","#00838F|ζ":"ζ — dimensionless head-loss group (from #53)","#1565C0|ε":"ε — wall roughness height (m)","#1565C0|d":"d — pipe diameter (m)"}'>
+        <div class="fs-top"><span class="fs-name">Reynolds Number, Explicit (Type 2) <span class="fs-num">#54</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#00838F}{\mathrm{Re}_d} = -\,(8\,\textcolor{#00838F}{\zeta})^{1/2}\,\log\!\left(\frac{\textcolor{#1565C0}{\varepsilon}/\textcolor{#1565C0}{d}}{3.7} + \frac{1.775}{\sqrt{\textcolor{#00838F}{\zeta}}}\right) \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">The Colebrook turbulent-friction law (#51) <strong>inverted</strong> using \(\zeta = \tfrac12 f\,\mathrm{Re}_d^2\). It returns \(\mathrm{Re}_d\) straight from the knowns &mdash; no Moody chart, no iteration.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>the Type 2 analysis problem, once \(\zeta\) and \(\varepsilon/d\) are known (turbulent flow).</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>laminar flow &mdash; it is built from the turbulent Colebrook law; always check the result is \(>4000\).</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">Explicit Re_d for Type 2. Then V = ν Re_d/d and Q = (π/4)d²V.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="55" data-ch="6" data-name="Diameter from Darcy-Weisbach (Type 3)" data-vars='{"#1565C0|d":"d — pipe diameter (m)","#00838F|f":"f — Darcy friction factor (dimensionless)","#1565C0|L":"L — pipe length (m)","#E65100|Q":"Q — volume flow rate (m³/s)","#2E7D32|g":"g — gravitational acceleration (9.81 m/s²)","#1565C0|h":"h_f — friction head loss (m)"}'>
+        <div class="fs-top"><span class="fs-name">Diameter from Darcy&ndash;Weisbach (Type 3) <span class="fs-num">#55</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#1565C0}{d}^5 = \frac{8\,\textcolor{#00838F}{f}\,\textcolor{#1565C0}{L}\,\textcolor{#E65100}{Q}^2}{\pi^2\,\textcolor{#2E7D32}{g}\,\textcolor{#1565C0}{h_f}} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">Darcy&ndash;Weisbach with \(V = 4Q/(\pi d^2)\) substituted in and solved for \(d^5\). Given a friction factor it returns a trial diameter &mdash; the inner step of the <strong>Type 3</strong> iteration.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>sizing a pipe (Type 3: given \(Q\) and \(h_f\), find \(d\)); recompute \(d\) each pass after updating \(f\).</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>a one-shot answer &mdash; \(f\) depends on \(d\), so iterate with the Moody chart until \(f\) settles.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">d⁵ = 8 f L Q²/(π² g h_f). Type 3 design; iterate f via Moody.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="56" data-ch="6" data-name="Reynolds Number from Flow Rate" data-vars='{"#00838F|Re":"Re_d — Reynolds number (dimensionless)","#E65100|Q":"Q — volume flow rate (m³/s)","#1565C0|d":"d — pipe diameter (m)","#2E7D32|ν":"ν — kinematic viscosity (m²/s)"}'>
+        <div class="fs-top"><span class="fs-name">Reynolds Number from Flow Rate <span class="fs-num">#56</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#00838F}{\mathrm{Re}_d} = \frac{4\,\textcolor{#E65100}{Q}}{\pi\,\textcolor{#1565C0}{d}\,\textcolor{#2E7D32}{\nu}} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">The Reynolds number written in terms of the flow rate, using \(V = 4Q/(\pi d^2)\). Convenient whenever \(Q\) is fixed and the diameter is the unknown being iterated.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>computing \(\mathrm{Re}_d\) during a Type 3 iteration, or any time you have \(Q\) and \(d\) but not \(V\).</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>nothing special &mdash; it is just \(\mathrm{Re}_d = Vd/\nu\) rewritten; identical physics.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">Re_d = 4Q/(π d ν). Re from flow rate; handy in Type 3 iteration.</p></div>
+        </div>
+      </div>
+
   </div>
 </section>

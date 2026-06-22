@@ -6,7 +6,7 @@
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:28px;">
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Reference items</div>
-      <div style="font-size:22px;font-weight:600;color:var(--eq);">52</div>
+      <div style="font-size:22px;font-weight:600;color:var(--eq);">56</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Chapters completed</div>
@@ -14,7 +14,7 @@
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Examples</div>
-      <div style="font-size:22px;font-weight:600;color:var(--deriv);">29</div>
+      <div style="font-size:22px;font-weight:600;color:var(--deriv);">32</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Assignments</div>
@@ -124,6 +124,16 @@
       <div class="branch"><strong>Turbulent (\(\mathrm{Re}_d &gt; 4000\))?</strong> &rarr; need \(\varepsilon/d\), then read \(f\) off the <strong>Moody chart</strong> (or Colebrook / Haaland: \(1/f^{1/2} \approx -1.8\log[6.9/\mathrm{Re}_d + (\varepsilon/d/3.7)^{1.11}]\)).</div>
       <div class="branch"><strong>Have \(f\) &mdash; want the loss?</strong> &rarr; Darcy&ndash;Weisbach: \(h_f = f\frac{L}{d}\frac{V^2}{2g}\).</div>
       <div class="branch"><strong>Need a pressure drop instead?</strong> &rarr; horizontal pipe: \(\Delta p = \gamma h_f\). With elevation/velocity change, feed \(h_f\) into the head equation (#43).</div>
+    </div>
+  </div>
+
+  <div class="decision-tree card-bracket" style="border-left-color:var(--ch6-title);">
+    <h3 style="color:var(--ch6-title);margin-top:0;">Which Pipe-Flow Problem? (Type 1 / 2 / 3)</h3>
+    <div class="tree">
+      <div class="branch"><strong>What is unknown?</strong> &rarr; the missing one of \(\{d,\,Q,\,h_f\}\) names the type. Decide this <em>before</em> any arithmetic.</div>
+      <div class="branch"><strong>\(h_f\) unknown (\(d,\,Q\) given) &mdash; Type 1, rating.</strong> &rarr; march straight through: \(V=\tfrac{4Q}{\pi d^2}\to\mathrm{Re}_d\to f\to h_f=f\tfrac{L}{d}\tfrac{V^2}{2g}\). Nothing is circular.</div>
+      <div class="branch"><strong>\(Q\) unknown (\(d,\,h_f\) given) &mdash; Type 2, analysis.</strong> &rarr; explicit: \(\zeta=\tfrac{gd^3h_f}{L\nu^2}\), then \(\mathrm{Re}_d=-(8\zeta)^{1/2}\log\!\big(\tfrac{\varepsilon/d}{3.7}+\tfrac{1.775}{\sqrt{\zeta}}\big)\), then \(V=\nu\mathrm{Re}_d/d\), \(Q=\tfrac{\pi}{4}d^2V\). (Or iterate on \(f\).)</div>
+      <div class="branch"><strong>\(d\) unknown (\(Q,\,h_f\) given) &mdash; Type 3, design.</strong> &rarr; iterate: guess \(f\) &rarr; \(d^5=\tfrac{8fLQ^2}{\pi^2 g h_f}\) &rarr; \(\mathrm{Re}_d=\tfrac{4Q}{\pi d\nu}\), \(\varepsilon/d\) &rarr; Moody &rarr; repeat until \(f\) settles.</div>
     </div>
   </div>
 
@@ -337,7 +347,7 @@
   <h2 style="color:var(--ch6-title);">Ch 6 — Pipe Flow &amp; Losses</h2>
   <div class="card-bracket" style="border-left:3.5px solid var(--ch6-title);">
     <div class="eq-name" style="color:var(--ch6-title);">Ch 6 &mdash; Pipe Flow &amp; Losses</div>
-    <p style="color:var(--muted);font-size:12px;margin-top:-2px;">Lecture 6.1 of 3 complete (6.2&ndash;6.3 pending)</p>
+    <p style="color:var(--muted);font-size:12px;margin-top:-2px;">Lectures 6.1&ndash;6.2 of 3 complete (6.3 pending)</p>
 
     <p><strong style="color:var(--ch6-title)">Key ideas:</strong></p>
     <ul>
@@ -345,6 +355,7 @@
       <li>&rarr; The Reynolds number \(\mathrm{Re}_d\) (inertia &divide; viscosity) decides the regime &mdash; and the regime decides the method</li>
       <li>&rarr; Darcy&ndash;Weisbach \(h_f = f\frac{L}{d}\frac{V^2}{2g}\) is the master tool; everything reduces to finding the friction factor \(f\)</li>
       <li>&rarr; Laminar \(f\) is exact (\(64/\mathrm{Re}_d\)); turbulent \(f\) depends on roughness and comes from the Moody chart / Colebrook</li>
+      <li>&rarr; Three single-pipe problems by what is unknown: <strong>Type 1</strong> (\(d,Q\!\to\! h_f\), rating), <strong>Type 2</strong> (\(d,h_f\!\to\! Q\), analysis), <strong>Type 3</strong> (\(Q,h_f\!\to\! d\), design) &mdash; Types 2 &amp; 3 hide \(V\), so \(f\) is unknown up front</li>
     </ul>
 
     <p><strong style="color:var(--ch6-title)">When to use what:</strong></p>
@@ -355,6 +366,8 @@
       <li>&rarr; Head loss from \(f\)? &mdash; \(h_f = f\frac{L}{d}\frac{V^2}{2g}\)</li>
       <li>&rarr; Pressure drop (horizontal)? &mdash; \(\Delta p = \gamma h_f\)</li>
       <li>&rarr; Loss between two points at different heights? &mdash; feed \(h_f\) into the head equation (#43)</li>
+      <li>&rarr; Find \(Q\) from \(d\) &amp; \(h_f\) (Type 2)? &mdash; \(\zeta=\frac{gd^3h_f}{L\nu^2}\) then explicit \(\mathrm{Re}_d=-(8\zeta)^{1/2}\log(\cdots)\), or iterate on \(f\)</li>
+      <li>&rarr; Size the pipe \(d\) from \(Q\) &amp; \(h_f\) (Type 3)? &mdash; iterate: guess \(f\to d^5=\frac{8fLQ^2}{\pi^2 g h_f}\to\mathrm{Re}_d=\frac{4Q}{\pi d\nu},\,\varepsilon/d\to\) Moody \(\to\) repeat</li>
     </ul>
 
     <p><strong style="color:var(--ch6-title)">&#9888; Traps:</strong></p>
@@ -363,6 +376,7 @@
       <li>Mixing up Darcy and Fanning friction factors &mdash; \(f_{\text{Darcy}} = 4f_{\text{Fanning}}\); this course&rsquo;s Moody chart is Darcy (laminar line \(64/\mathrm{Re}\))</li>
       <li>Forgetting \(\Delta p = \gamma h_f\) only holds with no elevation/velocity change &mdash; otherwise use the full head equation</li>
       <li>Using gauge vs absolute pressure inconsistently, or skipping the unit conversion on \(Q\) when finding \(V\)</li>
+      <li>Running the Type 1 march on a Type 2 or Type 3 problem &mdash; with \(V\) unknown you cannot get \(\mathrm{Re}_d\) or \(f\); use the explicit \(\zeta\) formula or iterate</li>
     </ol>
   </div>
 
@@ -415,6 +429,9 @@
       <tr style="border-left:3px solid var(--ch6-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Turbulent friction factor</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Moody chart, or Colebrook / Haaland</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Needs \(\varepsilon/d\); &lt; 15% error</td></tr>
       <tr style="border-left:3px solid var(--ch6-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Head loss &rarr; pressure drop</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\Delta p = \gamma h_f\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Horizontal pipe (no \(\Delta z\), no \(\Delta V\))</td></tr>
       <tr style="border-left:3px solid var(--ch6-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Head loss from wall shear</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(h_f = \frac{4\tau_w}{\rho g}\frac{L}{d}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Exact force-balance form</td></tr>
+      <tr style="border-left:3px solid var(--ch6-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Find \(h_f\) &mdash; Type 1 (\(d,Q\) known)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(V\to\mathrm{Re}_d\to f\to h_f=f\frac{L}{d}\frac{V^2}{2g}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Rating; one straight pass</td></tr>
+      <tr style="border-left:3px solid var(--ch6-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Find \(Q\) &mdash; Type 2 (\(d,h_f\) known)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\zeta=\frac{gd^3h_f}{L\nu^2}\), then explicit \(\mathrm{Re}_d\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Analysis; no iteration (or iterate \(f\))</td></tr>
+      <tr style="border-left:3px solid var(--ch6-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Size pipe \(d\) &mdash; Type 3 (\(Q,h_f\) known)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(d^5=\frac{8fLQ^2}{\pi^2 g h_f}\), iterate via Moody</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Design; always iterate</td></tr>
     </tbody>
   </table>
 

@@ -11,7 +11,7 @@ CHAPTER_ORDER = [
     "ch3-lec1", "ch3-lec2", "ch3-prob",
     "ch4-notes", "ch4-prob",
     "ch5-lec1", "ch5-lec2", "ch5-lec3", "ch5-lec4", "ch5-prob",
-    "ch6-lec1", "ch6-prob",
+    "ch6-lec1", "ch6-lec2", "ch6-prob",
     "formulas", "m2sheet", "m1prep", "m2prep", "m2prep-concepts", "m2prep-sample", "m2prep-predicted", "final",
     "lab1", "lab2", "lab3",
     "summary", "progress",
