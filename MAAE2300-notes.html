@@ -5900,6 +5900,139 @@ p.concept-bridge { font-size: 13px !important; color: var(--muted) !important; }
   <p>This closes the RTT chapter: mass, linear momentum, angular momentum, and now energy &mdash; the four control-volume conservation laws that underpin essentially all of applied fluid mechanics.</p>
 </div>
 
+<!-- ═══════════ PROBLEM PLAYBOOK — STEP-BY-STEP BY QUESTION TYPE ═══════════ -->
+<h2 style="color:var(--ch5-title);">Problem Playbook &mdash; Step-by-Step by Question Type</h2>
+
+<p>Every energy-equation question on this material reduces to one of four patterns. Find your pattern in the table, then follow the matching recipe below &mdash; each one lists the exact steps and the equation used at every step.</p>
+
+<table class="qr-table">
+  <thead>
+    <tr><th>If the question asks for&hellip;</th><th>Use recipe</th><th>Governing equation</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Pump/turbine/fan <strong>head, power, or efficiency</strong></td>
+      <td><strong style="color:var(--def);">A</strong> &mdash; Machine sizing</td>
+      <td>\(\dot{W}_f = \rho Q g\,h\)</td>
+    </tr>
+    <tr>
+      <td>A <strong>pressure, velocity, elevation, or head loss</strong> at a section</td>
+      <td><strong style="color:var(--def);">B</strong> &mdash; Solve a section</td>
+      <td>\(\frac{p}{\gamma}+\frac{V^2}{2g}+z\) at 1 and 2</td>
+    </tr>
+    <tr>
+      <td>A <strong>temperature rise</strong>, heat, or internal-energy change</td>
+      <td><strong style="color:var(--def);">C</strong> &mdash; Thermal/energy form</td>
+      <td>\(g\,h_{\text{loss}} = c\,\Delta T - q\)</td>
+    </tr>
+    <tr>
+      <td>The <strong>correction factor \(\alpha\)</strong> from a velocity profile</td>
+      <td><strong style="color:var(--def);">D</strong> &mdash; KE correction</td>
+      <td>\(\alpha = \frac{1}{A}\int\!\left(\frac{u}{V_{\text{av}}}\right)^{3}dA\)</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ── RECIPE A ── -->
+<h3>Recipe A &mdash; Pump or Turbine Sizing</h3>
+
+<div class="card-bracket def-card">
+  <div class="eq-name" style="color:var(--def);">A &mdash; Machine head, power &amp; efficiency</div>
+  <p><strong>When you see it:</strong> a pump, turbine, fan, or compressor sits between two points, and you are asked for its head, the power it delivers/consumes, or its efficiency. Usually two pressures and/or an elevation change are given across the machine.</p>
+  <p style="margin-bottom:2px;"><strong>Steps:</strong></p>
+  <ol style="margin:6px 0;padding-left:20px;line-height:1.7;">
+    <li>Pick the control volume from <strong>inlet (1) to outlet (2)</strong>. Use continuity to get every velocity and the mass flow:
+      <div style="overflow-x:auto;overflow-y:hidden;">\[A=\tfrac{\pi}{4}D^2,\qquad V=\frac{Q}{A},\qquad \dot{m}=\rho Q\]</div>
+    </li>
+    <li>Write the head equation with the machine term, then solve for the machine head. A <strong>pump adds</strong> head (left side); a <strong>turbine removes</strong> it (right side). Keep only the machine you actually have and set the other to zero; drop \(\alpha\) if the flow is turbulent:
+      <div style="overflow-x:auto;overflow-y:hidden;">\[\frac{p_1}{\gamma}+\frac{\alpha_1 V_1^2}{2g}+z_1 + h_{\text{pump}} = \frac{p_2}{\gamma}+\frac{\alpha_2 V_2^2}{2g}+z_2 + h_{\text{loss}} + h_{\text{turbine}}\]</div>
+    </li>
+    <li>Convert that head into the <strong>hydraulic (fluid) power</strong> &mdash; the power actually transferred to or from the fluid:
+      <div style="overflow-x:auto;overflow-y:hidden;">\[\dot{W}_f = \dot{m}\,g\,h = \rho Q g\,h\]</div>
+    </li>
+    <li>Apply the efficiency in the correct orientation, then rearrange for whatever power the question wants (shaft, electrical, etc.). Useful output always goes on top:
+      <div style="overflow-x:auto;overflow-y:hidden;">\[\eta_{\text{pump}} = \frac{\dot{W}_f}{\dot{W}_{\text{shaft}}},\qquad \eta_{\text{turbine}} = \frac{\dot{W}_{\text{shaft}}}{\dot{W}_f}\]</div>
+    </li>
+  </ol>
+  <p style="margin-top:8px;"><strong style="color:var(--tip);">&starf; Watch out:</strong> a negative <em>gage</em> pressure on the suction side is physical (below atmospheric) &mdash; keep the sign. It correctly <em>increases</em> the head a pump must supply. This is exactly the chain used in <a href="#ch5-lec4" onclick="showSection('ch5-lec4')" style="color:var(--def);">Example 1</a> above.</p>
+</div>
+
+<!-- ── RECIPE B ── -->
+<h3>Recipe B &mdash; Solve for a Quantity at a Section</h3>
+
+<div class="card-bracket def-card">
+  <div class="eq-name" style="color:var(--def);">B &mdash; Find \(p\), \(V\), \(z\), or \(h_{\text{loss}}\)</div>
+  <p><strong>When you see it:</strong> flow between two points in a pipe or duct with friction, no machine (or a machine whose head is already known), and you must find a single missing pressure, velocity, elevation, or the head loss itself.</p>
+  <p style="margin-bottom:2px;"><strong>Steps:</strong></p>
+  <ol style="margin:6px 0;padding-left:20px;line-height:1.7;">
+    <li>Label the two sections 1 and 2, list every known, and circle the one unknown.</li>
+    <li>Get any velocity you are missing from continuity (a diameter change is the usual giveaway):
+      <div style="overflow-x:auto;overflow-y:hidden;">\[V_2 = V_1\frac{A_1}{A_2} = V_1\!\left(\frac{D_1}{D_2}\right)^{2}\]</div>
+    </li>
+    <li>Write the head equation and isolate the unknown term. For head loss, group the two sections:
+      <div style="overflow-x:auto;overflow-y:hidden;">\[h_{\text{loss}} = \left(\frac{p_1}{\gamma}+\frac{V_1^2}{2g}+z_1\right) - \left(\frac{p_2}{\gamma}+\frac{V_2^2}{2g}+z_2\right)\]</div>
+    </li>
+    <li>If the target is a <strong>pressure</strong>, convert head to pressure with \(p=\gamma h\); if the unknown is buried inside a velocity head, solve the resulting quadratic in \(V\).</li>
+  </ol>
+  <p style="margin-top:8px;"><strong style="color:var(--tip);">&starf; Watch out:</strong> every term must share the same units &mdash; convert kPa to Pa, keep \(\gamma=\rho g\) consistent, and make sure both sides use the <em>same</em> pressure reference (all gage or all absolute).</p>
+</div>
+
+<!-- ── RECIPE C ── -->
+<h3>Recipe C &mdash; Thermal / Steady-Flow Energy Form</h3>
+
+<div class="card-bracket def-card">
+  <div class="eq-name" style="color:var(--def);">C &mdash; Temperature rise, heat &amp; internal energy</div>
+  <p><strong>When you see it:</strong> heat is added or removed (\(q\) or \(\dot{Q}\)), a temperature change is mentioned, you are asked for the rise in temperature caused by friction, or the wording is thermodynamic (enthalpy, internal energy, &ldquo;adiabatic&rdquo;).</p>
+  <p style="margin-bottom:2px;"><strong>Steps:</strong></p>
+  <ol style="margin:6px 0;padding-left:20px;line-height:1.7;">
+    <li>Start from the specific energy equation (per unit mass), with \(q\) added at inlet and shaft work \(w_s\) done by the fluid:
+      <div style="overflow-x:auto;overflow-y:hidden;">\[\hat{h}_1+\tfrac{1}{2}V_1^2+gz_1 = \left(\hat{h}_2+\tfrac{1}{2}V_2^2+gz_2\right)-q+w_s\]</div>
+    </li>
+    <li>For an <strong>incompressible liquid</strong>, split enthalpy as \(\hat{h}=\hat{u}+p/\rho\) and use \(\hat{u}_2-\hat{u}_1=c\,\Delta T\). The mechanical part is exactly the head loss, so the energy &ldquo;lost&rdquo; to friction reappears as internal energy minus any heat that escaped:
+      <div style="overflow-x:auto;overflow-y:hidden;">\[g\,h_{\text{loss}} = (\hat{u}_2-\hat{u}_1) - q = c\,\Delta T - q\]</div>
+    </li>
+    <li>For <strong>adiabatic friction</strong> (no heat exchange, no machine), all of the lost head becomes a temperature rise:
+      <div style="overflow-x:auto;overflow-y:hidden;padding:8px;background:rgba(244,162,97,0.06);border-radius:6px;border:1px solid rgba(244,162,97,0.15);">\[\boxed{\Delta T = \frac{g\,h_{\text{loss}}}{c}}\]</div>
+    </li>
+  </ol>
+  <p style="margin-top:8px;"><strong style="color:var(--tip);">&starf; Watch out:</strong> sign convention is the whole game here &mdash; heat <em>added</em> is \(+q\), shaft work done <em>by</em> the fluid is \(+w_s\). A pump does work <em>on</em> the fluid, so it enters as \(-w_s\), which is the same thing as the \(+h_{\text{pump}}\) term in the head form of Recipe A.</p>
+</div>
+
+<!-- ── RECIPE D ── -->
+<h3>Recipe D &mdash; Kinetic Energy Correction Factor \(\alpha\)</h3>
+
+<div class="card-bracket def-card">
+  <div class="eq-name" style="color:var(--def);">D &mdash; Compute or apply \(\alpha\)</div>
+  <p><strong>When you see it:</strong> a velocity profile \(u(r)\) is given (parabolic, power-law, or linear), you are asked to find \(\alpha\), or you must decide whether \(\alpha\) can be ignored (laminar vs. turbulent).</p>
+  <p style="margin-bottom:2px;"><strong>Steps:</strong></p>
+  <ol style="margin:6px 0;padding-left:20px;line-height:1.7;">
+    <li>Find the average velocity (the one that reproduces the correct mass flow). For a round pipe use the annular area element \(dA=2\pi r\,dr\):
+      <div style="overflow-x:auto;overflow-y:hidden;">\[V_{\text{av}} = \frac{1}{A}\int u\,dA = \frac{2\pi}{A}\int_0^R u(r)\,r\,dr\]</div>
+    </li>
+    <li>Substitute the profile into the definition of \(\alpha\) and integrate:
+      <div style="overflow-x:auto;overflow-y:hidden;">\[\alpha = \frac{1}{A}\int\!\left(\frac{u}{V_{\text{av}}}\right)^{3}dA = \frac{2\pi}{A}\int_0^R\!\left(\frac{u(r)}{V_{\text{av}}}\right)^{3} r\,dr\]</div>
+    </li>
+    <li>Read off whether it matters. <strong>Laminar</strong> (parabolic) gives \(\alpha=2\) &mdash; keep it. <strong>Turbulent</strong> gives \(\alpha\approx 1.05\) &mdash; usually drop it. If \(\alpha\) is non-negligible, carry it on each velocity head in the complete head equation:
+      <div style="overflow-x:auto;overflow-y:hidden;">\[\frac{p_1}{\gamma}+\frac{\alpha_1 V_1^2}{2g}+z_1 = \frac{p_2}{\gamma}+\frac{\alpha_2 V_2^2}{2g}+z_2 + h_{\text{loss}} - h_{\text{pump}} + h_{\text{turbine}}\]</div>
+    </li>
+  </ol>
+  <p style="margin-top:6px;"><strong>Worked shortcut (laminar):</strong> for the parabolic profile \(u=u_{\max}\!\left(1-\frac{r^2}{R^2}\right)\), the integral gives \(V_{\text{av}}=\tfrac{1}{2}u_{\max}\) and</p>
+  <div style="overflow-x:auto;overflow-y:hidden;padding:8px;background:rgba(244,162,97,0.06);border-radius:6px;border:1px solid rgba(244,162,97,0.15);">\[\boxed{\alpha = 2}\]</div>
+  <p style="margin-top:8px;"><strong style="color:var(--tip);">&starf; Watch out:</strong> \(\alpha\) multiplies <em>only</em> the velocity head \(\frac{V^2}{2g}\) &mdash; never the pressure head or elevation head &mdash; and each section uses its own \(\alpha\).</p>
+</div>
+
+<!-- ── CLOSING: COMMON TRAPS ── -->
+<div class="card-bracket tip-card">
+  <div class="eq-name" style="color:var(--tip);">&starf; Cross-Cutting Traps (all four recipes)</div>
+  <ul style="margin:8px 0;padding-left:20px;line-height:1.7;">
+    <li><strong>Right power, right name.</strong> &ldquo;Ideal/hydraulic/fluid power&rdquo; is \(\dot{W}_f=\rho Q g\,h\). &ldquo;Shaft/brake/input power&rdquo; comes only after dividing (pump) or multiplying (turbine) by \(\eta\). Don't report one when the question wants the other.</li>
+    <li><strong>Efficiency flips.</strong> Pump: useful = fluid, so \(\eta=\dot{W}_f/\dot{W}_{\text{shaft}}\). Turbine: useful = shaft, so \(\eta=\dot{W}_{\text{shaft}}/\dot{W}_f\). Identify the useful side first.</li>
+    <li><strong>Continuity before energy.</strong> You almost never have the velocities directly &mdash; get them from \(V=Q/A\) before touching the head equation.</li>
+    <li><strong>One reference frame.</strong> All-gage or all-absolute, consistent units, and \(\gamma=\rho g\) (not just \(\rho\)) on every head term.</li>
+    <li><strong>Loss has a sign.</strong> \(h_{\text{loss}}\) always sits on the <em>downstream</em> side and is always positive &mdash; friction never returns energy to the fluid.</li>
+  </ul>
+</div>
+
 </section>
 
 <!-- pending --><section id="ch5-prob" class="page-section"><div class="pending-placeholder"><i class="ti ti-math-function" aria-hidden="true"></i>Chapter 5 recommended problems — coming soon</div></section>
