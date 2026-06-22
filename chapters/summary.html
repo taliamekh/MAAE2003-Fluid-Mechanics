@@ -6,7 +6,7 @@
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:28px;">
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Reference items</div>
-      <div style="font-size:22px;font-weight:600;color:var(--eq);">46</div>
+      <div style="font-size:22px;font-weight:600;color:var(--eq);">52</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Chapters completed</div>
@@ -14,7 +14,7 @@
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Examples</div>
-      <div style="font-size:22px;font-weight:600;color:var(--deriv);">25</div>
+      <div style="font-size:22px;font-weight:600;color:var(--deriv);">29</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Assignments</div>
@@ -113,6 +113,17 @@
       <div class="branch"><strong>Sizing a pump / finding its power?</strong> &rarr; \(\dot{W}_f = \rho Q g\,h_{\text{pump}}\), \(\eta_{\text{pump}} = \dot{W}_f/\dot{W}_{\text{pump}}\) (fluid is the useful output)</div>
       <div class="branch"><strong>Power from a turbine?</strong> &rarr; \(\dot{W}_f = \rho Q g\,h_{\text{turbine}}\), \(\eta_{\text{turbine}} = \dot{W}_{\text{turbine}}/\dot{W}_f\) (shaft is the useful output &mdash; reciprocal of a pump)</div>
       <div class="branch"><strong>Velocity profile strongly non-uniform?</strong> &rarr; add KE correction \(\alpha\) on each velocity head: \(\alpha = \frac{1}{A}\int(u/V_{\text{av}})^3 dA\) &nbsp;(\(\approx 2\) laminar, \(\approx 1\) turbulent)</div>
+    </div>
+  </div>
+
+  <div class="decision-tree card-bracket" style="border-left-color:var(--ch6-title);">
+    <h3 style="color:var(--ch6-title);margin-top:0;">Pipe Friction &amp; Head Loss</h3>
+    <div class="tree">
+      <div class="branch"><strong>First, what regime?</strong> &rarr; \(\mathrm{Re}_d = \rho V d/\mu = V d/\nu\) &nbsp;(&lt; 2000 laminar, &gt; 4000 turbulent). This decides everything that follows.</div>
+      <div class="branch"><strong>Laminar (\(\mathrm{Re}_d &lt; 2000\))?</strong> &rarr; friction factor is exact: \(f = 64/\mathrm{Re}_d\) &mdash; no chart, roughness irrelevant.</div>
+      <div class="branch"><strong>Turbulent (\(\mathrm{Re}_d &gt; 4000\))?</strong> &rarr; need \(\varepsilon/d\), then read \(f\) off the <strong>Moody chart</strong> (or Colebrook / Haaland: \(1/f^{1/2} \approx -1.8\log[6.9/\mathrm{Re}_d + (\varepsilon/d/3.7)^{1.11}]\)).</div>
+      <div class="branch"><strong>Have \(f\) &mdash; want the loss?</strong> &rarr; Darcy&ndash;Weisbach: \(h_f = f\frac{L}{d}\frac{V^2}{2g}\).</div>
+      <div class="branch"><strong>Need a pressure drop instead?</strong> &rarr; horizontal pipe: \(\Delta p = \gamma h_f\). With elevation/velocity change, feed \(h_f\) into the head equation (#43).</div>
     </div>
   </div>
 
@@ -324,7 +335,36 @@
   </div>
 
   <h2 style="color:var(--ch6-title);">Ch 6 — Pipe Flow &amp; Losses</h2>
-  <p style="color:var(--muted);font-size:13px;">Pending &mdash; Text Ch 6.3&ndash;6.4, 6.6&ndash;6.7</p>
+  <div class="card-bracket" style="border-left:3.5px solid var(--ch6-title);">
+    <div class="eq-name" style="color:var(--ch6-title);">Ch 6 &mdash; Pipe Flow &amp; Losses</div>
+    <p style="color:var(--muted);font-size:12px;margin-top:-2px;">Lecture 6.1 of 3 complete (6.2&ndash;6.3 pending)</p>
+
+    <p><strong style="color:var(--ch6-title)">Key ideas:</strong></p>
+    <ul>
+      <li>&rarr; Real pipes lose energy to wall friction; the lumped \(h_{\text{loss}}\) of &sect;5.4 becomes the friction head loss \(h_f\)</li>
+      <li>&rarr; The Reynolds number \(\mathrm{Re}_d\) (inertia &divide; viscosity) decides the regime &mdash; and the regime decides the method</li>
+      <li>&rarr; Darcy&ndash;Weisbach \(h_f = f\frac{L}{d}\frac{V^2}{2g}\) is the master tool; everything reduces to finding the friction factor \(f\)</li>
+      <li>&rarr; Laminar \(f\) is exact (\(64/\mathrm{Re}_d\)); turbulent \(f\) depends on roughness and comes from the Moody chart / Colebrook</li>
+    </ul>
+
+    <p><strong style="color:var(--ch6-title)">When to use what:</strong></p>
+    <ul>
+      <li>&rarr; Classify the flow? &mdash; \(\mathrm{Re}_d = \rho V d/\mu\) (&lt; 2000 laminar, &gt; 4000 turbulent)</li>
+      <li>&rarr; Laminar friction factor? &mdash; \(f = 64/\mathrm{Re}_d\) (exact, roughness-independent)</li>
+      <li>&rarr; Turbulent friction factor? &mdash; Moody chart with \(\varepsilon/d\), or Haaland \(1/f^{1/2}\approx-1.8\log[6.9/\mathrm{Re}_d+(\varepsilon/d/3.7)^{1.11}]\)</li>
+      <li>&rarr; Head loss from \(f\)? &mdash; \(h_f = f\frac{L}{d}\frac{V^2}{2g}\)</li>
+      <li>&rarr; Pressure drop (horizontal)? &mdash; \(\Delta p = \gamma h_f\)</li>
+      <li>&rarr; Loss between two points at different heights? &mdash; feed \(h_f\) into the head equation (#43)</li>
+    </ul>
+
+    <p><strong style="color:var(--ch6-title)">&#9888; Traps:</strong></p>
+    <ol>
+      <li>Reaching for the Moody chart in laminar flow &mdash; \(f = 64/\mathrm{Re}_d\) is exact there and roughness is irrelevant</li>
+      <li>Mixing up Darcy and Fanning friction factors &mdash; \(f_{\text{Darcy}} = 4f_{\text{Fanning}}\); this course&rsquo;s Moody chart is Darcy (laminar line \(64/\mathrm{Re}\))</li>
+      <li>Forgetting \(\Delta p = \gamma h_f\) only holds with no elevation/velocity change &mdash; otherwise use the full head equation</li>
+      <li>Using gauge vs absolute pressure inconsistently, or skipping the unit conversion on \(Q\) when finding \(V\)</li>
+    </ol>
+  </div>
 
   <!-- ═══ QUICK REFERENCE TABLE ═══ -->
   <h2>Quick Reference</h2>
@@ -369,6 +409,12 @@
       <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Pump power &amp; efficiency</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\dot{W}_f = \rho Q g\,h_{\text{pump}}\), \(\eta = \dot{W}_f/\dot{W}_{\text{pump}}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Fluid is the useful output</td></tr>
       <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Turbine power &amp; efficiency</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\dot{W}_f = \rho Q g\,h_{\text{turbine}}\), \(\eta = \dot{W}_{\text{turbine}}/\dot{W}_f\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Shaft is the useful output</td></tr>
       <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">KE correction factor</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\alpha = \frac{1}{A}\int(u/V_{\text{av}})^3 dA\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\approx 2\) laminar, \(\approx 1\) turbulent</td></tr>
+      <tr style="border-left:3px solid var(--ch6-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Pipe flow regime?</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\mathrm{Re}_d = \rho V d/\mu = V d/\nu\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">&lt; 2000 laminar, &gt; 4000 turbulent</td></tr>
+      <tr style="border-left:3px solid var(--ch6-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Friction head loss</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(h_f = f\frac{L}{d}\frac{V^2}{2g}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Darcy&ndash;Weisbach &mdash; the master equation</td></tr>
+      <tr style="border-left:3px solid var(--ch6-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Laminar friction factor</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(f = 64/\mathrm{Re}_d\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Exact; roughness irrelevant</td></tr>
+      <tr style="border-left:3px solid var(--ch6-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Turbulent friction factor</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Moody chart, or Colebrook / Haaland</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Needs \(\varepsilon/d\); &lt; 15% error</td></tr>
+      <tr style="border-left:3px solid var(--ch6-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Head loss &rarr; pressure drop</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\Delta p = \gamma h_f\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Horizontal pipe (no \(\Delta z\), no \(\Delta V\))</td></tr>
+      <tr style="border-left:3px solid var(--ch6-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Head loss from wall shear</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(h_f = \frac{4\tau_w}{\rho g}\frac{L}{d}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Exact force-balance form</td></tr>
     </tbody>
   </table>
 

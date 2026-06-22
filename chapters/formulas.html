@@ -601,5 +601,80 @@
 
     </div>
 
+    <h2 style="color:var(--ch6-title);">Ch 6 &mdash; Pipe Flow &amp; Losses</h2>
+    <div class="fs-chapter" data-ch="6">
+
+      <div class="fs-card" data-num="47" data-ch="6" data-name="Reynolds Number" data-vars='{"#00838F|Re":"Re_d — Reynolds number; ratio of inertia to viscous forces (dimensionless)","#2E7D32|ρ":"ρ — fluid density (kg/m³)","#E65100|V":"V — average flow velocity (m/s)","#1565C0|d":"d — pipe diameter (m)","#2E7D32|μ":"μ — dynamic viscosity (Pa·s)","#2E7D32|ν":"ν — kinematic viscosity, ν = μ/ρ (m²/s)"}'>
+        <div class="fs-top"><span class="fs-name">Reynolds Number <span class="fs-num">#47</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#00838F}{\mathrm{Re}_d} = \frac{\textcolor{#2E7D32}{\rho}\,\textcolor{#E65100}{V}\,\textcolor{#1565C0}{d}}{\textcolor{#2E7D32}{\mu}} = \frac{\textcolor{#E65100}{V}\,\textcolor{#1565C0}{d}}{\textcolor{#2E7D32}{\nu}} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">The dimensionless ratio of <strong>inertia</strong> to <strong>viscous</strong> forces. It predicts the pipe-flow regime: small &rarr; laminar, large &rarr; turbulent.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>classifying any pipe flow (laminar &lt; 2000, turbulent &gt; 4000); first step of every head-loss problem.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>non-circular ducts without switching to the hydraulic diameter; the two forms are identical, just pick μ or ν.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">Re_d = ρVd/μ = Vd/ν. &lt; 2000 laminar, &gt; 4000 turbulent.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="48" data-ch="6" data-name="Darcy-Weisbach Head Loss" data-vars='{"#1565C0|h":"h_f — friction head loss (m)","#00838F|f":"f — Darcy friction factor (dimensionless)","#1565C0|L":"L — pipe length (m)","#1565C0|d":"d — pipe diameter (m)","#E65100|V":"V — average velocity (m/s)","#2E7D32|g":"g — gravitational acceleration (9.81 m/s²)"}'>
+        <div class="fs-top"><span class="fs-name">Darcy&ndash;Weisbach Head Loss <span class="fs-num">#48</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#1565C0}{h_f} = \textcolor{#00838F}{f}\,\frac{\textcolor{#1565C0}{L}}{\textcolor{#1565C0}{d}}\,\frac{\textcolor{#E65100}{V}^2}{2\textcolor{#2E7D32}{g}} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">The master equation for pipe friction loss. All the wall-physics is bundled into the <strong>friction factor</strong> f; loss grows with the square of velocity.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>finding head loss (or pressure drop) in any straight pipe run, laminar or turbulent, once you have f.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>minor (fitting) losses — those use a loss coefficient K, not L/d. Get f from #50 (laminar) or #51 / Moody (turbulent).</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">h_f = f(L/d)(V²/2g). Bundles wall friction into f = F(Re_d, ε/d).</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="49" data-ch="6" data-name="Head Loss to Pressure Drop" data-vars='{"#D32F2F|Δ":"Δp — pressure drop due to friction (Pa)","#2E7D32|ρ":"ρ — fluid density (kg/m³)","#2E7D32|g":"g — gravitational acceleration (9.81 m/s²)","#1565C0|h":"h_f — friction head loss (m)","#2E7D32|γ":"γ — specific weight, γ = ρg (N/m³)"}'>
+        <div class="fs-top"><span class="fs-name">Head Loss &harr; Pressure Drop <span class="fs-num">#49</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{\Delta p} = \textcolor{#2E7D32}{\rho}\,\textcolor{#2E7D32}{g}\,\textcolor{#1565C0}{h_f} = \textcolor{#2E7D32}{\gamma}\,\textcolor{#1565C0}{h_f} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">Converts a head loss (metres of fluid) into the <strong>pressure drop</strong> a gauge would read &mdash; the drop caused by friction alone.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>a horizontal, constant-area pipe and you need Δp from h_f (or vice-versa).</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>cases with elevation or velocity change between the two points — then use the full head equation (#43).</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">Δp = γ h_f = ρg h_f. Pressure drop due to head loss only (no Δz, no ΔV).</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="50" data-ch="6" data-name="Laminar Friction Factor" data-vars='{"#00838F|f":"f_lam — laminar Darcy friction factor (dimensionless)","#00838F|Re":"Re_d — Reynolds number (must be < 2000)"}'>
+        <div class="fs-top"><span class="fs-name">Laminar Friction Factor <span class="fs-num">#50</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#00838F}{f_{\text{lam}}} = \frac{64}{\textcolor{#00838F}{\mathrm{Re}_d}} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">In laminar flow the friction factor is <strong>exact</strong> and depends only on the Reynolds number &mdash; wall roughness is irrelevant.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>Re_d &lt; 2000. Exact result &mdash; no Moody chart needed.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>turbulent or transitional flow; and this is the Darcy factor (64/Re), not the Fanning factor (16/Re).</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">f = 64/Re_d (laminar only). Roughness does not matter.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="51" data-ch="6" data-name="Turbulent Friction Factor (Colebrook / Haaland)" data-vars='{"#00838F|f":"f — Darcy friction factor (dimensionless)","#1565C0|ε":"ε — wall roughness height (m)","#1565C0|d":"d — pipe diameter (m)","#00838F|Re":"Re_d — Reynolds number (turbulent)"}'>
+        <div class="fs-top"><span class="fs-name">Turbulent Friction Factor &mdash; Colebrook / Haaland <span class="fs-num">#51</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \frac{1}{\textcolor{#00838F}{f}^{1/2}} = -2.0\,\log\!\left(\frac{\textcolor{#1565C0}{\varepsilon}/\textcolor{#1565C0}{d}}{3.7} + \frac{2.51}{\textcolor{#00838F}{\mathrm{Re}_d}\,\textcolor{#00838F}{f}^{1/2}}\right) \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">The <strong>Colebrook</strong> equation (implicit) is the standard turbulent friction-factor law; it is what the Moody chart plots. Haaland&rsquo;s explicit form is within ~2%: \(1/f^{1/2} \approx -1.8\log[\,6.9/\mathrm{Re}_d + (\varepsilon/d/3.7)^{1.11}\,]\).</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>turbulent flow (Re_d &gt; 4000) and you need f more precisely than reading a chart; Haaland avoids iteration.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>laminar flow (use 64/Re). Colebrook needs iteration since f is on both sides.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">Colebrook (implicit) = the Moody chart. Haaland ≈ explicit, within 2%.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="52" data-ch="6" data-name="Head Loss from Wall Shear" data-vars='{"#1565C0|h":"h_f — friction head loss (m)","#E65100|τ":"τ_w — wall shear stress (Pa)","#1565C0|L":"L — pipe length (m)","#2E7D32|ρ":"ρ — fluid density (kg/m³)","#2E7D32|g":"g — gravitational acceleration (9.81 m/s²)","#1565C0|d":"d — pipe diameter (m)"}'>
+        <div class="fs-top"><span class="fs-name">Head Loss from Wall Shear <span class="fs-num">#52</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#1565C0}{h_f} = \frac{4\,\textcolor{#E65100}{\tau_w}}{\textcolor{#2E7D32}{\rho}\,\textcolor{#2E7D32}{g}}\,\frac{\textcolor{#1565C0}{L}}{\textcolor{#1565C0}{d}} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">The exact head loss from a force balance on the fluid cylinder, written in terms of the <strong>wall shear stress</strong> &mdash; the physical origin of Darcy&ndash;Weisbach.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>relating head loss to wall shear, or deriving the friction factor from first principles.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>direct computation &mdash; τ_w is rarely known, especially in turbulent flow; use Darcy&ndash;Weisbach (#48) instead.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">h_f = 4τ_w L/(ρg d). Exact force-balance form; basis of Darcy&ndash;Weisbach.</p></div>
+        </div>
+      </div>
+
   </div>
 </section>
