@@ -325,4 +325,83 @@
     <p>&bull; Standard values to keep close: sharp entrance \(K\approx0.5\), sharp exit \(K=1.0\); area-change losses use the <strong>smaller</strong>-pipe velocity head.</p>
   </div>
 
+  <h2 style="color:var(--ch6-title);">Quick-Solve Guide &mdash; Pipe-Flow Problems</h2>
+
+  <p>Every problem in Chapter 6 (&sect;6.1&ndash;6.3) is one of a few recognizable shapes. The trick is to <strong>name the problem first</strong>, then run its recipe. A single pipe is driven by three quantities &mdash; diameter \(d\), flow rate \(Q\), and head loss \(h_f\) &mdash; and you are always given two while solving for the third. A fourth shape adds fittings and a pump/turbine and is solved straight from the energy equation.</p>
+
+  <div class="callout callout-tip">
+    <div class="callout-icon"><i class="ti ti-bulb" aria-hidden="true"></i></div>
+    <div class="callout-body">
+      <div class="callout-title">&#9733; Identify by what is missing</div>
+      <div class="callout-text">Missing \(h_f\) &rarr; <strong>Type 1</strong> (rating). Missing \(Q\) &rarr; <strong>Type 2</strong> (analysis). Missing \(d\) &rarr; <strong>Type 3</strong> (design). A circuit with valves/fittings and a machine &rarr; <strong>complete-system</strong> energy balance. If you know both \(d\) and \(Q\) you can march straight through (\(V\to\mathrm{Re}_d\to f\)); if \(V\) is unknown (Types 2 &amp; 3) you cannot, so use the explicit or iterative route.</div>
+    </div>
+  </div>
+
+  <table class="quick-ref">
+    <thead><tr><th>If the problem gives you&hellip;</th><th>It is&hellip;</th><th>First move</th></tr></thead>
+    <tbody>
+      <tr style="border-left:3px solid var(--ch6-title);"><td>\(d\) and \(Q\), wants \(h_f\) or \(\Delta p\)</td><td><strong>Type 1</strong> &mdash; rating</td><td>Direct march \(V\to\mathrm{Re}_d\to f\to h_f\)</td></tr>
+      <tr style="border-left:3px solid var(--ch6-title);"><td>\(d\) and \(h_f\), wants \(Q\)</td><td><strong>Type 2</strong> &mdash; analysis</td><td>\(\zeta=\frac{gd^3h_f}{L\nu^2}\), then explicit \(\mathrm{Re}_d\)</td></tr>
+      <tr style="border-left:3px solid var(--ch6-title);"><td>\(Q\) and \(h_f\), wants \(d\)</td><td><strong>Type 3</strong> &mdash; design</td><td>Guess \(f\), solve \(d^5=\frac{8fLQ^2}{\pi^2gh_f}\), iterate</td></tr>
+      <tr style="border-left:3px solid var(--ch6-title);"><td>A circuit with fittings + pump/turbine</td><td><strong>Complete system</strong></td><td>Head eq between 2 points; \(h_{\text{loss}}=\sum h_f+\sum h_m\)</td></tr>
+      <tr style="border-left:3px solid var(--ch6-title);"><td>Just &ldquo;laminar or turbulent?&rdquo;</td><td>Regime check</td><td>\(\mathrm{Re}_d=Vd/\nu\): &lt;2000 lam, &gt;4000 turb</td></tr>
+    </tbody>
+  </table>
+
+  <div class="card-bracket drv-card">
+    <div class="card-title">Type 1 &mdash; Rating (have \(d, Q\) &rarr; find \(h_f\))</div>
+    <p style="margin:2px 0 6px;color:var(--muted);font-size:13px;">Giveaway: both \(d\) and \(Q\) are known. No iteration &mdash; just march.</p>
+    <ol style="margin:6px 0 2px;padding-left:20px;line-height:1.75;">
+      <li>Velocity: \(V = \frac{Q}{A} = \frac{4Q}{\pi d^2}\)</li>
+      <li>Reynolds: \(\mathrm{Re}_d = \frac{Vd}{\nu}\) &rarr; classify the regime</li>
+      <li>Friction factor: laminar \(f=\frac{64}{\mathrm{Re}_d}\) (exact); turbulent &rarr; Moody chart with \(\varepsilon/d\) (or Haaland)</li>
+      <li>Head loss: \(h_f = f\frac{L}{d}\frac{V^2}{2g}\)&nbsp; (add \(\sum K\frac{V^2}{2g}\) if fittings are present)</li>
+      <li>If wanted: \(\Delta p = \gamma h_f\)&nbsp; (horizontal, constant area only)</li>
+    </ol>
+  </div>
+
+  <div class="card-bracket drv-card">
+    <div class="card-title">Type 2 &mdash; Analysis (have \(d, h_f\) &rarr; find \(Q\))</div>
+    <p style="margin:2px 0 6px;color:var(--muted);font-size:13px;">Giveaway: \(Q\) is missing, so \(V\) (hence \(\mathrm{Re}_d\) and \(f\)) is unknown up front &mdash; the direct march cannot start.</p>
+    <p style="margin:6px 0 2px;"><strong>Explicit route (turbulent):</strong></p>
+    <ol style="margin:4px 0 2px;padding-left:20px;line-height:1.75;">
+      <li>Dimensionless head loss: \(\zeta = \frac{g\,d^3 h_f}{L\,\nu^2}\)&nbsp; (no \(V\) inside)</li>
+      <li>\(\mathrm{Re}_d = -(8\zeta)^{1/2}\log\!\left(\frac{\varepsilon/d}{3.7}+\frac{1.775}{\sqrt{\zeta}}\right)\) &mdash; check \(>4000\)</li>
+      <li>\(V = \frac{\nu\,\mathrm{Re}_d}{d}\), then \(Q = \frac{\pi}{4}d^2 V\)</li>
+    </ol>
+    <p style="margin:6px 0 2px;"><strong>Iterative alternative:</strong> guess \(f\approx0.02\) &rarr; \(V=\sqrt{\frac{2g\,d\,h_f}{fL}}\) &rarr; \(\mathrm{Re}_d\) &rarr; new \(f\) (Moody) &rarr; repeat.</p>
+  </div>
+
+  <div class="card-bracket drv-card">
+    <div class="card-title">Type 3 &mdash; Design (have \(Q, h_f\) &rarr; find \(d\))</div>
+    <p style="margin:2px 0 6px;color:var(--muted);font-size:13px;">Giveaway: \(d\) is missing. Since \(d\) sits inside \(\mathrm{Re}_d\), \(\varepsilon/d\) and the loss equation, this is <strong>always iterative</strong>.</p>
+    <ol style="margin:6px 0 2px;padding-left:20px;line-height:1.75;">
+      <li>Guess \(f \approx 0.02\) to \(0.03\)</li>
+      <li>Diameter: \(d^5 = \frac{8 f L Q^2}{\pi^2 g\, h_f}\)</li>
+      <li>\(\mathrm{Re}_d = \frac{4Q}{\pi d\,\nu}\) and \(\varepsilon/d\) with the new \(d\)</li>
+      <li>New \(f\) from the Moody chart &rarr; back to step 2 until \(f\) settles (\(d\propto f^{1/5}\), converges in 2&ndash;3 passes)</li>
+    </ol>
+  </div>
+
+  <div class="card-bracket drv-card">
+    <div class="card-title">Complete System &mdash; Minor Losses + Pump/Turbine</div>
+    <p style="margin:2px 0 6px;color:var(--muted);font-size:13px;">Giveaway: a circuit with fittings/valves and a machine; asks for pump power, head, or flow.</p>
+    <ol style="margin:6px 0 2px;padding-left:20px;line-height:1.75;">
+      <li>Choose points 1 and 2 &mdash; usually the two reservoir surfaces (\(V\approx0\), gauge \(p=0\))</li>
+      <li>Head equation: \(\frac{p_1}{\gamma}+\frac{V_1^2}{2g}+z_1 = \frac{p_2}{\gamma}+\frac{V_2^2}{2g}+z_2 + h_{\text{loss}} - h_{\text{pump}} + h_{\text{turbine}}\)</li>
+      <li>Losses: \(h_{\text{loss}} = \sum h_f + \sum h_m\); single diameter &rArr; \(h_{\text{total}} = \frac{V^2}{2g}\!\left(\frac{f}{d}\Sigma L + \Sigma K\right)\)</li>
+      <li>Look up every \(K\) (table/charts) and sum \(\Sigma K\) &mdash; <strong>do not drop the sharp exit \(K=1.0\)</strong></li>
+      <li>Get \(f\) for the major loss (\(V\to\mathrm{Re}_d\to\) Moody)</li>
+      <li>Solve for the unknown &mdash; often \(h_{\text{pump}}\); then power \(P = \rho g Q\,h_{\text{pump}} = \gamma Q\,h_{\text{pump}}\)</li>
+    </ol>
+  </div>
+
+  <div class="callout callout-warning">
+    <div class="callout-icon"><i class="ti ti-alert-triangle" aria-hidden="true"></i></div>
+    <div class="callout-body">
+      <div class="callout-title">Cross-cutting slips to avoid</div>
+      <div class="callout-text">Do not reach for the Moody chart in laminar flow (\(f=64/\mathrm{Re}_d\) is exact). Base an area-change \(K\) on the <strong>smaller</strong>-pipe velocity head. Only factor out one \(V^2/2g\) when the diameter is constant &mdash; otherwise do each segment separately. Keep \(\Delta p=\gamma h_f\) to horizontal, constant-area runs; with elevation or velocity change use the full head equation. And mind your unit system &mdash; in BG units carry \(g\) so slugs cancel into lbf.</div>
+    </div>
+  </div>
+
 </section>
