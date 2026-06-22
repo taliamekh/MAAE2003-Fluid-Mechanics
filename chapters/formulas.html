@@ -724,5 +724,41 @@
         </div>
       </div>
 
+      <div class="fs-card" data-num="57" data-ch="6" data-name="Minor Loss (Loss Coefficient)" data-vars='{"#1565C0|hm":"h_m — minor (local) head loss at a fitting (m)","#00838F|K":"K — loss coefficient (dimensionless; from charts/tables)","#E65100|V":"V — average velocity in the pipe (m/s)","#2E7D32|g":"g — gravitational acceleration (9.81 m/s²)"}'>
+        <div class="fs-top"><span class="fs-name">Minor Loss &mdash; Loss Coefficient <span class="fs-num">#57</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#1565C0}{h_m} = \textcolor{#00838F}{K}\,\frac{\textcolor{#E65100}{V}^2}{2\textcolor{#2E7D32}{g}} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">The head lost at one fitting (valve, elbow, bend, entrance, exit, area change), written as a multiple of the <strong>velocity head</strong>. All the fitting&rsquo;s geometry is packed into the experimental coefficient \(K\).</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>adding a fitting/valve/bend loss; look up \(K\) from the loss-coefficient table or the entrance/contraction/expansion/bend charts.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>straight-pipe friction (that is \(f\,\frac{L}{d}\), #48). For an area change, base \(V\) on the <strong>smaller</strong> pipe.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">h_m = K V²/2g. Local loss as a multiple of velocity head; equivalently h_m = Δp/ρg.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="58" data-ch="6" data-name="Total Head Loss (Major + Minor)" data-vars='{"#1565C0|hloss":"h_loss — total head loss in the system (m, always ≥ 0)","#1565C0|hf":"Σh_f — sum of major (straight-pipe friction) losses (m)","#1565C0|hm":"Σh_m — sum of minor (fitting) losses (m)"}'>
+        <div class="fs-top"><span class="fs-name">Total Head Loss (Major + Minor) <span class="fs-num">#58</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#1565C0}{h_{\text{loss}}} = \textcolor{#1565C0}{\sum h_f} + \textcolor{#1565C0}{\sum h_m} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">The \(h_{\text{loss}}\) term of the head equation (#43) is the <strong>sum of every loss</strong> in the system: all the straight-pipe friction losses plus all the fitting losses.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>assembling a complete pipe-system energy balance; feed this into the head equation with sign pattern +loss, &minus;pump, +turbine.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>forgetting either bucket &mdash; both major and minor losses count; on short systems the minor losses can dominate.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">h_loss = Σh_f + Σh_m. Major (pipe) losses plus minor (fitting) losses.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="59" data-ch="6" data-name="Total Loss in a Single-Diameter Pipe" data-vars='{"#1565C0|htotal":"h_total — total head loss in a single-diameter pipe (m)","#E65100|V":"V — common pipe velocity (m/s)","#2E7D32|g":"g — gravitational acceleration (9.81 m/s²)","#00838F|f":"f — Darcy friction factor (dimensionless)","#1565C0|d":"d — pipe diameter (m)","#1565C0|L":"ΣL — sum of straight-pipe lengths (m)","#00838F|K":"ΣK — sum of all minor-loss coefficients (dimensionless)"}'>
+        <div class="fs-top"><span class="fs-name">Total Loss in a Single-Diameter Pipe <span class="fs-num">#59</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#1565C0}{h_{\text{total}}} = \frac{\textcolor{#E65100}{V}^2}{2\textcolor{#2E7D32}{g}}\left(\frac{\textcolor{#00838F}{f}}{\textcolor{#1565C0}{d}}\,\textcolor{#1565C0}{\Sigma L} + \textcolor{#00838F}{\Sigma K}\right) \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">When the pipe is a <strong>single constant diameter</strong>, \(V\) is the same everywhere, so one velocity head factors out of every major and minor loss. Sum the straight lengths into \(\Sigma L\) and the fitting coefficients into \(\Sigma K\).</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>a single-diameter pipe with friction plus several fittings &mdash; the standard one-line system loss.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>multiple pipe sizes &mdash; then \(V\) (hence the velocity head) changes per segment; compute each segment separately.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">h_total = (V²/2g)(fΣL/d + ΣK). One velocity head for a single-diameter pipe.</p></div>
+        </div>
+      </div>
+
   </div>
 </section>

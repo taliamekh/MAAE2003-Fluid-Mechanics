@@ -6,7 +6,7 @@
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:28px;">
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Reference items</div>
-      <div style="font-size:22px;font-weight:600;color:var(--eq);">56</div>
+      <div style="font-size:22px;font-weight:600;color:var(--eq);">59</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Chapters completed</div>
@@ -14,7 +14,7 @@
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Examples</div>
-      <div style="font-size:22px;font-weight:600;color:var(--deriv);">32</div>
+      <div style="font-size:22px;font-weight:600;color:var(--deriv);">33</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Assignments</div>
@@ -347,7 +347,7 @@
   <h2 style="color:var(--ch6-title);">Ch 6 — Pipe Flow &amp; Losses</h2>
   <div class="card-bracket" style="border-left:3.5px solid var(--ch6-title);">
     <div class="eq-name" style="color:var(--ch6-title);">Ch 6 &mdash; Pipe Flow &amp; Losses</div>
-    <p style="color:var(--muted);font-size:12px;margin-top:-2px;">Lectures 6.1&ndash;6.2 of 3 complete (6.3 pending)</p>
+    <p style="color:var(--muted);font-size:12px;margin-top:-2px;">Lectures 6.1&ndash;6.3 of 3 complete &mdash; chapter done</p>
 
     <p><strong style="color:var(--ch6-title)">Key ideas:</strong></p>
     <ul>
@@ -356,6 +356,7 @@
       <li>&rarr; Darcy&ndash;Weisbach \(h_f = f\frac{L}{d}\frac{V^2}{2g}\) is the master tool; everything reduces to finding the friction factor \(f\)</li>
       <li>&rarr; Laminar \(f\) is exact (\(64/\mathrm{Re}_d\)); turbulent \(f\) depends on roughness and comes from the Moody chart / Colebrook</li>
       <li>&rarr; Three single-pipe problems by what is unknown: <strong>Type 1</strong> (\(d,Q\!\to\! h_f\), rating), <strong>Type 2</strong> (\(d,h_f\!\to\! Q\), analysis), <strong>Type 3</strong> (\(Q,h_f\!\to\! d\), design) &mdash; Types 2 &amp; 3 hide \(V\), so \(f\) is unknown up front</li>
+      <li>&rarr; <strong>Minor losses</strong> at fittings/valves/bends/entrances/exits are local, not small: \(h_m = K\frac{V^2}{2g}\). The full balance is \(h_{\text{loss}} = \sum h_f + \sum h_m\)</li>
     </ul>
 
     <p><strong style="color:var(--ch6-title)">When to use what:</strong></p>
@@ -368,6 +369,8 @@
       <li>&rarr; Loss between two points at different heights? &mdash; feed \(h_f\) into the head equation (#43)</li>
       <li>&rarr; Find \(Q\) from \(d\) &amp; \(h_f\) (Type 2)? &mdash; \(\zeta=\frac{gd^3h_f}{L\nu^2}\) then explicit \(\mathrm{Re}_d=-(8\zeta)^{1/2}\log(\cdots)\), or iterate on \(f\)</li>
       <li>&rarr; Size the pipe \(d\) from \(Q\) &amp; \(h_f\) (Type 3)? &mdash; iterate: guess \(f\to d^5=\frac{8fLQ^2}{\pi^2 g h_f}\to\mathrm{Re}_d=\frac{4Q}{\pi d\nu},\,\varepsilon/d\to\) Moody \(\to\) repeat</li>
+      <li>&rarr; Loss at a fitting/valve/bend/entrance/exit? &mdash; \(h_m = K\frac{V^2}{2g}\); read \(K\) from the loss-coefficient table or the entrance/contraction/expansion/bend charts</li>
+      <li>&rarr; Whole system with pump + fittings, single diameter? &mdash; \(h_{\text{total}} = \frac{V^2}{2g}\!\left(\frac{f}{d}\Sigma L + \Sigma K\right)\), then the head equation for \(h_{\text{pump}}\) and \(P=\rho g Q h_p\)</li>
     </ul>
 
     <p><strong style="color:var(--ch6-title)">&#9888; Traps:</strong></p>
@@ -377,6 +380,7 @@
       <li>Forgetting \(\Delta p = \gamma h_f\) only holds with no elevation/velocity change &mdash; otherwise use the full head equation</li>
       <li>Using gauge vs absolute pressure inconsistently, or skipping the unit conversion on \(Q\) when finding \(V\)</li>
       <li>Running the Type 1 march on a Type 2 or Type 3 problem &mdash; with \(V\) unknown you cannot get \(\mathrm{Re}_d\) or \(f\); use the explicit \(\zeta\) formula or iterate</li>
+      <li>Dropping the sharp-exit loss (\(K=1.0\) always) or basing an area-change \(K\) on the wrong pipe &mdash; contraction/expansion losses use the <strong>smaller</strong>-pipe velocity head; and factoring out one \(V^2/2g\) is only valid for a single diameter</li>
     </ol>
   </div>
 
@@ -432,6 +436,9 @@
       <tr style="border-left:3px solid var(--ch6-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Find \(h_f\) &mdash; Type 1 (\(d,Q\) known)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(V\to\mathrm{Re}_d\to f\to h_f=f\frac{L}{d}\frac{V^2}{2g}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Rating; one straight pass</td></tr>
       <tr style="border-left:3px solid var(--ch6-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Find \(Q\) &mdash; Type 2 (\(d,h_f\) known)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\zeta=\frac{gd^3h_f}{L\nu^2}\), then explicit \(\mathrm{Re}_d\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Analysis; no iteration (or iterate \(f\))</td></tr>
       <tr style="border-left:3px solid var(--ch6-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Size pipe \(d\) &mdash; Type 3 (\(Q,h_f\) known)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(d^5=\frac{8fLQ^2}{\pi^2 g h_f}\), iterate via Moody</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Design; always iterate</td></tr>
+      <tr style="border-left:3px solid var(--ch6-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Loss at a fitting / valve / bend</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(h_m = K\frac{V^2}{2g}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(K\) from table/charts; area change uses smaller-pipe \(V\)</td></tr>
+      <tr style="border-left:3px solid var(--ch6-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Total system loss (1 diameter)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(h_{\text{total}}=\frac{V^2}{2g}\!\left(\frac{f}{d}\Sigma L+\Sigma K\right)\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Major + minor; multiple sizes &rArr; per segment</td></tr>
+      <tr style="border-left:3px solid var(--ch6-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Pump power for a system</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(h_p=\Delta z + h_{\text{total}};\ P=\rho g Q h_p\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Sharp entrance \(K\!\approx\!0.5\), sharp exit \(K\!=\!1.0\)</td></tr>
     </tbody>
   </table>
 
