@@ -260,6 +260,42 @@
         </div>
       </div>
 
+      <div class="fs-card" data-num="38" data-ch="2" data-name="Buoyant Force (Archimedes)" data-vars='{"#D32F2F|FB":"F_B — buoyant force, always directed vertically upward (N)","#2E7D32|γ":"γ — specific weight of the surrounding fluid, γ = ρg (N/m³)","#E65100|∀disp":"∀_disp — volume of fluid displaced = submerged volume of the body (m³)"}'>
+        <div class="fs-top"><span class="fs-name">Buoyant Force (Archimedes) <span class="fs-num">#38</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{F_B} = \textcolor{#2E7D32}{\gamma}\,\textcolor{#E65100}{\forall_{disp}} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">A body in a fluid at rest feels an upward force equal to the weight of the fluid it pushes aside. Comes from the net of pressure forces: the deeper bottom face is pushed up harder than the top face is pushed down. The displaced volume is the body volume if fully submerged, or just the submerged part if floating.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>any body fully or partly submerged — find lift, apparent weight, cable tension, or float/sink. Put it into ΣF_V = 0 with the weight and any other vertical force.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>a body sealed flat to the bottom (no fluid underneath = no upward face). Use the displaced volume, never a floating body's above-water volume.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">F_B = γ_fluid ∀_displaced. Upward, equals the weight of displaced fluid, acts through the centre of buoyancy.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="39" data-ch="2" data-name="Floating Body (Displaces Own Weight)" data-vars='{"#D32F2F|FB":"F_B — buoyant force (N)","#D32F2F|W":"W — weight of the body (N)","#2E7D32|γf":"γ_f — specific weight of the fluid (N/m³)","#2E7D32|γb":"γ_b — average specific weight of the body (N/m³)","#E65100|∀sub":"∀_sub — submerged (displaced) volume (m³)","#E65100|∀body":"∀_body — total volume of the body (m³)"}'>
+        <div class="fs-top"><span class="fs-name">Floating Body (Displaces Own Weight) <span class="fs-num">#39</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#D32F2F}{F_B} = \textcolor{#D32F2F}{W} \;\Rightarrow\; \textcolor{#2E7D32}{\gamma_{f}}\,\textcolor{#E65100}{\forall_{sub}} = \textcolor{#2E7D32}{\gamma_{b}}\,\textcolor{#E65100}{\forall_{body}} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">A freely floating body sinks just far enough that the displaced fluid weighs exactly what the body weighs. Equate buoyancy to weight to find the draft / submerged depth. The weight side may be written as the given W instead of γ_b ∀_body.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>an object floats at rest with nothing tethering or pushing it — find submerged depth, draft, or how high it rides.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>fully submerged tethered/supported bodies where F_B ≠ W — an external force closes the balance, so use #38 inside ΣF_V = 0.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">Floating: F_B = W, i.e. γ_f ∀_sub = γ_b ∀_body. A floating body displaces its own weight.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="40" data-ch="2" data-name="Submerged Fraction (Floating Body)" data-vars='{"#E65100|∀sub":"∀_sub — submerged volume (m³)","#E65100|∀body":"∀_body — total body volume (m³)","#2E7D32|ρb":"ρ_b — density of the body (kg/m³)","#2E7D32|ρf":"ρ_f — density of the fluid (kg/m³)","#2E7D32|SGb":"SG_b — specific gravity of the body","#2E7D32|SGf":"SG_f — specific gravity of the fluid (= 1 for water)"}'>
+        <div class="fs-top"><span class="fs-name">Submerged Fraction (Floating Body) <span class="fs-num">#40</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \frac{\textcolor{#E65100}{\forall_{sub}}}{\textcolor{#E65100}{\forall_{body}}} = \frac{\textcolor{#2E7D32}{\rho_{b}}}{\textcolor{#2E7D32}{\rho_{f}}} = \frac{\textcolor{#2E7D32}{SG_{b}}}{\textcolor{#2E7D32}{SG_{f}}} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">Rearranged from #39 — the g in γ = ρg cancels. The fraction of a floating body sitting below the surface equals the body-to-fluid density ratio. E.g. ice (SG ≈ 0.92) floats with ≈ 92% submerged.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>quickly getting the submerged fraction of a floating object, or comparing densities in a single fluid.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>fully submerged bodies (fraction = 1) or layered fluids. If SG_body ≥ SG_fluid the body does not float — it sinks.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">∀_sub/∀_body = ρ_body/ρ_fluid = SG_body/SG_fluid. Density ratio = submerged fraction.</p></div>
+        </div>
+      </div>
+
     </div>
 
     <h2 style="color:var(--ch3-title);">Ch 3 &mdash; Bernoulli&rsquo;s Equation</h2>

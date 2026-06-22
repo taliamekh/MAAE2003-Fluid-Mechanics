@@ -6,7 +6,7 @@
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:28px;">
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Reference items</div>
-      <div style="font-size:22px;font-weight:600;color:var(--eq);">37</div>
+      <div style="font-size:22px;font-weight:600;color:var(--eq);">40</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Chapters completed</div>
@@ -14,7 +14,7 @@
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Examples</div>
-      <div style="font-size:22px;font-weight:600;color:var(--deriv);">21</div>
+      <div style="font-size:22px;font-weight:600;color:var(--deriv);">24</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Assignments</div>
@@ -57,6 +57,18 @@
       <div class="branch"><strong>Where does the force act?</strong> &rarr; Center of pressure: \(y_{cp} = \bar{y} + I_{xx}/(\bar{y}A)\)</div>
       <div class="branch"><strong>Curved surface?</strong> &rarr; Project onto horizontal &amp; vertical planes, combine components</div>
       <div class="branch"><strong>Equilibrium (hinge/stop/bolt forces)?</strong> &rarr; Draw FBD, sum moments about hinge using F_R at y_cp</div>
+    </div>
+  </div>
+
+  <div class="decision-tree card-bracket" style="border-left-color:var(--ch2-title);">
+    <h3 style="color:var(--ch2-title);margin-top:0;">Buoyancy &amp; Floating Bodies</h3>
+    <div class="tree">
+      <div class="branch"><strong>Upward force on a submerged/floating body?</strong> &rarr; Buoyant force: \(F_B = \gamma_{\text{fluid}}\forall_{\text{displaced}}\) &mdash; weight of displaced fluid, acting up through the centre of buoyancy</div>
+      <div class="branch"><strong>Does it float or sink?</strong> &rarr; Compare fully-submerged \(F_B\) with \(W\): \(F_B &gt; W\) floats, \(F_B &lt; W\) sinks, \(F_B = W\) hovers &nbsp;(equivalently \(\rho_{\text{body}}\) vs \(\rho_{\text{fluid}}\))</div>
+      <div class="branch"><strong>How deep does a floating body sit?</strong> &rarr; Set \(F_B = W\): \(\gamma_f\forall_{\text{sub}} = \gamma_b\forall_{\text{body}}\), solve for the draft
+        <div class="sub-branch" style="padding-left:20px;margin-top:4px;"><strong>Just the fraction submerged?</strong> &rarr; \(\forall_{\text{sub}}/\forall_{\text{body}} = SG_{\text{body}}/SG_{\text{fluid}}\)</div>
+      </div>
+      <div class="branch"><strong>Cable tension / apparent weight on a submerged body?</strong> &rarr; FBD with \(F_B\) up, \(W\) down, the support force, then \(\sum F_V = 0\); apparent weight \(= W - F_B\)</div>
     </div>
   </div>
 
@@ -142,6 +154,7 @@
       <li>&rarr; Hydrostatic pressure on a submerged surface varies linearly with depth &mdash; the resultant force equals the pressure at the centroid times the area</li>
       <li>&rarr; The center of pressure is always below the centroid &mdash; the offset depends on the shape&rsquo;s second moment of area</li>
       <li>&rarr; For curved surfaces, decompose into horizontal and vertical components using projected areas</li>
+      <li>&rarr; A submerged or floating body feels an upward buoyant force equal to the weight of the fluid it displaces, acting through the centre of buoyancy &mdash; whether it floats or sinks is set by density</li>
     </ul>
 
     <p><strong style="color:var(--ch2-title)">When to use what:</strong></p>
@@ -155,6 +168,10 @@
       <li>&rarr; Curved surface, vertical force? &mdash; Weight of fluid above (real or imaginary): \(F_V = \gamma\forall_{\text{above}}\) (+ \(p_aA\))</li>
       <li>&rarr; Curved surface, resultant &amp; angle? &mdash; \(F = \sqrt{F_H^2 + F_V^2}\), \(\theta = \tan^{-1}(F_V/F_H)\)</li>
       <li>&rarr; Where do they act? &mdash; \(x_{CP} = \sum W_ix_i/F_V\) (for \(F_V\)); \(z_{CP} = h_{CG} + I_{xx}/(h_{CG}A)\) (for \(F_H\))</li>
+      <li>&rarr; <strong>Buoyant</strong> force on a body? &mdash; \(F_B = \gamma_{\text{fluid}}\forall_{\text{displaced}}\) (up, through the centre of buoyancy)</li>
+      <li>&rarr; Float or sink? &mdash; fully-submerged \(F_B\) vs \(W\): \(F_B &gt; W\) floats, \(F_B &lt; W\) sinks, equal hovers</li>
+      <li>&rarr; Floating depth / draft? &mdash; \(F_B = W \Rightarrow \gamma_f\forall_{\text{sub}} = \gamma_b\forall_{\text{body}}\); fraction submerged \(= SG_{\text{body}}/SG_{\text{fluid}}\)</li>
+      <li>&rarr; Cable tension / apparent weight? &mdash; \(\sum F_V = 0\) with \(F_B\), \(W\), and the support; apparent weight \(= W - F_B\)</li>
     </ul>
 
     <p><strong style="color:var(--ch2-title)">&#9888; Traps:</strong></p>
@@ -165,6 +182,8 @@
       <li>On a curved surface, \(F_H\) uses the <strong>projected</strong> area and \(F_V\) uses a <strong>volume</strong> (weight of fluid) &mdash; never multiply a pressure by the curved area</li>
       <li>Get the <strong>direction of \(F_V\)</strong> right: fluid physically above pushes down; fluid below pushes up (imaginary column / buoyancy)</li>
       <li>In a pressurised chamber, keep \(p_a\) in \(F_H\); for \(F_V\) on a symmetric surface (e.g. hemisphere) uniform \(p_a\) cancels vertically</li>
+      <li>Buoyancy uses the <strong>displaced</strong> volume &mdash; the whole body if fully submerged, only the submerged part if floating (never the above-water volume)</li>
+      <li>Watch the tether direction: a cable to the <strong>floor</strong> pulls a buoyant body <strong>down</strong> (\(T\) downward in \(\sum F_V\)); a cable from above pulls up</li>
     </ol>
   </div>
 
@@ -301,6 +320,10 @@
       <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Curved surface &mdash; horizontal</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(F_H = (\gamma h_{CG}+p_a)A_{\text{proj}}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Flat plate on vertical projection</td></tr>
       <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Curved surface &mdash; vertical</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(F_V = \gamma\forall_{\text{above}}\) (+ \(p_aA\))</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Weight of fluid above (real/imaginary)</td></tr>
       <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Curved surface &mdash; resultant</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(F = \sqrt{F_H^2+F_V^2}\), \(\theta = \tan^{-1}(F_V/F_H)\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Circular arc &rarr; line hits centre</td></tr>
+      <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Buoyant force</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(F_B = \gamma_{\text{fluid}}\forall_{\text{displaced}}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Up, through centre of buoyancy</td></tr>
+      <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Float or sink?</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(F_B\) vs \(W\) (or \(\rho_b\) vs \(\rho_f\))</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(F_B &gt; W\) floats, \(F_B &lt; W\) sinks</td></tr>
+      <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Floating draft / fraction</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(F_B=W\); \(\forall_{\text{sub}}/\forall_{\text{body}} = SG_b/SG_f\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Displaces its own weight</td></tr>
+      <tr style="border-left:3px solid var(--ch2-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Cable tension / apparent weight</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\sum F_V = 0\) with \(F_B, W, T\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Apparent weight \(= W - F_B\)</td></tr>
       <tr style="border-left:3px solid var(--ch3-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Two points on a streamline</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(P/\rho + V^2/2 + gz = \text{const}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Steady, inviscid, 1 streamline</td></tr>
       <tr style="border-left:3px solid var(--ch3-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Tank draining / free jet</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(V = \sqrt{2gz}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Torricelli; open surface at rest</td></tr>
       <tr style="border-left:3px solid var(--ch3-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Velocity from Pitot tube</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(V = \sqrt{2(P_0-P)/\rho}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Stagnation &minus; static</td></tr>
