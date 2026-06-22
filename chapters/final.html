@@ -18,6 +18,10 @@
     <div style="font-weight:600;color:var(--eq);font-size:15px;">Concept Review →</div>
     <div style="font-size:12px;color:var(--muted);margin-top:4px;">What's new since MT2 — Ch 6 pipe flow: regimes, Reynolds number, Darcy–Weisbach &amp; Moody, the three problem types, minor losses, complete-system pump problems</div>
   </a>
+  <a class="past-exam-card" onclick="showSection('finalsheet')" style="display:block;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;text-decoration:none;transition:border-color .2s,box-shadow .2s;cursor:pointer;" onmouseover="this.style.borderColor='var(--def)';this.style.boxShadow='0 0 12px rgba(42,107,124,.12)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+    <div style="font-weight:600;color:var(--def);font-size:15px;">📄 Final Sheet (provided) →</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:4px;">The exact 3-page equation sheet you get on the exam (pages 12–14) — every equation, the K-value table, and the Moody chart, searchable and themed</div>
+  </a>
   <div class="past-exam-card" style="display:block;background:var(--surface);border:1px dashed var(--border);border-radius:8px;padding:14px 16px;opacity:.7;">
     <div style="font-weight:600;color:var(--muted);font-size:15px;">Practice Final <span style="font-size:11px;font-weight:400;">· coming soon</span></div>
     <div style="font-size:12px;color:var(--muted);margin-top:4px;">Full worked sample final with cumulative long-answer problems — added next.</div>
@@ -44,8 +48,8 @@
 
 <!-- ── FORMULA SHEET WARNING ── -->
 <div class="card-bracket" style="--bracket-c:var(--example);margin-bottom:24px;background:rgba(244,162,97,.06);">
-  <div class="card-title" style="color:var(--example);border-color:var(--example);">★ Check your formula sheet before exam day</div>
-  <p style="margin:8px 0 0;font-size:13.5px;">Some Ch 6 equations are messy and are often <em>not</em> printed on provided sheets — confirm which of these you must memorise: the <strong>Colebrook / Haaland</strong> friction-factor equations (#51), the <strong>Type-2 explicit Reynolds</strong> form (#53–#54), and the <strong>Type-3 diameter</strong> equation (#55). The Moody chart is usually supplied; the Darcy–Weisbach (#48), <span style="white-space:nowrap;">\(f=64/Re\)</span> (#50) and minor-loss (#57) forms are short enough to memorise regardless. When you work the practice exams, each solution will flag whether a formula is sheet-supplied or must be supplied from memory.</p>
+  <div class="card-title" style="color:var(--example);border-color:var(--example);">📄 Your provided formula sheet</div>
+  <p style="margin:8px 0 0;font-size:13.5px;">The final comes with a <strong>3-page equation sheet</strong> (pages 12–14) — now reproduced in the notes: open <a onclick="showSection('finalsheet')" style="color:var(--example);cursor:pointer;text-decoration:underline;font-weight:600;">Final Sheet (provided) →</a>. The good news: almost everything for pipe flow is on it — <strong>Reynolds number, Weisbach, \(f=64/Re\), the explicit Haaland turbulent-\(f\), the full Type-2 (ζ) and Type-3 (\(d^5\)) forms, minor &amp; total losses, the K-value table, and the Moody chart</strong> — plus the energy/head equation, pump/turbine power, momentum and hydrostatics. A few things you must still supply from memory: <strong>Colebrook</strong> (only Haaland is printed — but Haaland is enough), <strong>\(\Delta p=\gamma h_f\)</strong> (derive from the head equation, horizontal only), <strong>\(\nu=\mu/\rho\)</strong> (the sheet uses ν but not the conversion), and the <strong>regime numbers</strong> (\(Re\approx2300/4000\)). The <strong>Formula Map</strong> tab on the Concept Review lists every item by page.</p>
 </div>
 
 <!-- ── PRIORITY TIERS ── -->
@@ -54,13 +58,13 @@
 <h3 style="color:#D94F4F;margin:14px 0 8px;font-size:15px;">🔴 High priority — study these first (the new + the bridge)</h3>
 <div style="overflow-x:auto;">
 <table class="prio-table" style="width:100%;font-size:13px;border-collapse:collapse;margin-bottom:16px;background:var(--surface);border-radius:8px;overflow:hidden;border:1px solid var(--border);">
-  <thead><tr style="background:rgba(217,79,79,.08);"><th style="padding:8px 12px;text-align:left;color:#D94F4F;font-weight:600;">Topic</th><th style="padding:8px 12px;text-align:left;color:#D94F4F;font-weight:600;">Where</th><th style="padding:8px 12px;text-align:left;color:#D94F4F;font-weight:600;">Formulas</th><th style="padding:8px 12px;text-align:left;color:#D94F4F;font-weight:600;">Why high</th></tr></thead>
+  <thead><tr style="background:rgba(217,79,79,.08);"><th style="padding:8px 12px;text-align:left;color:#D94F4F;font-weight:600;">Topic</th><th style="padding:8px 12px;text-align:left;color:#D94F4F;font-weight:600;">Where</th><th style="padding:8px 12px;text-align:left;color:#D94F4F;font-weight:600;">On the sheet</th><th style="padding:8px 12px;text-align:left;color:#D94F4F;font-weight:600;">Why high</th></tr></thead>
   <tbody>
-    <tr style="border-top:1px solid var(--border);"><td style="padding:8px 12px;">The three single-pipe problems (Type 1 / 2 / 3)</td><td style="padding:8px 12px;">Ch 6.2 (§6.6)</td><td style="padding:8px 12px;">#48, #50–#56</td><td style="padding:8px 12px;">Newest material; "name the type by the missing variable" — at least one is very likely</td></tr>
-    <tr style="border-top:1px solid var(--border);"><td style="padding:8px 12px;">Complete-system pump problem (head eq + Σh<sub>f</sub> + Σh<sub>m</sub>)</td><td style="padding:8px 12px;">Ch 6.3 (§6.7) + Ch 5.4</td><td style="padding:8px 12px;">#43, #48, #57–#59</td><td style="padding:8px 12px;">The capstone integrator — marries the energy equation, major &amp; minor losses, and a pump / turbine</td></tr>
-    <tr style="border-top:1px solid var(--border);"><td style="padding:8px 12px;">Reynolds number &amp; regime identification</td><td style="padding:8px 12px;">Ch 6.1 (§6.3)</td><td style="padding:8px 12px;">#47</td><td style="padding:8px 12px;">Gate to every pipe problem — the wrong regime gives the wrong friction factor</td></tr>
-    <tr style="border-top:1px solid var(--border);"><td style="padding:8px 12px;">Darcy–Weisbach + friction factor (Moody / Colebrook / Haaland / 64·Re⁻¹)</td><td style="padding:8px 12px;">Ch 6.1 (§6.4)</td><td style="padding:8px 12px;">#48, #50, #51</td><td style="padding:8px 12px;">Core of every major-loss calculation</td></tr>
-    <tr style="border-top:1px solid var(--border);"><td style="padding:8px 12px;">Minor losses (K-coefficients, ΣK)</td><td style="padding:8px 12px;">Ch 6.3 (§6.7)</td><td style="padding:8px 12px;">#57–#59</td><td style="padding:8px 12px;">Almost always paired with the system problem; easy marks if you list every fitting</td></tr>
+    <tr style="border-top:1px solid var(--border);"><td style="padding:8px 12px;">The three single-pipe problems (Type 1 / 2 / 3)</td><td style="padding:8px 12px;">Ch 6.2 (§6.6)</td><td style="padding:8px 12px;">Sheet p.13</td><td style="padding:8px 12px;">Newest material; "name the type by the missing variable" — at least one is very likely</td></tr>
+    <tr style="border-top:1px solid var(--border);"><td style="padding:8px 12px;">Complete-system pump problem (head eq + Σh<sub>f</sub> + Σh<sub>m</sub>)</td><td style="padding:8px 12px;">Ch 6.3 (§6.7) + Ch 5.4</td><td style="padding:8px 12px;">Sheet p.13–14</td><td style="padding:8px 12px;">The capstone integrator — marries the energy equation, major &amp; minor losses, and a pump / turbine</td></tr>
+    <tr style="border-top:1px solid var(--border);"><td style="padding:8px 12px;">Reynolds number &amp; regime identification</td><td style="padding:8px 12px;">Ch 6.1 (§6.3)</td><td style="padding:8px 12px;">Sheet p.13</td><td style="padding:8px 12px;">Gate to every pipe problem — the wrong regime gives the wrong friction factor</td></tr>
+    <tr style="border-top:1px solid var(--border);"><td style="padding:8px 12px;">Weisbach + friction factor (Moody / Haaland / 64·Re⁻¹)</td><td style="padding:8px 12px;">Ch 6.1 (§6.4)</td><td style="padding:8px 12px;">Sheet p.13–14</td><td style="padding:8px 12px;">Core of every major-loss calculation</td></tr>
+    <tr style="border-top:1px solid var(--border);"><td style="padding:8px 12px;">Minor losses (K-coefficients, ΣK)</td><td style="padding:8px 12px;">Ch 6.3 (§6.7)</td><td style="padding:8px 12px;">Sheet p.13–14</td><td style="padding:8px 12px;">Almost always paired with the system problem; easy marks if you list every fitting</td></tr>
   </tbody>
 </table>
 </div>
@@ -95,7 +99,7 @@
 <div class="card-bracket tip-card" style="--bracket-c:var(--tip);margin-bottom:24px;">
   <h3 style="color:var(--tip);margin-bottom:8px;">🚫 Don't waste time on these</h3>
   <ul style="font-size:13.5px;padding-left:18px;margin:0;">
-    <li style="margin:4px 0;">Memorising the <strong>Moody chart</strong> — you'll be given it (or use Colebrook / Haaland). Practice <em>reading</em> it, don't redraw it.</li>
+    <li style="margin:4px 0;">Memorising the <strong>Moody chart</strong> — you'll be given it on the sheet (or use Haaland). Practice <em>reading</em> it, don't redraw it.</li>
     <li style="margin:4px 0;">Hand-deriving Colebrook or the laminar parabolic profile — only the result <span style="white-space:nowrap;">\(f=64/Re\)</span> is used.</li>
     <li style="margin:4px 0;">Compressible flow / Mach number — not in scope.</li>
     <li style="margin:4px 0;">Re-deriving RTT or the generalized energy equation — apply the final forms.</li>
@@ -140,7 +144,7 @@
   <div id="final-checklist" style="font-size:13.5px;line-height:2.1;">
     <div style="font-weight:600;color:var(--eq);margin:2px 0 4px;font-size:12.5px;">NEW SINCE MIDTERM 2 — Ch 6 (study first)</div>
     <label style="display:block;cursor:pointer;"><input type="checkbox" data-key="final-re-regime"> Reynolds number &amp; flow regimes — \(Re_d=Vd/\nu\), thresholds (laminar &lt;2300, turbulent &gt;4000)</label>
-    <label style="display:block;cursor:pointer;"><input type="checkbox" data-key="final-darcy"> Darcy–Weisbach \(h_f=f(L/d)(V^2/2g)\) and the friction factor (laminar \(f=64/Re\); turbulent Moody / Colebrook / Haaland)</label>
+    <label style="display:block;cursor:pointer;"><input type="checkbox" data-key="final-darcy"> Darcy–Weisbach \(h_f=f(L/d)(V^2/2g)\) and the friction factor (laminar \(f=64/Re\); turbulent Moody / Haaland — both on the sheet)</label>
     <label style="display:block;cursor:pointer;"><input type="checkbox" data-key="final-moody"> Reading the Moody chart — relative roughness \(\varepsilon/d\), commercial-pipe roughness table</label>
     <label style="display:block;cursor:pointer;"><input type="checkbox" data-key="final-type1"> Type 1 — rating (given \(d,Q\) → \(h_f\)): the direct march</label>
     <label style="display:block;cursor:pointer;"><input type="checkbox" data-key="final-type2"> Type 2 — analysis (given \(d,h_f\) → \(Q\)): dimensionless \(\zeta\) + explicit \(Re_d\)</label>
