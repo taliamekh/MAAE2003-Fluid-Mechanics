@@ -1,0 +1,288 @@
+<section id="final-concepts" class="page-section">
+
+<h1 class="page-title" style="color:var(--eq);">Final Exam — Concept Review</h1>
+<p class="page-subtitle">What's new since Midterm 2: Ch 6 — Pipe Flow &amp; Losses, and the energy/head equation it sits on.</p>
+
+<!-- intro banner -->
+<div style="font-size:13.5px;line-height:1.65;border-radius:8px;padding:12px 14px;margin:0 0 22px;background:rgba(255,107,53,.05);border:1px solid rgba(255,107,53,.16);">
+  The final is <strong>cumulative</strong>, but the only material you have <em>not</em> already been tested on is <strong>Ch 6</strong>. This review concentrates there. For each method it also reminds you which earlier tool it leans on — the <strong>energy / head equation</strong> (§5.4), <strong>Bernoulli</strong> (§3.5), and <strong>continuity</strong> (§5.1) — so the cumulative pieces fall into place around the new content. Formula numbers in parentheses (e.g. #48) refer to the <strong>Full Reference Sheet</strong>; use its search box to jump to any card.
+</div>
+
+<!-- SPOT-IT TABLE -->
+<h2 style="color:var(--def);margin-bottom:10px;">🧭 What kind of problem is this?</h2>
+<p style="font-size:13.5px;margin-top:0;">Every Ch 6 problem is one of a small handful of shapes. Identify it from what you're given before you write anything — the method follows automatically.</p>
+<div style="overflow-x:auto;margin-bottom:22px;">
+<table style="width:100%;font-size:13px;border-collapse:collapse;background:var(--surface);border-radius:8px;overflow:hidden;border:1px solid var(--border);">
+  <thead><tr style="background:rgba(42,107,124,.08);">
+    <th style="padding:8px 12px;text-align:left;color:var(--def);font-weight:600;">You're given…</th>
+    <th style="padding:8px 12px;text-align:left;color:var(--def);font-weight:600;">…and asked for…</th>
+    <th style="padding:8px 12px;text-align:left;color:var(--def);font-weight:600;">It's a…</th>
+    <th style="padding:8px 12px;text-align:left;color:var(--def);font-weight:600;">First move</th>
+  </tr></thead>
+  <tbody>
+    <tr style="border-top:1px solid var(--border);"><td style="padding:8px 12px;">\(d\) and \(Q\) (or \(V\))</td><td style="padding:8px 12px;">\(h_f\) or \(\Delta p\)</td><td style="padding:8px 12px;"><strong style="color:var(--eq);">Type 1 — rating</strong></td><td style="padding:8px 12px;">March: \(V\to Re_d\to\) regime \(\to f\to h_f\)</td></tr>
+    <tr style="border-top:1px solid var(--border);"><td style="padding:8px 12px;">\(d\) and \(h_f\)</td><td style="padding:8px 12px;">\(Q\) (or \(V\))</td><td style="padding:8px 12px;"><strong style="color:var(--eq);">Type 2 — analysis</strong></td><td style="padding:8px 12px;">\(\zeta=\dfrac{gd^3h_f}{L\nu^2}\) then explicit \(Re_d\)</td></tr>
+    <tr style="border-top:1px solid var(--border);"><td style="padding:8px 12px;">\(Q\) and \(h_f\)</td><td style="padding:8px 12px;">\(d\)</td><td style="padding:8px 12px;"><strong style="color:var(--eq);">Type 3 — design</strong></td><td style="padding:8px 12px;">Guess \(f\to d^5\to Re,\varepsilon/d\to\) Moody \(\to\) repeat</td></tr>
+    <tr style="border-top:1px solid var(--border);"><td style="padding:8px 12px;">A circuit with a pump / two reservoirs at different levels</td><td style="padding:8px 12px;">pump head or power</td><td style="padding:8px 12px;"><strong style="color:var(--def);">Complete system</strong></td><td style="padding:8px 12px;">Head eq between the two surfaces + \(\sum h_f+\sum h_m\)</td></tr>
+    <tr style="border-top:1px solid var(--border);"><td style="padding:8px 12px;">A fluid, velocity, diameter</td><td style="padding:8px 12px;">"laminar or turbulent?" / which \(f\)</td><td style="padding:8px 12px;"><strong style="color:var(--tip);">Regime check</strong></td><td style="padding:8px 12px;">\(Re_d=Vd/\nu\) vs 2300 / 4000</td></tr>
+    <tr style="border-top:1px solid var(--border);"><td style="padding:8px 12px;">Any of the above <em>with fittings / valves / bends</em></td><td style="padding:8px 12px;">total loss</td><td style="padding:8px 12px;"><strong style="color:var(--example);">+ Minor losses</strong></td><td style="padding:8px 12px;">Add \(\sum h_m=\big(\sum K\big)\dfrac{V^2}{2g}\)</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ASSUMED KNOWLEDGE -->
+<h2 style="color:var(--def);margin-bottom:10px;">📌 The toolkit you bring in</h2>
+<p style="font-size:13.5px;margin-top:0;">Pipe flow is not a brand-new theory — it is the <strong>energy/head equation with the loss term spelled out</strong>. Make sure these four are automatic before exam day.</p>
+
+<div class="card-bracket def-card">
+  <div class="card-title">Energy / head equation (§5.4, #43)</div>
+  \[\frac{p_1}{\gamma}+\alpha_1\frac{V_1^2}{2g}+z_1=\frac{p_2}{\gamma}+\alpha_2\frac{V_2^2}{2g}+z_2+h_{loss}-h_p+h_t\]
+  <p style="margin:8px 0 0;font-size:13px;">Every pipe problem is this equation. <strong>Pipe flow just replaces \(h_{loss}\)</strong> with \(\sum h_f+\sum h_m\). Sign pattern: <strong>+loss, −pump, +turbine</strong>.</p>
+  <div class="var-row">
+    <span class="pill">\(h_{loss}\) — total head lost to friction (m)</span>
+    <span class="pill">\(h_p\) — pump head added</span>
+    <span class="pill">\(h_t\) — turbine head extracted</span>
+    <span class="pill">\(\alpha\) — KE correction (≈2 laminar, ≈1.05 turbulent)</span>
+  </div>
+</div>
+
+<div class="card-bracket def-card">
+  <div class="card-title">Bernoulli (§3.5)</div>
+  \[\frac{p_1}{\gamma}+\frac{V_1^2}{2g}+z_1=\frac{p_2}{\gamma}+\frac{V_2^2}{2g}+z_2\]
+  <p style="margin:8px 0 0;font-size:13px;">The head equation with <strong>no losses and no machine</strong> — valid only along a streamline, steady, incompressible, frictionless. The instant a real pipe has length, Bernoulli is replaced by the head equation above.</p>
+</div>
+
+<div class="card-bracket def-card">
+  <div class="card-title">Continuity (§5.1, #16–#18)</div>
+  \[Q=A\,V=\text{const}\qquad\Rightarrow\qquad V=\frac{4Q}{\pi d^2}\]
+  <p style="margin:8px 0 0;font-size:13px;">Gives you the <strong>velocity every pipe formula needs</strong>. For a round pipe \(A=\tfrac{\pi}{4}d^2\), so \(V=4Q/\pi d^2\) is the workhorse substitution.</p>
+</div>
+
+<div class="card-bracket unit-card">
+  <div class="card-title">Kinematic viscosity (§1.2, #5)</div>
+  \[\nu=\frac{\mu}{\rho}\]
+  <p style="margin:8px 0 0;font-size:13px;">The Reynolds number uses \(\nu\), not \(\mu\). If a problem gives dynamic viscosity \(\mu\) and density \(\rho\), convert first. Units: \(\nu\) in \(\text{m}^2/\text{s}\).</p>
+</div>
+
+<!-- CORE CONCEPTS -->
+<h2 style="color:var(--eq);margin-bottom:10px;">📚 Core concepts (Ch 6)</h2>
+
+<h3 style="color:var(--ch6-title);">A · Flow regimes &amp; the Reynolds number</h3>
+
+<div class="card-bracket def-card">
+  <div class="card-title">Two regimes</div>
+  <p style="margin:6px 0 0;font-size:13px;"><strong>Laminar</strong> flow is ordered — fluid moves in smooth layers with no mixing (Reynolds' dye filament stays a thin line). <strong>Turbulent</strong> flow is chaotic — eddies mix the fluid (the dye bursts and spreads). The regime decides which friction-factor rule you use, so it is always the <em>first</em> thing you establish.</p>
+</div>
+
+<div class="card-bracket eq-card">
+  <div class="card-title">Reynolds number (#47)</div>
+  \[Re_d=\frac{\rho V d}{\mu}=\frac{V d}{\nu}\]
+  <p style="margin:8px 0 0;font-size:13px;">The ratio of <strong>inertia to viscous forces</strong>. Dimensionless. Big \(Re\) ⇒ inertia wins ⇒ turbulent; small \(Re\) ⇒ viscosity wins ⇒ laminar.</p>
+  <div class="var-row">
+    <span class="pill">\(\rho\) — density (kg/m³)</span>
+    <span class="pill">\(V\) — average velocity (m/s)</span>
+    <span class="pill">\(d\) — pipe diameter (m)</span>
+    <span class="pill">\(\mu\) — dynamic viscosity (Pa·s)</span>
+    <span class="pill">\(\nu=\mu/\rho\) — kinematic viscosity (m²/s)</span>
+  </div>
+</div>
+
+<div class="card-bracket tip-card">
+  <div class="card-title">★ Regime thresholds</div>
+  <p style="margin:6px 0 0;font-size:13px;">\(Re_{crit}\approx 2300\). Practical bands: \(Re_d<2000\) laminar · \(2000\text{–}4000\) transitional (unpredictable) · \(>4000\) turbulent. <strong>Compute \(Re\) first; it picks the \(f\) formula.</strong> Roughness \(\varepsilon/d\) matters <em>only</em> in turbulent flow.</p>
+</div>
+
+<h3 style="color:var(--ch6-title);">B · Major losses — Darcy–Weisbach &amp; the friction factor</h3>
+
+<div class="card-bracket def-card">
+  <div class="card-title">Friction head loss \(h_f\)</div>
+  <p style="margin:6px 0 0;font-size:13px;">The mechanical energy a fluid loses to <strong>wall friction down a straight run of pipe</strong> — "major" because it is distributed over the whole length. This is exactly the \(h_{loss}\) of the head equation for a plain pipe with no fittings.</p>
+</div>
+
+<div class="card-bracket eq-card">
+  <div class="card-title">Darcy–Weisbach (#48)</div>
+  \[h_f=f\,\frac{L}{d}\,\frac{V^2}{2g}\]
+  <p style="margin:8px 0 0;font-size:13px;">The master equation for major loss — works in <strong>both</strong> regimes; only the way you get \(f\) changes. Warning: this is the <strong>Darcy</strong> friction factor \(f\), which is \(4\times\) the Fanning factor. The laminar line is \(64/Re\), not \(16/Re\).</p>
+  <div class="var-row">
+    <span class="pill">\(f\) — Darcy friction factor (dimensionless)</span>
+    <span class="pill">\(L\) — pipe length (m)</span>
+    <span class="pill">\(d\) — diameter (m)</span>
+    <span class="pill">\(V\) — velocity (m/s)</span>
+    <span class="pill">\(g\) — 9.81 m/s² (32.2 ft/s²)</span>
+  </div>
+</div>
+
+<div class="card-bracket eq-card">
+  <div class="card-title">Friction factor — laminar (#50)</div>
+  \[f=\frac{64}{Re_d}\]
+  <p style="margin:8px 0 0;font-size:13px;"><strong>Exact</strong>, derived from the parabolic velocity profile. Roughness-independent — a rough pipe and a smooth pipe have the same \(f\) in laminar flow. <strong>No chart needed.</strong></p>
+</div>
+
+<div class="card-bracket eq-card">
+  <div class="card-title">Friction factor — turbulent (#51): Colebrook / Haaland</div>
+  \[\frac{1}{\sqrt f}=-2.0\log\!\left(\frac{\varepsilon/d}{3.7}+\frac{2.51}{Re_d\sqrt f}\right)\quad\text{(Colebrook, implicit)}\]
+  \[\frac{1}{\sqrt f}\approx-1.8\log\!\left[\frac{6.9}{Re_d}+\left(\frac{\varepsilon/d}{3.7}\right)^{1.11}\right]\quad\text{(Haaland, explicit, }\pm2\%)\]
+  <p style="margin:8px 0 0;font-size:13px;">\(f\) depends on \(Re_d\) <em>and</em> relative roughness \(\varepsilon/d\). Colebrook is the standard but implicit (needs iteration / the chart); <strong>Haaland is explicit</strong> and exam-friendly. The <strong>Moody chart</strong> is just Colebrook plotted — read \(Re\) on the bottom, follow the \(\varepsilon/d\) curve, read \(f\) on the left.</p>
+  <div class="var-row">
+    <span class="pill">\(\varepsilon\) — wall roughness height (m), from a table</span>
+    <span class="pill">\(\varepsilon/d\) — relative roughness (dimensionless)</span>
+  </div>
+</div>
+
+<div class="card-bracket eq-card">
+  <div class="card-title">Head loss ↔ pressure drop (#49)</div>
+  \[\Delta p=\gamma\,h_f\]
+  <p style="margin:8px 0 0;font-size:13px;">Only for a <strong>horizontal, constant-area</strong> pipe (no elevation change, \(V_1=V_2\)). If the pipe rises or changes size, go back to the full head equation — don't shortcut it.</p>
+</div>
+
+<h3 style="color:var(--ch6-title);">C · The three single-pipe problems</h3>
+<p style="font-size:13.5px;margin-top:0;">The heart of Ch 6. Any two of \(\{d,\ Q,\ h_f\}\) are given and you find the third. <strong>Name the problem by which one is missing</strong> — that tells you whether the solve is direct or iterative.</p>
+
+<div class="card-bracket def-card">
+  <div class="card-title">The taxonomy</div>
+  <p style="margin:6px 0 4px;font-size:13px;">
+    <strong>Type 1 (rating)</strong> — missing \(h_f\): everything you need for the march is known. <strong>Direct.</strong><br>
+    <strong>Type 2 (analysis)</strong> — missing \(Q\): \(V\) is unknown, so \(Re\) and \(f\) are unknown too. <strong>Solved by the explicit ζ method</strong> (or iterate on \(f\)).<br>
+    <strong>Type 3 (design)</strong> — missing \(d\): \(d\) hides inside \(Re\), \(\varepsilon/d\) and the loss equation at once. <strong>Always iterative.</strong>
+  </p>
+</div>
+
+<div class="card-bracket eq-card">
+  <div class="card-title">Type 2 — dimensionless head loss (#53) + explicit Reynolds (#54)</div>
+  \[\zeta=\frac{g\,d^3 h_f}{L\,\nu^2}\qquad\Big(=\tfrac12 f\,Re_d^{\,2}\Big)\]
+  \[Re_d=-\sqrt{8\zeta}\;\log\!\left(\frac{\varepsilon/d}{3.7}+\frac{1.775}{\sqrt{\zeta}}\right)\]
+  <p style="margin:8px 0 0;font-size:13px;">\(\zeta\) is built entirely from <strong>known</strong> quantities (no \(V\) inside), so it breaks the circularity. Then \(V=\nu Re_d/d\) and \(Q=\tfrac{\pi}{4}d^2 V\). <strong>Turbulent only</strong> — verify \(Re_d>4000\) at the end.</p>
+  <div class="var-row">
+    <span class="pill">\(\zeta\) — dimensionless head loss</span>
+    <span class="pill">all RHS quantities known up front</span>
+  </div>
+</div>
+
+<div class="card-bracket eq-card">
+  <div class="card-title">Type 3 — diameter equation (#55) + Reynolds from flow (#56)</div>
+  \[d^5=\frac{8\,f\,L\,Q^2}{\pi^2\,g\,h_f}\qquad\qquad Re_d=\frac{4Q}{\pi d\,\nu}\]
+  <p style="margin:8px 0 0;font-size:13px;">Darcy–Weisbach solved for \(d^5\) after substituting \(V=4Q/\pi d^2\). Recipe: guess \(f\approx0.02\text{–}0.03\) → solve \(d^5\) → get \(Re_d\) and \(\varepsilon/d\) → read a new \(f\) from Moody → repeat. Converges fast because \(d\propto f^{1/5}\).</p>
+</div>
+
+<div class="card-bracket tip-card">
+  <div class="card-title">★ Type-spotting</div>
+  <p style="margin:6px 0 0;font-size:13px;">Name the type <em>before</em> writing equations. The classic error is running the Type-1 direct march when \(V\) is unknown — you can't, because \(f\) needs \(Re\) which needs \(V\). Missing \(Q\) or \(d\) ⇒ you must use ζ or iterate.</p>
+</div>
+
+<h3 style="color:var(--ch6-title);">D · Minor losses &amp; the complete system</h3>
+
+<div class="card-bracket def-card">
+  <div class="card-title">Minor losses \(h_m\)</div>
+  <p style="margin:6px 0 0;font-size:13px;">Local losses at <strong>fittings, valves, bends, entrances, exits and area changes</strong>. "Minor" means <em>local, not small</em> — a nearly-closed valve can lose more head than a long straight pipe. They go in the same \(h_{loss}\) bucket as friction.</p>
+</div>
+
+<div class="card-bracket eq-card">
+  <div class="card-title">Loss-coefficient form (#57)</div>
+  \[h_m=K\,\frac{V^2}{2g}=\frac{\Delta p}{\rho g}\]
+  <p style="margin:8px 0 0;font-size:13px;">\(K\) is a dimensionless, experimentally-measured coefficient (manufacturer-dependent for valves). Each fitting has its own \(K\); you look them up and add them.</p>
+  <div class="var-row">
+    <span class="pill">\(K\) — loss coefficient (dimensionless)</span>
+    <span class="pill">\(V\) — velocity in the relevant pipe (m/s)</span>
+  </div>
+</div>
+
+<div class="card-bracket eq-card">
+  <div class="card-title">Total loss (#58) &amp; single-diameter shortcut (#59)</div>
+  \[h_{loss}=\sum h_f+\sum h_m\qquad\Rightarrow\qquad h_{total}=\frac{V^2}{2g}\left(f\,\frac{\sum L}{d}+\sum K\right)\]
+  <p style="margin:8px 0 0;font-size:13px;">Feed \(h_{loss}\) into the head equation. The factored form on the right <strong>only works when one diameter (one \(V\)) runs the whole circuit</strong> — multiple sizes ⇒ compute each segment separately because \(V=Q/A\) changes.</p>
+</div>
+
+<div class="card-bracket tip-card">
+  <div class="card-title">★ Standard K values worth memorising</div>
+  <p style="margin:6px 0 0;font-size:13px;">Sharp entrance \(K\approx0.5\); rounded entrance \(K\approx0.05\). <strong>Sharp exit \(K=1.0\)</strong> — the entire velocity head is dumped into the reservoir (don't forget this one). Flanged fittings lose less than screwed; valves vary widely (open globe ≈ 5–10, open gate ≈ 0.1–0.2). For sudden expansion/contraction, apply \(K\) to the <strong>smaller-pipe (faster) velocity</strong>.</p>
+</div>
+
+<!-- QUICK-SOLVE GUIDES -->
+<h2 style="color:var(--eq);margin-bottom:6px;">🧩 Question types &amp; quick-solve guides</h2>
+<p style="font-size:13.5px;margin-top:4px;">Step-by-step recipes for each shape. Practice until the first move is automatic.</p>
+
+<div class="card-bracket" style="--bracket-c:var(--eq);">
+  <div class="card-title" style="color:var(--eq);border-color:var(--eq);">① Type 1 — Rating (find \(h_f\) / \(\Delta p\))</div>
+  <ol style="font-size:13px;padding-left:20px;margin:8px 0 0;line-height:1.55;">
+    <li><strong>Velocity from flow:</strong> \(V=4Q/\pi d^2\).</li>
+    <li><strong>Reynolds number:</strong> \(Re_d=Vd/\nu\) → state the regime.</li>
+    <li><strong>Friction factor:</strong> laminar \(f=64/Re_d\); turbulent → \(\varepsilon/d\) → Moody / Haaland.</li>
+    <li><strong>Head loss:</strong> \(h_f=f(L/d)(V^2/2g)\).</li>
+    <li><strong>Pressure drop</strong> (if horizontal, constant-area): \(\Delta p=\gamma h_f\).</li>
+  </ol>
+</div>
+
+<div class="card-bracket" style="--bracket-c:var(--eq);">
+  <div class="card-title" style="color:var(--eq);border-color:var(--eq);">② Type 2 — Analysis (find \(Q\))</div>
+  <ol style="font-size:13px;padding-left:20px;margin:8px 0 0;line-height:1.55;">
+    <li><strong>Assume turbulent</strong> (verify at the end).</li>
+    <li><strong>Dimensionless head loss:</strong> \(\zeta=g\,d^3 h_f/(L\nu^2)\).</li>
+    <li><strong>Explicit Reynolds:</strong> \(Re_d=-\sqrt{8\zeta}\,\log\big(\tfrac{\varepsilon/d}{3.7}+\tfrac{1.775}{\sqrt\zeta}\big)\).</li>
+    <li><strong>Velocity &amp; flow:</strong> \(V=\nu Re_d/d\), \(Q=\tfrac{\pi}{4}d^2V\).</li>
+    <li><strong>Verify</strong> \(Re_d>4000\) (else the flow is laminar — solve \(f=64/Re\) directly instead).</li>
+  </ol>
+</div>
+
+<div class="card-bracket" style="--bracket-c:var(--eq);">
+  <div class="card-title" style="color:var(--eq);border-color:var(--eq);">③ Type 3 — Design (find \(d\))</div>
+  <ol style="font-size:13px;padding-left:20px;margin:8px 0 0;line-height:1.55;">
+    <li><strong>Guess</strong> \(f\approx0.02\text{–}0.03\).</li>
+    <li><strong>Diameter:</strong> \(d^5=8fLQ^2/(\pi^2 g\,h_f)\) → \(d\).</li>
+    <li><strong>Re &amp; roughness:</strong> \(Re_d=4Q/(\pi d\nu)\), compute \(\varepsilon/d\).</li>
+    <li><strong>New \(f\)</strong> from Moody / Haaland; repeat from step 2 until \(f\) stops changing (2–3 passes).</li>
+  </ol>
+</div>
+
+<div class="card-bracket" style="--bracket-c:var(--def);">
+  <div class="card-title">④ Complete system — pump between two reservoirs</div>
+  <ol style="font-size:13px;padding-left:20px;margin:8px 0 0;line-height:1.55;">
+    <li><strong>Pick the two free surfaces</strong> as points 1 and 2: there \(p=0\) (gauge) and \(V\approx0\).</li>
+    <li><strong>Head equation</strong> collapses to \(z_1+h_p=z_2+h_{loss}\) ⇒ \(h_p=(z_2-z_1)+h_{loss}\).</li>
+    <li><strong>Pipe velocity:</strong> \(V=Q/A=4Q/\pi d^2\); then \(Re_d\) → regime → \(f\).</li>
+    <li><strong>Major loss:</strong> \(\sum h_f=f(L/d)(V^2/2g)\).</li>
+    <li><strong>Minor loss:</strong> list <em>every</em> fitting → \(\sum K\) (don't forget the sharp exit \(K=1.0\)) → \(\sum h_m=(\sum K)V^2/2g\).</li>
+    <li><strong>Solve</strong> \(h_p\), then power \(P=\rho g Q\,h_p\) (ideal); divide by \(\eta_p\) for shaft power.</li>
+  </ol>
+</div>
+
+<div class="card-bracket" style="--bracket-c:var(--tip);">
+  <div class="card-title" style="color:var(--tip);border-color:var(--tip);">⑤ Conceptual — laminar vs turbulent / which \(f\)?</div>
+  <ol style="font-size:13px;padding-left:20px;margin:8px 0 0;line-height:1.55;">
+    <li><strong>Compute</strong> \(Re_d=Vd/\nu\) (convert \(\mu\to\nu=\mu/\rho\) if needed).</li>
+    <li><strong>Classify:</strong> \(<2300\) laminar (use \(f=64/Re\)); \(>4000\) turbulent (Moody / Colebrook); \(2000\text{–}4000\) transitional.</li>
+    <li><strong>Remember</strong> roughness \(\varepsilon/d\) affects \(f\) only when turbulent — in laminar flow \(f\) depends on \(Re\) alone.</li>
+  </ol>
+</div>
+
+<!-- TRAPS -->
+<h2 style="color:var(--example);margin-bottom:10px;">⚡ Concept traps &amp; tips</h2>
+<div class="card-bracket tip-card" style="--bracket-c:var(--example);margin-bottom:24px;">
+  <ul style="font-size:13.5px;padding-left:18px;margin:0;line-height:1.5;">
+    <li style="margin:5px 0;"><strong style="color:var(--example);">No Moody chart in laminar flow.</strong> If \(Re_d<2300\), \(f=64/Re\) — full stop. Reaching for the chart is the #1 Ch 6 slip.</li>
+    <li style="margin:5px 0;"><strong style="color:var(--example);">Smaller-pipe velocity for area changes.</strong> Sudden expansion/contraction \(K\) is applied to the faster (smaller-\(d\)) stream in \(KV^2/2g\).</li>
+    <li style="margin:5px 0;"><strong style="color:var(--example);">The \((f\Sigma L/d+\Sigma K)\) factoring is single-diameter only.</strong> Different sizes ⇒ separate segments — \(V\) changes with \(A\).</li>
+    <li style="margin:5px 0;"><strong style="color:var(--example);">\(\Delta p=\gamma h_f\) is horizontal &amp; constant-area only.</strong> Any elevation change or machine ⇒ use the full head equation.</li>
+    <li style="margin:5px 0;"><strong style="color:var(--example);">Don't mix \(\mu\) and \(\nu\).</strong> Reynolds uses \(\nu=\mu/\rho\). Read the units the problem gives you.</li>
+    <li style="margin:5px 0;"><strong style="color:var(--example);">Type 2 / Type 3 explicit formulas are turbulent-only.</strong> Always verify \(Re\) at the end; if it came out laminar, redo with \(f=64/Re\).</li>
+    <li style="margin:5px 0;"><strong style="color:var(--example);">Keep BG units straight.</strong> \(g=32.2\ \text{ft/s}^2\), mass in slugs — many textbook pipe examples are imperial.</li>
+    <li style="margin:5px 0;"><strong style="color:var(--example);">Carry \(\alpha\) if asked.</strong> The full head equation has \(\alpha V^2/2g\) (\(\alpha\approx2\) laminar, \(\approx1.05\) turbulent); most exam problems take \(\alpha=1\) unless stated.</li>
+  </ul>
+</div>
+
+<!-- MEMORISE NOTHING ELSE -->
+<h2 style="color:var(--eq);margin-bottom:10px;">🎯 If you memorise nothing else</h2>
+<div class="card-bracket eq-card" style="margin-bottom:8px;">
+  <ul style="font-size:13.5px;padding-left:18px;margin:0;line-height:1.7;">
+    <li><strong>Reynolds:</strong> \(Re_d=Vd/\nu\), threshold \(\approx2300\) (laminar below, turbulent above 4000).</li>
+    <li><strong>Laminar \(f\):</strong> \(f=64/Re_d\) (exact, no chart).</li>
+    <li><strong>Major loss:</strong> \(h_f=f\dfrac{L}{d}\dfrac{V^2}{2g}\) (Darcy–Weisbach).</li>
+    <li><strong>Minor loss:</strong> \(h_m=K\dfrac{V^2}{2g}\); sharp entrance \(0.5\), sharp exit \(1.0\).</li>
+    <li><strong>Total:</strong> \(h_{loss}=\sum h_f+\sum h_m\) → into \(\dfrac{p}{\gamma}+\dfrac{V^2}{2g}+z\) with +loss / −pump / +turbine.</li>
+    <li><strong>Name by the missing variable:</strong> \(h_f\)→Type 1, \(Q\)→Type 2, \(d\)→Type 3, pump/2 reservoirs→system.</li>
+    <li><strong>Type 2:</strong> \(\zeta=\dfrac{g d^3 h_f}{L\nu^2}\). &nbsp;<strong>Type 3:</strong> \(d^5=\dfrac{8fLQ^2}{\pi^2 g h_f}\).</li>
+  </ul>
+</div>
+
+<p style="font-size:12.5px;color:var(--muted);margin-top:14px;">Worked numbers for every method live in the Ch 6 lecture pages (6.1 Examples 1–4, 6.2 Examples 1–3, 6.3 capstone). Full sample-final and predicted-exam papers are coming to this prep section next.</p>
+
+</section>
