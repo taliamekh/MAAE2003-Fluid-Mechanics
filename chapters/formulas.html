@@ -527,6 +527,78 @@
         </div>
       </div>
 
+      <div class="fs-card" data-num="41" data-ch="5" data-name="Energy Equation (General Integral Form)" data-vars='{"#E65100|Ws": "Ẇ_s — rate of shaft work done by the CV (W)", "#E65100|Wv": "Ẇ_v — rate of viscous work, ≈0 at no-slip walls (W)", "#E65100|Q": "Q̇ — net rate of heat added to the CV (W)", "#00838F|h": "ĥ — specific enthalpy û+p/ρ; appears in the FLUX term (J/kg)", "#00838F|u": "û — specific internal energy; appears in the STORAGE term (J/kg)", "#2E7D32|ρ": "ρ — fluid density (kg/m³)"}'>
+        <div class="fs-top"><span class="fs-name">Energy Equation (General Integral Form) <span class="fs-num">#41</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#E65100}{\dot{Q}} - \textcolor{#E65100}{\dot{W}_s} - \textcolor{#E65100}{\dot{W}_v} = \frac{\partial}{\partial t}\!\left[\int_{\text{CV}}\!\left(\textcolor{#00838F}{\hat{u}} + \tfrac{1}{2}V^2 + gz\right)\textcolor{#2E7D32}{\rho}\,d\forall\right] + \int_{\text{CS}}\!\left(\textcolor{#00838F}{\hat{h}} + \tfrac{1}{2}V^2 + gz\right)\textcolor{#2E7D32}{\rho}\,(\vec{V}\cdot\hat{n})\,dA \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">RTT with β = e (energy per unit mass). LHS gathers the sources: heat in, minus shaft and viscous work done by the CV. First RHS integral is energy STORED in the CV (uses internal energy û); second is the net energy FLUX across the surface (uses enthalpy ĥ, because pressure work folded in). The û-vs-ĥ split is the fingerprint of pressure work crossing the boundary.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>the most general energy accounting on a control volume — unsteady flow, distributed surfaces, before simplifying to ports.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>quick single-stream pipe problems — jump to the head equation (#43) instead.</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">Q̇ − Ẇ_s − Ẇ_v = ∂/∂t(storage, û) + flux(ĥ). Storage uses internal energy, flux uses enthalpy.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="42" data-ch="5" data-name="Specific Energy Equation (per Unit Mass)" data-vars='{"#00838F|h1": "ĥ₁ — specific enthalpy at the inlet (J/kg)", "#00838F|h2": "ĥ₂ — specific enthalpy at the outlet (J/kg)", "#00838F|ws": "w_s — specific shaft work, Ẇ_s/ṁ (J/kg)", "#00838F|wv": "w_v — specific viscous work, ≈0 (J/kg)", "#00838F|q": "q — specific heat added, Q̇/ṁ (J/kg)", "#E65100|V": "V — flow speed at a section (m/s)", "#1565C0|z": "z — elevation above datum (m)", "#2E7D32|g": "g — gravitational acceleration (9.81 m/s²)"}'>
+        <div class="fs-top"><span class="fs-name">Specific Energy Equation (per Unit Mass) <span class="fs-num">#42</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#00838F}{\hat{h}_1} + \tfrac{1}{2}\textcolor{#E65100}{V_1}^2 + \textcolor{#2E7D32}{g}\,\textcolor{#1565C0}{z_1} = \left(\textcolor{#00838F}{\hat{h}_2} + \tfrac{1}{2}\textcolor{#E65100}{V_2}^2 + \textcolor{#2E7D32}{g}\,\textcolor{#1565C0}{z_2}\right) - \textcolor{#00838F}{q} + \textcolor{#00838F}{w_s} + \textcolor{#00838F}{w_v} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">Steady flow, single inlet (1) and single outlet (2). Conservation of mass gives ṁ_in = ṁ_out = ṁ, so dividing the steady-flow energy equation by ṁ turns every rate into a per-unit-mass quantity (q, w_s, w_v). This is the form &lsquo;used by mechanical engineers&rsquo;. Read it as: energy in at 1 equals energy out at 2, adjusted for heat added and work done.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>one-stream steady devices when you want energy per kilogram — pumps, nozzles, ducts with heat transfer.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>multi-port or unsteady systems (use #41), or when you want metres of head (divide by g → #43).</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">ĥ₁+½V₁²+gz₁ = (ĥ₂+½V₂²+gz₂) − q + w_s + w_v. Single-stream steady flow, per unit mass.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="43" data-ch="5" data-name="Head Equation (Generalized Bernoulli)" data-vars='{"#D32F2F|p": "p — static (gauge) pressure at the section (Pa)", "#E65100|V": "V — average flow speed at the section (m/s)", "#1565C0|hloss": "h_loss — total head loss from friction & heat (m, always ≥ 0)", "#1565C0|hpump": "h_pump — head ADDED by a pump (m)", "#1565C0|hturbine": "h_turbine — head REMOVED by a turbine (m)", "#1565C0|z": "z — elevation head (m)", "#2E7D32|γ": "γ — specific weight, γ = ρg (N/m³)", "#2E7D32|g": "g — gravitational acceleration (9.81 m/s²)"}'>
+        <div class="fs-top"><span class="fs-name">Head Equation (Generalized Bernoulli) <span class="fs-num">#43</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \frac{\textcolor{#D32F2F}{p_1}}{\textcolor{#2E7D32}{\gamma}} + \frac{\textcolor{#E65100}{V_1}^2}{2\textcolor{#2E7D32}{g}} + \textcolor{#1565C0}{z_1} = \frac{\textcolor{#D32F2F}{p_2}}{\textcolor{#2E7D32}{\gamma}} + \frac{\textcolor{#E65100}{V_2}^2}{2\textcolor{#2E7D32}{g}} + \textcolor{#1565C0}{z_2} + \textcolor{#1565C0}{h_{\text{loss}}} - \textcolor{#1565C0}{h_{\text{pump}}} + \textcolor{#1565C0}{h_{\text{turbine}}} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">Energy per unit WEIGHT — every term has units of metres (head). The three heads on each side are pressure head p/γ, velocity head V²/2g, and elevation head z. Sign pattern on the right: + h_loss, − h_pump, + h_turbine. A pump adds energy so it enters with a minus; a turbine extracts energy so it enters with a plus. Reusing Bernoulli&rsquo;s symbol h here means HEAD, not enthalpy.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>real pipe/channel systems with friction and/or machinery — the everyday tool of mechanical & civil engineers.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>compressible or unsteady flow; and when the velocity profile is very non-uniform, add α (use #44 / complete form).</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">p/γ + V²/2g + z (in) = (out) + h_loss − h_pump + h_turbine. Bernoulli plus friction and machines.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="44" data-ch="5" data-name="Kinetic Energy Correction Factor α" data-vars='{"#7B1FA2|α": "α — kinetic energy correction factor (dimensionless, ≥ 1)", "#E65100|Vav": "V_av — average velocity over the cross-section (m/s)", "#1565C0|A": "A — cross-sectional area (m²)", "#00838F|u": "u — local axial velocity at radius r (m/s)"}'>
+        <div class="fs-top"><span class="fs-name">Kinetic Energy Correction Factor α <span class="fs-num">#44</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#7B1FA2}{\alpha} = \frac{1}{\textcolor{#1565C0}{A}}\int\!\left(\frac{\textcolor{#00838F}{u}}{\textcolor{#E65100}{V_{\text{av}}}}\right)^{3} dA \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">Average velocity reproduces the mass flow but NOT the kinetic energy, because KE flux goes as the cube of velocity and the average of cubes exceeds the cube of the average. α rescales the velocity head built from V_av so it matches the true KE flux. It depends only on the profile shape: α ≈ 2 for fully developed LAMINAR flow (parabolic, very non-uniform); 1.04 < α < 1.11 for TURBULENT flow (flat profile, so α ≈ 1 and usually dropped).</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>laminar pipe flow, or any time the profile is strongly non-uniform — multiply each velocity head by α.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>turbulent engineering flow, where α ≈ 1 is close enough to ignore (as in the pump example).</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">α = (1/A)∫(u/V_av)³ dA. ≈2 laminar, ≈1 turbulent. Corrects velocity head for a non-uniform profile.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="45" data-ch="5" data-name="Pump Head, Power & Efficiency" data-vars='{"#E65100|Wpump": "Ẇ_pump — shaft power CONSUMED by the pump (W)", "#E65100|Wf": "Ẇ_f — useful hydraulic power delivered to the fluid (W)", "#E65100|Q": "Q — volumetric flow rate (m³/s)", "#D32F2F|m": "ṁ — mass flow rate, ρQ (kg/s)", "#00838F|ws": "w_s — specific shaft work, g·h_pump (J/kg)", "#1565C0|hpump": "h_pump — pump head added to the flow (m)", "#2E7D32|ηpump": "η_pump — pump efficiency, Ẇ_f/Ẇ_pump (between 0 and 1)", "#2E7D32|ρ": "ρ — fluid density (kg/m³)", "#2E7D32|g": "g — gravitational acceleration (9.81 m/s²)"}'>
+        <div class="fs-top"><span class="fs-name">Pump Head, Power & Efficiency <span class="fs-num">#45</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#E65100}{\dot{W}_f} = \textcolor{#D32F2F}{\dot{m}}\,\textcolor{#00838F}{w_s} = \textcolor{#2E7D32}{\rho}\,\textcolor{#E65100}{Q}\,\textcolor{#2E7D32}{g}\,\textcolor{#1565C0}{h_{\text{pump}}}, \qquad \textcolor{#2E7D32}{\eta_{\text{pump}}} = \frac{\textcolor{#E65100}{\dot{W}_f}}{\textcolor{#E65100}{\dot{W}_{\text{pump}}}} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">A pump raises the head, so w_s = g·h_pump and the useful (hydraulic) power delivered to the fluid is Ẇ_f = ṁ w_s = ρQg·h_pump. The shaft consumes more than this; efficiency is the USEFUL output (fluid) over the consumed input (shaft). For a pump the fluid is the output, so Ẇ_f sits on top.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>sizing a pump or finding its efficiency once you know the head it must supply (from #43).</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>turbines — the efficiency definition flips (use #46).</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">Ẇ_f = ρQg·h_pump (ideal power); η_pump = Ẇ_f/Ẇ_pump. Fluid is the useful output.</p></div>
+        </div>
+      </div>
+
+      <div class="fs-card" data-num="46" data-ch="5" data-name="Turbine Head, Power & Efficiency" data-vars='{"#E65100|Wturbine": "Ẇ_turbine — useful shaft power delivered BY the turbine (W)", "#E65100|Wf": "Ẇ_f — total power received FROM the fluid (W)", "#E65100|Q": "Q — volumetric flow rate (m³/s)", "#D32F2F|m": "ṁ — mass flow rate, ρQ (kg/s)", "#00838F|ws": "w_s — specific shaft work, g·h_turbine (J/kg)", "#1565C0|hturbine": "h_turbine — turbine head extracted from the flow (m)", "#2E7D32|ηturbine": "η_turbine — turbine efficiency, Ẇ_turbine/Ẇ_f (between 0 and 1)", "#2E7D32|ρ": "ρ — fluid density (kg/m³)", "#2E7D32|g": "g — gravitational acceleration (9.81 m/s²)"}'>
+        <div class="fs-top"><span class="fs-name">Turbine Head, Power & Efficiency <span class="fs-num">#46</span></span></div>
+        <div class="fs-body">
+          <div class="fs-formula">\[ \textcolor{#E65100}{\dot{W}_f} = \textcolor{#D32F2F}{\dot{m}}\,\textcolor{#00838F}{w_s} = \textcolor{#2E7D32}{\rho}\,\textcolor{#E65100}{Q}\,\textcolor{#2E7D32}{g}\,\textcolor{#1565C0}{h_{\text{turbine}}}, \qquad \textcolor{#2E7D32}{\eta_{\text{turbine}}} = \frac{\textcolor{#E65100}{\dot{W}_{\text{turbine}}}}{\textcolor{#E65100}{\dot{W}_f}} \]</div>
+          <div class="fs-detail">
+            <p class="fs-explain">A turbine extracts head from the fluid, so the power the fluid gives up is Ẇ_f = ρQg·h_turbine. Efficiency is again USEFUL output over input, but now the useful output is the SHAFT, so Ẇ_turbine sits on top — the reciprocal arrangement to a pump. Identify which side is &lsquo;useful&rsquo; and put it in the numerator.</p>
+            <div class="fs-use-grid"><div class="fs-use-box"><div class="fs-ub-label">✓ Use when</div>hydro turbines and any device extracting work from a flow with a known head drop.</div><div class="fs-notfor-box"><div class="fs-ub-label">✗ Not for</div>pumps, fans, compressors — those ADD head and flip the efficiency (use #45).</div></div>
+          </div>
+          <div class="fs-quick"><p class="fs-explain">Ẇ_f = ρQg·h_turbine; η_turbine = Ẇ_turbine/Ẇ_f. Shaft is the useful output (reciprocal of a pump).</p></div>
+        </div>
+      </div>
+
     </div>
 
   </div>

@@ -6,7 +6,7 @@
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:28px;">
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Reference items</div>
-      <div style="font-size:22px;font-weight:600;color:var(--eq);">40</div>
+      <div style="font-size:22px;font-weight:600;color:var(--eq);">46</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Chapters completed</div>
@@ -14,7 +14,7 @@
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Examples</div>
-      <div style="font-size:22px;font-weight:600;color:var(--deriv);">24</div>
+      <div style="font-size:22px;font-weight:600;color:var(--deriv);">25</div>
     </div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:14px 16px;">
       <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">Assignments</div>
@@ -99,6 +99,20 @@
         <div class="sub-branch" style="padding-left:20px;margin-top:4px;"><strong>Steady flow?</strong> &rarr; all three coincide</div>
       </div>
       <div class="branch"><strong>Steady or uniform?</strong> &rarr; steady = no change in time at a point (\(\partial/\partial t = 0\)) &nbsp;|&nbsp; uniform = no change in space along the flow</div>
+    </div>
+  </div>
+
+  <div class="decision-tree card-bracket" style="border-left-color:var(--ch5-title);">
+    <h3 style="color:var(--ch5-title);margin-top:0;">Energy &amp; Head Equation</h3>
+    <div class="tree">
+      <div class="branch"><strong>Energy balance on a CV (heat, work, storage)?</strong> &rarr; General energy equation: \(\dot{Q} - \dot{W}_s - \dot{W}_v = \frac{\partial}{\partial t}\int_{\text{CV}}(\hat{u}+\tfrac{1}{2}V^2+gz)\rho\,d\forall + \int_{\text{CS}}(\hat{h}+\tfrac{1}{2}V^2+gz)\rho(\vec{V}\cdot\hat{n})dA\) &mdash; storage uses \(\hat{u}\), flux uses enthalpy \(\hat{h}\)</div>
+      <div class="branch"><strong>Steady, one-in/one-out, per unit mass?</strong> &rarr; Specific energy equation: \(\hat{h}_1+\tfrac{1}{2}V_1^2+gz_1 = (\hat{h}_2+\tfrac{1}{2}V_2^2+gz_2)-q+w_s+w_v\)</div>
+      <div class="branch"><strong>Want energy in metres of fluid (head)?</strong> &rarr; Head equation: \(\frac{p_1}{\gamma}+\frac{V_1^2}{2g}+z_1 = \frac{p_2}{\gamma}+\frac{V_2^2}{2g}+z_2 + h_{\text{loss}} - h_{\text{pump}} + h_{\text{turbine}}\)
+        <div class="sub-branch" style="padding-left:20px;margin-top:4px;"><strong>Ideal, no friction, no machine?</strong> &rarr; drop \(h_{\text{loss}},h_{\text{pump}},h_{\text{turbine}}\) &rArr; this IS Bernoulli</div>
+      </div>
+      <div class="branch"><strong>Sizing a pump / finding its power?</strong> &rarr; \(\dot{W}_f = \rho Q g\,h_{\text{pump}}\), \(\eta_{\text{pump}} = \dot{W}_f/\dot{W}_{\text{pump}}\) (fluid is the useful output)</div>
+      <div class="branch"><strong>Power from a turbine?</strong> &rarr; \(\dot{W}_f = \rho Q g\,h_{\text{turbine}}\), \(\eta_{\text{turbine}} = \dot{W}_{\text{turbine}}/\dot{W}_f\) (shaft is the useful output &mdash; reciprocal of a pump)</div>
+      <div class="branch"><strong>Velocity profile strongly non-uniform?</strong> &rarr; add KE correction \(\alpha\) on each velocity head: \(\alpha = \frac{1}{A}\int(u/V_{\text{av}})^3 dA\) &nbsp;(\(\approx 2\) laminar, \(\approx 1\) turbulent)</div>
     </div>
   </div>
 
@@ -273,6 +287,10 @@
       <li>&rarr; Moving CV at constant \(\vec{V}_b\): replace all velocities with \(\vec{V}_{f/b} = \vec{V}_{\text{flow}} - \vec{V}_b\)</li>
       <li>&rarr; For angular momentum: set \(\beta = \vec{r} \times \vec{V}\) &rArr; \(\sum \vec{M}_{\text{ext}} = \frac{\partial}{\partial t}\int_{\text{CV}} (\vec{r}\times\vec{V})\rho\,d\forall + \int_{\text{CS}} (\vec{r}\times\vec{V})\rho(\vec{V}\cdot\hat{n})\,dA\)</li>
       <li>&rarr; Steady ideal angular momentum: \(\sum \vec{M}_{\text{ext}} = \sum(\vec{r}\times\vec{V})\dot{m}\) &mdash; only ports offset from the moment point contribute</li>
+      <li>&rarr; For energy: set \(\beta = e = \hat{u} + \tfrac{1}{2}V^2 + gz\); the first law \(\frac{dQ}{dt}-\frac{dW}{dt}=\frac{dE}{dt}\) becomes a CV equation. Pressure work folds into the flux, turning internal energy \(\hat{u}\) into enthalpy \(\hat{h} = \hat{u} + p/\rho\)</li>
+      <li>&rarr; Steady single-stream head equation (generalized Bernoulli): \(\frac{p_1}{\gamma}+\frac{V_1^2}{2g}+z_1 = \frac{p_2}{\gamma}+\frac{V_2^2}{2g}+z_2 + h_{\text{loss}} - h_{\text{pump}} + h_{\text{turbine}}\)</li>
+      <li>&rarr; Head loss is always positive (friction heats the fluid, raising \(\hat{u}\)); a pump adds head, a turbine extracts it; power \(\dot{W}_f = \rho Q g\,h\)</li>
+      <li>&rarr; The KE correction factor \(\alpha = \frac{1}{A}\int(u/V_{\text{av}})^3\,dA\) corrects the velocity head for a non-uniform profile: \(\approx 2\) laminar, \(\approx 1\) turbulent</li>
     </ul>
 
     <p><strong style="color:var(--ch5-title)">When to use what:</strong></p>
@@ -284,6 +302,9 @@
       <li>&rarr; Sluice gate / open channel? &mdash; Bernoulli + continuity + momentum (three-tool combo)</li>
       <li>&rarr; Need the moment/torque at a support? &mdash; angular momentum: \(\sum M = \sum(\vec{r}\times\vec{V})\dot{m}\)</li>
       <li>&rarr; Tipping/overturning? &mdash; moment balance: weight stabilizes, momentum flux destabilizes</li>
+      <li>&rarr; Pump/turbine power or efficiency? &mdash; head equation for \(h\), then \(\dot{W}_f = \rho Q g\,h\); efficiency puts the useful side on top</li>
+      <li>&rarr; Pressures + elevation change across a device? &mdash; head equation: \(\frac{p}{\gamma}+\frac{V^2}{2g}+z\) balance plus \(h_{\text{loss}} - h_{\text{pump}} + h_{\text{turbine}}\)</li>
+      <li>&rarr; Laminar pipe (very non-uniform profile)? &mdash; keep \(\alpha\) on each velocity head (\(\alpha \approx 2\))</li>
     </ul>
 
     <p><strong style="color:var(--ch5-title)">&#9888; Traps:</strong></p>
@@ -295,11 +316,15 @@
       <li>In ideal flow along a deflecting surface, speed stays the same (Bernoulli with same pressure) &mdash; only direction changes</li>
       <li>Angular momentum: if the inlet velocity passes through the moment point, its r&times;V is zero &mdash; only offset ports contribute moments</li>
       <li>Moment arm d is the perpendicular distance from the moment point to the <em>line of action</em> of the velocity, not the distance to the port center</li>
+      <li>Head-equation sign pattern is <strong>+ h<sub>loss</sub>, &minus; h<sub>pump</sub>, + h<sub>turbine</sub></strong> &mdash; getting the pump/turbine sign backwards is the single most common error</li>
+      <li>&ldquo;h&rdquo; in the head equation means <strong>head</strong> (a length), not enthalpy \(\hat{h}\) &mdash; same letter, different quantity</li>
+      <li>The storage term uses internal energy \(\hat{u}\) but the flux term uses enthalpy \(\hat{h}\) &mdash; don&rsquo;t put \(\hat{h}\) inside the CV storage integral</li>
+      <li>Pump vs turbine efficiency are reciprocals: the useful output (fluid for a pump, shaft for a turbine) always goes in the numerator</li>
     </ol>
   </div>
 
   <h2 style="color:var(--ch6-title);">Ch 6 — Pipe Flow &amp; Losses</h2>
-  <p style="color:var(--muted);font-size:13px;">Pending &mdash; Text Ch 3.7, 6.3&ndash;6.4, 6.6&ndash;6.7</p>
+  <p style="color:var(--muted);font-size:13px;">Pending &mdash; Text Ch 6.3&ndash;6.4, 6.6&ndash;6.7</p>
 
   <!-- ═══ QUICK REFERENCE TABLE ═══ -->
   <h2>Quick Reference</h2>
@@ -339,6 +364,11 @@
       <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Sluice gate / open channel</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Bernoulli + continuity + momentum</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Add hydrostatic F<sub>A</sub>, F<sub>B</sub> to FBD</td></tr>
       <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Moment at pipe elbow</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\sum M = \sum(\vec{r}\times\vec{V})\dot{m}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Choose moment point at support</td></tr>
       <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Tipping / overturning</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">W&middot;d<sub>stab</sub> = &rho;QV&middot;h</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Moment about base edge at incipient tip</td></tr>
+      <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Energy (head) between two points</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\frac{p}{\gamma}+\frac{V^2}{2g}+z\) (in) = (out) \(+ h_{\text{loss}} - h_{\text{pump}} + h_{\text{turbine}}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Bernoulli + losses + machines</td></tr>
+      <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Specific energy (per unit mass)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\hat{h}_1+\tfrac{1}{2}V_1^2+gz_1 = (\hat{h}_2+\tfrac{1}{2}V_2^2+gz_2)-q+w_s+w_v\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Storage û, flux ĥ = û+p/ρ</td></tr>
+      <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Pump power &amp; efficiency</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\dot{W}_f = \rho Q g\,h_{\text{pump}}\), \(\eta = \dot{W}_f/\dot{W}_{\text{pump}}\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Fluid is the useful output</td></tr>
+      <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Turbine power &amp; efficiency</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\dot{W}_f = \rho Q g\,h_{\text{turbine}}\), \(\eta = \dot{W}_{\text{turbine}}/\dot{W}_f\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">Shaft is the useful output</td></tr>
+      <tr style="border-left:3px solid var(--ch5-title);"><td style="padding:6px 10px;border-bottom:1px solid var(--border);">KE correction factor</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\alpha = \frac{1}{A}\int(u/V_{\text{av}})^3 dA\)</td><td style="padding:6px 10px;border-bottom:1px solid var(--border);">\(\approx 2\) laminar, \(\approx 1\) turbulent</td></tr>
     </tbody>
   </table>
 
